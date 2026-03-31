@@ -1,5 +1,5 @@
 ﻿using HelpDesk.Application.Common;
-using HelpDesk.Application.Interfaces;
+using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Domain.Entities;
 using HelpDesk.Domain.Enums;
 using HelpDesk.Infrastructure.Persistence.Repositories.BaseRepository;

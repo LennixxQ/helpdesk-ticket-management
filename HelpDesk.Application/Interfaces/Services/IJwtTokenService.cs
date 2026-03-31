@@ -1,9 +1,6 @@
 ﻿using HelpDesk.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace HelpDesk.Application.Interfaces
+namespace HelpDesk.Application.Interfaces.Services
 {
     public interface IJwtTokenService
     {

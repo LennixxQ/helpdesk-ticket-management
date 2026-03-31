@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Interfaces;
+﻿using HelpDesk.Application.Interfaces.Repositories;
 
 namespace HelpDesk.Infrastructure.Persistence.Repositories
 {

@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Interfaces;
+﻿using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -25,11 +25,10 @@ namespace HelpDesk.Infrastructure.Identity
             {
                 new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new(JwtRegisteredClaimNames.Email, user.Email!),
+                new(JwtRegisteredClaimNames.Name, user.FullName),
+                new(ClaimTypes.Role, user.Role.ToString()),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new(ClaimTypes.Role, user.Role.ToString()),
-                new("firstName", user.FirstName),
-                new("lastName", user.LastName)
             };
 
             var token = new JwtSecurityToken(

@@ -1,4 +1,5 @@
-﻿using HelpDesk.Application.Interfaces;
+﻿using HelpDesk.Application.Interfaces.Repositories;
+using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Domain.Entities;
 using HelpDesk.Infrastructure.Identity;
 using HelpDesk.Infrastructure.Persistence;
