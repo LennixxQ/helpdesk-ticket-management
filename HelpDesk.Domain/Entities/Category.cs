@@ -1,4 +1,6 @@
-﻿namespace HelpDesk.Domain.Entities;
+﻿using HelpDesk.Domain.Entities.Common;
+
+namespace HelpDesk.Domain.Entities;
 
 public class Category : BaseEntity
 {

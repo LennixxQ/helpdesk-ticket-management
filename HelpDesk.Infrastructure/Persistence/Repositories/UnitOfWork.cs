@@ -5,27 +5,29 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _context;
+
         public ITicketRepository Tickets { get; }
         public IUserRepository Users { get; }
+        public ICategoryRepository Categories { get; }
         public IAuditLogRepository AuditLogs { get; }
 
-        public UnitOfWork(AppDbContext context, ITicketRepository tickets, IUserRepository users, IAuditLogRepository auditLogs)
+        public UnitOfWork(AppDbContext context)
         {
             _context = context;
-            Tickets = tickets;
-            Users = users;
-            AuditLogs = auditLogs;
+            Tickets = new TicketRepository(context);
+            Users = new UserRepository(context);
+            Categories = new CategoryRepository(context);
+            AuditLogs = new AuditLogRepository(context);
         }
 
-        public async Task<int> SaveChangesAsync(CancellationToken ct = default)
+        public async Task<int> SaveChangesAsync()
         {
-            var result = await _context.SaveChangesAsync(ct);
+            var result = await _context.SaveChangesAsync();
             return result;
-        }
+        } 
 
-        public void Dispose()
-        {
+
+        public void Dispose() =>
             _context.Dispose();
-        }
     }
 }

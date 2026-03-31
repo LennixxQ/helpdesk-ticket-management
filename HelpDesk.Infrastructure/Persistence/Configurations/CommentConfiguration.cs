@@ -6,12 +6,11 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
 {
     public class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
-        void IEntityTypeConfiguration<Comment>.Configure(EntityTypeBuilder<Comment> builder)
+        public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Content).IsRequired().HasMaxLength(2000);
-            builder.Property(c => c.CreatedAt).IsRequired().HasDefaultValueSql("GETUTCDATE()");
-            builder.HasIndex(c => c.TicketId);
+            builder.HasOne(c => c.User).WithMany(u => u.Comments).HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
