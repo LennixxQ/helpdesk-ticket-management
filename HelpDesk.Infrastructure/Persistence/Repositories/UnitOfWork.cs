@@ -10,6 +10,7 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
         public IUserRepository Users { get; }
         public ICategoryRepository Categories { get; }
         public IAuditLogRepository AuditLogs { get; }
+        public ICommentRepository Comments { get; }
 
         public UnitOfWork(AppDbContext context)
         {
@@ -18,6 +19,7 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
             Users = new UserRepository(context);
             Categories = new CategoryRepository(context);
             AuditLogs = new AuditLogRepository(context);
+            Comments = new CommentRepository(context);
         }
 
         public async Task<int> SaveChangesAsync()

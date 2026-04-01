@@ -20,7 +20,7 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
             TicketStatus? status = null,
             TicketPriority? priority = null,
             Guid? categoryId = null,
-            Guid? agentId = null)
+            Guid? agentId = null, Guid? raisedByUserId = null)
         {
             var query = _context.Tickets.Include(t => t.Category).Include(t => t.RaisedByUser).Include(t => t.AssignedAgent).AsQueryable();
 
@@ -35,6 +35,9 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
 
             if (agentId.HasValue)
                 query = query.Where(t => t.AssignedAgentId == agentId.Value);
+
+            if (raisedByUserId.HasValue)
+                query = query.Where(t => t.RaisedByUserId == raisedByUserId.Value);
 
             var totalCount = await query.CountAsync();
 
@@ -79,24 +82,22 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
         public async Task<List<(Guid AgentId, string AgentName, int Count)>> GetTopAgentsThisMonthAsync(int top = 5)
         {
             var now = DateTime.UtcNow;
-            return await _context.Tickets
+
+            var result = await _context.Tickets
                 .Where(t =>
                     t.Status == TicketStatus.Resolved &&
                     t.AssignedAgentId != null &&
                     t.LastModifiedAt.HasValue &&
                     t.LastModifiedAt.Value.Year == now.Year &&
-                    t.LastModifiedAt.Value.Month == now.Month)
-                .GroupBy(t => new { t.AssignedAgentId, t.AssignedAgent!.FullName })
-                .Select(g => new
+                    t.LastModifiedAt.Value.Month == now.Month).GroupBy(t => t.AssignedAgentId).Select(g => new
                 {
-                    AgentId = g.Key.AssignedAgentId!.Value,
-                    AgentName = g.Key.FullName,
+                    AgentId = g.Key!.Value,
                     Count = g.Count()
-                })
-                .OrderByDescending(x => x.Count)
-                .Take(top)
-                .Select(x => ValueTuple.Create(x.AgentId, x.AgentName, x.Count))
-                .ToListAsync();
+                }).OrderByDescending(x => x.Count).Take(top).ToListAsync();
+            var agentIds = result.Select(r => r.AgentId).ToList();
+            var agents = await _context.Users.Where(u => agentIds.Contains(u.Id)).Select(u => new { u.Id, u.FullName }).ToListAsync();
+
+            return result.Join(agents, r => r.AgentId, a => a.Id,(r, a) => (r.AgentId, a.FullName, r.Count)).ToList();
         }
     }
 }

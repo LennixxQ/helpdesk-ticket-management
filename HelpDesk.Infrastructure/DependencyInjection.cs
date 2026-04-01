@@ -19,18 +19,11 @@ namespace HelpDesk.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly(typeof(DbContext).Assembly.FullName)
+                b => b.MigrationsAssembly("HelpDesk.Infrastructure")
                 ));
 
-            services.AddIdentity<User, IdentityRole<Guid>>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 6;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-
+            services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -43,6 +36,7 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddHttpContextAccessor();
 
             return services;

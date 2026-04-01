@@ -12,19 +12,19 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<CreateTicketCommand, Ticket>()
-            .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.Status, opt => opt.Ignore())
             .ForMember(dest => dest.AssignedAgentId, opt => opt.Ignore())
             .ForMember(dest => dest.RaisedByUserId, opt => opt.Ignore());
 
         CreateMap<CreateUserCommand, User>()
-            .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email))
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true))
             .ForMember(dest => dest.PasswordHash, opt => opt.Ignore());
 
         CreateMap<CreateCategoryCommand, Category>()
-            .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true));
 
         CreateMap<Ticket, TicketDto>()

@@ -6,6 +6,7 @@
         IUserRepository Users { get; }
         ICategoryRepository Categories { get; }
         IAuditLogRepository AuditLogs { get; }
+        ICommentRepository Comments { get; }
         Task<int> SaveChangesAsync();
     }
 }

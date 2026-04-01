@@ -4,6 +4,7 @@
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
+      "launchUrl": "",
       "launchBrowser": false,
       "applicationUrl": "http://localhost:5219",
       "environmentVariables": {
@@ -13,6 +14,7 @@
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
+      "launchUrl": "",
       "launchBrowser": false,
       "applicationUrl": "https://localhost:7119;http://localhost:5219",
       "environmentVariables": {

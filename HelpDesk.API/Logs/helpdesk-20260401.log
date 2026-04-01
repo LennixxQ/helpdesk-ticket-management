@@ -1,0 +1,1197 @@
+2026-04-01 13:06:23.600 +05:30 [INF] Database migrations applied.
+2026-04-01 13:06:24.344 +05:30 [INF] Database seeding completed.
+2026-04-01 13:06:24.355 +05:30 [INF] Database seeding complete.
+2026-04-01 13:13:11.009 +05:30 [INF] Executed DbCommand (49ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 13:13:11.108 +05:30 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 13:13:11.134 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 13:13:11.152 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 13:13:11.205 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-01 13:13:11.264 +05:30 [INF] Database migrations applied.
+2026-04-01 13:13:11.332 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-01 13:13:11.850 +05:30 [INF] Executed DbCommand (197ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:13:11.945 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:13:11.963 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:13:11.995 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 13:13:12.103 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:13:12.126 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:13:12.146 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:13:12.161 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:13:12.178 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:13:12.273 +05:30 [INF] Database seeding completed.
+2026-04-01 13:13:12.281 +05:30 [INF] Database seeding complete.
+2026-04-01 13:13:12.774 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-01 13:13:12.788 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-01 13:13:12.890 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-01 13:13:13.036 +05:30 [INF] Hosting environment: Development
+2026-04-01 13:13:13.040 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-01 13:16:27.820 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/ - null null
+2026-04-01 13:16:28.002 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/ - 301 null null 189.1259ms
+2026-04-01 13:16:28.009 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-01 13:16:28.152 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 142.693ms
+2026-04-01 13:16:28.170 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger-ui.css - null null
+2026-04-01 13:16:28.170 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger-ui-bundle.js - null null
+2026-04-01 13:16:28.171 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-01 13:16:28.170 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger-ui-standalone-preset.js - null null
+2026-04-01 13:16:28.266 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 95.2736ms
+2026-04-01 13:16:28.251 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-04-01 13:16:28.286 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-04-01 13:16:28.293 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-04-01 13:16:28.314 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger-ui.css - 200 144929 text/css 143.9858ms
+2026-04-01 13:16:28.323 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger-ui-bundle.js - 200 1061536 text/javascript 153.261ms
+2026-04-01 13:16:28.337 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger-ui-standalone-preset.js - 200 312163 text/javascript 166.3472ms
+2026-04-01 13:16:28.488 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-01 13:16:28.884 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 396.519ms
+2026-04-01 13:16:28.939 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-01 13:16:28.961 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 22.327ms
+2026-04-01 13:16:28.967 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/favicon-32x32.png - null null
+2026-04-01 13:16:28.993 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2026-04-01 13:16:29.006 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/favicon-32x32.png - 200 628 image/png 39.2027ms
+2026-04-01 13:17:59.154 +05:30 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 13:17:59.298 +05:30 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 13:17:59.320 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 13:17:59.342 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 13:17:59.385 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-01 13:17:59.427 +05:30 [INF] Database migrations applied.
+2026-04-01 13:17:59.468 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-01 13:17:59.776 +05:30 [INF] Executed DbCommand (30ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:18:00.049 +05:30 [INF] Executed DbCommand (27ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:18:00.101 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:18:00.135 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 13:18:00.255 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:18:00.278 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:18:00.297 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:18:00.311 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:18:00.325 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:18:00.397 +05:30 [INF] Database seeding completed.
+2026-04-01 13:18:00.405 +05:30 [INF] Database seeding complete.
+2026-04-01 13:18:00.911 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-01 13:18:00.922 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-01 13:18:00.991 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-01 13:18:01.000 +05:30 [INF] Hosting environment: Development
+2026-04-01 13:18:01.006 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-01 13:20:16.080 +05:30 [INF] Executed DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 13:20:16.241 +05:30 [INF] Executed DbCommand (49ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 13:20:16.438 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 13:20:16.448 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 13:20:16.472 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-01 13:20:16.490 +05:30 [INF] Database migrations applied.
+2026-04-01 13:20:16.510 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-01 13:20:16.667 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:20:16.723 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:20:16.741 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:20:16.780 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 13:20:16.867 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:20:16.893 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:20:16.920 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:20:16.949 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:20:16.970 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:20:17.038 +05:30 [INF] Database seeding completed.
+2026-04-01 13:20:17.050 +05:30 [INF] Database seeding complete.
+2026-04-01 13:20:17.387 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-01 13:20:17.402 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-01 13:20:17.687 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-01 13:20:17.692 +05:30 [INF] Hosting environment: Development
+2026-04-01 13:20:17.697 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-01 13:20:33.616 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-01 13:20:33.847 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 234.3818ms
+2026-04-01 13:20:33.852 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-01 13:20:33.893 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 41.1326ms
+2026-04-01 13:20:34.327 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-01 13:20:34.376 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 49.743ms
+2026-04-01 13:20:34.542 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-01 13:20:34.556 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.7547ms
+2026-04-01 13:23:34.229 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Auth/login - application/json 70
+2026-04-01 13:23:34.485 +05:30 [INF] CORS policy execution failed.
+2026-04-01 13:23:34.498 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-01 13:23:34.678 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-01 13:23:34.741 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginRequest) on controller HelpDesk.API.Controllers.AuthController (HelpDesk.API).
+2026-04-01 13:23:34.837 +05:30 [INF] Login attempt for email: vivek.chauhan@helpdesk.com
+2026-04-01 13:23:34.900 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 13:23:35.114 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-01 13:23:35.152 +05:30 [INF] Executed action HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API) in 369.0565ms
+2026-04-01 13:23:35.172 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-01 13:23:35.191 +05:30 [INF] HTTP POST /api/Auth/login responded 200 in 708.6571 ms
+2026-04-01 13:23:35.214 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Auth/login - 200 null application/json; charset=utf-8 985.7349ms
+2026-04-01 13:58:48.302 +05:30 [INF] Executed DbCommand (69ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 13:58:48.455 +05:30 [INF] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 13:58:48.481 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 13:58:48.496 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 13:58:48.540 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-01 13:58:48.585 +05:30 [INF] Database migrations applied.
+2026-04-01 13:58:48.793 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-01 13:58:49.392 +05:30 [INF] Executed DbCommand (57ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:58:49.472 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:58:49.501 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 13:58:49.543 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 13:58:49.646 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:58:49.700 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:58:49.720 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:58:49.735 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:58:49.758 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 13:58:49.817 +05:30 [INF] Database seeding completed.
+2026-04-01 13:58:49.827 +05:30 [INF] Database seeding complete.
+2026-04-01 13:58:50.505 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-01 13:58:50.520 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-01 13:58:50.611 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-01 13:58:50.619 +05:30 [INF] Hosting environment: Development
+2026-04-01 13:58:50.625 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-01 13:59:01.033 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-01 13:59:01.406 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 395.0874ms
+2026-04-01 13:59:01.816 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-01 13:59:01.816 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-01 13:59:01.909 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 93.9622ms
+2026-04-01 13:59:01.938 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 120.9941ms
+2026-04-01 13:59:02.156 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-01 13:59:02.374 +05:30 [ERR] Unhandled exception on GET /swagger/v1/swagger.json
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/Users" for actions - HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API),HelpDesk.API.Controllers.UsersController.GetById (HelpDesk.API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at HelpDesk.API.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API\Middleware\ExceptionHandlingMiddleware.cs:line 21
+2026-04-01 13:59:02.422 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 500 null application/json 266.3832ms
+2026-04-01 14:00:15.667 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-01 14:00:15.714 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 47.2915ms
+2026-04-01 14:00:15.754 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-01 14:00:15.773 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 19.7666ms
+2026-04-01 14:00:15.904 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-01 14:00:15.952 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 48.7895ms
+2026-04-01 14:00:16.024 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-01 14:00:16.129 +05:30 [ERR] Unhandled exception on GET /swagger/v1/swagger.json
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/Users" for actions - HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API),HelpDesk.API.Controllers.UsersController.GetById (HelpDesk.API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at HelpDesk.API.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API\Middleware\ExceptionHandlingMiddleware.cs:line 21
+2026-04-01 14:00:16.143 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 500 null application/json 119.7546ms
+2026-04-01 14:00:29.459 +05:30 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 14:00:29.567 +05:30 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 14:00:29.597 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 14:00:29.618 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 14:00:29.692 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-01 14:00:29.727 +05:30 [INF] Database migrations applied.
+2026-04-01 14:00:29.758 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-01 14:00:30.231 +05:30 [INF] Executed DbCommand (31ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 14:00:30.300 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 14:00:30.322 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 14:00:30.356 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 14:00:30.465 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 14:00:30.490 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 14:00:30.517 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 14:00:30.537 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 14:00:30.555 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 14:00:30.632 +05:30 [INF] Database seeding completed.
+2026-04-01 14:00:30.640 +05:30 [INF] Database seeding complete.
+2026-04-01 14:00:31.262 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-01 14:00:31.272 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-01 14:00:31.339 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-01 14:00:31.347 +05:30 [INF] Hosting environment: Development
+2026-04-01 14:00:31.353 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-01 14:00:37.883 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-01 14:00:38.164 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 285.8528ms
+2026-04-01 14:00:38.399 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-01 14:00:38.400 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-01 14:00:38.432 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 32.6436ms
+2026-04-01 14:00:38.487 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 87.2032ms
+2026-04-01 14:00:38.505 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-01 14:00:38.632 +05:30 [ERR] Unhandled exception on GET /swagger/v1/swagger.json
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/Users" for actions - HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API),HelpDesk.API.Controllers.UsersController.GetById (HelpDesk.API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at HelpDesk.API.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API\Middleware\ExceptionHandlingMiddleware.cs:line 21
+2026-04-01 14:00:38.669 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 500 null application/json 163.5549ms
+2026-04-01 14:01:04.544 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-01 14:01:04.659 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 120.4122ms
+2026-04-01 14:01:04.676 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-01 14:01:04.693 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 17.4834ms
+2026-04-01 14:01:04.813 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-01 14:01:04.864 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 51.544ms
+2026-04-01 14:01:04.924 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-01 14:01:05.173 +05:30 [ERR] Unhandled exception on GET /swagger/v1/swagger.json
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/Users" for actions - HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API),HelpDesk.API.Controllers.UsersController.GetById (HelpDesk.API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at HelpDesk.API.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API\Middleware\ExceptionHandlingMiddleware.cs:line 21
+2026-04-01 14:01:05.186 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 500 null application/json 262.2437ms
+2026-04-01 15:15:38.770 +05:30 [INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 15:15:38.869 +05:30 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 15:15:38.888 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-01 15:15:38.902 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-01 15:15:38.979 +05:30 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-01 15:15:39.019 +05:30 [INF] Database migrations applied.
+2026-04-01 15:15:39.080 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-01 15:15:39.634 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 15:15:39.746 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 15:15:39.767 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-01 15:15:39.806 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 15:15:39.912 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 15:15:39.927 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 15:15:39.940 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 15:15:39.953 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 15:15:39.966 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-01 15:15:40.084 +05:30 [INF] Database seeding completed.
+2026-04-01 15:15:40.097 +05:30 [INF] Database seeding complete.
+2026-04-01 15:15:40.993 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-01 15:15:41.005 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-01 15:15:41.105 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-01 15:15:41.120 +05:30 [INF] Hosting environment: Development
+2026-04-01 15:15:41.131 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-01 15:15:50.641 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/ - null null
+2026-04-01 15:15:50.813 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/ - 301 null null 179.5814ms
+2026-04-01 15:15:50.820 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-01 15:15:50.951 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 131.2477ms
+2026-04-01 15:15:50.952 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger-ui-bundle.js - null null
+2026-04-01 15:15:50.952 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger-ui.css - null null
+2026-04-01 15:15:50.953 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger-ui-standalone-preset.js - null null
+2026-04-01 15:15:50.983 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-01 15:15:51.072 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-04-01 15:15:51.080 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-04-01 15:15:50.983 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-01 15:15:51.095 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger-ui-standalone-preset.js - 200 312163 text/javascript 142.6156ms
+2026-04-01 15:15:51.104 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger-ui-bundle.js - 200 1061536 text/javascript 152.021ms
+2026-04-01 15:15:51.128 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 145.7235ms
+2026-04-01 15:15:51.062 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-04-01 15:15:51.129 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 147.1044ms
+2026-04-01 15:15:51.181 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger-ui.css - 200 144929 text/css 228.6666ms
+2026-04-01 15:15:51.800 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-01 15:15:51.846 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/favicon-32x32.png - null null
+2026-04-01 15:15:51.870 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 70.721ms
+2026-04-01 15:15:51.883 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2026-04-01 15:15:51.908 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/favicon-32x32.png - 200 628 image/png 63.6265ms
+2026-04-01 15:15:59.741 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-01 15:15:59.770 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 29.6028ms
+2026-04-01 15:15:59.809 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-01 15:15:59.825 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 16.8114ms
+2026-04-01 15:16:00.108 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-01 15:16:00.159 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 50.9146ms
+2026-04-01 15:16:00.282 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-01 15:16:00.304 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 21.7974ms
+2026-04-01 15:16:54.558 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Users - application/json 114
+2026-04-01 15:16:54.595 +05:30 [INF] CORS policy execution failed.
+2026-04-01 15:16:54.670 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-01 15:16:55.122 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.CreateUser (HelpDesk.API)'
+2026-04-01 15:16:55.197 +05:30 [INF] Route matched with {action = "CreateUser", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateUser(HelpDesk.Application.Commands.UserCommand.CreateUserCommand) on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:16:55.592 +05:30 [INF] Admin Creating User with Email: hardik.parmar@helpdesk.com
+2026-04-01 15:16:55.656 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 15:16:55.992 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-04-01 15:16:56.181 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (Size = 256), @p6='?' (DbType = Boolean), @p7='?' (Size = 4000), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime2), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (DbType = DateTimeOffset), @p13='?' (Size = 256), @p14='?' (Size = 256), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (DbType = Boolean), @p18='?' (DbType = Int32), @p19='?' (Size = 4000), @p20='?' (DbType = Boolean), @p21='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [CreatedAt], [CreatedBy], [Email], [EmailConfirmed], [FullName], [IsActive], [LastModifiedAt], [LastModifiedBy], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [Role], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21);
+2026-04-01 15:16:56.422 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200), @p62='?' (DbType = Guid), @p63='?' (DbType = Guid), @p64='?' (Size = 100), @p65='?' (Size = 200), @p66='?' (Size = 200), @p67='?' (DbType = Guid), @p68='?' (DbType = Guid), @p69='?' (Size = 100), @p70='?' (Size = 200), @p71='?' (Size = 200), @p72='?' (DbType = Guid), @p73='?' (DbType = Guid), @p74='?' (Size = 100), @p75='?' (Size = 200), @p76='?' (Size = 200), @p77='?' (DbType = Guid), @p78='?' (DbType = Guid), @p79='?' (Size = 100), @p80='?' (Size = 200), @p81='?' (Size = 200), @p82='?' (DbType = Guid), @p83='?' (DbType = Guid), @p84='?' (Size = 100), @p85='?' (Size = 200), @p86='?' (Size = 200), @p87='?' (DbType = Guid), @p88='?' (DbType = Guid), @p89='?' (Size = 100), @p90='?' (Size = 200), @p91='?' (Size = 200), @p92='?' (DbType = Guid), @p93='?' (DbType = Guid), @p94='?' (Size = 100), @p95='?' (Size = 200), @p96='?' (Size = 200), @p97='?' (DbType = Guid), @p98='?' (DbType = Guid), @p99='?' (Size = 100), @p100='?' (Size = 200), @p101='?' (Size = 200), @p102='?' (DbType = Guid), @p103='?' (DbType = Guid), @p104='?' (Size = 100), @p105='?' (Size = 200), @p106='?' (Size = 200), @p107='?' (DbType = Guid), @p108='?' (DbType = Guid), @p109='?' (Size = 100), @p110='?' (Size = 200), @p111='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61),
+(@p62, @p63, @p64, @p65, @p66),
+(@p67, @p68, @p69, @p70, @p71),
+(@p72, @p73, @p74, @p75, @p76),
+(@p77, @p78, @p79, @p80, @p81),
+(@p82, @p83, @p84, @p85, @p86),
+(@p87, @p88, @p89, @p90, @p91),
+(@p92, @p93, @p94, @p95, @p96),
+(@p97, @p98, @p99, @p100, @p101),
+(@p102, @p103, @p104, @p105, @p106),
+(@p107, @p108, @p109, @p110, @p111);
+2026-04-01 15:16:56.510 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:16:56.713 +05:30 [INF] Executed DbCommand (26ms) [Parameters=[@__get_Item_0='?' (DbType = Guid), @__get_Item_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__get_Item_0 AND [a].[RoleId] = @__get_Item_1
+2026-04-01 15:16:56.763 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:16:56.839 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-04-01 15:16:56.960 +05:30 [INF] Executed DbCommand (31ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p23='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p24='?' (Size = 4000), @p4='?' (DbType = DateTime2), @p5='?' (Size = 4000), @p6='?' (Size = 256), @p7='?' (DbType = Boolean), @p8='?' (Size = 4000), @p9='?' (DbType = Boolean), @p10='?' (DbType = DateTime2), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (DbType = DateTimeOffset), @p14='?' (Size = 256), @p15='?' (Size = 256), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (DbType = Boolean), @p19='?' (DbType = Int32), @p20='?' (Size = 4000), @p21='?' (DbType = Boolean), @p22='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [CreatedAt] = @p4, [CreatedBy] = @p5, [Email] = @p6, [EmailConfirmed] = @p7, [FullName] = @p8, [IsActive] = @p9, [LastModifiedAt] = @p10, [LastModifiedBy] = @p11, [LockoutEnabled] = @p12, [LockoutEnd] = @p13, [NormalizedEmail] = @p14, [NormalizedUserName] = @p15, [PasswordHash] = @p16, [PhoneNumber] = @p17, [PhoneNumberConfirmed] = @p18, [Role] = @p19, [SecurityStamp] = @p20, [TwoFactorEnabled] = @p21, [UserName] = @p22
+OUTPUT 1
+WHERE [Id] = @p23 AND [ConcurrencyStamp] = @p24;
+2026-04-01 15:16:57.229 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (Size = 50), @p9='?' (DbType = Guid), @p10='?' (Size = 100), @p11='?' (Size = 45), @p12='?' (DbType = DateTime2), @p13='?' (Size = 256), @p14='?' (DbType = Guid), @p15='?' (DbType = Guid), @p16='?' (Size = 100), @p17='?' (Size = 200), @p18='?' (Size = 200), @p19='?' (DbType = Guid), @p20='?' (DbType = Guid), @p21='?' (Size = 100), @p22='?' (Size = 200), @p23='?' (Size = 200), @p24='?' (DbType = Guid), @p25='?' (DbType = Guid), @p26='?' (Size = 100), @p27='?' (Size = 200), @p28='?' (Size = 200), @p29='?' (DbType = Guid), @p30='?' (DbType = Guid), @p31='?' (Size = 100), @p32='?' (Size = 200), @p33='?' (Size = 200), @p34='?' (DbType = Guid), @p35='?' (DbType = Guid), @p36='?' (Size = 100), @p37='?' (Size = 200), @p38='?' (Size = 200), @p39='?' (DbType = Guid), @p40='?' (DbType = Guid), @p41='?' (Size = 100), @p42='?' (Size = 200), @p43='?' (Size = 200), @p44='?' (DbType = Guid), @p45='?' (DbType = Guid), @p46='?' (Size = 100), @p47='?' (Size = 200), @p48='?' (Size = 200), @p49='?' (DbType = Guid), @p50='?' (DbType = Guid), @p51='?' (Size = 100), @p52='?' (Size = 200), @p53='?' (Size = 200), @p54='?' (DbType = Guid), @p55='?' (DbType = Guid), @p56='?' (Size = 100), @p57='?' (Size = 200), @p58='?' (Size = 200), @p59='?' (DbType = Guid), @p60='?' (DbType = Guid), @p61='?' (Size = 100), @p62='?' (Size = 200), @p63='?' (Size = 200), @p64='?' (DbType = Guid), @p65='?' (DbType = Guid), @p66='?' (Size = 100), @p67='?' (Size = 200), @p68='?' (Size = 200), @p69='?' (DbType = Guid), @p70='?' (DbType = Guid), @p71='?' (Size = 100), @p72='?' (Size = 200), @p73='?' (Size = 200), @p74='?' (DbType = Guid), @p75='?' (DbType = Guid), @p76='?' (Size = 100), @p77='?' (Size = 200), @p78='?' (Size = 200), @p79='?' (DbType = Guid), @p80='?' (DbType = Guid), @p81='?' (Size = 100), @p82='?' (Size = 200), @p83='?' (Size = 200), @p84='?' (DbType = Guid), @p85='?' (DbType = Guid), @p86='?' (Size = 100), @p87='?' (Size = 200), @p88='?' (Size = 200), @p89='?' (DbType = Guid), @p90='?' (DbType = Guid), @p91='?' (Size = 100), @p92='?' (Size = 200), @p93='?' (Size = 200), @p94='?' (DbType = Guid), @p95='?' (DbType = Guid), @p96='?' (Size = 100), @p97='?' (Size = 200), @p98='?' (Size = 200), @p99='?' (DbType = Guid), @p100='?' (DbType = Guid), @p101='?' (Size = 100), @p102='?' (Size = 200), @p103='?' (Size = 200), @p104='?' (DbType = Guid), @p105='?' (DbType = Guid), @p106='?' (Size = 100), @p107='?' (Size = 200), @p108='?' (Size = 200), @p109='?' (DbType = Guid), @p110='?' (DbType = Guid), @p111='?' (Size = 100), @p112='?' (Size = 200), @p113='?' (Size = 200), @p114='?' (DbType = Guid), @p115='?' (DbType = Guid), @p116='?' (Size = 100), @p117='?' (Size = 200), @p118='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6),
+(@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p14, @p15, @p16, @p17, @p18),
+(@p19, @p20, @p21, @p22, @p23),
+(@p24, @p25, @p26, @p27, @p28),
+(@p29, @p30, @p31, @p32, @p33),
+(@p34, @p35, @p36, @p37, @p38),
+(@p39, @p40, @p41, @p42, @p43),
+(@p44, @p45, @p46, @p47, @p48),
+(@p49, @p50, @p51, @p52, @p53),
+(@p54, @p55, @p56, @p57, @p58),
+(@p59, @p60, @p61, @p62, @p63),
+(@p64, @p65, @p66, @p67, @p68),
+(@p69, @p70, @p71, @p72, @p73),
+(@p74, @p75, @p76, @p77, @p78),
+(@p79, @p80, @p81, @p82, @p83),
+(@p84, @p85, @p86, @p87, @p88),
+(@p89, @p90, @p91, @p92, @p93),
+(@p94, @p95, @p96, @p97, @p98),
+(@p99, @p100, @p101, @p102, @p103),
+(@p104, @p105, @p106, @p107, @p108),
+(@p109, @p110, @p111, @p112, @p113),
+(@p114, @p115, @p116, @p117, @p118);
+2026-04-01 15:16:57.262 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-01 15:16:57.310 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.CreateUser (HelpDesk.API) in 2081.0896ms
+2026-04-01 15:16:57.332 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.CreateUser (HelpDesk.API)'
+2026-04-01 15:16:57.351 +05:30 [INF] HTTP POST /api/Users responded 200 in 2760.4339 ms
+2026-04-01 15:16:57.365 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Users - 200 null application/json; charset=utf-8 2806.5997ms
+2026-04-01 15:19:02.248 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Users - application/json 107
+2026-04-01 15:19:02.275 +05:30 [INF] CORS policy execution failed.
+2026-04-01 15:19:02.289 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-01 15:19:02.305 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.CreateUser (HelpDesk.API)'
+2026-04-01 15:19:02.322 +05:30 [INF] Route matched with {action = "CreateUser", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateUser(HelpDesk.Application.Commands.UserCommand.CreateUserCommand) on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:19:02.603 +05:30 [INF] Admin Creating User with Email: mihir.raj@helpdesk.com
+2026-04-01 15:19:02.636 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 15:19:02.771 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-04-01 15:19:02.805 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (Size = 256), @p6='?' (DbType = Boolean), @p7='?' (Size = 4000), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime2), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (DbType = DateTimeOffset), @p13='?' (Size = 256), @p14='?' (Size = 256), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (DbType = Boolean), @p18='?' (DbType = Int32), @p19='?' (Size = 4000), @p20='?' (DbType = Boolean), @p21='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [CreatedAt], [CreatedBy], [Email], [EmailConfirmed], [FullName], [IsActive], [LastModifiedAt], [LastModifiedBy], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [Role], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21);
+2026-04-01 15:19:02.879 +05:30 [INF] Executed DbCommand (34ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200), @p62='?' (DbType = Guid), @p63='?' (DbType = Guid), @p64='?' (Size = 100), @p65='?' (Size = 200), @p66='?' (Size = 200), @p67='?' (DbType = Guid), @p68='?' (DbType = Guid), @p69='?' (Size = 100), @p70='?' (Size = 200), @p71='?' (Size = 200), @p72='?' (DbType = Guid), @p73='?' (DbType = Guid), @p74='?' (Size = 100), @p75='?' (Size = 200), @p76='?' (Size = 200), @p77='?' (DbType = Guid), @p78='?' (DbType = Guid), @p79='?' (Size = 100), @p80='?' (Size = 200), @p81='?' (Size = 200), @p82='?' (DbType = Guid), @p83='?' (DbType = Guid), @p84='?' (Size = 100), @p85='?' (Size = 200), @p86='?' (Size = 200), @p87='?' (DbType = Guid), @p88='?' (DbType = Guid), @p89='?' (Size = 100), @p90='?' (Size = 200), @p91='?' (Size = 200), @p92='?' (DbType = Guid), @p93='?' (DbType = Guid), @p94='?' (Size = 100), @p95='?' (Size = 200), @p96='?' (Size = 200), @p97='?' (DbType = Guid), @p98='?' (DbType = Guid), @p99='?' (Size = 100), @p100='?' (Size = 200), @p101='?' (Size = 200), @p102='?' (DbType = Guid), @p103='?' (DbType = Guid), @p104='?' (Size = 100), @p105='?' (Size = 200), @p106='?' (Size = 200), @p107='?' (DbType = Guid), @p108='?' (DbType = Guid), @p109='?' (Size = 100), @p110='?' (Size = 200), @p111='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61),
+(@p62, @p63, @p64, @p65, @p66),
+(@p67, @p68, @p69, @p70, @p71),
+(@p72, @p73, @p74, @p75, @p76),
+(@p77, @p78, @p79, @p80, @p81),
+(@p82, @p83, @p84, @p85, @p86),
+(@p87, @p88, @p89, @p90, @p91),
+(@p92, @p93, @p94, @p95, @p96),
+(@p97, @p98, @p99, @p100, @p101),
+(@p102, @p103, @p104, @p105, @p106),
+(@p107, @p108, @p109, @p110, @p111);
+2026-04-01 15:19:02.934 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:19:02.996 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__get_Item_0='?' (DbType = Guid), @__get_Item_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__get_Item_0 AND [a].[RoleId] = @__get_Item_1
+2026-04-01 15:19:03.037 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:19:03.072 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-04-01 15:19:03.132 +05:30 [INF] Executed DbCommand (25ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p23='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p24='?' (Size = 4000), @p4='?' (DbType = DateTime2), @p5='?' (Size = 4000), @p6='?' (Size = 256), @p7='?' (DbType = Boolean), @p8='?' (Size = 4000), @p9='?' (DbType = Boolean), @p10='?' (DbType = DateTime2), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (DbType = DateTimeOffset), @p14='?' (Size = 256), @p15='?' (Size = 256), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (DbType = Boolean), @p19='?' (DbType = Int32), @p20='?' (Size = 4000), @p21='?' (DbType = Boolean), @p22='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [CreatedAt] = @p4, [CreatedBy] = @p5, [Email] = @p6, [EmailConfirmed] = @p7, [FullName] = @p8, [IsActive] = @p9, [LastModifiedAt] = @p10, [LastModifiedBy] = @p11, [LockoutEnabled] = @p12, [LockoutEnd] = @p13, [NormalizedEmail] = @p14, [NormalizedUserName] = @p15, [PasswordHash] = @p16, [PhoneNumber] = @p17, [PhoneNumberConfirmed] = @p18, [Role] = @p19, [SecurityStamp] = @p20, [TwoFactorEnabled] = @p21, [UserName] = @p22
+OUTPUT 1
+WHERE [Id] = @p23 AND [ConcurrencyStamp] = @p24;
+2026-04-01 15:19:03.214 +05:30 [INF] Executed DbCommand (34ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (Size = 50), @p9='?' (DbType = Guid), @p10='?' (Size = 100), @p11='?' (Size = 45), @p12='?' (DbType = DateTime2), @p13='?' (Size = 256), @p14='?' (DbType = Guid), @p15='?' (DbType = Guid), @p16='?' (Size = 100), @p17='?' (Size = 200), @p18='?' (Size = 200), @p19='?' (DbType = Guid), @p20='?' (DbType = Guid), @p21='?' (Size = 100), @p22='?' (Size = 200), @p23='?' (Size = 200), @p24='?' (DbType = Guid), @p25='?' (DbType = Guid), @p26='?' (Size = 100), @p27='?' (Size = 200), @p28='?' (Size = 200), @p29='?' (DbType = Guid), @p30='?' (DbType = Guid), @p31='?' (Size = 100), @p32='?' (Size = 200), @p33='?' (Size = 200), @p34='?' (DbType = Guid), @p35='?' (DbType = Guid), @p36='?' (Size = 100), @p37='?' (Size = 200), @p38='?' (Size = 200), @p39='?' (DbType = Guid), @p40='?' (DbType = Guid), @p41='?' (Size = 100), @p42='?' (Size = 200), @p43='?' (Size = 200), @p44='?' (DbType = Guid), @p45='?' (DbType = Guid), @p46='?' (Size = 100), @p47='?' (Size = 200), @p48='?' (Size = 200), @p49='?' (DbType = Guid), @p50='?' (DbType = Guid), @p51='?' (Size = 100), @p52='?' (Size = 200), @p53='?' (Size = 200), @p54='?' (DbType = Guid), @p55='?' (DbType = Guid), @p56='?' (Size = 100), @p57='?' (Size = 200), @p58='?' (Size = 200), @p59='?' (DbType = Guid), @p60='?' (DbType = Guid), @p61='?' (Size = 100), @p62='?' (Size = 200), @p63='?' (Size = 200), @p64='?' (DbType = Guid), @p65='?' (DbType = Guid), @p66='?' (Size = 100), @p67='?' (Size = 200), @p68='?' (Size = 200), @p69='?' (DbType = Guid), @p70='?' (DbType = Guid), @p71='?' (Size = 100), @p72='?' (Size = 200), @p73='?' (Size = 200), @p74='?' (DbType = Guid), @p75='?' (DbType = Guid), @p76='?' (Size = 100), @p77='?' (Size = 200), @p78='?' (Size = 200), @p79='?' (DbType = Guid), @p80='?' (DbType = Guid), @p81='?' (Size = 100), @p82='?' (Size = 200), @p83='?' (Size = 200), @p84='?' (DbType = Guid), @p85='?' (DbType = Guid), @p86='?' (Size = 100), @p87='?' (Size = 200), @p88='?' (Size = 200), @p89='?' (DbType = Guid), @p90='?' (DbType = Guid), @p91='?' (Size = 100), @p92='?' (Size = 200), @p93='?' (Size = 200), @p94='?' (DbType = Guid), @p95='?' (DbType = Guid), @p96='?' (Size = 100), @p97='?' (Size = 200), @p98='?' (Size = 200), @p99='?' (DbType = Guid), @p100='?' (DbType = Guid), @p101='?' (Size = 100), @p102='?' (Size = 200), @p103='?' (Size = 200), @p104='?' (DbType = Guid), @p105='?' (DbType = Guid), @p106='?' (Size = 100), @p107='?' (Size = 200), @p108='?' (Size = 200), @p109='?' (DbType = Guid), @p110='?' (DbType = Guid), @p111='?' (Size = 100), @p112='?' (Size = 200), @p113='?' (Size = 200), @p114='?' (DbType = Guid), @p115='?' (DbType = Guid), @p116='?' (Size = 100), @p117='?' (Size = 200), @p118='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6),
+(@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p14, @p15, @p16, @p17, @p18),
+(@p19, @p20, @p21, @p22, @p23),
+(@p24, @p25, @p26, @p27, @p28),
+(@p29, @p30, @p31, @p32, @p33),
+(@p34, @p35, @p36, @p37, @p38),
+(@p39, @p40, @p41, @p42, @p43),
+(@p44, @p45, @p46, @p47, @p48),
+(@p49, @p50, @p51, @p52, @p53),
+(@p54, @p55, @p56, @p57, @p58),
+(@p59, @p60, @p61, @p62, @p63),
+(@p64, @p65, @p66, @p67, @p68),
+(@p69, @p70, @p71, @p72, @p73),
+(@p74, @p75, @p76, @p77, @p78),
+(@p79, @p80, @p81, @p82, @p83),
+(@p84, @p85, @p86, @p87, @p88),
+(@p89, @p90, @p91, @p92, @p93),
+(@p94, @p95, @p96, @p97, @p98),
+(@p99, @p100, @p101, @p102, @p103),
+(@p104, @p105, @p106, @p107, @p108),
+(@p109, @p110, @p111, @p112, @p113),
+(@p114, @p115, @p116, @p117, @p118);
+2026-04-01 15:19:03.237 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-01 15:19:03.254 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.CreateUser (HelpDesk.API) in 713.1037ms
+2026-04-01 15:19:03.266 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.CreateUser (HelpDesk.API)'
+2026-04-01 15:19:03.277 +05:30 [INF] HTTP POST /api/Users responded 200 in 1002.2221 ms
+2026-04-01 15:19:03.286 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Users - 200 null application/json; charset=utf-8 1038.3819ms
+2026-04-01 15:21:45.191 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-01 15:21:45.255 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 69.1311ms
+2026-04-01 15:21:45.956 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-01 15:21:45.957 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-01 15:21:45.974 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 17.8525ms
+2026-04-01 15:21:46.008 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 51.586ms
+2026-04-01 15:21:46.262 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-01 15:21:46.287 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 25.5048ms
+2026-04-01 15:23:01.390 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Users - application/json 112
+2026-04-01 15:23:01.438 +05:30 [INF] CORS policy execution failed.
+2026-04-01 15:23:01.470 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-01 15:23:01.513 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.CreateUser (HelpDesk.API)'
+2026-04-01 15:23:01.556 +05:30 [INF] Route matched with {action = "CreateUser", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateUser(HelpDesk.Application.Commands.UserCommand.CreateUserCommand) on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:23:01.605 +05:30 [INF] Admin Creating User with Email: jay.kishor@helpdesk.com
+2026-04-01 15:23:01.642 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-01 15:23:01.783 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-04-01 15:23:01.807 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (Size = 256), @p6='?' (DbType = Boolean), @p7='?' (Size = 4000), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime2), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (DbType = DateTimeOffset), @p13='?' (Size = 256), @p14='?' (Size = 256), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (DbType = Boolean), @p18='?' (DbType = Int32), @p19='?' (Size = 4000), @p20='?' (DbType = Boolean), @p21='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [CreatedAt], [CreatedBy], [Email], [EmailConfirmed], [FullName], [IsActive], [LastModifiedAt], [LastModifiedBy], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [Role], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21);
+2026-04-01 15:23:01.846 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200), @p62='?' (DbType = Guid), @p63='?' (DbType = Guid), @p64='?' (Size = 100), @p65='?' (Size = 200), @p66='?' (Size = 200), @p67='?' (DbType = Guid), @p68='?' (DbType = Guid), @p69='?' (Size = 100), @p70='?' (Size = 200), @p71='?' (Size = 200), @p72='?' (DbType = Guid), @p73='?' (DbType = Guid), @p74='?' (Size = 100), @p75='?' (Size = 200), @p76='?' (Size = 200), @p77='?' (DbType = Guid), @p78='?' (DbType = Guid), @p79='?' (Size = 100), @p80='?' (Size = 200), @p81='?' (Size = 200), @p82='?' (DbType = Guid), @p83='?' (DbType = Guid), @p84='?' (Size = 100), @p85='?' (Size = 200), @p86='?' (Size = 200), @p87='?' (DbType = Guid), @p88='?' (DbType = Guid), @p89='?' (Size = 100), @p90='?' (Size = 200), @p91='?' (Size = 200), @p92='?' (DbType = Guid), @p93='?' (DbType = Guid), @p94='?' (Size = 100), @p95='?' (Size = 200), @p96='?' (Size = 200), @p97='?' (DbType = Guid), @p98='?' (DbType = Guid), @p99='?' (Size = 100), @p100='?' (Size = 200), @p101='?' (Size = 200), @p102='?' (DbType = Guid), @p103='?' (DbType = Guid), @p104='?' (Size = 100), @p105='?' (Size = 200), @p106='?' (Size = 200), @p107='?' (DbType = Guid), @p108='?' (DbType = Guid), @p109='?' (Size = 100), @p110='?' (Size = 200), @p111='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61),
+(@p62, @p63, @p64, @p65, @p66),
+(@p67, @p68, @p69, @p70, @p71),
+(@p72, @p73, @p74, @p75, @p76),
+(@p77, @p78, @p79, @p80, @p81),
+(@p82, @p83, @p84, @p85, @p86),
+(@p87, @p88, @p89, @p90, @p91),
+(@p92, @p93, @p94, @p95, @p96),
+(@p97, @p98, @p99, @p100, @p101),
+(@p102, @p103, @p104, @p105, @p106),
+(@p107, @p108, @p109, @p110, @p111);
+2026-04-01 15:23:01.869 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:23:01.901 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__get_Item_0='?' (DbType = Guid), @__get_Item_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__get_Item_0 AND [a].[RoleId] = @__get_Item_1
+2026-04-01 15:23:01.934 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:23:01.971 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-04-01 15:23:02.018 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p23='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p24='?' (Size = 4000), @p4='?' (DbType = DateTime2), @p5='?' (Size = 4000), @p6='?' (Size = 256), @p7='?' (DbType = Boolean), @p8='?' (Size = 4000), @p9='?' (DbType = Boolean), @p10='?' (DbType = DateTime2), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (DbType = DateTimeOffset), @p14='?' (Size = 256), @p15='?' (Size = 256), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (DbType = Boolean), @p19='?' (DbType = Int32), @p20='?' (Size = 4000), @p21='?' (DbType = Boolean), @p22='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [CreatedAt] = @p4, [CreatedBy] = @p5, [Email] = @p6, [EmailConfirmed] = @p7, [FullName] = @p8, [IsActive] = @p9, [LastModifiedAt] = @p10, [LastModifiedBy] = @p11, [LockoutEnabled] = @p12, [LockoutEnd] = @p13, [NormalizedEmail] = @p14, [NormalizedUserName] = @p15, [PasswordHash] = @p16, [PhoneNumber] = @p17, [PhoneNumberConfirmed] = @p18, [Role] = @p19, [SecurityStamp] = @p20, [TwoFactorEnabled] = @p21, [UserName] = @p22
+OUTPUT 1
+WHERE [Id] = @p23 AND [ConcurrencyStamp] = @p24;
+2026-04-01 15:23:02.258 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (Size = 50), @p9='?' (DbType = Guid), @p10='?' (Size = 100), @p11='?' (Size = 45), @p12='?' (DbType = DateTime2), @p13='?' (Size = 256), @p14='?' (DbType = Guid), @p15='?' (DbType = Guid), @p16='?' (Size = 100), @p17='?' (Size = 200), @p18='?' (Size = 200), @p19='?' (DbType = Guid), @p20='?' (DbType = Guid), @p21='?' (Size = 100), @p22='?' (Size = 200), @p23='?' (Size = 200), @p24='?' (DbType = Guid), @p25='?' (DbType = Guid), @p26='?' (Size = 100), @p27='?' (Size = 200), @p28='?' (Size = 200), @p29='?' (DbType = Guid), @p30='?' (DbType = Guid), @p31='?' (Size = 100), @p32='?' (Size = 200), @p33='?' (Size = 200), @p34='?' (DbType = Guid), @p35='?' (DbType = Guid), @p36='?' (Size = 100), @p37='?' (Size = 200), @p38='?' (Size = 200), @p39='?' (DbType = Guid), @p40='?' (DbType = Guid), @p41='?' (Size = 100), @p42='?' (Size = 200), @p43='?' (Size = 200), @p44='?' (DbType = Guid), @p45='?' (DbType = Guid), @p46='?' (Size = 100), @p47='?' (Size = 200), @p48='?' (Size = 200), @p49='?' (DbType = Guid), @p50='?' (DbType = Guid), @p51='?' (Size = 100), @p52='?' (Size = 200), @p53='?' (Size = 200), @p54='?' (DbType = Guid), @p55='?' (DbType = Guid), @p56='?' (Size = 100), @p57='?' (Size = 200), @p58='?' (Size = 200), @p59='?' (DbType = Guid), @p60='?' (DbType = Guid), @p61='?' (Size = 100), @p62='?' (Size = 200), @p63='?' (Size = 200), @p64='?' (DbType = Guid), @p65='?' (DbType = Guid), @p66='?' (Size = 100), @p67='?' (Size = 200), @p68='?' (Size = 200), @p69='?' (DbType = Guid), @p70='?' (DbType = Guid), @p71='?' (Size = 100), @p72='?' (Size = 200), @p73='?' (Size = 200), @p74='?' (DbType = Guid), @p75='?' (DbType = Guid), @p76='?' (Size = 100), @p77='?' (Size = 200), @p78='?' (Size = 200), @p79='?' (DbType = Guid), @p80='?' (DbType = Guid), @p81='?' (Size = 100), @p82='?' (Size = 200), @p83='?' (Size = 200), @p84='?' (DbType = Guid), @p85='?' (DbType = Guid), @p86='?' (Size = 100), @p87='?' (Size = 200), @p88='?' (Size = 200), @p89='?' (DbType = Guid), @p90='?' (DbType = Guid), @p91='?' (Size = 100), @p92='?' (Size = 200), @p93='?' (Size = 200), @p94='?' (DbType = Guid), @p95='?' (DbType = Guid), @p96='?' (Size = 100), @p97='?' (Size = 200), @p98='?' (Size = 200), @p99='?' (DbType = Guid), @p100='?' (DbType = Guid), @p101='?' (Size = 100), @p102='?' (Size = 200), @p103='?' (Size = 200), @p104='?' (DbType = Guid), @p105='?' (DbType = Guid), @p106='?' (Size = 100), @p107='?' (Size = 200), @p108='?' (Size = 200), @p109='?' (DbType = Guid), @p110='?' (DbType = Guid), @p111='?' (Size = 100), @p112='?' (Size = 200), @p113='?' (Size = 200), @p114='?' (DbType = Guid), @p115='?' (DbType = Guid), @p116='?' (Size = 100), @p117='?' (Size = 200), @p118='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6),
+(@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p14, @p15, @p16, @p17, @p18),
+(@p19, @p20, @p21, @p22, @p23),
+(@p24, @p25, @p26, @p27, @p28),
+(@p29, @p30, @p31, @p32, @p33),
+(@p34, @p35, @p36, @p37, @p38),
+(@p39, @p40, @p41, @p42, @p43),
+(@p44, @p45, @p46, @p47, @p48),
+(@p49, @p50, @p51, @p52, @p53),
+(@p54, @p55, @p56, @p57, @p58),
+(@p59, @p60, @p61, @p62, @p63),
+(@p64, @p65, @p66, @p67, @p68),
+(@p69, @p70, @p71, @p72, @p73),
+(@p74, @p75, @p76, @p77, @p78),
+(@p79, @p80, @p81, @p82, @p83),
+(@p84, @p85, @p86, @p87, @p88),
+(@p89, @p90, @p91, @p92, @p93),
+(@p94, @p95, @p96, @p97, @p98),
+(@p99, @p100, @p101, @p102, @p103),
+(@p104, @p105, @p106, @p107, @p108),
+(@p109, @p110, @p111, @p112, @p113),
+(@p114, @p115, @p116, @p117, @p118);
+2026-04-01 15:23:02.273 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-01 15:23:02.289 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.CreateUser (HelpDesk.API) in 707.8729ms
+2026-04-01 15:23:02.298 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.CreateUser (HelpDesk.API)'
+2026-04-01 15:23:02.307 +05:30 [INF] HTTP POST /api/Users responded 200 in 870.7095 ms
+2026-04-01 15:23:02.317 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Users - 200 null application/json; charset=utf-8 928.0153ms
+2026-04-01 15:23:37.525 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Users/getAll - null null
+2026-04-01 15:23:37.549 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API)'
+2026-04-01 15:23:37.563 +05:30 [INF] Route matched with {action = "GetAll", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:23:37.604 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+2026-04-01 15:23:37.642 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.Collections.Generic.List`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-01 15:23:37.671 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API) in 93.4094ms
+2026-04-01 15:23:37.707 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API)'
+2026-04-01 15:23:37.730 +05:30 [INF] HTTP GET /api/Users/getAll responded 200 in 182.1428 ms
+2026-04-01 15:23:37.747 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Users/getAll - 200 null application/json; charset=utf-8 222.2678ms
+2026-04-01 15:24:04.241 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Users/getById?id=E0EB02C2-5DBC-4E30-A794-8BCECC170395 - null null
+2026-04-01 15:24:04.301 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.GetById (HelpDesk.API)'
+2026-04-01 15:24:04.321 +05:30 [INF] Route matched with {action = "GetById", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:24:04.379 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__get_Item_0
+2026-04-01 15:24:04.430 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-01 15:24:04.479 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.GetById (HelpDesk.API) in 130.8757ms
+2026-04-01 15:24:04.525 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.GetById (HelpDesk.API)'
+2026-04-01 15:24:04.546 +05:30 [INF] HTTP GET /api/Users/getById responded 200 in 244.9431 ms
+2026-04-01 15:24:04.567 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Users/getById?id=E0EB02C2-5DBC-4E30-A794-8BCECC170395 - 200 null application/json; charset=utf-8 325.6429ms
+2026-04-01 15:24:46.996 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Users/UpdateUsersRole?id=DF9CB77C-E673-4E90-B3E5-5B3FF9146A72 - application/json 24
+2026-04-01 15:24:47.046 +05:30 [INF] CORS policy execution failed.
+2026-04-01 15:24:47.058 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-01 15:24:47.071 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.UpdateRole (HelpDesk.API)'
+2026-04-01 15:24:47.086 +05:30 [INF] Route matched with {action = "UpdateRole", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateRole(System.Guid, UpdateRoleRequest) on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:24:47.128 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__get_Item_0
+2026-04-01 15:24:47.155 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:24:47.177 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__get_Item_0='?' (DbType = Guid), @__get_Item_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__get_Item_0 AND [a].[RoleId] = @__get_Item_1
+2026-04-01 15:24:47.220 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:24:47.256 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-04-01 15:24:47.297 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p23='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p24='?' (Size = 4000), @p4='?' (DbType = DateTime2), @p5='?' (Size = 4000), @p6='?' (Size = 256), @p7='?' (DbType = Boolean), @p8='?' (Size = 4000), @p9='?' (DbType = Boolean), @p10='?' (DbType = DateTime2), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (DbType = DateTimeOffset), @p14='?' (Size = 256), @p15='?' (Size = 256), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (DbType = Boolean), @p19='?' (DbType = Int32), @p20='?' (Size = 4000), @p21='?' (DbType = Boolean), @p22='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [AspNetUserRoles]
+OUTPUT 1
+WHERE [RoleId] = @p0 AND [UserId] = @p1;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [CreatedAt] = @p4, [CreatedBy] = @p5, [Email] = @p6, [EmailConfirmed] = @p7, [FullName] = @p8, [IsActive] = @p9, [LastModifiedAt] = @p10, [LastModifiedBy] = @p11, [LockoutEnabled] = @p12, [LockoutEnd] = @p13, [NormalizedEmail] = @p14, [NormalizedUserName] = @p15, [PasswordHash] = @p16, [PhoneNumber] = @p17, [PhoneNumberConfirmed] = @p18, [Role] = @p19, [SecurityStamp] = @p20, [TwoFactorEnabled] = @p21, [UserName] = @p22
+OUTPUT 1
+WHERE [Id] = @p23 AND [ConcurrencyStamp] = @p24;
+2026-04-01 15:24:47.347 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (Size = 50), @p9='?' (DbType = Guid), @p10='?' (Size = 100), @p11='?' (Size = 45), @p12='?' (DbType = DateTime2), @p13='?' (Size = 256), @p14='?' (DbType = Guid), @p15='?' (DbType = Guid), @p16='?' (Size = 100), @p17='?' (Size = 200), @p18='?' (Size = 200), @p19='?' (DbType = Guid), @p20='?' (DbType = Guid), @p21='?' (Size = 100), @p22='?' (Size = 200), @p23='?' (Size = 200), @p24='?' (DbType = Guid), @p25='?' (DbType = Guid), @p26='?' (Size = 100), @p27='?' (Size = 200), @p28='?' (Size = 200), @p29='?' (DbType = Guid), @p30='?' (DbType = Guid), @p31='?' (Size = 100), @p32='?' (Size = 200), @p33='?' (Size = 200), @p34='?' (DbType = Guid), @p35='?' (DbType = Guid), @p36='?' (Size = 100), @p37='?' (Size = 200), @p38='?' (Size = 200), @p39='?' (DbType = Guid), @p40='?' (DbType = Guid), @p41='?' (Size = 100), @p42='?' (Size = 200), @p43='?' (Size = 200), @p44='?' (DbType = Guid), @p45='?' (DbType = Guid), @p46='?' (Size = 100), @p47='?' (Size = 200), @p48='?' (Size = 200), @p49='?' (DbType = Guid), @p50='?' (DbType = Guid), @p51='?' (Size = 100), @p52='?' (Size = 200), @p53='?' (Size = 200), @p54='?' (DbType = Guid), @p55='?' (DbType = Guid), @p56='?' (Size = 100), @p57='?' (Size = 200), @p58='?' (Size = 200), @p59='?' (DbType = Guid), @p60='?' (DbType = Guid), @p61='?' (Size = 100), @p62='?' (Size = 200), @p63='?' (Size = 200), @p64='?' (DbType = Guid), @p65='?' (DbType = Guid), @p66='?' (Size = 100), @p67='?' (Size = 200), @p68='?' (Size = 200), @p69='?' (DbType = Guid), @p70='?' (DbType = Guid), @p71='?' (Size = 100), @p72='?' (Size = 200), @p73='?' (Size = 200), @p74='?' (DbType = Guid), @p75='?' (DbType = Guid), @p76='?' (Size = 100), @p77='?' (Size = 200), @p78='?' (Size = 200), @p79='?' (DbType = Guid), @p80='?' (DbType = Guid), @p81='?' (Size = 100), @p82='?' (Size = 200), @p83='?' (Size = 200), @p84='?' (DbType = Guid), @p85='?' (DbType = Guid), @p86='?' (Size = 100), @p87='?' (Size = 200), @p88='?' (Size = 200), @p89='?' (DbType = Guid), @p90='?' (DbType = Guid), @p91='?' (Size = 100), @p92='?' (Size = 200), @p93='?' (Size = 200), @p94='?' (DbType = Guid), @p95='?' (DbType = Guid), @p96='?' (Size = 100), @p97='?' (Size = 200), @p98='?' (Size = 200), @p99='?' (DbType = Guid), @p100='?' (DbType = Guid), @p101='?' (Size = 100), @p102='?' (Size = 200), @p103='?' (Size = 200), @p104='?' (DbType = Guid), @p105='?' (DbType = Guid), @p106='?' (Size = 100), @p107='?' (Size = 200), @p108='?' (Size = 200), @p109='?' (DbType = Guid), @p110='?' (DbType = Guid), @p111='?' (Size = 100), @p112='?' (Size = 200), @p113='?' (Size = 200), @p114='?' (DbType = Guid), @p115='?' (DbType = Guid), @p116='?' (Size = 100), @p117='?' (Size = 200), @p118='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6),
+(@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p14, @p15, @p16, @p17, @p18),
+(@p19, @p20, @p21, @p22, @p23),
+(@p24, @p25, @p26, @p27, @p28),
+(@p29, @p30, @p31, @p32, @p33),
+(@p34, @p35, @p36, @p37, @p38),
+(@p39, @p40, @p41, @p42, @p43),
+(@p44, @p45, @p46, @p47, @p48),
+(@p49, @p50, @p51, @p52, @p53),
+(@p54, @p55, @p56, @p57, @p58),
+(@p59, @p60, @p61, @p62, @p63),
+(@p64, @p65, @p66, @p67, @p68),
+(@p69, @p70, @p71, @p72, @p73),
+(@p74, @p75, @p76, @p77, @p78),
+(@p79, @p80, @p81, @p82, @p83),
+(@p84, @p85, @p86, @p87, @p88),
+(@p89, @p90, @p91, @p92, @p93),
+(@p94, @p95, @p96, @p97, @p98),
+(@p99, @p100, @p101, @p102, @p103),
+(@p104, @p105, @p106, @p107, @p108),
+(@p109, @p110, @p111, @p112, @p113),
+(@p114, @p115, @p116, @p117, @p118);
+2026-04-01 15:24:47.374 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:24:47.410 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?' (DbType = Guid), @__get_Item_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__get_Item_0 AND [a].[RoleId] = @__get_Item_1
+2026-04-01 15:24:47.434 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2026-04-01 15:24:47.464 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2026-04-01 15:24:47.513 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p23='?' (DbType = Guid), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p24='?' (Size = 4000), @p4='?' (DbType = DateTime2), @p5='?' (Size = 4000), @p6='?' (Size = 256), @p7='?' (DbType = Boolean), @p8='?' (Size = 4000), @p9='?' (DbType = Boolean), @p10='?' (DbType = DateTime2), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (DbType = DateTimeOffset), @p14='?' (Size = 256), @p15='?' (Size = 256), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (DbType = Boolean), @p19='?' (DbType = Int32), @p20='?' (Size = 4000), @p21='?' (DbType = Boolean), @p22='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [CreatedAt] = @p4, [CreatedBy] = @p5, [Email] = @p6, [EmailConfirmed] = @p7, [FullName] = @p8, [IsActive] = @p9, [LastModifiedAt] = @p10, [LastModifiedBy] = @p11, [LockoutEnabled] = @p12, [LockoutEnd] = @p13, [NormalizedEmail] = @p14, [NormalizedUserName] = @p15, [PasswordHash] = @p16, [PhoneNumber] = @p17, [PhoneNumberConfirmed] = @p18, [Role] = @p19, [SecurityStamp] = @p20, [TwoFactorEnabled] = @p21, [UserName] = @p22
+OUTPUT 1
+WHERE [Id] = @p23 AND [ConcurrencyStamp] = @p24;
+2026-04-01 15:24:47.564 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (Size = 50), @p9='?' (DbType = Guid), @p10='?' (Size = 100), @p11='?' (Size = 45), @p12='?' (DbType = DateTime2), @p13='?' (Size = 256), @p14='?' (DbType = Guid), @p15='?' (DbType = Guid), @p16='?' (Size = 100), @p17='?' (Size = 200), @p18='?' (Size = 200), @p19='?' (DbType = Guid), @p20='?' (DbType = Guid), @p21='?' (Size = 100), @p22='?' (Size = 200), @p23='?' (Size = 200), @p24='?' (DbType = Guid), @p25='?' (DbType = Guid), @p26='?' (Size = 100), @p27='?' (Size = 200), @p28='?' (Size = 200), @p29='?' (DbType = Guid), @p30='?' (DbType = Guid), @p31='?' (Size = 100), @p32='?' (Size = 200), @p33='?' (Size = 200), @p34='?' (DbType = Guid), @p35='?' (DbType = Guid), @p36='?' (Size = 100), @p37='?' (Size = 200), @p38='?' (Size = 200), @p39='?' (DbType = Guid), @p40='?' (DbType = Guid), @p41='?' (Size = 100), @p42='?' (Size = 200), @p43='?' (Size = 200), @p44='?' (DbType = Guid), @p45='?' (DbType = Guid), @p46='?' (Size = 100), @p47='?' (Size = 200), @p48='?' (Size = 200), @p49='?' (DbType = Guid), @p50='?' (DbType = Guid), @p51='?' (Size = 100), @p52='?' (Size = 200), @p53='?' (Size = 200), @p54='?' (DbType = Guid), @p55='?' (DbType = Guid), @p56='?' (Size = 100), @p57='?' (Size = 200), @p58='?' (Size = 200), @p59='?' (DbType = Guid), @p60='?' (DbType = Guid), @p61='?' (Size = 100), @p62='?' (Size = 200), @p63='?' (Size = 200), @p64='?' (DbType = Guid), @p65='?' (DbType = Guid), @p66='?' (Size = 100), @p67='?' (Size = 200), @p68='?' (Size = 200), @p69='?' (DbType = Guid), @p70='?' (DbType = Guid), @p71='?' (Size = 100), @p72='?' (Size = 200), @p73='?' (Size = 200), @p74='?' (DbType = Guid), @p75='?' (DbType = Guid), @p76='?' (Size = 100), @p77='?' (Size = 200), @p78='?' (Size = 200), @p79='?' (DbType = Guid), @p80='?' (DbType = Guid), @p81='?' (Size = 100), @p82='?' (Size = 200), @p83='?' (Size = 200), @p84='?' (DbType = Guid), @p85='?' (DbType = Guid), @p86='?' (Size = 100), @p87='?' (Size = 200), @p88='?' (Size = 200), @p89='?' (DbType = Guid), @p90='?' (DbType = Guid), @p91='?' (Size = 100), @p92='?' (Size = 200), @p93='?' (Size = 200), @p94='?' (DbType = Guid), @p95='?' (DbType = Guid), @p96='?' (Size = 100), @p97='?' (Size = 200), @p98='?' (Size = 200), @p99='?' (DbType = Guid), @p100='?' (DbType = Guid), @p101='?' (Size = 100), @p102='?' (Size = 200), @p103='?' (Size = 200), @p104='?' (DbType = Guid), @p105='?' (DbType = Guid), @p106='?' (Size = 100), @p107='?' (Size = 200), @p108='?' (Size = 200), @p109='?' (DbType = Guid), @p110='?' (DbType = Guid), @p111='?' (Size = 100), @p112='?' (Size = 200), @p113='?' (Size = 200), @p114='?' (DbType = Guid), @p115='?' (DbType = Guid), @p116='?' (Size = 100), @p117='?' (Size = 200), @p118='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6),
+(@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p14, @p15, @p16, @p17, @p18),
+(@p19, @p20, @p21, @p22, @p23),
+(@p24, @p25, @p26, @p27, @p28),
+(@p29, @p30, @p31, @p32, @p33),
+(@p34, @p35, @p36, @p37, @p38),
+(@p39, @p40, @p41, @p42, @p43),
+(@p44, @p45, @p46, @p47, @p48),
+(@p49, @p50, @p51, @p52, @p53),
+(@p54, @p55, @p56, @p57, @p58),
+(@p59, @p60, @p61, @p62, @p63),
+(@p64, @p65, @p66, @p67, @p68),
+(@p69, @p70, @p71, @p72, @p73),
+(@p74, @p75, @p76, @p77, @p78),
+(@p79, @p80, @p81, @p82, @p83),
+(@p84, @p85, @p86, @p87, @p88),
+(@p89, @p90, @p91, @p92, @p93),
+(@p94, @p95, @p96, @p97, @p98),
+(@p99, @p100, @p101, @p102, @p103),
+(@p104, @p105, @p106, @p107, @p108),
+(@p109, @p110, @p111, @p112, @p113),
+(@p114, @p115, @p116, @p117, @p118);
+2026-04-01 15:24:47.608 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p21='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p22='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (Size = 4000), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime2), @p9='?' (Size = 4000), @p10='?' (DbType = Boolean), @p11='?' (DbType = DateTimeOffset), @p12='?' (Size = 256), @p13='?' (Size = 256), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (DbType = Boolean), @p17='?' (DbType = Int32), @p18='?' (Size = 4000), @p19='?' (DbType = Boolean), @p20='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [CreatedAt] = @p2, [CreatedBy] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [FullName] = @p6, [IsActive] = @p7, [LastModifiedAt] = @p8, [LastModifiedBy] = @p9, [LockoutEnabled] = @p10, [LockoutEnd] = @p11, [NormalizedEmail] = @p12, [NormalizedUserName] = @p13, [PasswordHash] = @p14, [PhoneNumber] = @p15, [PhoneNumberConfirmed] = @p16, [Role] = @p17, [SecurityStamp] = @p18, [TwoFactorEnabled] = @p19, [UserName] = @p20
+OUTPUT 1
+WHERE [Id] = @p21 AND [ConcurrencyStamp] = @p22;
+2026-04-01 15:24:47.659 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200), @p62='?' (DbType = Guid), @p63='?' (DbType = Guid), @p64='?' (Size = 100), @p65='?' (Size = 200), @p66='?' (Size = 200), @p67='?' (DbType = Guid), @p68='?' (DbType = Guid), @p69='?' (Size = 100), @p70='?' (Size = 200), @p71='?' (Size = 200), @p72='?' (DbType = Guid), @p73='?' (DbType = Guid), @p74='?' (Size = 100), @p75='?' (Size = 200), @p76='?' (Size = 200), @p77='?' (DbType = Guid), @p78='?' (DbType = Guid), @p79='?' (Size = 100), @p80='?' (Size = 200), @p81='?' (Size = 200), @p82='?' (DbType = Guid), @p83='?' (DbType = Guid), @p84='?' (Size = 100), @p85='?' (Size = 200), @p86='?' (Size = 200), @p87='?' (DbType = Guid), @p88='?' (DbType = Guid), @p89='?' (Size = 100), @p90='?' (Size = 200), @p91='?' (Size = 200), @p92='?' (DbType = Guid), @p93='?' (DbType = Guid), @p94='?' (Size = 100), @p95='?' (Size = 200), @p96='?' (Size = 200), @p97='?' (DbType = Guid), @p98='?' (DbType = Guid), @p99='?' (Size = 100), @p100='?' (Size = 200), @p101='?' (Size = 200), @p102='?' (DbType = Guid), @p103='?' (DbType = Guid), @p104='?' (Size = 100), @p105='?' (Size = 200), @p106='?' (Size = 200), @p107='?' (DbType = Guid), @p108='?' (DbType = Guid), @p109='?' (Size = 100), @p110='?' (Size = 200), @p111='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61),
+(@p62, @p63, @p64, @p65, @p66),
+(@p67, @p68, @p69, @p70, @p71),
+(@p72, @p73, @p74, @p75, @p76),
+(@p77, @p78, @p79, @p80, @p81),
+(@p82, @p83, @p84, @p85, @p86),
+(@p87, @p88, @p89, @p90, @p91),
+(@p92, @p93, @p94, @p95, @p96),
+(@p97, @p98, @p99, @p100, @p101),
+(@p102, @p103, @p104, @p105, @p106),
+(@p107, @p108, @p109, @p110, @p111);
+2026-04-01 15:24:47.707 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-01 15:24:47.736 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.UpdateRole (HelpDesk.API) in 634.0339ms
+2026-04-01 15:24:47.771 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.UpdateRole (HelpDesk.API)'
+2026-04-01 15:24:47.795 +05:30 [INF] HTTP PUT /api/Users/UpdateUsersRole responded 200 in 748.6841 ms
+2026-04-01 15:24:47.813 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Users/UpdateUsersRole?id=DF9CB77C-E673-4E90-B3E5-5B3FF9146A72 - 200 null application/json; charset=utf-8 817.3313ms
+2026-04-01 15:25:07.388 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Users/UpdateUsersRole?id=DF9CB77C-E673-4E90-B3E5-5B3FF9146A72 - application/json 27
+2026-04-01 15:25:07.427 +05:30 [INF] CORS policy execution failed.
+2026-04-01 15:25:07.452 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-01 15:25:07.480 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.UpdateRole (HelpDesk.API)'
+2026-04-01 15:25:07.507 +05:30 [INF] Route matched with {action = "UpdateRole", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateRole(System.Guid, UpdateRoleRequest) on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:25:08.252 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2026-04-01 15:25:08.286 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.UpdateRole (HelpDesk.API) in 517.0422ms
+2026-04-01 15:25:08.311 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.UpdateRole (HelpDesk.API)'
+2026-04-01 15:25:08.322 +05:30 [INF] HTTP PUT /api/Users/UpdateUsersRole responded 400 in 894.9505 ms
+2026-04-01 15:25:08.330 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Users/UpdateUsersRole?id=DF9CB77C-E673-4E90-B3E5-5B3FF9146A72 - 400 null application/problem+json; charset=utf-8 942.7141ms
+2026-04-01 15:25:31.189 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Users/DeleteUser?id=E0EB02C2-5DBC-4E30-A794-8BCECC170395 - null 0
+2026-04-01 15:25:31.221 +05:30 [INF] CORS policy execution failed.
+2026-04-01 15:25:31.260 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-01 15:25:31.297 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.Deactivate (HelpDesk.API)'
+2026-04-01 15:25:31.334 +05:30 [INF] Route matched with {action = "Deactivate", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Deactivate(System.Guid) on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:25:31.364 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__get_Item_0
+2026-04-01 15:25:31.389 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p21='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p22='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (Size = 4000), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime2), @p9='?' (Size = 4000), @p10='?' (DbType = Boolean), @p11='?' (DbType = DateTimeOffset), @p12='?' (Size = 256), @p13='?' (Size = 256), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (DbType = Boolean), @p17='?' (DbType = Int32), @p18='?' (Size = 4000), @p19='?' (DbType = Boolean), @p20='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [CreatedAt] = @p2, [CreatedBy] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [FullName] = @p6, [IsActive] = @p7, [LastModifiedAt] = @p8, [LastModifiedBy] = @p9, [LockoutEnabled] = @p10, [LockoutEnd] = @p11, [NormalizedEmail] = @p12, [NormalizedUserName] = @p13, [PasswordHash] = @p14, [PhoneNumber] = @p15, [PhoneNumberConfirmed] = @p16, [Role] = @p17, [SecurityStamp] = @p18, [TwoFactorEnabled] = @p19, [UserName] = @p20
+OUTPUT 1
+WHERE [Id] = @p21 AND [ConcurrencyStamp] = @p22;
+2026-04-01 15:25:31.414 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200), @p62='?' (DbType = Guid), @p63='?' (DbType = Guid), @p64='?' (Size = 100), @p65='?' (Size = 200), @p66='?' (Size = 200), @p67='?' (DbType = Guid), @p68='?' (DbType = Guid), @p69='?' (Size = 100), @p70='?' (Size = 200), @p71='?' (Size = 200), @p72='?' (DbType = Guid), @p73='?' (DbType = Guid), @p74='?' (Size = 100), @p75='?' (Size = 200), @p76='?' (Size = 200), @p77='?' (DbType = Guid), @p78='?' (DbType = Guid), @p79='?' (Size = 100), @p80='?' (Size = 200), @p81='?' (Size = 200), @p82='?' (DbType = Guid), @p83='?' (DbType = Guid), @p84='?' (Size = 100), @p85='?' (Size = 200), @p86='?' (Size = 200), @p87='?' (DbType = Guid), @p88='?' (DbType = Guid), @p89='?' (Size = 100), @p90='?' (Size = 200), @p91='?' (Size = 200), @p92='?' (DbType = Guid), @p93='?' (DbType = Guid), @p94='?' (Size = 100), @p95='?' (Size = 200), @p96='?' (Size = 200), @p97='?' (DbType = Guid), @p98='?' (DbType = Guid), @p99='?' (Size = 100), @p100='?' (Size = 200), @p101='?' (Size = 200), @p102='?' (DbType = Guid), @p103='?' (DbType = Guid), @p104='?' (Size = 100), @p105='?' (Size = 200), @p106='?' (Size = 200), @p107='?' (DbType = Guid), @p108='?' (DbType = Guid), @p109='?' (Size = 100), @p110='?' (Size = 200), @p111='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61),
+(@p62, @p63, @p64, @p65, @p66),
+(@p67, @p68, @p69, @p70, @p71),
+(@p72, @p73, @p74, @p75, @p76),
+(@p77, @p78, @p79, @p80, @p81),
+(@p82, @p83, @p84, @p85, @p86),
+(@p87, @p88, @p89, @p90, @p91),
+(@p92, @p93, @p94, @p95, @p96),
+(@p97, @p98, @p99, @p100, @p101),
+(@p102, @p103, @p104, @p105, @p106),
+(@p107, @p108, @p109, @p110, @p111);
+2026-04-01 15:25:31.435 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-01 15:25:31.451 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.Deactivate (HelpDesk.API) in 93.1278ms
+2026-04-01 15:25:31.488 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.Deactivate (HelpDesk.API)'
+2026-04-01 15:25:31.500 +05:30 [INF] HTTP PUT /api/Users/DeleteUser responded 200 in 278.7766 ms
+2026-04-01 15:25:31.511 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Users/DeleteUser?id=E0EB02C2-5DBC-4E30-A794-8BCECC170395 - 200 null application/json; charset=utf-8 322.7902ms
+2026-04-01 15:25:32.783 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Users/DeleteUser?id=E0EB02C2-5DBC-4E30-A794-8BCECC170395 - null 0
+2026-04-01 15:25:32.814 +05:30 [INF] CORS policy execution failed.
+2026-04-01 15:25:32.836 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-01 15:25:32.860 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.Deactivate (HelpDesk.API)'
+2026-04-01 15:25:32.881 +05:30 [INF] Route matched with {action = "Deactivate", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Deactivate(System.Guid) on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:25:32.905 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__get_Item_0
+2026-04-01 15:25:32.927 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p21='?' (DbType = Guid), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p22='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (Size = 4000), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime2), @p9='?' (Size = 4000), @p10='?' (DbType = Boolean), @p11='?' (DbType = DateTimeOffset), @p12='?' (Size = 256), @p13='?' (Size = 256), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (DbType = Boolean), @p17='?' (DbType = Int32), @p18='?' (Size = 4000), @p19='?' (DbType = Boolean), @p20='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [CreatedAt] = @p2, [CreatedBy] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [FullName] = @p6, [IsActive] = @p7, [LastModifiedAt] = @p8, [LastModifiedBy] = @p9, [LockoutEnabled] = @p10, [LockoutEnd] = @p11, [NormalizedEmail] = @p12, [NormalizedUserName] = @p13, [PasswordHash] = @p14, [PhoneNumber] = @p15, [PhoneNumberConfirmed] = @p16, [Role] = @p17, [SecurityStamp] = @p18, [TwoFactorEnabled] = @p19, [UserName] = @p20
+OUTPUT 1
+WHERE [Id] = @p21 AND [ConcurrencyStamp] = @p22;
+2026-04-01 15:25:32.945 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200), @p62='?' (DbType = Guid), @p63='?' (DbType = Guid), @p64='?' (Size = 100), @p65='?' (Size = 200), @p66='?' (Size = 200), @p67='?' (DbType = Guid), @p68='?' (DbType = Guid), @p69='?' (Size = 100), @p70='?' (Size = 200), @p71='?' (Size = 200), @p72='?' (DbType = Guid), @p73='?' (DbType = Guid), @p74='?' (Size = 100), @p75='?' (Size = 200), @p76='?' (Size = 200), @p77='?' (DbType = Guid), @p78='?' (DbType = Guid), @p79='?' (Size = 100), @p80='?' (Size = 200), @p81='?' (Size = 200), @p82='?' (DbType = Guid), @p83='?' (DbType = Guid), @p84='?' (Size = 100), @p85='?' (Size = 200), @p86='?' (Size = 200), @p87='?' (DbType = Guid), @p88='?' (DbType = Guid), @p89='?' (Size = 100), @p90='?' (Size = 200), @p91='?' (Size = 200), @p92='?' (DbType = Guid), @p93='?' (DbType = Guid), @p94='?' (Size = 100), @p95='?' (Size = 200), @p96='?' (Size = 200), @p97='?' (DbType = Guid), @p98='?' (DbType = Guid), @p99='?' (Size = 100), @p100='?' (Size = 200), @p101='?' (Size = 200), @p102='?' (DbType = Guid), @p103='?' (DbType = Guid), @p104='?' (Size = 100), @p105='?' (Size = 200), @p106='?' (Size = 200), @p107='?' (DbType = Guid), @p108='?' (DbType = Guid), @p109='?' (Size = 100), @p110='?' (Size = 200), @p111='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61),
+(@p62, @p63, @p64, @p65, @p66),
+(@p67, @p68, @p69, @p70, @p71),
+(@p72, @p73, @p74, @p75, @p76),
+(@p77, @p78, @p79, @p80, @p81),
+(@p82, @p83, @p84, @p85, @p86),
+(@p87, @p88, @p89, @p90, @p91),
+(@p92, @p93, @p94, @p95, @p96),
+(@p97, @p98, @p99, @p100, @p101),
+(@p102, @p103, @p104, @p105, @p106),
+(@p107, @p108, @p109, @p110, @p111);
+2026-04-01 15:25:32.962 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-01 15:25:32.976 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.Deactivate (HelpDesk.API) in 74.5923ms
+2026-04-01 15:25:32.989 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.Deactivate (HelpDesk.API)'
+2026-04-01 15:25:33.000 +05:30 [INF] HTTP PUT /api/Users/DeleteUser responded 200 in 186.7077 ms
+2026-04-01 15:25:33.011 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Users/DeleteUser?id=E0EB02C2-5DBC-4E30-A794-8BCECC170395 - 200 null application/json; charset=utf-8 229.2864ms
+2026-04-01 15:25:48.109 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Users/agents/active - null null
+2026-04-01 15:25:48.133 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.GetActiveAgents (HelpDesk.API)'
+2026-04-01 15:25:48.167 +05:30 [INF] Route matched with {action = "GetActiveAgents", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetActiveAgents() on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-01 15:25:48.258 +05:30 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Role] = 2 AND [a].[IsActive] = CAST(1 AS bit)
+ORDER BY [a].[FullName]
+2026-04-01 15:25:48.295 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.Collections.Generic.List`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-01 15:25:48.337 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.GetActiveAgents (HelpDesk.API) in 148.5245ms
+2026-04-01 15:25:48.363 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.GetActiveAgents (HelpDesk.API)'
+2026-04-01 15:25:48.380 +05:30 [INF] HTTP GET /api/Users/agents/active responded 200 in 247.2920 ms
+2026-04-01 15:25:48.396 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Users/agents/active - 200 null application/json; charset=utf-8 288.9377ms

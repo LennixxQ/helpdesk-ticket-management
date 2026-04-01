@@ -32,6 +32,7 @@ namespace HelpDesk.Application.Services
                 return BaseResponse<CategoryDto>.Fail("Category already exists.");
 
             var category = _mapper.Map<Category>(command);
+            category.Id = Guid.NewGuid();
             category.CreatedAt = DateTime.UtcNow;
 
             await _uow.Categories.AddAsync(category);

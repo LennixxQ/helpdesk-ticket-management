@@ -51,9 +51,10 @@ namespace HelpDesk.Application.Services
             ticket.LastModifiedBy = currentUserId.ToString();
 
 
-            await _uow.Tickets.AddAsync(comment as dynamic);
+            await _uow.Comments.AddAsync(comment);
             _uow.Tickets.Update(ticket);
             await _uow.SaveChangesAsync();
+            comment.User = (await _uow.Users.GetByIdAsync(currentUserId))!;
 
             return BaseResponse<CommentDto>.Ok(_mapper.Map<CommentDto>(comment), "Comment Added");
         }
@@ -109,6 +110,7 @@ namespace HelpDesk.Application.Services
             var raisedById = currentUserRole == UserRole.Admin && command.RaisedByUserId.HasValue ? command.RaisedByUserId.Value : currentUserId;
 
             var ticket = _mapper.Map<Ticket>(command);
+            ticket.Id = Guid.NewGuid();
             ticket.RaisedByUserId = raisedById;
             ticket.Status = TicketStatus.Open;
             ticket.CreatedAt = DateTime.UtcNow;
@@ -127,8 +129,9 @@ namespace HelpDesk.Application.Services
             Guid? filterByUser = currentUserRole == UserRole.User ? currentUserId : null;
             Guid? filterByAgent = currentUserRole == UserRole.Agent ? currentUserId : agentId;
 
+
             var paged = await _uow.Tickets.GetAllPagedAsync(
-                page, pageSize, status, priority, categoryId, filterByAgent);
+                page, pageSize, status, priority, categoryId, filterByAgent, filterByUser);
 
             var dto = new PagedResult<TicketDto>
             {

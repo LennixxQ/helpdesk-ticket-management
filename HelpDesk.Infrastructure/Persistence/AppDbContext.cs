@@ -12,7 +12,7 @@ namespace HelpDesk.Infrastructure.Persistence
     {
         private readonly IHttpContextAccessor? _httpContextAccessor;
 
-        public AppDbContext(DbContextOptions<AppDbContext> options, IHttpContextAccessor? httpContextAccessor = null) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options, IHttpContextAccessor? httpContextAccessor) : base(options)
         {
             _httpContextAccessor = httpContextAccessor;
         }
