@@ -1,0 +1,826 @@
+2026-04-02 12:03:07.099 +05:30 [INF] Executed DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-02 12:03:07.295 +05:30 [INF] Executed DbCommand (57ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-02 12:03:07.483 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-02 12:03:07.499 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-02 12:03:07.558 +05:30 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-02 12:03:07.601 +05:30 [INF] Database migrations applied.
+2026-04-02 12:03:07.677 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-02 12:03:07.911 +05:30 [INF] Executed DbCommand (26ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-02 12:03:07.958 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-02 12:03:07.973 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-02 12:03:07.999 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-02 12:03:08.062 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:03:08.078 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:03:08.093 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:03:08.103 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:03:08.117 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:03:08.171 +05:30 [INF] Database seeding completed.
+2026-04-02 12:03:08.178 +05:30 [INF] Database seeding complete.
+2026-04-02 12:03:08.770 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-02 12:03:08.778 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-02 12:03:08.823 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-02 12:03:08.838 +05:30 [INF] Hosting environment: Development
+2026-04-02 12:03:08.845 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-02 12:03:27.202 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-02 12:03:27.660 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 469.112ms
+2026-04-02 12:03:27.706 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-02 12:03:27.727 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 21.5647ms
+2026-04-02 12:03:27.952 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-02 12:03:28.022 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 70.378ms
+2026-04-02 12:03:28.222 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-02 12:03:28.281 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 59.4786ms
+2026-04-02 12:04:36.572 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Auth/login - application/json 70
+2026-04-02 12:04:36.616 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:04:36.630 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:04:36.866 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-02 12:04:37.005 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginRequest) on controller HelpDesk.API.Controllers.AuthController (HelpDesk.API).
+2026-04-02 12:04:37.083 +05:30 [INF] Login attempt for email: vivek.chauhan@helpdesk.com
+2026-04-02 12:04:37.125 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-02 12:04:37.380 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-02 12:04:37.410 +05:30 [INF] Executed action HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API) in 364.9904ms
+2026-04-02 12:04:37.428 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-02 12:04:37.444 +05:30 [INF] HTTP POST /api/Auth/login responded 200 in 828.3395 ms
+2026-04-02 12:04:37.462 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Auth/login - 200 null application/json; charset=utf-8 890.6089ms
+2026-04-02 12:05:02.425 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Tickets/createTicket - application/json 187
+2026-04-02 12:05:02.452 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:05:02.468 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:05:02.496 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin|User)
+2026-04-02 12:05:02.534 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2026-04-02 12:05:02.557 +05:30 [INF] HTTP POST /api/Tickets/createTicket responded 401 in 106.0900 ms
+2026-04-02 12:05:02.572 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Tickets/createTicket - 401 0 null 148.7534ms
+2026-04-02 12:05:34.532 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Tickets/createTicket - application/json 187
+2026-04-02 12:05:34.561 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:05:34.574 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:05:34.649 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.Create (HelpDesk.API)'
+2026-04-02 12:05:34.666 +05:30 [INF] Route matched with {action = "Create", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(HelpDesk.Application.Commands.TicketCommand.CreateTicketCommand) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:05:35.111 +05:30 [INF] User "c6a8fb25-5e6a-45d2-a7fe-10f153832ea4" creating ticket with title: string
+2026-04-02 12:05:36.022 +05:30 [ERR] Failed executing DbCommand (407ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (Size = 2000), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (DbType = Guid), @p10='?' (Size = 4000), @p11='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Tickets] ([Id], [AssignedAgentId], [CategoryId], [CreatedAt], [CreatedBy], [Description], [LastModifiedAt], [LastModifiedBy], [Priority], [RaisedByUserId], [Status], [Title])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2026-04-02 12:05:36.956 +05:30 [ERR] An exception occurred in the database while saving changes for context type 'HelpDesk.Infrastructure.Persistence.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Tickets_AspNetUsers_RaisedByUserId". The conflict occurred in database "HelpDeskDb", table "dbo.AspNetUsers", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:a59db1de-1143-4dab-89a1-781688375a7a
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Tickets_AspNetUsers_RaisedByUserId". The conflict occurred in database "HelpDeskDb", table "dbo.AspNetUsers", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:a59db1de-1143-4dab-89a1-781688375a7a
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-04-02 12:05:38.357 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.Create (HelpDesk.API) in 3676.7917ms
+2026-04-02 12:05:38.582 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.Create (HelpDesk.API)'
+2026-04-02 12:05:38.942 +05:30 [ERR] HTTP POST /api/Tickets/createTicket responded 500 in 4381.4241 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Tickets_AspNetUsers_RaisedByUserId". The conflict occurred in database "HelpDeskDb", table "dbo.AspNetUsers", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:a59db1de-1143-4dab-89a1-781688375a7a
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at HelpDesk.Infrastructure.Persistence.AppDbContext.SaveChangesAsync(CancellationToken cancellationToken) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.Infrastructure\Persistence\AppDbContext.cs:line 35
+   at HelpDesk.Infrastructure.Persistence.Repositories.UnitOfWork.SaveChangesAsync() in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.Infrastructure\Persistence\Repositories\UnitOfWork.cs:line 27
+   at HelpDesk.Application.Services.TicketService.CreateAsync(CreateTicketCommand command, Guid currentUserId, UserRole currentUserRole) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.Application\Services\TicketService.cs:line 120
+   at HelpDesk.API.Controllers.TicketsController.Create(CreateTicketCommand command) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API\Controllers\TicketsController.cs:line 36
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-04-02 12:05:39.604 +05:30 [ERR] Unhandled exception on POST /api/Tickets/createTicket
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Tickets_AspNetUsers_RaisedByUserId". The conflict occurred in database "HelpDeskDb", table "dbo.AspNetUsers", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__209_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:a59db1de-1143-4dab-89a1-781688375a7a
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at HelpDesk.Infrastructure.Persistence.AppDbContext.SaveChangesAsync(CancellationToken cancellationToken) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.Infrastructure\Persistence\AppDbContext.cs:line 35
+   at HelpDesk.Infrastructure.Persistence.Repositories.UnitOfWork.SaveChangesAsync() in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.Infrastructure\Persistence\Repositories\UnitOfWork.cs:line 27
+   at HelpDesk.Application.Services.TicketService.CreateAsync(CreateTicketCommand command, Guid currentUserId, UserRole currentUserRole) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.Application\Services\TicketService.cs:line 120
+   at HelpDesk.API.Controllers.TicketsController.Create(CreateTicketCommand command) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API\Controllers\TicketsController.cs:line 36
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at HelpDesk.API.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API\Middleware\ExceptionHandlingMiddleware.cs:line 21
+2026-04-02 12:05:39.659 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Tickets/createTicket - 500 null application/json 5127.5721ms
+2026-04-02 12:10:53.846 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Tickets/createTicket - application/json 271
+2026-04-02 12:10:53.880 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:10:53.900 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:10:53.929 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.Create (HelpDesk.API)'
+2026-04-02 12:10:53.951 +05:30 [INF] Route matched with {action = "Create", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(HelpDesk.Application.Commands.TicketCommand.CreateTicketCommand) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:10:53.982 +05:30 [INF] User "c6a8fb25-5e6a-45d2-a7fe-10f153832ea4" creating ticket with title: Laptop Problem
+2026-04-02 12:10:54.062 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (Size = 2000), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (DbType = Guid), @p10='?' (Size = 4000), @p11='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Tickets] ([Id], [AssignedAgentId], [CategoryId], [CreatedAt], [CreatedBy], [Description], [LastModifiedAt], [LastModifiedBy], [Priority], [RaisedByUserId], [Status], [Title])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11);
+2026-04-02 12:10:54.375 +05:30 [INF] Executed DbCommand (29ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61);
+2026-04-02 12:10:54.758 +05:30 [INF] Executed DbCommand (45ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:10:54.892 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:10:54.963 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.Create (HelpDesk.API) in 984.2478ms
+2026-04-02 12:10:54.991 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.Create (HelpDesk.API)'
+2026-04-02 12:10:55.015 +05:30 [INF] HTTP POST /api/Tickets/createTicket responded 200 in 1135.4214 ms
+2026-04-02 12:10:55.032 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Tickets/createTicket - 200 null application/json; charset=utf-8 1186.6657ms
+2026-04-02 12:11:27.155 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Tickets/GetAllTicket - null null
+2026-04-02 12:11:27.213 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.GetAll (HelpDesk.API)'
+2026-04-02 12:11:27.232 +05:30 [INF] Route matched with {action = "GetAll", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(HelpDesk.Application.DTOs.PaginationDto) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:11:27.304 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+2026-04-02 12:11:27.381 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [c].[Id], [c].[CreatedAt], [c].[CreatedBy], [c].[IsActive], [c].[LastModifiedAt], [c].[LastModifiedBy], [c].[Name], [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id], [a0].[AccessFailedCount], [a0].[ConcurrencyStamp], [a0].[CreatedAt], [a0].[CreatedBy], [a0].[Email], [a0].[EmailConfirmed], [a0].[FullName], [a0].[IsActive], [a0].[LastModifiedAt], [a0].[LastModifiedBy], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[Role], [a0].[SecurityStamp], [a0].[TwoFactorEnabled], [a0].[UserName]
+FROM (
+    SELECT [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title]
+    FROM [Tickets] AS [t]
+    ORDER BY [t].[CreatedAt] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t0]
+INNER JOIN [Categories] AS [c] ON [t0].[CategoryId] = [c].[Id]
+INNER JOIN [AspNetUsers] AS [a] ON [t0].[RaisedByUserId] = [a].[Id]
+LEFT JOIN [AspNetUsers] AS [a0] ON [t0].[AssignedAgentId] = [a0].[Id]
+ORDER BY [t0].[CreatedAt] DESC
+2026-04-02 12:11:27.423 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.Common.PagedResult`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:11:27.449 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.GetAll (HelpDesk.API) in 198.5554ms
+2026-04-02 12:11:27.477 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.GetAll (HelpDesk.API)'
+2026-04-02 12:11:27.494 +05:30 [INF] HTTP GET /api/Tickets/GetAllTicket responded 200 in 281.9977 ms
+2026-04-02 12:11:27.508 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Tickets/GetAllTicket - 200 null application/json; charset=utf-8 353.6212ms
+2026-04-02 12:13:14.657 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - null null
+2026-04-02 12:13:14.706 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:14.758 +05:30 [INF] Route matched with {action = "GetById", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:13:14.834 +05:30 [INF] Executed DbCommand (25ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:13:15.092 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:13:15.109 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API) in 312.1425ms
+2026-04-02 12:13:15.125 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:15.134 +05:30 [INF] HTTP GET /api/Tickets/getByIdTicket responded 200 in 428.8567 ms
+2026-04-02 12:13:15.142 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 485.2653ms
+2026-04-02 12:13:30.276 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - null null
+2026-04-02 12:13:30.310 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:30.340 +05:30 [INF] Route matched with {action = "GetById", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:13:30.410 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:13:30.449 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:13:30.482 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API) in 109.0373ms
+2026-04-02 12:13:30.523 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:30.549 +05:30 [INF] HTTP GET /api/Tickets/getByIdTicket responded 200 in 239.3070 ms
+2026-04-02 12:13:30.558 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 283.3646ms
+2026-04-02 12:13:37.398 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - null null
+2026-04-02 12:13:37.429 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:37.444 +05:30 [INF] Route matched with {action = "GetById", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:13:37.492 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:13:37.523 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:13:37.548 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API) in 82.9371ms
+2026-04-02 12:13:37.581 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:37.618 +05:30 [INF] HTTP GET /api/Tickets/getByIdTicket responded 200 in 189.6344 ms
+2026-04-02 12:13:37.646 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 248.5802ms
+2026-04-02 12:13:41.073 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-8E10-498147D40382 - null null
+2026-04-02 12:13:41.093 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:41.113 +05:30 [INF] Route matched with {action = "GetById", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:13:41.145 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:13:41.168 +05:30 [INF] Executing NotFoundObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:13:41.186 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API) in 47.3965ms
+2026-04-02 12:13:41.199 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:41.212 +05:30 [INF] HTTP GET /api/Tickets/getByIdTicket responded 404 in 119.6046 ms
+2026-04-02 12:13:41.221 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-8E10-498147D40382 - 404 null application/json; charset=utf-8 147.88ms
+2026-04-02 12:13:47.931 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - null null
+2026-04-02 12:13:48.173 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:48.181 +05:30 [INF] Route matched with {action = "GetById", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:13:48.219 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:13:48.246 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:13:48.270 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API) in 74.5338ms
+2026-04-02 12:13:48.297 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-02 12:13:48.317 +05:30 [INF] HTTP GET /api/Tickets/getByIdTicket responded 200 in 144.4570 ms
+2026-04-02 12:13:48.329 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Tickets/getByIdTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 397.8202ms
+2026-04-02 12:14:44.740 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Tickets/Agent-assign?id=137384D6-EF6C-4DA3-9E10-498147D40382 - application/json 55
+2026-04-02 12:14:44.772 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:14:44.788 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:14:44.803 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.Assign (HelpDesk.API)'
+2026-04-02 12:14:44.821 +05:30 [INF] Route matched with {action = "Assign", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Assign(System.Guid, AssignAgentRequest) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:14:44.889 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:14:44.975 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__get_Item_0
+2026-04-02 12:14:45.086 +05:30 [INF] Executed DbCommand (25ms) [Parameters=[@p11='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 2000), @p5='?' (DbType = DateTime2), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid), @p9='?' (Size = 4000), @p10='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Tickets] SET [AssignedAgentId] = @p0, [CategoryId] = @p1, [CreatedAt] = @p2, [CreatedBy] = @p3, [Description] = @p4, [LastModifiedAt] = @p5, [LastModifiedBy] = @p6, [Priority] = @p7, [RaisedByUserId] = @p8, [Status] = @p9, [Title] = @p10
+OUTPUT 1
+WHERE [Id] = @p11;
+2026-04-02 12:14:45.157 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61);
+2026-04-02 12:14:45.197 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:14:45.421 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.Assign (HelpDesk.API) in 578.7015ms
+2026-04-02 12:14:45.432 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.Assign (HelpDesk.API)'
+2026-04-02 12:14:45.444 +05:30 [INF] HTTP PUT /api/Tickets/Agent-assign responded 200 in 672.3836 ms
+2026-04-02 12:14:45.452 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Tickets/Agent-assign?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 712.6835ms
+2026-04-02 12:19:05.288 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Tickets/UpdateTicketStatus?id=137384D6-EF6C-4DA3-9E10-498147D40382 - application/json 27
+2026-04-02 12:19:05.312 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:19:05.324 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:19:05.345 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.UpdateStatus (HelpDesk.API)'
+2026-04-02 12:19:05.370 +05:30 [INF] Route matched with {action = "UpdateStatus", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateStatus(System.Guid, UpdateStatusRequest) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:19:05.452 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:19:05.497 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p11='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 2000), @p5='?' (DbType = DateTime2), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid), @p9='?' (Size = 4000), @p10='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Tickets] SET [AssignedAgentId] = @p0, [CategoryId] = @p1, [CreatedAt] = @p2, [CreatedBy] = @p3, [Description] = @p4, [LastModifiedAt] = @p5, [LastModifiedBy] = @p6, [Priority] = @p7, [RaisedByUserId] = @p8, [Status] = @p9, [Title] = @p10
+OUTPUT 1
+WHERE [Id] = @p11;
+2026-04-02 12:19:05.548 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61);
+2026-04-02 12:19:05.581 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:19:05.599 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.UpdateStatus (HelpDesk.API) in 206.9499ms
+2026-04-02 12:19:05.624 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.UpdateStatus (HelpDesk.API)'
+2026-04-02 12:19:05.638 +05:30 [INF] HTTP PUT /api/Tickets/UpdateTicketStatus responded 200 in 326.6942 ms
+2026-04-02 12:19:05.649 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Tickets/UpdateTicketStatus?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 361.0203ms
+2026-04-02 12:20:14.598 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Tickets/UpdatePriority?id=137384D6-EF6C-4DA3-9E10-498147D40382 - application/json 23
+2026-04-02 12:20:14.628 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:20:14.643 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:20:14.658 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.UpdatePriority (HelpDesk.API)'
+2026-04-02 12:20:14.676 +05:30 [INF] Route matched with {action = "UpdatePriority", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdatePriority(System.Guid, UpdatePriorityRequest) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:20:14.737 +05:30 [INF] Executed DbCommand (27ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:20:14.798 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@p11='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 2000), @p5='?' (DbType = DateTime2), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid), @p9='?' (Size = 4000), @p10='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Tickets] SET [AssignedAgentId] = @p0, [CategoryId] = @p1, [CreatedAt] = @p2, [CreatedBy] = @p3, [Description] = @p4, [LastModifiedAt] = @p5, [LastModifiedBy] = @p6, [Priority] = @p7, [RaisedByUserId] = @p8, [Status] = @p9, [Title] = @p10
+OUTPUT 1
+WHERE [Id] = @p11;
+2026-04-02 12:20:14.852 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61);
+2026-04-02 12:20:14.900 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:20:14.933 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.UpdatePriority (HelpDesk.API) in 235.7678ms
+2026-04-02 12:20:14.960 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.UpdatePriority (HelpDesk.API)'
+2026-04-02 12:20:14.979 +05:30 [INF] HTTP PUT /api/Tickets/UpdatePriority responded 200 in 351.0181 ms
+2026-04-02 12:20:14.996 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Tickets/UpdatePriority?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 397.337ms
+2026-04-02 12:20:45.505 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Tickets/CloseTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - null 0
+2026-04-02 12:20:45.546 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:20:45.566 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:20:45.589 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.Close (HelpDesk.API)'
+2026-04-02 12:20:45.614 +05:30 [INF] Route matched with {action = "Close", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Close(System.Guid) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:20:45.812 +05:30 [INF] Executed DbCommand (155ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:20:45.851 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p11='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 2000), @p5='?' (DbType = DateTime2), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid), @p9='?' (Size = 4000), @p10='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Tickets] SET [AssignedAgentId] = @p0, [CategoryId] = @p1, [CreatedAt] = @p2, [CreatedBy] = @p3, [Description] = @p4, [LastModifiedAt] = @p5, [LastModifiedBy] = @p6, [Priority] = @p7, [RaisedByUserId] = @p8, [Status] = @p9, [Title] = @p10
+OUTPUT 1
+WHERE [Id] = @p11;
+2026-04-02 12:20:45.879 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61);
+2026-04-02 12:20:45.899 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:20:45.917 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.Close (HelpDesk.API) in 276.0791ms
+2026-04-02 12:20:45.939 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.Close (HelpDesk.API)'
+2026-04-02 12:20:45.956 +05:30 [INF] HTTP PUT /api/Tickets/CloseTicket responded 200 in 409.4368 ms
+2026-04-02 12:20:45.969 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Tickets/CloseTicket?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 464.1904ms
+2026-04-02 12:20:59.577 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Tickets/Ticket-reopen?id=137384D6-EF6C-4DA3-9E10-498147D40382 - null 0
+2026-04-02 12:20:59.605 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:20:59.635 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:20:59.660 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.Reopen (HelpDesk.API)'
+2026-04-02 12:20:59.688 +05:30 [INF] Route matched with {action = "Reopen", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Reopen(System.Guid) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:20:59.720 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:20:59.765 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p11='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 2000), @p5='?' (DbType = DateTime2), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid), @p9='?' (Size = 4000), @p10='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Tickets] SET [AssignedAgentId] = @p0, [CategoryId] = @p1, [CreatedAt] = @p2, [CreatedBy] = @p3, [Description] = @p4, [LastModifiedAt] = @p5, [LastModifiedBy] = @p6, [Priority] = @p7, [RaisedByUserId] = @p8, [Status] = @p9, [Title] = @p10
+OUTPUT 1
+WHERE [Id] = @p11;
+2026-04-02 12:20:59.793 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (Size = 100), @p10='?' (Size = 200), @p11='?' (Size = 200), @p12='?' (DbType = Guid), @p13='?' (DbType = Guid), @p14='?' (Size = 100), @p15='?' (Size = 200), @p16='?' (Size = 200), @p17='?' (DbType = Guid), @p18='?' (DbType = Guid), @p19='?' (Size = 100), @p20='?' (Size = 200), @p21='?' (Size = 200), @p22='?' (DbType = Guid), @p23='?' (DbType = Guid), @p24='?' (Size = 100), @p25='?' (Size = 200), @p26='?' (Size = 200), @p27='?' (DbType = Guid), @p28='?' (DbType = Guid), @p29='?' (Size = 100), @p30='?' (Size = 200), @p31='?' (Size = 200), @p32='?' (DbType = Guid), @p33='?' (DbType = Guid), @p34='?' (Size = 100), @p35='?' (Size = 200), @p36='?' (Size = 200), @p37='?' (DbType = Guid), @p38='?' (DbType = Guid), @p39='?' (Size = 100), @p40='?' (Size = 200), @p41='?' (Size = 200), @p42='?' (DbType = Guid), @p43='?' (DbType = Guid), @p44='?' (Size = 100), @p45='?' (Size = 200), @p46='?' (Size = 200), @p47='?' (DbType = Guid), @p48='?' (DbType = Guid), @p49='?' (Size = 100), @p50='?' (Size = 200), @p51='?' (Size = 200), @p52='?' (DbType = Guid), @p53='?' (DbType = Guid), @p54='?' (Size = 100), @p55='?' (Size = 200), @p56='?' (Size = 200), @p57='?' (DbType = Guid), @p58='?' (DbType = Guid), @p59='?' (Size = 100), @p60='?' (Size = 200), @p61='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p7, @p8, @p9, @p10, @p11),
+(@p12, @p13, @p14, @p15, @p16),
+(@p17, @p18, @p19, @p20, @p21),
+(@p22, @p23, @p24, @p25, @p26),
+(@p27, @p28, @p29, @p30, @p31),
+(@p32, @p33, @p34, @p35, @p36),
+(@p37, @p38, @p39, @p40, @p41),
+(@p42, @p43, @p44, @p45, @p46),
+(@p47, @p48, @p49, @p50, @p51),
+(@p52, @p53, @p54, @p55, @p56),
+(@p57, @p58, @p59, @p60, @p61);
+2026-04-02 12:20:59.819 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:20:59.834 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.Reopen (HelpDesk.API) in 123.6283ms
+2026-04-02 12:20:59.853 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.Reopen (HelpDesk.API)'
+2026-04-02 12:20:59.867 +05:30 [INF] HTTP PUT /api/Tickets/Ticket-reopen responded 200 in 261.8898 ms
+2026-04-02 12:20:59.879 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Tickets/Ticket-reopen?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 301.7771ms
+2026-04-02 12:22:47.966 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Tickets/Add-Comment?id=E0EB02C2-5DBC-4E30-A794-8BCECC170395 - application/json 40
+2026-04-02 12:22:47.991 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:22:48.001 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:22:48.014 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.AddComment (HelpDesk.API)'
+2026-04-02 12:22:48.030 +05:30 [INF] Route matched with {action = "AddComment", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddComment(System.Guid, AddCommentRequest) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:22:48.077 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:22:48.097 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.CommentDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:22:48.119 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.AddComment (HelpDesk.API) in 74.5352ms
+2026-04-02 12:22:48.146 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.AddComment (HelpDesk.API)'
+2026-04-02 12:22:48.163 +05:30 [INF] HTTP POST /api/Tickets/Add-Comment responded 400 in 171.3833 ms
+2026-04-02 12:22:48.177 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Tickets/Add-Comment?id=E0EB02C2-5DBC-4E30-A794-8BCECC170395 - 400 null application/json; charset=utf-8 211.7613ms
+2026-04-02 12:23:18.916 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Tickets/Add-Comment?id=137384D6-EF6C-4DA3-9E10-498147D40382 - application/json 40
+2026-04-02 12:23:18.944 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:23:18.964 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:23:18.980 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.AddComment (HelpDesk.API)'
+2026-04-02 12:23:18.998 +05:30 [INF] Route matched with {action = "AddComment", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddComment(System.Guid, AddCommentRequest) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-02 12:23:19.021 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-02 12:23:19.096 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 2000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (DbType = DateTime2), @p5='?' (Size = 4000), @p6='?' (DbType = Guid), @p7='?' (DbType = Guid), @p19='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (DbType = Guid), @p10='?' (DbType = DateTime2), @p11='?' (Size = 4000), @p12='?' (Size = 2000), @p13='?' (DbType = DateTime2), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (DbType = Guid), @p17='?' (Size = 4000), @p18='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Comments] ([Id], [Content], [CreatedAt], [CreatedBy], [LastModifiedAt], [LastModifiedBy], [TicketId], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+UPDATE [Tickets] SET [AssignedAgentId] = @p8, [CategoryId] = @p9, [CreatedAt] = @p10, [CreatedBy] = @p11, [Description] = @p12, [LastModifiedAt] = @p13, [LastModifiedBy] = @p14, [Priority] = @p15, [RaisedByUserId] = @p16, [Status] = @p17, [Title] = @p18
+OUTPUT 1
+WHERE [Id] = @p19;
+2026-04-02 12:23:19.153 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 50), @p2='?' (DbType = Guid), @p3='?' (Size = 100), @p4='?' (Size = 45), @p5='?' (DbType = DateTime2), @p6='?' (Size = 256), @p7='?' (DbType = Guid), @p8='?' (Size = 50), @p9='?' (DbType = Guid), @p10='?' (Size = 100), @p11='?' (Size = 45), @p12='?' (DbType = DateTime2), @p13='?' (Size = 256), @p14='?' (DbType = Guid), @p15='?' (DbType = Guid), @p16='?' (Size = 100), @p17='?' (Size = 200), @p18='?' (Size = 200), @p19='?' (DbType = Guid), @p20='?' (DbType = Guid), @p21='?' (Size = 100), @p22='?' (Size = 200), @p23='?' (Size = 200), @p24='?' (DbType = Guid), @p25='?' (DbType = Guid), @p26='?' (Size = 100), @p27='?' (Size = 200), @p28='?' (Size = 200), @p29='?' (DbType = Guid), @p30='?' (DbType = Guid), @p31='?' (Size = 100), @p32='?' (Size = 200), @p33='?' (Size = 200), @p34='?' (DbType = Guid), @p35='?' (DbType = Guid), @p36='?' (Size = 100), @p37='?' (Size = 200), @p38='?' (Size = 200), @p39='?' (DbType = Guid), @p40='?' (DbType = Guid), @p41='?' (Size = 100), @p42='?' (Size = 200), @p43='?' (Size = 200), @p44='?' (DbType = Guid), @p45='?' (DbType = Guid), @p46='?' (Size = 100), @p47='?' (Size = 200), @p48='?' (Size = 200), @p49='?' (DbType = Guid), @p50='?' (DbType = Guid), @p51='?' (Size = 100), @p52='?' (Size = 200), @p53='?' (Size = 200), @p54='?' (DbType = Guid), @p55='?' (DbType = Guid), @p56='?' (Size = 100), @p57='?' (Size = 200), @p58='?' (Size = 200), @p59='?' (DbType = Guid), @p60='?' (DbType = Guid), @p61='?' (Size = 100), @p62='?' (Size = 200), @p63='?' (Size = 200), @p64='?' (DbType = Guid), @p65='?' (DbType = Guid), @p66='?' (Size = 100), @p67='?' (Size = 200), @p68='?' (Size = 200), @p69='?' (DbType = Guid), @p70='?' (DbType = Guid), @p71='?' (Size = 100), @p72='?' (Size = 200), @p73='?' (Size = 200), @p74='?' (DbType = Guid), @p75='?' (DbType = Guid), @p76='?' (Size = 100), @p77='?' (Size = 200), @p78='?' (Size = 200), @p79='?' (DbType = Guid), @p80='?' (DbType = Guid), @p81='?' (Size = 100), @p82='?' (Size = 200), @p83='?' (Size = 200), @p84='?' (DbType = Guid), @p85='?' (DbType = Guid), @p86='?' (Size = 100), @p87='?' (Size = 200), @p88='?' (Size = 200), @p89='?' (DbType = Guid), @p90='?' (DbType = Guid), @p91='?' (Size = 100), @p92='?' (Size = 200), @p93='?' (Size = 200), @p94='?' (DbType = Guid), @p95='?' (DbType = Guid), @p96='?' (Size = 100), @p97='?' (Size = 200), @p98='?' (Size = 200), @p99='?' (DbType = Guid), @p100='?' (DbType = Guid), @p101='?' (Size = 100), @p102='?' (Size = 200), @p103='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AuditLogs] ([Id], [Action], [EntityId], [EntityName], [IpAddress], [PerformedAt], [PerformedBy])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6),
+(@p7, @p8, @p9, @p10, @p11, @p12, @p13);
+INSERT INTO [AuditLogDetails] ([Id], [AuditLogId], [FieldName], [NewValue], [OldValue])
+VALUES (@p14, @p15, @p16, @p17, @p18),
+(@p19, @p20, @p21, @p22, @p23),
+(@p24, @p25, @p26, @p27, @p28),
+(@p29, @p30, @p31, @p32, @p33),
+(@p34, @p35, @p36, @p37, @p38),
+(@p39, @p40, @p41, @p42, @p43),
+(@p44, @p45, @p46, @p47, @p48),
+(@p49, @p50, @p51, @p52, @p53),
+(@p54, @p55, @p56, @p57, @p58),
+(@p59, @p60, @p61, @p62, @p63),
+(@p64, @p65, @p66, @p67, @p68),
+(@p69, @p70, @p71, @p72, @p73),
+(@p74, @p75, @p76, @p77, @p78),
+(@p79, @p80, @p81, @p82, @p83),
+(@p84, @p85, @p86, @p87, @p88),
+(@p89, @p90, @p91, @p92, @p93),
+(@p94, @p95, @p96, @p97, @p98),
+(@p99, @p100, @p101, @p102, @p103);
+2026-04-02 12:23:19.201 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__get_Item_0
+2026-04-02 12:23:19.249 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.CommentDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:23:19.282 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.AddComment (HelpDesk.API) in 266.8941ms
+2026-04-02 12:23:19.517 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.AddComment (HelpDesk.API)'
+2026-04-02 12:23:19.527 +05:30 [INF] HTTP POST /api/Tickets/Add-Comment responded 200 in 583.7245 ms
+2026-04-02 12:23:19.533 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Tickets/Add-Comment?id=137384D6-EF6C-4DA3-9E10-498147D40382 - 200 null application/json; charset=utf-8 618.526ms
+2026-04-02 12:24:32.551 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Auth/login - application/json 66
+2026-04-02 12:24:32.595 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:24:32.605 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:24:32.616 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-02 12:24:32.626 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginRequest) on controller HelpDesk.API.Controllers.AuthController (HelpDesk.API).
+2026-04-02 12:24:32.642 +05:30 [INF] Login attempt for email: jay.kishor@helpdesk.com
+2026-04-02 12:24:32.659 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-02 12:24:32.671 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-02 12:24:32.685 +05:30 [INF] Executed action HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API) in 45.3536ms
+2026-04-02 12:24:32.720 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-02 12:24:32.747 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 152.2010 ms
+2026-04-02 12:24:32.769 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Auth/login - 401 null application/json; charset=utf-8 217.9747ms
+2026-04-02 12:24:37.827 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Auth/login - application/json 66
+2026-04-02 12:24:37.843 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:24:37.859 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:24:37.874 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-02 12:24:37.883 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginRequest) on controller HelpDesk.API.Controllers.AuthController (HelpDesk.API).
+2026-04-02 12:24:37.904 +05:30 [INF] Login attempt for email: jay.kishor@helpdesk.com
+2026-04-02 12:24:37.919 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-02 12:24:37.934 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-02 12:24:37.946 +05:30 [INF] Executed action HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API) in 49.005ms
+2026-04-02 12:24:37.957 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-02 12:24:37.967 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 123.6977 ms
+2026-04-02 12:24:37.975 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Auth/login - 401 null application/json; charset=utf-8 148.0121ms
+2026-04-02 12:25:05.131 +05:30 [INF] Request starting HTTP/2 PUT https://localhost:7119/api/Users/UpdateUsersRole?id=FAF25058-5E78-4D2E-A36A-8A048AE9A5AC - application/json 23
+2026-04-02 12:25:05.164 +05:30 [INF] CORS policy execution failed.
+2026-04-02 12:25:05.174 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 12:25:05.190 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-04-02 12:25:05.204 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2026-04-02 12:25:05.222 +05:30 [INF] HTTP PUT /api/Users/UpdateUsersRole responded 401 in 57.1046 ms
+2026-04-02 12:25:05.237 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/Users/UpdateUsersRole?id=FAF25058-5E78-4D2E-A36A-8A048AE9A5AC - 401 0 null 105.993ms
