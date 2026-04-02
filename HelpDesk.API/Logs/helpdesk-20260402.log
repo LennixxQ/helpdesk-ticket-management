@@ -1000,3 +1000,161 @@ FROM [Categories] AS [c]
 2026-04-02 12:41:36.687 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.CategoriesController.GetAll (HelpDesk.API)'
 2026-04-02 12:41:36.709 +05:30 [INF] HTTP GET /api/Categories responded 200 in 114.4463 ms
 2026-04-02 12:41:36.727 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Categories - 200 null application/json; charset=utf-8 166.2627ms
+2026-04-02 12:44:09.682 +05:30 [INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-02 12:44:09.774 +05:30 [INF] Executed DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-02 12:44:09.790 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-02 12:44:09.804 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-02 12:44:09.853 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-02 12:44:09.902 +05:30 [INF] Database migrations applied.
+2026-04-02 12:44:09.946 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-02 12:44:10.488 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-02 12:44:10.602 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-02 12:44:10.622 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-02 12:44:10.666 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-02 12:44:10.811 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:44:10.825 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:44:10.836 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:44:10.845 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:44:10.855 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 12:44:10.928 +05:30 [INF] Database seeding completed.
+2026-04-02 12:44:10.936 +05:30 [INF] Database seeding complete.
+2026-04-02 12:44:11.610 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-02 12:44:11.627 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-02 12:44:11.721 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-02 12:44:11.728 +05:30 [INF] Hosting environment: Development
+2026-04-02 12:44:11.736 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-02 12:44:40.999 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/index.html - null null
+2026-04-02 12:44:41.267 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/index.html - 200 null text/html;charset=utf-8 273.3786ms
+2026-04-02 12:44:41.521 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-02 12:44:41.521 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/_vs/browserLink - null null
+2026-04-02 12:44:41.554 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_framework/aspnetcore-browser-refresh.js - 200 14929 application/javascript; charset=utf-8 32.9334ms
+2026-04-02 12:44:41.616 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/_vs/browserLink - 200 null text/javascript; charset=UTF-8 95.5644ms
+2026-04-02 12:44:41.675 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - null null
+2026-04-02 12:44:41.711 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 36.763ms
+2026-04-02 12:45:03.816 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/Dashboard - null null
+2026-04-02 12:45:04.248 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API)'
+2026-04-02 12:45:04.287 +05:30 [INF] Route matched with {action = "GetDashboard", controller = "Dashboard"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDashboard() on controller HelpDesk.API.Controllers.DashboardController (HelpDesk.API).
+2026-04-02 12:45:04.366 +05:30 [INF] Admin requesting dashboard data.
+2026-04-02 12:45:04.408 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title]
+FROM [Tickets] AS [t]
+2026-04-02 12:45:04.554 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-02 12:45:04.596 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-02 12:45:04.636 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-02 12:45:04.671 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-02 12:45:04.702 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-02 12:45:04.739 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-02 12:45:04.820 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-02 12:45:04.869 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-02 12:45:04.917 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-02 12:45:04.962 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-02 12:45:05.268 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@__p_2='?' (DbType = Int32), @__now_Year_0='?' (DbType = Int32), @__now_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_2) [t].[AssignedAgentId] AS [AgentId], COUNT(*) AS [Count]
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = N'Resolved' AND [t].[AssignedAgentId] IS NOT NULL AND [t].[LastModifiedAt] IS NOT NULL AND DATEPART(year, [t].[LastModifiedAt]) = @__now_Year_0 AND DATEPART(month, [t].[LastModifiedAt]) = @__now_Month_1
+GROUP BY [t].[AssignedAgentId]
+ORDER BY COUNT(*) DESC
+2026-04-02 12:45:05.358 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@__agentIds_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[FullName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] IN (
+    SELECT [a0].[value]
+    FROM OPENJSON(@__agentIds_0) WITH ([value] uniqueidentifier '$') AS [a0]
+)
+2026-04-02 12:45:05.412 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__now_Year_0='?' (DbType = Int32), @__now_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE DATEPART(year, [t].[CreatedAt]) = @__now_Year_0 AND DATEPART(month, [t].[CreatedAt]) = @__now_Month_1
+2026-04-02 12:45:05.455 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__last_Year_0='?' (DbType = Int32), @__last_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE DATEPART(year, [t].[CreatedAt]) = @__last_Year_0 AND DATEPART(month, [t].[CreatedAt]) = @__last_Month_1
+2026-04-02 12:45:05.508 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.DashboardDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-02 12:45:05.570 +05:30 [INF] Executed action HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API) in 1237.8205ms
+2026-04-02 12:45:05.598 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API)'
+2026-04-02 12:45:05.628 +05:30 [INF] HTTP GET /api/Dashboard responded 200 in 1568.7829 ms
+2026-04-02 12:45:05.678 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Dashboard - 200 null application/json; charset=utf-8 1861.0362ms
