@@ -1,5 +1,4 @@
-﻿using Azure;
-using HelpDesk.Application.Commands.CommentCommand;
+﻿using HelpDesk.Application.Commands.CommentCommand;
 using HelpDesk.Application.Commands.TicketCommand;
 using HelpDesk.Application.DTOs;
 using HelpDesk.Application.Interfaces.Services;
