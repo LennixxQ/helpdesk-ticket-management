@@ -27,7 +27,7 @@ namespace HelpDesk.API.Extensions
                     ValidIssuer = jwtSettings["Issuer"],
                     ValidAudience = jwtSettings["Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(secret)),
+                    Encoding.UTF8.GetBytes(secret!)),
                     ClockSkew = TimeSpan.Zero
                 };
 

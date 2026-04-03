@@ -36,7 +36,7 @@ namespace HelpDesk.API.Controllers
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
-        [HttpGet("GetAllTicket")]
+        [HttpPost("GetAllTicket")]
         public async Task<IActionResult> GetAll([FromQuery] PaginationDto dto)
         {
             var response = await _ticketService.GetAllAsync(dto.page, dto.pageSize, dto.status, dto.priority, dto.categoryId, dto.agentId, CurrentUserId, CurrentUserRole);

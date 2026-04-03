@@ -1158,3 +1158,95 @@ WHERE DATEPART(year, [t].[CreatedAt]) = @__last_Year_0 AND DATEPART(month, [t].[
 2026-04-02 12:45:05.598 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API)'
 2026-04-02 12:45:05.628 +05:30 [INF] HTTP GET /api/Dashboard responded 200 in 1568.7829 ms
 2026-04-02 12:45:05.678 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/Dashboard - 200 null application/json; charset=utf-8 1861.0362ms
+2026-04-02 15:05:13.836 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-02 15:05:13.896 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-02 15:05:13.924 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-02 15:05:13.948 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-02 15:05:13.982 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-02 15:05:14.362 +05:30 [INF] Database migrations applied.
+2026-04-02 15:05:14.456 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-02 15:05:14.926 +05:30 [INF] Executed DbCommand (35ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-02 15:05:14.986 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-02 15:05:15.001 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-02 15:05:15.029 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-02 15:05:15.123 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 15:05:15.142 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 15:05:15.157 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 15:05:15.179 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 15:05:15.208 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-02 15:05:15.276 +05:30 [INF] Database seeding completed.
+2026-04-02 15:05:15.287 +05:30 [INF] Database seeding complete.
+2026-04-02 15:05:15.716 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-02 15:05:15.728 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-02 15:05:15.800 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-02 15:05:15.815 +05:30 [INF] Hosting environment: Development
+2026-04-02 15:05:15.829 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-02 15:05:29.604 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/Auth/login - application/json 70
+2026-04-02 15:05:29.744 +05:30 [INF] CORS policy execution failed.
+2026-04-02 15:05:29.765 +05:30 [INF] Request origin https://localhost:7119 does not have permission to access the resource.
+2026-04-02 15:05:29.993 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-02 15:05:30.066 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginRequest) on controller HelpDesk.API.Controllers.AuthController (HelpDesk.API).
+2026-04-02 15:05:30.218 +05:30 [INF] Login attempt for email: vivek.chauhan@helpdesk.com
+2026-04-02 15:05:30.299 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-02 15:05:30.685 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-02 15:05:30.714 +05:30 [INF] Executed action HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API) in 601.5703ms
+2026-04-02 15:05:30.727 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-02 15:05:30.744 +05:30 [INF] HTTP POST /api/Auth/login responded 200 in 1005.3149 ms
+2026-04-02 15:05:30.763 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/Auth/login - 200 null application/json; charset=utf-8 1172.9787ms
