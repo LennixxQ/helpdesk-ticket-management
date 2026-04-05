@@ -1,1 +1,58 @@
-<p>navbar works!</p>
+<div class="navbar">
+
+    <!-- Left: Toggle + Breadcrumb -->
+    <div class="navbar-left">
+        <button mat-icon-button class="toggle-btn" (click)="toggleSidebar.emit()" matTooltip="Toggle sidebar">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <div class="brand">
+            <span class="page-title">HelpDesk</span>
+        </div>
+    </div>
+
+    <!-- Right: Actions + Profile -->
+    <div class="navbar-right">
+
+        <!-- New Ticket Button -->
+        @if (auth.isAdmin() || auth.isUser()) {
+
+        mat-stroked-button
+        routerLink="/tickets/new"
+        class="new-ticket-btn">
+        <mat-icon>add</mat-icon>
+        New Ticket
+        }
+
+        <!-- Profile Menu -->
+        <div class="profile-section" [matMenuTriggerFor]="profileMenu">
+            <div class="avatar" [style.background]="roleColor">
+                {{ userInitial }}
+            </div>
+            <div class="user-info">
+                <span class="user-name">{{ auth.currentUserName() }}</span>
+                <span class="user-role">{{ auth.currentRole() }}</span>
+            </div>
+            <mat-icon class="chevron">expand_more</mat-icon>
+        </div>
+
+        <!-- Profile Dropdown -->
+        <mat-menu #profileMenu="matMenu" class="profile-menu">
+            <div class="menu-header">
+                <div class="menu-avatar" [style.background]="roleColor">
+                    {{ userInitial }}
+                </div>
+                <div>
+                    <div class="menu-name">{{ auth.currentUserName() }}</div>
+                    <div class="menu-role">{{ auth.currentRole() }}</div>
+                </div>
+            </div>
+            <mat-divider />
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Sign Out</span>
+            </button>
+        </mat-menu>
+
+    </div>
+</div>

@@ -119,6 +119,7 @@ namespace HelpDesk.Application.Services
             await _uow.Tickets.AddAsync(ticket);
             await _uow.SaveChangesAsync();
 
+            //remove create
             var created = await _uow.Tickets.GetByIdWithDetailsAsync(ticket.Id);
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(created), "Ticket created successfully.");
 

@@ -1,0 +1,23 @@
+<div class="layout-wrapper">
+
+    <!-- Sidebar -->
+    <aside class="sidebar-container" [class.collapsed]="isSidebarCollapsed()" [style.width]="sidebarWidth">
+        <app-sidebar [collapsed]="isSidebarCollapsed()" />
+    </aside>
+
+    <!-- Main Area -->
+    <div class="main-area" [style.margin-left]="sidebarWidth">
+
+        <!-- Navbar -->
+        <header class="navbar-container">
+            <app-navbar (toggleSidebar)="toggleSidebar()" />
+        </header>
+
+        <!-- Page Content -->
+        <main class="page-content">
+            <router-outlet />
+        </main>
+
+    </div>
+
+</div>

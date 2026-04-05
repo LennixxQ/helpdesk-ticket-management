@@ -1,0 +1,71 @@
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #EEF3FC 0%, #F3EEFF 50%, #E8F8F5 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-bg-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    .shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.5;
+    }
+
+    .shape-1 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, #B5A4E8 0%, transparent 70%);
+        top: -100px;
+        left: -100px;
+        animation: float 8s ease-in-out infinite;
+    }
+
+    .shape-2 {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, #7B9EE5 0%, transparent 70%);
+        bottom: -80px;
+        right: -80px;
+        animation: float 10s ease-in-out infinite reverse;
+    }
+
+    .shape-3 {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, #82D8C8 0%, transparent 70%);
+        top: 50%;
+        left: 60%;
+        animation: float 12s ease-in-out infinite;
+    }
+}
+
+.auth-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.05);
+    }
+}

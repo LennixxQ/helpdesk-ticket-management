@@ -35,7 +35,6 @@ namespace HelpDesk.Application.Services
                 return BaseResponse<UserDto>.Fail("Email already in use.");
 
             var user = _mapper.Map<User>(command);
-            user.Id = Guid.NewGuid();
             user.CreatedAt = DateTime.UtcNow;
             user.CreatedBy = "Vivek-Admin";
 

@@ -1,1 +1,45 @@
-<p>sidebar works!</p>
+<nav class="sidebar" [class.collapsed]="collapsed">
+
+    <!-- Logo -->
+    <div class="sidebar-logo">
+        <div class="logo-icon">
+            <mat-icon>support_agent</mat-icon>
+        </div>
+        @if (!collapsed) {
+        <div class="logo-text">
+            <span class="logo-title">HelpDesk</span>
+            <span class="logo-sub">Support Portal</span>
+        </div>
+        }
+    </div>
+
+    <!-- Divider -->
+    <div class="sidebar-divider"></div>
+
+    <!-- Nav Items -->
+    <ul class="nav-list">
+        @for (item of visibleItems(); track item.route) {
+        <li>
+
+            class="nav-item"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            [matTooltip]="collapsed ? item.label : ''"
+            matTooltipPosition="right">
+            <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+            @if (!collapsed) {
+            <span class="nav-label">{{ item.label }}</span>
+            }
+        </li>
+        }
+    </ul>
+
+    <!-- Bottom Section -->
+    <div class="sidebar-bottom">
+        <div class="sidebar-divider"></div>
+        <div class="version-tag" [class.hidden]="collapsed">
+            <span>v1.0.0</span>
+        </div>
+    </div>
+
+</nav>
