@@ -15,13 +15,11 @@
     <div class="navbar-right">
 
         <!-- New Ticket Button -->
-        @if (auth.isAdmin() || auth.isUser()) {
-
-        mat-stroked-button
-        routerLink="/tickets/new"
-        class="new-ticket-btn">
-        <mat-icon>add</mat-icon>
-        New Ticket
+        @if (auth.isAdmin() || auth.isUser() || !auth.currentRole()) {
+        <button mat-stroked-button routerLink="/tickets/new" class="new-ticket-btn">
+            <mat-icon>add</mat-icon>
+            New Ticket
+        </button>
         }
 
         <!-- Profile Menu -->
@@ -30,7 +28,7 @@
                 {{ userInitial }}
             </div>
             <div class="user-info">
-                <span class="user-name">{{ auth.currentUserName() }}</span>
+                <span class="user-name">{{ userDisplayName }}</span>
                 <span class="user-role">{{ auth.currentRole() }}</span>
             </div>
             <mat-icon class="chevron">expand_more</mat-icon>

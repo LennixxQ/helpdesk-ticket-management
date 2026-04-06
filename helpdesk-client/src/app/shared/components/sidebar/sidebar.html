@@ -20,16 +20,13 @@
     <ul class="nav-list">
         @for (item of visibleItems(); track item.route) {
         <li>
-
-            class="nav-item"
-            [routerLink]="item.route"
-            routerLinkActive="active"
-            [matTooltip]="collapsed ? item.label : ''"
-            matTooltipPosition="right">
-            <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
-            @if (!collapsed) {
-            <span class="nav-label">{{ item.label }}</span>
-            }
+            <a class="nav-item" [routerLink]="item.route" routerLinkActive="active"
+                [matTooltip]="collapsed ? item.label : ''" matTooltipPosition="right">
+                <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+                @if (!collapsed) {
+                <span class="nav-label">{{ item.label }}</span>
+                }
+            </a>
         </li>
         }
     </ul>

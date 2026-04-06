@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Commands.CategoryCommand;
+using HelpDesk.Application.Commands.CategoryCommand;
 using HelpDesk.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,9 +37,9 @@ namespace HelpDesk.API.Controllers
 
         [HttpPut("ActivateCategory")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Toggle(Guid id)
+        public async Task<IActionResult> Toggle([FromBody] ToggleCategoryCommand command)
         {
-            var response = await _categoryService.ToggleActiveAsync(id);
+            var response = await _categoryService.ToggleActiveAsync(command.CategoryId);
             return response.Success ? Ok(response) : NotFound(response);
         }
     }

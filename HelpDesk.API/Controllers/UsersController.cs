@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Commands.UserCommand;
+using HelpDesk.Application.Commands.UserCommand;
 using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
@@ -39,26 +39,26 @@ namespace HelpDesk.API.Controllers
 
         [HttpGet("getById")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById([FromQuery] Guid userId)
         {
-            var user = await _userService.GetByIdAsync(id);
+            var user = await _userService.GetByIdAsync(userId);
             return user.Success ? Ok(user) : NotFound(user);
         }
 
         [HttpPut("UpdateUsersRole")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateRole(Guid id, [FromBody] UpdateRoleRequest request)
+        public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleRequest request)
         {
-            var command = new UpdateUserRoleCommand { UserId = id, NewRole = request.NewRole };
+            var command = new UpdateUserRoleCommand { UserId = request.UserId, NewRole = request.NewRole };
             var response = await _userService.UpdateRoleAsync(command);
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
         [HttpPut("DeleteUser")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Deactivate(Guid id)
+        public async Task<IActionResult> Deactivate([FromBody] DeactivateUserRequest request)
         {
-            var response = await _userService.DeactivateAsync(id);
+            var response = await _userService.DeactivateAsync(request.UserId);
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
@@ -70,6 +70,7 @@ namespace HelpDesk.API.Controllers
             return Ok(response);
         }
 
-        public record UpdateRoleRequest(UserRole NewRole);
+        public record UpdateRoleRequest(Guid UserId, UserRole NewRole);
+        public record DeactivateUserRequest(Guid UserId);
     }
 }

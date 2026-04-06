@@ -4,16 +4,15 @@ import { TicketStatus } from '../../../core/models/ticket.model';
 
 @Component({
   selector: 'app-status-badge',
-  imports: [],
-  templateUrl: './status-badge.html',
-  styleUrl: './status-badge.scss',
   standalone: true,
+  imports: [CommonModule],
   template: `
     <span class="badge" [ngClass]="statusClass">
       <span class="dot"></span>
       {{ label }}
     </span>
   `,
+  styleUrl: './status-badge.scss',
 })
 export class StatusBadgeComponent {
   @Input() status!: TicketStatus;

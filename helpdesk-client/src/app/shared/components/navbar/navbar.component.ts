@@ -23,7 +23,14 @@ export class NavbarComponent {
 
   get userInitial(): string {
     const name = this.auth.currentUserName();
-    return name ? name.charAt(0).toUpperCase() : 'U';
+    const email = this.auth.currentUser()?.['email'] as string;
+    const display = name ?? email ?? 'U';
+    return display.charAt(0).toUpperCase();
+  }
+  get userDisplayName(): string {
+    return this.auth.currentUserName()
+      ?? (this.auth.currentUser()?.['email'] as string)
+      ?? 'User';
   }
 
   get roleColor(): string {

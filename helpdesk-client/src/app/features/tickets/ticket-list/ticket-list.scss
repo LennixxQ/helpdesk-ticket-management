@@ -1,0 +1,259 @@
+.ticket-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+// ── Header ────────────────────────────────────────────────────
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.page-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+    letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.new-btn {
+    border-radius: var(--radius-full) !important;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 12px rgba(123, 158, 229, 0.35) !important;
+    gap: 4px;
+}
+
+// ── Filters ───────────────────────────────────────────────────
+.filters-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-field {
+    min-width: 180px;
+    max-width: 220px;
+
+    ::ng-deep .mdc-text-field--outlined {
+        --mdc-outlined-text-field-container-shape: 12px;
+        background: #fff;
+    }
+}
+
+.clear-btn {
+    border-radius: var(--radius-full) !important;
+    color: var(--color-text-secondary) !important;
+    height: 40px;
+    gap: 4px;
+}
+
+// ── Loading ───────────────────────────────────────────────────
+.loading-center {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+// ── Empty State ───────────────────────────────────────────────
+.empty-state {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 2px dashed rgba(123, 158, 229, 0.25);
+    padding: 64px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.empty-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+
+    mat-icon {
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+        color: var(--color-primary);
+    }
+}
+
+.empty-state h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.empty-state p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0;
+    text-decoration: underline;
+}
+
+// ── Table Card ────────────────────────────────────────────────
+.table-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(123, 158, 229, 0.08);
+    overflow: hidden;
+}
+
+.tickets-table {
+    width: 100%;
+    background: transparent !important;
+}
+
+// Header row
+::ng-deep .tickets-table .mat-mdc-header-row {
+    background: var(--color-primary-light) !important;
+    border-bottom: 1px solid rgba(123, 158, 229, 0.15) !important;
+}
+
+::ng-deep .tickets-table .mat-mdc-header-cell {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: var(--color-text-secondary) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border-bottom: none !important;
+}
+
+// Data rows
+.ticket-row {
+    cursor: pointer;
+    transition: background var(--transition-fast);
+
+    &:hover {
+        background: var(--color-bg-hover) !important;
+    }
+
+    ::ng-deep .mat-mdc-cell {
+        border-bottom: 1px solid rgba(123, 158, 229, 0.07) !important;
+        padding: 14px 16px !important;
+    }
+}
+
+// ── Cell Styles ───────────────────────────────────────────────
+.ticket-id {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: 'Courier New', monospace;
+    background: var(--color-primary-light);
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.title-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 280px;
+}
+
+.ticket-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ticket-category-sub {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.category-tag {
+    background: var(--color-bg);
+    color: var(--color-text-secondary);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid rgba(123, 158, 229, 0.15);
+}
+
+.agent-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-primary);
+}
+
+.mini-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.unassigned {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+.date-text {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+.view-btn {
+    color: var(--color-primary) !important;
+    opacity: 0;
+    transition: opacity var(--transition-fast) !important;
+}
+
+.ticket-row:hover .view-btn {
+    opacity: 1;
+}
+
+// ── Paginator ─────────────────────────────────────────────────
+.table-paginator {
+    border-top: 1px solid rgba(123, 158, 229, 0.1);
+    background: var(--color-primary-light) !important;
+}

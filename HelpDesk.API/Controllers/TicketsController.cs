@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Commands.CommentCommand;
+using HelpDesk.Application.Commands.CommentCommand;
 using HelpDesk.Application.Commands.TicketCommand;
 using HelpDesk.Application.DTOs;
 using HelpDesk.Application.Interfaces.Services;
@@ -44,31 +44,30 @@ namespace HelpDesk.API.Controllers
         }
 
         [HttpGet("getByIdTicket")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById([FromQuery] Guid ticketId)
         {
-            var response = await _ticketService.GetByIdAsync(id, CurrentUserId, CurrentUserRole);
+            var response = await _ticketService.GetByIdAsync(ticketId, CurrentUserId, CurrentUserRole);
             return response.Success ? Ok(response) : NotFound(response);
         }
 
         [HttpPut("Agent-assign")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Assign(Guid id, [FromBody] AssignAgentRequest request)
+        public async Task<IActionResult> Assign([FromBody] AssignAgentRequest request)
         {
-            var command = new AssignTicketCommand { TicketId = id, AgentId = request.AgentId };
+            var command = new AssignTicketCommand { TicketId = request.TicketId, AgentId = request.AgentId };
             var response = await _ticketService.AssignAsync(command);
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
         [HttpPut("UpdateTicketStatus")]
         [Authorize(Roles = "Admin,Agent")]
-        public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] UpdateStatusRequest request)
+        public async Task<IActionResult> UpdateStatus([FromBody] UpdateStatusRequest request)
         {
             var command = new UpdateTicketStatusCommand
             {
-                TicketId = id,
+                TicketId = request.TicketId,
                 NewStatus = request.NewStatus
             };
-
             var updateStatus = await _ticketService.UpdateStatusAsync(command, CurrentUserId, CurrentUserRole);
             return updateStatus.Success ? Ok(updateStatus) : BadRequest(updateStatus);
         }
@@ -76,46 +75,46 @@ namespace HelpDesk.API.Controllers
 
         [HttpPut("UpdatePriority")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdatePriority(Guid id, [FromBody] UpdatePriorityRequest request)
+        public async Task<IActionResult> UpdatePriority([FromBody] UpdatePriorityRequest request)
         {
-            var updatePriority = await _ticketService.UpdatePriorityAsync(id, request.Priority);
+            var updatePriority = await _ticketService.UpdatePriorityAsync(request.TicketId, request.Priority);
             return updatePriority.Success ? Ok(updatePriority) : BadRequest(updatePriority);
         }
 
         [HttpPut("CloseTicket")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Close(Guid id)
+        public async Task<IActionResult> Close([FromBody] CloseTicketRequest request)
         {
-            var closeTicket = await _ticketService.CloseAsync(id);
+            var closeTicket = await _ticketService.CloseAsync(request.TicketId);
             return closeTicket.Success ? Ok(closeTicket) : BadRequest(closeTicket);
         }
 
         [HttpPut("Ticket-reopen")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Reopen(Guid id)
+        public async Task<IActionResult> Reopen([FromBody] ReopenTicketRequest request)
         {
-            var reopen = await _ticketService.ReopenAsync(id);
+            var reopen = await _ticketService.ReopenAsync(request.TicketId);
             return reopen.Success ? Ok(reopen) : BadRequest(reopen);
         }
 
         [HttpPost("Add-Comment")]
-        public async Task<IActionResult> AddComment(Guid id, [FromBody] AddCommentRequest request)
+        public async Task<IActionResult> AddComment([FromBody] AddCommentRequest request)
         {
             var command = new AddCommentCommand
             {
-                TicketId = id,
+                TicketId = request.TicketId,
                 Content = request.Content
             };
-
             var response = await _ticketService.AddCommentAsync(
                 command, CurrentUserId, CurrentUserRole);
-
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
-        public record AssignAgentRequest(Guid AgentId);
-        public record UpdateStatusRequest(TicketStatus NewStatus);
-        public record UpdatePriorityRequest(TicketPriority Priority);
-        public record AddCommentRequest(string Content);
+        public record AssignAgentRequest(Guid TicketId, Guid AgentId);
+        public record UpdateStatusRequest(Guid TicketId, TicketStatus NewStatus);
+        public record UpdatePriorityRequest(Guid TicketId, TicketPriority Priority);
+        public record CloseTicketRequest(Guid TicketId);
+        public record ReopenTicketRequest(Guid TicketId);
+        public record AddCommentRequest(Guid TicketId, string Content);
     }
 }

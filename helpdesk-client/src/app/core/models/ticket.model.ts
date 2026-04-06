@@ -1,6 +1,8 @@
 import { CommentModel } from './comment.model';
 
-export type TicketStatus = 'Open' | 'InProgress' | 'OnHold' | 'Resolved' | 'Closed' | 'Reopened';
+export type TicketStatus =
+    'Open' | 'InProgress' | 'OnHold' | 'Resolved' | 'Closed' | 'Reopened';
+
 export type TicketPriority = 'Low' | 'Medium' | 'High' | 'Critical';
 
 export interface TicketModel {
@@ -28,6 +30,7 @@ export interface CreateTicketRequest {
     raisedByUserId?: string;
 }
 
+// ✅ Ab yeh body mein jayega (POST /GetAllTicket)
 export interface TicketFilterParams {
     page?: number;
     pageSize?: number;
@@ -35,4 +38,19 @@ export interface TicketFilterParams {
     priority?: TicketPriority | '';
     categoryId?: string;
     agentId?: string;
+}
+
+export interface AssignTicketRequest {
+    ticketId: string;
+    agentId: string;
+}
+
+export interface UpdateStatusRequest {
+    ticketId: string;
+    newStatus: TicketStatus;
+}
+
+export interface UpdatePriorityRequest {
+    ticketId: string;
+    priority: TicketPriority;
 }

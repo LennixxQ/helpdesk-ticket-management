@@ -1,1 +1,140 @@
-<p>agent-tickets works!</p>
+<div class="agent-tickets page-enter">
+
+    <!-- Header -->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">My Tickets</h1>
+            <p class="page-subtitle">
+                {{ auth.currentUserName() }} · {{ tickets().length }} assigned tickets
+            </p>
+        </div>
+        <button mat-stroked-button class="refresh-btn" (click)="loadTickets()">
+            <mat-icon>refresh</mat-icon>
+            Refresh
+        </button>
+    </div>
+
+    <!-- Agent Stats -->
+    <div class="agent-stats">
+        <div class="stat-item inprogress">
+            <mat-icon>pending_actions</mat-icon>
+            <div>
+                <span class="s-val">{{ inProgressCount() }}</span>
+                <span class="s-lbl">In Progress</span>
+            </div>
+        </div>
+        <div class="stat-item onhold">
+            <mat-icon>pause_circle</mat-icon>
+            <div>
+                <span class="s-val">{{ onHoldCount() }}</span>
+                <span class="s-lbl">On Hold</span>
+            </div>
+        </div>
+        <div class="stat-item resolved">
+            <mat-icon>check_circle</mat-icon>
+            <div>
+                <span class="s-val">{{ resolvedCount() }}</span>
+                <span class="s-lbl">Resolved</span>
+            </div>
+        </div>
+        <div class="stat-item total">
+            <mat-icon>confirmation_number</mat-icon>
+            <div>
+                <span class="s-val">{{ tickets().length }}</span>
+                <span class="s-lbl">Total</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-row">
+        <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>Filter by Status</mat-label>
+            <mat-select [formControl]="statusFilter">
+                <mat-option value="">All Statuses</mat-option>
+                @for (s of statuses; track s) {
+                <mat-option [value]="s">{{ statusLabel[s] }}</mat-option>
+                }
+            </mat-select>
+            <mat-icon matPrefix>filter_list</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <!-- Loading -->
+    @if (isLoading()) {
+    <div class="loading-center"><mat-spinner diameter="44" /></div>
+    }
+
+    <!-- Tickets Grid -->
+    @if (!isLoading()) {
+    @if (filteredTickets().length === 0) {
+    <div class="empty-state">
+        <div class="empty-icon">
+            <mat-icon>inbox</mat-icon>
+        </div>
+        <h3>No tickets assigned</h3>
+        <p>You don't have any tickets assigned yet. Check back later.</p>
+    </div>
+    } @else {
+    <div class="tickets-grid">
+        @for (ticket of filteredTickets(); track ticket.id) {
+        <div class="ticket-card hover-lift">
+
+            <!-- Card Top -->
+            <div class="card-top">
+                <span class="ticket-id">{{ shortId(ticket.id) }}</span>
+                <app-priority-badge [priority]="ticket.priority" />
+            </div>
+
+            <!-- Title -->
+            <h3 class="ticket-title">{{ ticket.title }}</h3>
+
+            <!-- Meta -->
+            <div class="ticket-meta">
+                <div class="meta-item">
+                    <mat-icon>folder_open</mat-icon>
+                    <span>{{ ticket.categoryName }}</span>
+                </div>
+                <div class="meta-item">
+                    <mat-icon>person_outline</mat-icon>
+                    <span>{{ ticket.raisedByUserName }}</span>
+                </div>
+                <div class="meta-item">
+                    <mat-icon>schedule</mat-icon>
+                    <span>{{ ticket.createdAt | date:'MMM d' }}</span>
+                </div>
+            </div>
+
+            <!-- Status + Actions -->
+            <div class="card-footer">
+                <app-status-badge [status]="ticket.status" />
+
+                <div class="card-actions">
+                    <!-- Quick status update -->
+                    @if (ticket.status !== 'Resolved') {
+                    <button mat-icon-button class="quick-resolve" matTooltip="Mark as Resolved"
+                        (click)="updateStatus(ticket, 'Resolved')">
+                        <mat-icon>check_circle_outline</mat-icon>
+                    </button>
+                    }
+                    @if (ticket.status === 'InProgress') {
+                    <button mat-icon-button class="quick-hold" matTooltip="Put On Hold"
+                        (click)="updateStatus(ticket, 'OnHold')">
+                        <mat-icon>pause</mat-icon>
+                    </button>
+                    }
+
+                    <button mat-icon-button [routerLink]="['/tickets', ticket.id]" matTooltip="View details"
+                        class="view-btn">
+                        <mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        }
+    </div>
+    }
+    }
+
+</div>

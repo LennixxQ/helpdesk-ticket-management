@@ -1,1 +1,193 @@
-<p>ticket-create works!</p>
+<div class="ticket-create page-enter">
+
+    <!-- Header -->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Create New Ticket</h1>
+            <p class="page-subtitle">Describe your issue and we'll get it resolved</p>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="form-layout">
+        <div class="form-card">
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <!-- Title -->
+                <div class="field-group">
+                    <label class="field-label">
+                        <mat-icon>title</mat-icon>
+                        Issue Title
+                        <span class="required">*</span>
+                    </label>
+                    <mat-form-field appearance="outline" class="full-width">
+                        <input matInput formControlName="title" placeholder="Brief summary of the issue..."
+                            maxlength="150" />
+                        <mat-hint align="end">{{ titleLength }}/150</mat-hint>
+                        @if (form.get('title')?.invalid && form.get('title')?.touched) {
+                        <mat-error>
+                            @if (form.get('title')?.hasError('required')) { Title is required }
+                            @else { Title cannot exceed 150 characters }
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+
+                <!-- Description -->
+                <div class="field-group">
+                    <label class="field-label">
+                        <mat-icon>description</mat-icon>
+                        Description
+                        <span class="required">*</span>
+                    </label>
+                    <mat-form-field appearance="outline" class="full-width">
+                        <textarea matInput formControlName="description" rows="6"
+                            placeholder="Describe the issue in detail — what happened, when, and any steps to reproduce..."
+                            maxlength="2000">
+            </textarea>
+                        <mat-hint align="end">{{ descLength }}/2000</mat-hint>
+                        @if (form.get('description')?.invalid && form.get('description')?.touched) {
+                        <mat-error>
+                            @if (form.get('description')?.hasError('required')) { Description is required }
+                            @else { Description cannot exceed 2000 characters }
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+
+                <!-- Row: Category + Priority -->
+                <div class="two-col">
+
+                    <!-- Category -->
+                    <div class="field-group">
+                        <label class="field-label">
+                            <mat-icon>folder_open</mat-icon>
+                            Category
+                            <span class="required">*</span>
+                        </label>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Select category</mat-label>
+                            <mat-select formControlName="categoryId">
+                                @for (cat of categories(); track cat.id) {
+                                <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
+                                }
+                            </mat-select>
+                            @if (form.get('categoryId')?.invalid && form.get('categoryId')?.touched) {
+                            <mat-error>Please select a category</mat-error>
+                            }
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Priority -->
+                    <div class="field-group">
+                        <label class="field-label">
+                            <mat-icon>flag</mat-icon>
+                            Priority
+                            <span class="required">*</span>
+                        </label>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Select priority</mat-label>
+                            <mat-select formControlName="priority">
+                                <mat-select-trigger>
+                                    @if (getSelectedPriority(); as selected) {
+                                    <div class="priority-option">
+                                        <mat-icon>{{ selected.icon }}</mat-icon>
+                                        {{ selected.label }}
+                                    </div>
+                                    }
+                                </mat-select-trigger>
+                                @for (p of priorities; track p.value) {
+                                <mat-option [value]="p.value">
+                                    <div class="priority-option">
+                                        <mat-icon>{{ p.icon }}</mat-icon>
+                                        {{ p.label }}
+                                    </div>
+                                </mat-option>
+                                }
+                            </mat-select>
+                            @if (form.get('priority')?.invalid && form.get('priority')?.touched) {
+                            <mat-error>Please select a priority</mat-error>
+                            }
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <!-- Raise on behalf (Admin only) -->
+                @if (auth.isAdmin()) {
+                <div class="field-group">
+                    <label class="field-label">
+                        <mat-icon>person_outline</mat-icon>
+                        Raise on behalf of
+                    </label>
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Select user (optional)</mat-label>
+                        <mat-select formControlName="raisedByUserId">
+                            <mat-option value="">Myself (Admin)</mat-option>
+                            @for (user of users(); track user.id) {
+                            <mat-option [value]="user.id">{{ user.fullName }} — {{ user.email }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                }
+
+                <!-- Actions -->
+                <div class="form-actions">
+                    <button mat-stroked-button type="button" class="cancel-btn" (click)="cancel()">
+                        Cancel
+                    </button>
+                    <button mat-flat-button type="submit" class="submit-btn" [disabled]="isLoading()">
+                        @if (isLoading()) {
+                        <mat-spinner diameter="18" />
+                        <span>Creating...</span>
+                        } @else {
+                        <mat-icon>confirmation_number</mat-icon>
+                        <span>Create Ticket</span>
+                        }
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- Side Hints -->
+        <div class="hints-panel">
+            <div class="hint-card">
+                <div class="hint-icon">💡</div>
+                <h4>Tips for a great ticket</h4>
+                <ul>
+                    <li>Be specific in the title</li>
+                    <li>Include error messages if any</li>
+                    <li>Mention when the issue started</li>
+                    <li>List steps to reproduce</li>
+                    <li>Attach screenshots if needed</li>
+                </ul>
+            </div>
+
+            <div class="priority-guide">
+                <h4>Priority Guide</h4>
+                @for (p of priorities; track p.value) {
+                <div class="priority-row">
+                    <mat-icon class="p-icon">{{ p.icon }}</mat-icon>
+                    <div>
+                        <div class="p-label">{{ p.label }}</div>
+                        <div class="p-desc">
+                            @switch (p.value) {
+                            @case ('Low') { Minor issue, no urgency }
+                            @case ('Medium') { Moderate impact on work }
+                            @case ('High') { Significant disruption }
+                            @case ('Critical') { System down, immediate help }
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+
+    </div>
+
+</div>

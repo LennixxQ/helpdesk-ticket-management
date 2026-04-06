@@ -1,1 +1,244 @@
-<p>ticket-detail works!</p>
+<div class="ticket-detail page-enter">
+
+    <!-- Loading -->
+    @if (isLoading()) {
+    <div class="loading-center"><mat-spinner diameter="48" /></div>
+    }
+
+    @if (!isLoading() && ticket()) {
+    <!-- Back -->
+    <button mat-button class="back-btn" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Tickets
+    </button>
+
+    <div class="detail-layout">
+
+        <!-- ── LEFT: Ticket Info ── -->
+        <div class="ticket-main">
+
+            <!-- Ticket Header Card -->
+            <div class="card ticket-header-card">
+                <div class="ticket-meta-top">
+                    <span class="ticket-id">{{ shortId(ticket()!.id) }}</span>
+                    <div class="badge-row">
+                        <app-status-badge [status]="ticket()!.status" />
+                        <app-priority-badge [priority]="ticket()!.priority" />
+                    </div>
+                </div>
+
+                <h1 class="ticket-title">{{ ticket()!.title }}</h1>
+
+                <div class="ticket-info-row">
+                    <div class="info-chip">
+                        <mat-icon>folder_open</mat-icon>
+                        <span>{{ ticket()!.categoryName }}</span>
+                    </div>
+                    <div class="info-chip">
+                        <mat-icon>person_outline</mat-icon>
+                        <span>{{ ticket()!.raisedByUserName }}</span>
+                    </div>
+                    <div class="info-chip">
+                        <mat-icon>schedule</mat-icon>
+                        <span>{{ ticket()!.createdAt | date:'MMM d, y · h:mm a' }}</span>
+                    </div>
+                    @if (ticket()!.lastModifiedAt) {
+                    <div class="info-chip muted">
+                        <mat-icon>update</mat-icon>
+                        <span>Updated {{ ticket()!.lastModifiedAt | date:'MMM d, y' }}</span>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="card description-card">
+                <h3 class="section-title">
+                    <mat-icon>description</mat-icon>
+                    Description
+                </h3>
+                <p class="description-text">{{ ticket()!.description }}</p>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="card comments-card">
+                <h3 class="section-title">
+                    <mat-icon>chat_bubble_outline</mat-icon>
+                    Comments
+                    <span class="comment-count">{{ ticket()!.comments.length }}</span>
+                </h3>
+
+                <!-- Comment Thread -->
+                @if (ticket()!.comments.length === 0) {
+                <div class="no-comments">
+                    <mat-icon>chat</mat-icon>
+                    <p>No comments yet. Be the first to respond.</p>
+                </div>
+                }
+
+                <div class="comments-list">
+                    @for (comment of ticket()!.comments; track comment.id) {
+                    <div class="comment-item" [class.mine]="isMyComment(comment.userId)">
+                        <div class="comment-avatar" [class.mine-avatar]="isMyComment(comment.userId)">
+                            {{ comment.postedByUserName.charAt(0).toUpperCase() }}
+                        </div>
+                        <div class="comment-bubble" [class.mine-bubble]="isMyComment(comment.userId)">
+                            <div class="comment-header">
+                                <span class="comment-author">
+                                    {{ isMyComment(comment.userId) ? 'You' : comment.postedByUserName }}
+                                </span>
+                                <span class="comment-time">
+                                    {{ comment.createdAt | date:'MMM d · h:mm a' }}
+                                </span>
+                            </div>
+                            <p class="comment-text">{{ comment.content }}</p>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+                <!-- Add Comment -->
+                <div class="add-comment">
+                    <div class="comment-input-row">
+                        <div class="my-avatar">
+                            {{ auth.currentUserName()?.charAt(0)?.toUpperCase() }}
+                        </div>
+                        <mat-form-field appearance="outline" class="comment-field">
+                            <mat-label>Add a comment...</mat-label>
+                            <textarea matInput [formControl]="commentControl" rows="3"
+                                placeholder="Write your comment here...">
+                </textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="comment-actions">
+                        <button mat-flat-button class="send-btn" [disabled]="commentControl.invalid || isCommenting()"
+                            (click)="submitComment()">
+                            @if (isCommenting()) {
+                            <mat-spinner diameter="18" />
+                            } @else {
+                            <mat-icon>send</mat-icon>
+                            }
+                            Post Comment
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── RIGHT: Actions Panel ── -->
+        <aside class="ticket-sidebar">
+
+            <!-- Assigned Agent -->
+            <div class="card action-card">
+                <h4 class="action-title">
+                    <mat-icon>person_pin</mat-icon>
+                    Assigned Agent
+                </h4>
+
+                @if (ticket()!.assignedAgentName) {
+                <div class="assigned-agent">
+                    <div class="agent-avatar">
+                        {{ ticket()!.assignedAgentName!.charAt(0) }}
+                    </div>
+                    <div>
+                        <div class="agent-name">{{ ticket()!.assignedAgentName }}</div>
+                        <div class="agent-sub">Support Agent</div>
+                    </div>
+                </div>
+                } @else {
+                <p class="not-assigned">Not assigned yet</p>
+                }
+
+                @if (auth.isAdmin()) {
+                <mat-form-field appearance="outline" class="full-width mt-12">
+                    <mat-label>{{ ticket()!.assignedAgentName ? 'Reassign' : 'Assign' }} Agent</mat-label>
+                    <mat-select [formControl]="agentControl">
+                        <mat-option value="">Select agent...</mat-option>
+                        @for (agent of agents(); track agent.id) {
+                        <mat-option [value]="agent.id">{{ agent.fullName }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <button mat-flat-button class="action-btn" [disabled]="!agentControl.value || isSaving()"
+                    (click)="assignAgent()">
+                    <mat-icon>assignment_ind</mat-icon>
+                    {{ ticket()!.assignedAgentName ? 'Reassign' : 'Assign' }}
+                </button>
+                }
+            </div>
+
+            <!-- Status -->
+            @if (auth.isAdmin() || auth.isAgent()) {
+            <div class="card action-card">
+                <h4 class="action-title">
+                    <mat-icon>swap_horiz</mat-icon>
+                    Update Status
+                </h4>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Status</mat-label>
+                    <mat-select [formControl]="statusControl">
+                        @for (s of availableStatuses(); track s) {
+                        <mat-option [value]="s">{{ statusLabel[s] }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <button mat-flat-button class="action-btn" [disabled]="isSaving()" (click)="updateStatus()">
+                    <mat-icon>check</mat-icon>
+                    Update Status
+                </button>
+            </div>
+            }
+
+            <!-- Priority (Admin) -->
+            @if (auth.isAdmin()) {
+            <div class="card action-card">
+                <h4 class="action-title">
+                    <mat-icon>flag</mat-icon>
+                    Priority
+                </h4>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Priority</mat-label>
+                    <mat-select [formControl]="priorityControl">
+                        @for (p of priorities; track p) {
+                        <mat-option [value]="p">{{ p }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <button mat-flat-button class="action-btn" [disabled]="isSaving()" (click)="updatePriority()">
+                    <mat-icon>save</mat-icon>
+                    Save Priority
+                </button>
+            </div>
+            }
+
+            <!-- Admin Actions -->
+            @if (auth.isAdmin()) {
+            <div class="card action-card">
+                <h4 class="action-title">
+                    <mat-icon>admin_panel_settings</mat-icon>
+                    Admin Actions
+                </h4>
+                <div class="admin-actions">
+                    @if (ticket()!.status !== 'Closed') {
+                    <button mat-stroked-button class="danger-btn" (click)="closeTicket()">
+                        <mat-icon>lock</mat-icon>
+                        Close Ticket
+                    </button>
+                    }
+                    @if (ticket()!.status === 'Closed') {
+                    <button mat-stroked-button class="reopen-btn" (click)="reopenTicket()">
+                        <mat-icon>lock_open</mat-icon>
+                        Reopen Ticket
+                    </button>
+                    }
+                </div>
+            </div>
+            }
+
+        </aside>
+
+    </div>
+    }
+
+</div>

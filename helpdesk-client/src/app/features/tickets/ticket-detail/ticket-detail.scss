@@ -1,0 +1,421 @@
+.ticket-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.loading-center {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+.back-btn {
+    color: var(--color-text-secondary) !important;
+    align-self: flex-start;
+    gap: 4px;
+    margin-left: -8px;
+
+    &:hover {
+        color: var(--color-primary) !important;
+    }
+}
+
+// ── Layout ────────────────────────────────────────────────────
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+    align-items: flex-start;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ticket-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+// ── Card Base ─────────────────────────────────────────────────
+.card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(123, 158, 229, 0.08);
+}
+
+// ── Ticket Header Card ────────────────────────────────────────
+.ticket-header-card {}
+
+.ticket-meta-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.ticket-id {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: 'Courier New', monospace;
+    background: var(--color-primary-light);
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.badge-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.ticket-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 16px;
+    line-height: 1.35;
+    letter-spacing: -0.3px;
+}
+
+.ticket-info-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.info-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-bg);
+    border: 1px solid rgba(123, 158, 229, 0.12);
+    border-radius: var(--radius-full);
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+
+    mat-icon {
+        font-size: 15px;
+        width: 15px;
+        height: 15px;
+    }
+
+    &.muted {
+        opacity: 0.7;
+    }
+}
+
+// ── Description ───────────────────────────────────────────────
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 16px;
+
+    mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+        color: var(--color-primary);
+    }
+}
+
+.comment-count {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    margin-left: 4px;
+}
+
+.description-text {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+// ── Comments ──────────────────────────────────────────────────
+.no-comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 32px;
+    color: var(--color-text-muted);
+    text-align: center;
+
+    mat-icon {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+        opacity: 0.3;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+    }
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.comment-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+
+    &.mine {
+        flex-direction: row-reverse;
+    }
+}
+
+.comment-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #B5A4E8, #82D8C8);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+
+    &.mine-avatar {
+        background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    }
+}
+
+.comment-bubble {
+    max-width: 75%;
+    background: var(--color-bg);
+    border: 1px solid rgba(123, 158, 229, 0.12);
+    border-radius: 0 var(--radius-md) var(--radius-md) var(--radius-md);
+    padding: 12px 16px;
+
+    &.mine-bubble {
+        background: linear-gradient(135deg,
+                rgba(123, 158, 229, 0.12),
+                rgba(181, 164, 232, 0.08));
+        border-color: rgba(123, 158, 229, 0.2);
+        border-radius: var(--radius-md) 0 var(--radius-md) var(--radius-md);
+    }
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.comment-author {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.comment-time {
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+
+.comment-text {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+// ── Add Comment ───────────────────────────────────────────────
+.add-comment {
+    border-top: 1px solid rgba(123, 158, 229, 0.1);
+    padding-top: 20px;
+}
+
+.comment-input-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.my-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.comment-field {
+    flex: 1;
+
+    ::ng-deep .mdc-text-field--outlined {
+        --mdc-outlined-text-field-container-shape: 12px;
+    }
+}
+
+.comment-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.send-btn {
+    border-radius: var(--radius-full) !important;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(123, 158, 229, 0.3) !important;
+}
+
+// ── Sidebar Actions ───────────────────────────────────────────
+.ticket-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: sticky;
+    top: calc(var(--navbar-height) + 28px);
+}
+
+.action-card {}
+
+.action-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 16px;
+
+    mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        color: var(--color-primary);
+    }
+}
+
+.assigned-agent {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    background: var(--color-primary-light);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+}
+
+.agent-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.agent-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.agent-sub {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.not-assigned {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin: 0 0 12px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mt-12 {
+    margin-top: 12px;
+}
+
+.action-btn {
+    width: 100%;
+    border-radius: var(--radius-full) !important;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    gap: 6px;
+    margin-top: 8px;
+    box-shadow: 0 4px 12px rgba(123, 158, 229, 0.25) !important;
+}
+
+.admin-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.danger-btn {
+    width: 100%;
+    border-radius: var(--radius-full) !important;
+    border-color: #C62828 !important;
+    color: #C62828 !important;
+    gap: 6px;
+
+    &:hover {
+        background: #FCE4EC !important;
+    }
+}
+
+.reopen-btn {
+    width: 100%;
+    border-radius: var(--radius-full) !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    gap: 6px;
+
+    &:hover {
+        background: var(--color-primary-light) !important;
+    }
+}

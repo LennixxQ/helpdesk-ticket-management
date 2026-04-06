@@ -12,46 +12,77 @@ export class TicketService {
 
     constructor(private http: HttpClient) { }
 
+    // POST /api/tickets/createTicket
     create(req: CreateTicketRequest): Observable<ApiResponse<TicketModel>> {
-        return this.http.post<ApiResponse<TicketModel>>(this.api, req);
+        return this.http.post<ApiResponse<TicketModel>>(`${this.api}/createTicket`, req);
     }
 
+    // POST /api/tickets/GetAllTicket  (filters in body)
     getAll(f: TicketFilterParams = {}): Observable<ApiResponse<PagedResult<TicketModel>>> {
-        let p = new HttpParams();
-        if (f.page) p = p.set('page', f.page);
-        if (f.pageSize) p = p.set('pageSize', f.pageSize);
-        if (f.status) p = p.set('status', f.status);
-        if (f.priority) p = p.set('priority', f.priority);
-        if (f.categoryId) p = p.set('categoryId', f.categoryId);
-        if (f.agentId) p = p.set('agentId', f.agentId);
-        return this.http.get<ApiResponse<PagedResult<TicketModel>>>(this.api, { params: p });
+        let params = new HttpParams();
+
+        // ✅ [FromQuery] hai — query params mein denge
+        if (f.page) params = params.set('page', f.page);
+        if (f.pageSize) params = params.set('pageSize', f.pageSize);
+        if (f.status) params = params.set('status', f.status);
+        if (f.priority) params = params.set('priority', f.priority);
+        if (f.categoryId) params = params.set('categoryId', f.categoryId);
+        if (f.agentId) params = params.set('agentId', f.agentId);
+
+        return this.http.post<ApiResponse<PagedResult<TicketModel>>>(
+            `${this.api}/GetAllTicket`,
+            {},          // ← empty body (POST hai but data query mein hai)
+            { params }   // ← query params
+        );
     }
 
-    getById(id: string): Observable<ApiResponse<TicketModel>> {
-        return this.http.get<ApiResponse<TicketModel>>(`${this.api}/${id}`);
+    // GET /api/tickets/getByIdTicket?ticketId=xxx
+    getById(ticketId: string): Observable<ApiResponse<TicketModel>> {
+        const params = new HttpParams().set('ticketId', ticketId);
+        return this.http.get<ApiResponse<TicketModel>>(
+            `${this.api}/getByIdTicket`, { params }
+        );
     }
 
-    assign(id: string, agentId: string): Observable<ApiResponse<TicketModel>> {
-        return this.http.put<ApiResponse<TicketModel>>(`${this.api}/${id}/assign`, { agentId });
+    // PUT /api/tickets/Agent-assign  (ticketId + agentId in body)
+    assign(ticketId: string, agentId: string): Observable<ApiResponse<TicketModel>> {
+        return this.http.put<ApiResponse<TicketModel>>(
+            `${this.api}/Agent-assign`, { ticketId, agentId }
+        );
     }
 
-    updateStatus(id: string, newStatus: string): Observable<ApiResponse<TicketModel>> {
-        return this.http.put<ApiResponse<TicketModel>>(`${this.api}/${id}/status`, { newStatus });
+    // PUT /api/tickets/UpdateTicketStatus  (ticketId + newStatus in body)
+    updateStatus(ticketId: string, newStatus: string): Observable<ApiResponse<TicketModel>> {
+        return this.http.put<ApiResponse<TicketModel>>(
+            `${this.api}/UpdateTicketStatus`, { ticketId, newStatus }
+        );
     }
 
-    updatePriority(id: string, priority: string): Observable<ApiResponse<TicketModel>> {
-        return this.http.put<ApiResponse<TicketModel>>(`${this.api}/${id}/priority`, { priority });
+    // PUT /api/tickets/UpdatePriority  (ticketId + priority in body)
+    updatePriority(ticketId: string, priority: string): Observable<ApiResponse<TicketModel>> {
+        return this.http.put<ApiResponse<TicketModel>>(
+            `${this.api}/UpdatePriority`, { ticketId, priority }
+        );
     }
 
-    close(id: string): Observable<ApiResponse<TicketModel>> {
-        return this.http.put<ApiResponse<TicketModel>>(`${this.api}/${id}/close`, {});
+    // PUT /api/tickets/CloseTicket  (ticketId in body)
+    close(ticketId: string): Observable<ApiResponse<TicketModel>> {
+        return this.http.put<ApiResponse<TicketModel>>(
+            `${this.api}/CloseTicket`, { ticketId }
+        );
     }
 
-    reopen(id: string): Observable<ApiResponse<TicketModel>> {
-        return this.http.put<ApiResponse<TicketModel>>(`${this.api}/${id}/reopen`, {});
+    // PUT /api/tickets/Ticket-reopen  (ticketId in body)
+    reopen(ticketId: string): Observable<ApiResponse<TicketModel>> {
+        return this.http.put<ApiResponse<TicketModel>>(
+            `${this.api}/Ticket-reopen`, { ticketId }
+        );
     }
 
-    addComment(id: string, req: AddCommentRequest): Observable<ApiResponse<CommentModel>> {
-        return this.http.post<ApiResponse<CommentModel>>(`${this.api}/${id}/comments`, req);
+    // POST /api/tickets/Add-Comment  (ticketId + content in body)
+    addComment(ticketId: string, req: AddCommentRequest): Observable<ApiResponse<CommentModel>> {
+        return this.http.post<ApiResponse<CommentModel>>(
+            `${this.api}/Add-Comment`, { ticketId, content: req.content }
+        );
     }
-}
+}

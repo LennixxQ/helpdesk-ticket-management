@@ -1,1 +1,119 @@
-<p>category-management works!</p>
+<div class="category-management page-enter">
+
+    <!-- Header -->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Category Management</h1>
+            <p class="page-subtitle">Manage ticket categories</p>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+        <div class="stat-chip">
+            <div class="stat-icon blue">
+                <mat-icon>category</mat-icon>
+            </div>
+            <div>
+                <div class="stat-val">{{ categories().length }}</div>
+                <div class="stat-lbl">Total</div>
+            </div>
+        </div>
+        <div class="stat-chip">
+            <div class="stat-icon green">
+                <mat-icon>check_circle</mat-icon>
+            </div>
+            <div>
+                <div class="stat-val">{{ activeCount() }}</div>
+                <div class="stat-lbl">Active</div>
+            </div>
+        </div>
+        <div class="stat-chip">
+            <div class="stat-icon grey">
+                <mat-icon>cancel</mat-icon>
+            </div>
+            <div>
+                <div class="stat-val">{{ inactiveCount() }}</div>
+                <div class="stat-lbl">Inactive</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-layout">
+
+        <!-- Create Form -->
+        <div class="form-card">
+            <h3 class="form-title">
+                <mat-icon>add_circle_outline</mat-icon>
+                New Category
+            </h3>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Category Name</mat-label>
+                <input matInput [formControl]="nameControl" placeholder="e.g. Hardware, Software..." maxlength="100"
+                    (keydown.enter)="createCategory()" />
+                <mat-icon matPrefix>label_outline</mat-icon>
+                <mat-hint align="end">{{ nameControl.value?.length ?? 0 }}/100</mat-hint>
+                @if (nameControl.invalid && nameControl.touched) {
+                <mat-error>Category name is required</mat-error>
+                }
+            </mat-form-field>
+
+            <button mat-flat-button class="create-btn" [disabled]="isSaving()" (click)="createCategory()">
+                @if (isSaving()) {
+                <mat-spinner diameter="18" />
+                } @else {
+                <mat-icon>add</mat-icon>
+                }
+                Create Category
+            </button>
+        </div>
+
+        <!-- Categories List -->
+        <div class="list-card">
+            <h3 class="list-title">All Categories</h3>
+
+            @if (isLoading()) {
+            <div class="loading-center"><mat-spinner diameter="36" /></div>
+            }
+
+            @if (!isLoading()) {
+            @if (categories().length === 0) {
+            <div class="empty-state">
+                <mat-icon>category</mat-icon>
+                <p>No categories yet. Create one to get started.</p>
+            </div>
+            }
+
+            <div class="categories-grid">
+                @for (cat of categories(); track cat.id) {
+                <div class="category-item" [class.inactive]="!cat.isActive">
+
+                    <div class="cat-left">
+                        <div class="cat-icon" [class.active-icon]="cat.isActive">
+                            <mat-icon>{{ cat.isActive ? 'label' : 'label_off' }}</mat-icon>
+                        </div>
+                        <div>
+                            <div class="cat-name">{{ cat.name }}</div>
+                            <div class="cat-status">
+                                {{ cat.isActive ? 'Active — visible in ticket form' : 'Inactive — hidden from users' }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button mat-stroked-button class="toggle-btn" [class.activate-btn]="!cat.isActive"
+                        [class.deactivate-btn]="cat.isActive" [matTooltip]="cat.isActive ? 'Deactivate' : 'Activate'"
+                        (click)="toggle(cat)">
+                        <mat-icon>{{ cat.isActive ? 'toggle_on' : 'toggle_off' }}</mat-icon>
+                        {{ cat.isActive ? 'Deactivate' : 'Activate' }}
+                    </button>
+
+                </div>
+                }
+            </div>
+            }
+        </div>
+
+    </div>
+
+</div>

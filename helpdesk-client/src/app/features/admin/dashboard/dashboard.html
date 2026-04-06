@@ -1,1 +1,155 @@
-<p>dashboard works!</p>
+<div class="dashboard page-enter">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-subtitle">Overview of your support system</p>
+        </div>
+        <a mat-flat-button routerLink="/tickets" class="view-all-btn">
+            <mat-icon>open_in_new</mat-icon>
+            View All Tickets
+        </a>
+    </div>
+
+    <!-- Loading -->
+    @if (isLoading()) {
+    <div class="loading-center">
+        <mat-spinner diameter="48" />
+    </div>
+    }
+
+    @if (!isLoading() && dashboard()) {
+
+    <!-- Stat Cards -->
+    <div class="stat-grid">
+        @for (card of statCards(); track card.label) {
+        <div class="stat-card hover-lift">
+            <div class="stat-icon" [style.background]="card.bg">
+                <mat-icon [style.color]="card.color">{{ card.icon }}</mat-icon>
+            </div>
+            <div class="stat-body">
+                <span class="stat-label">{{ card.label }}</span>
+                <span class="stat-value">{{ card.value }}</span>
+                @if (card.trend !== null) {
+                <span class="stat-trend">
+                    <mat-icon class="trend-icon">trending_up</mat-icon>
+                    {{ card.trend }} {{ card.trendLabel }}
+                </span>
+                }
+            </div>
+        </div>
+        }
+    </div>
+
+    <!-- Middle Row -->
+    <div class="middle-row">
+
+        <!-- Priority Breakdown -->
+        <div class="card priority-card">
+            <div class="card-title-row">
+                <h3>Priority Breakdown</h3>
+                <span class="total-badge">{{ dashboard()!.totalTickets }} total</span>
+            </div>
+
+            <div class="priority-list">
+                @for (p of priorityData(); track p.label) {
+                <div class="priority-item">
+                    <div class="priority-meta">
+                        <span class="priority-dot" [style.background]="p.color"></span>
+                        <span class="priority-name">{{ p.label }}</span>
+                        <span class="priority-count" [style.color]="p.color">{{ p.value }}</span>
+                    </div>
+                    <mat-progress-bar mode="determinate" [value]="p.percent" class="priority-bar"
+                        [style.--bar-color]="p.color">
+                    </mat-progress-bar>
+                    <span class="priority-pct">{{ p.percent }}%</span>
+                </div>
+                }
+            </div>
+        </div>
+
+        <!-- Month Comparison -->
+        <div class="card month-card">
+            <div class="card-title-row">
+                <h3>Monthly Trend</h3>
+            </div>
+
+            <div class="month-stats">
+                <div class="month-block">
+                    <span class="month-label">This Month</span>
+                    <span class="month-value primary">{{ dashboard()!.ticketsThisMonth }}</span>
+                    <span class="month-sub">tickets raised</span>
+                </div>
+
+                <div class="month-divider">
+                    <div class="trend-indicator" [class.up]="monthTrend() >= 0" [class.down]="monthTrend() < 0">
+                        <mat-icon>{{ monthTrend() >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
+                        <span>{{ monthTrend() >= 0 ? '+' : '' }}{{ monthTrend() }}%</span>
+                    </div>
+                </div>
+
+                <div class="month-block">
+                    <span class="month-label">Last Month</span>
+                    <span class="month-value">{{ dashboard()!.ticketsLastMonth }}</span>
+                    <span class="month-sub">tickets raised</span>
+                </div>
+            </div>
+
+            <!-- Status Summary -->
+            <div class="status-summary">
+                @for (item of statusItems(); track item.label) {
+                <div class="status-chip" [style.background]="item.bg" [style.color]="item.color">
+                    {{ item.label }}: {{ item.value }}
+                </div>
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Top Agents -->
+    @if (dashboard()!.topAgentsThisMonth.length > 0) {
+    <div class="card agents-card">
+        <div class="card-title-row">
+            <h3>🏆 Top Agents This Month</h3>
+            <span class="subtitle-text">By resolved tickets</span>
+        </div>
+
+        <div class="agents-list">
+            @for (agent of dashboard()!.topAgentsThisMonth; track agent.agentId; let i = $index) {
+            <div class="agent-row">
+                <div class="agent-rank" [class.top]="i === 0">
+                    @if (i === 0) { 🥇 }
+                    @else if (i === 1) { 🥈 }
+                    @else if (i === 2) { 🥉 }
+                    @else { {{ i + 1 }} }
+                </div>
+                <div class="agent-avatar">
+                    {{ agent.agentName.charAt(0).toUpperCase() }}
+                </div>
+                <div class="agent-info">
+                    <span class="agent-name">{{ agent.agentName }}</span>
+                    <span class="agent-sub">Support Agent</span>
+                </div>
+                <div class="agent-score">
+                    <span class="score-value">{{ agent.resolvedCount }}</span>
+                    <span class="score-label">resolved</span>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    }
+
+    <!-- Empty State for agents -->
+    @if (dashboard()!.topAgentsThisMonth.length === 0) {
+    <div class="card empty-agents">
+        <mat-icon>emoji_events</mat-icon>
+        <p>No resolved tickets this month yet.</p>
+    </div>
+    }
+
+    }
+
+</div>
