@@ -139,13 +139,15 @@
                         Cancel
                     </button>
                     <button mat-flat-button type="submit" class="submit-btn" [disabled]="isLoading()">
-                        @if (isLoading()) {
-                        <mat-spinner diameter="18" />
-                        <span>Creating...</span>
-                        } @else {
-                        <mat-icon>confirmation_number</mat-icon>
-                        <span>Create Ticket</span>
-                        }
+                        <div class="btn-content">
+                            @if (isLoading()) {
+                            <mat-spinner diameter="18" />
+                            <span>Creating...</span>
+                            } @else {
+                            <mat-icon>confirmation_number</mat-icon>
+                            <span>Create Ticket</span>
+                            }
+                        </div>
                     </button>
                 </div>
 

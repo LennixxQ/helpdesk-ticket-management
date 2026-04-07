@@ -7,8 +7,10 @@
             <p class="page-subtitle">Manage accounts and roles</p>
         </div>
         <button mat-flat-button class="add-btn" (click)="showForm.set(!showForm())">
-            <mat-icon>{{ showForm() ? 'close' : 'person_add' }}</mat-icon>
-            {{ showForm() ? 'Cancel' : 'Add User' }}
+            <div class="btn-content">
+                <mat-icon>{{ showForm() ? 'close' : 'person_add' }}</mat-icon>
+                <span>{{ showForm() ? 'Cancel' : 'Add User' }}</span>
+            </div>
         </button>
     </div>
 
@@ -82,12 +84,14 @@
                     Cancel
                 </button>
                 <button mat-flat-button type="submit" class="submit-btn" [disabled]="isSaving()">
-                    @if (isSaving()) {
-                    <mat-spinner diameter="18" />
-                    } @else {
-                    <mat-icon>check</mat-icon>
-                    }
-                    Create User
+                    <div class="btn-content">
+                        @if (isSaving()) {
+                        <mat-spinner diameter="18" />
+                        } @else {
+                        <mat-icon>check</mat-icon>
+                        }
+                        <span>Create User</span>
+                    </div>
                 </button>
             </div>
         </form>
