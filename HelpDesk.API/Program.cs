@@ -37,6 +37,7 @@ try
                     "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] " +
                     "{Message:lj}{NewLine}{Exception}");
     });
+    builder.Services.AddHttpContextAccessor();
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
     builder.Services.AddJwtAuthentication(builder.Configuration);

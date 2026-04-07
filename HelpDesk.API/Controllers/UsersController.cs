@@ -1,6 +1,6 @@
 using HelpDesk.Application.Commands.UserCommand;
+using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
-using HelpDesk.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,12 +9,12 @@ namespace HelpDesk.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseController
     {
         private readonly IUserService _userService;
         private readonly ILogger<UsersController> _logger;
 
-        public UsersController(IUserService userService, ILogger<UsersController> logger)
+        public UsersController(IUserService userService, ILogger<UsersController> logger, ICurrentUserProvider currentUserProvider) :base(currentUserProvider)
         {
             _userService = userService;
             _logger = logger;
@@ -47,7 +47,7 @@ namespace HelpDesk.API.Controllers
 
         [HttpPut("UpdateUsersRole")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleRequest request)
+        public async Task<IActionResult> UpdateRole([FromBody] UpdateUserRoleCommand request)
         {
             var command = new UpdateUserRoleCommand { UserId = request.UserId, NewRole = request.NewRole };
             var response = await _userService.UpdateRoleAsync(command);
@@ -56,7 +56,7 @@ namespace HelpDesk.API.Controllers
 
         [HttpPut("DeleteUser")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Deactivate([FromBody] DeactivateUserRequest request)
+        public async Task<IActionResult> Deactivate([FromBody] UserIdDto request)
         {
             var response = await _userService.DeactivateAsync(request.UserId);
             return response.Success ? Ok(response) : BadRequest(response);
@@ -70,7 +70,6 @@ namespace HelpDesk.API.Controllers
             return Ok(response);
         }
 
-        public record UpdateRoleRequest(Guid UserId, UserRole NewRole);
-        public record DeactivateUserRequest(Guid UserId);
+        public record UserIdDto(Guid UserId);
     }
 }

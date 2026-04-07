@@ -1,4 +1,5 @@
 using HelpDesk.Application.Commands.CategoryCommand;
+using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +9,12 @@ namespace HelpDesk.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CategoriesController : ControllerBase
+    public class CategoriesController : BaseController
     {
         private readonly ICategoryService _categoryService;
         private readonly ILogger<CategoriesController> _logger;
 
-        public CategoriesController(ICategoryService categoryService, ILogger<CategoriesController> logger)
+        public CategoriesController(ICategoryService categoryService, ILogger<CategoriesController> logger, ICurrentUserProvider currentUserProvider) : base(currentUserProvider)
         {
             _categoryService = categoryService;
             _logger = logger;
@@ -37,10 +38,12 @@ namespace HelpDesk.API.Controllers
 
         [HttpPut("ActivateCategory")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Toggle([FromBody] ToggleCategoryCommand command)
+        public async Task<IActionResult> Toggle([FromBody] CategoryIdDto command)
         {
             var response = await _categoryService.ToggleActiveAsync(command.CategoryId);
             return response.Success ? Ok(response) : NotFound(response);
         }
+
+        public record CategoryIdDto(Guid CategoryId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using HelpDesk.Application.Interfaces.Services;
+﻿using HelpDesk.Application.Interfaces.Repositories;
+using HelpDesk.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,12 +8,12 @@ namespace HelpDesk.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class DashboardController : ControllerBase
+    public class DashboardController : BaseController
     {
         private readonly IDashboardService _dashboardService;
         private readonly ILogger<DashboardController> _logger;
 
-        public DashboardController(IDashboardService dashboardService, ILogger<DashboardController> logger)
+        public DashboardController(IDashboardService dashboardService, ILogger<DashboardController> logger, ICurrentUserProvider currentUserProvider) : base(currentUserProvider)
         {
             _dashboardService = dashboardService;
             _logger = logger;

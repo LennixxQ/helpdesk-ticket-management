@@ -13,11 +13,13 @@ namespace HelpDesk.Application.Services
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserProvider _currentUser;
 
-        public CategoryService(IUnitOfWork uow, IMapper mapper)
+        public CategoryService(IUnitOfWork uow, IMapper mapper, ICurrentUserProvider currentUser)
         {
             _uow = uow;
             _mapper = mapper;
+            _currentUser = currentUser;
         }
 
         public async Task<BaseResponse<CategoryDto>> CreateAsync(CreateCategoryCommand command)

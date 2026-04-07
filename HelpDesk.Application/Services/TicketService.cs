@@ -15,11 +15,14 @@ namespace HelpDesk.Application.Services
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserProvider _currentUser;
 
-        public TicketService(IUnitOfWork uow, IMapper mapper)
+
+        public TicketService(IUnitOfWork uow, IMapper mapper, ICurrentUserProvider currentUserProvider)
         {
             _uow = uow;
             _mapper = mapper;
+            _currentUser = currentUserProvider;
         }
 
         public async Task<BaseResponse<CommentDto>> AddCommentAsync(AddCommentCommand command, Guid currentUserId, UserRole currentUserRole)

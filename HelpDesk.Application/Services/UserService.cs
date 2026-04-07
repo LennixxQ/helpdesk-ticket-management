@@ -15,12 +15,14 @@ namespace HelpDesk.Application.Services
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly ICurrentUserProvider _currentUser;
 
-        public UserService(IUnitOfWork uow, IMapper mapper, UserManager<User> userManager)
+        public UserService(IUnitOfWork uow, IMapper mapper, UserManager<User> userManager, ICurrentUserProvider currentUser)
         {
             _uow = uow;
             _mapper = mapper;
             _userManager = userManager;
+            _currentUser = currentUser;
         }
 
         public async Task<BaseResponse<UserDto>> CreateUserAsync(CreateUserCommand command)

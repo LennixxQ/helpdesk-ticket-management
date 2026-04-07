@@ -1,5 +1,7 @@
-﻿using HelpDesk.Domain.Entities;
+﻿using HelpDesk.Application.Interfaces.Repositories;
+using HelpDesk.Domain.Entities;
 using HelpDesk.Domain.Entities.Common;
+using HelpDesk.Infrastructure.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -11,10 +13,13 @@ namespace HelpDesk.Infrastructure.Persistence
     public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         private readonly IHttpContextAccessor? _httpContextAccessor;
+        private readonly ICurrentUserProvider _currentUserProvider;
 
-        public AppDbContext(DbContextOptions<AppDbContext> options, IHttpContextAccessor? httpContextAccessor) : base(options)
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, IHttpContextAccessor? httpContextAccessor, ICurrentUserProvider currentUserProvider = null) : base(options)
         {
             _httpContextAccessor = httpContextAccessor;
+            _currentUserProvider = currentUserProvider;
         }
 
         public DbSet<Ticket> Tickets => Set<Ticket>();
@@ -44,8 +49,7 @@ namespace HelpDesk.Infrastructure.Persistence
             ChangeTracker.DetectChanges();
             var entries = new List<AuditEntry>();
 
-            var currentUser = _httpContextAccessor?.HttpContext?.User?.FindFirst(
-                System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "system";
+            var currentUser = _currentUserProvider?.GetCurrentUserId().ToString() ?? _httpContextAccessor?.HttpContext?.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "system";
 
             foreach (var entry in ChangeTracker.Entries())
             {

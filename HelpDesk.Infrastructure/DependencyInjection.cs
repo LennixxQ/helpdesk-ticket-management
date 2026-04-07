@@ -37,7 +37,7 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<ICommentRepository, CommentRepository>();
-            services.AddHttpContextAccessor();
+            services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
 
             return services;
         }
