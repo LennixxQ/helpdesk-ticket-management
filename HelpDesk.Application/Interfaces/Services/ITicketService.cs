@@ -8,7 +8,7 @@ namespace HelpDesk.Application.Interfaces.Services
 {
     public interface ITicketService
     {
-        Task<BaseResponse<TicketDto>> CreateAsync(CreateTicketCommand command, Guid currentUserId, UserRole currentUserRole);
+        Task<BaseResponse<CreateTicketResponseDto>> CreateAsync(CreateTicketCommand command, Guid currentUserId, UserRole currentUserRole);
         Task<BaseResponse<TicketDto>> AssignAsync(AssignTicketCommand command);
         Task<BaseResponse<TicketDto>> UpdateStatusAsync(UpdateTicketStatusCommand command, Guid currentUserId, UserRole currentUserRole);
         Task<BaseResponse<CommentDto>> AddCommentAsync(AddCommentCommand command, Guid currentUserId, UserRole currentUserRole);

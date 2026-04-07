@@ -103,12 +103,12 @@ namespace HelpDesk.Application.Services
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(ticket), "Ticket closed.");
         }
 
-        public async Task<BaseResponse<TicketDto>> CreateAsync(CreateTicketCommand command, Guid currentUserId, UserRole currentUserRole)
+        public async Task<BaseResponse<CreateTicketResponseDto>> CreateAsync(CreateTicketCommand command, Guid currentUserId, UserRole currentUserRole)
         {
             var validator = new CreateTicketValidator();
             var result = await validator.ValidateAsync(command);
             if (!result.IsValid)
-                return BaseResponse<TicketDto>.Fail(result.Errors.Select(e => e.ErrorMessage).ToList());
+                return BaseResponse<CreateTicketResponseDto>.Fail(result.Errors.Select(e => e.ErrorMessage).ToList());
 
             var raisedById = currentUserRole == UserRole.Admin && command.RaisedByUserId.HasValue ? command.RaisedByUserId.Value : currentUserId;
 
@@ -122,9 +122,9 @@ namespace HelpDesk.Application.Services
             await _uow.Tickets.AddAsync(ticket);
             await _uow.SaveChangesAsync();
 
-            //remove create
+            
             var created = await _uow.Tickets.GetByIdWithDetailsAsync(ticket.Id);
-            return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(created), "Ticket created successfully.");
+            return BaseResponse<CreateTicketResponseDto>.Ok(new CreateTicketResponseDto { Id = ticket.Id, Status = ticket.Status.ToString()}, "Ticket created successfully.");
 
         }
 

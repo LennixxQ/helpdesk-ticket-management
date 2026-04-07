@@ -54,3 +54,8 @@ export interface UpdatePriorityRequest {
     ticketId: string;
     priority: TicketPriority;
 }
+
+export interface CreateTicketResponse {
+    id: string;
+    status: TicketStatus;
+}

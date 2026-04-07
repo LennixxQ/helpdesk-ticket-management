@@ -28,7 +28,6 @@ namespace HelpDesk.API.Controllers
         public async Task<IActionResult> Create([FromBody] CreateTicketCommand command)
         {
             _logger.LogInformation("User {UserId} creating ticket with title: {Title}",CurrentUserId, command.Title);
-
             var response = await _ticketService.CreateAsync(command, CurrentUserId, CurrentUserRole);
             return response.Success ? Ok(response) : BadRequest(response);
         }

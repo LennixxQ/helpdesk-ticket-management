@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse, PagedResult } from '../../../core/models/api-response.model';
-import { TicketModel, CreateTicketRequest, TicketFilterParams } from '../../../core/models/ticket.model';
+import { TicketModel, CreateTicketRequest, TicketFilterParams, CreateTicketResponse } from '../../../core/models/ticket.model';
 import { CommentModel, AddCommentRequest } from '../../../core/models/comment.model';
 
 @Injectable({ providedIn: 'root' })
@@ -13,8 +13,8 @@ export class TicketService {
   constructor(private http: HttpClient) { }
 
   // POST /api/tickets/createTicket
-  create(req: CreateTicketRequest): Observable<ApiResponse<TicketModel>> {
-    return this.http.post<ApiResponse<TicketModel>>(`${this.api}/createTicket`, req);
+  create(req: CreateTicketRequest): Observable<ApiResponse<CreateTicketResponse>> {
+    return this.http.post<ApiResponse<CreateTicketResponse>>(`${this.api}/createTicket`, req);
   }
 
   // POST /api/tickets/GetAllTicket  (filters in body)
