@@ -1,4 +1,4 @@
-﻿using HelpDesk.Domain.Enums;
+using HelpDesk.Domain.Enums;
 
 namespace HelpDesk.Application.Commands.UserCommand
 {

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using HelpDesk.Application.Commands.CategoryCommand;
 using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs;
@@ -36,6 +36,7 @@ namespace HelpDesk.Application.Services
             var category = _mapper.Map<Category>(command);
             category.Id = Guid.NewGuid();
             category.CreatedAt = DateTime.UtcNow;
+            category.CreatedBy = _currentUser.GetCurrentUserId().ToString();
 
             await _uow.Categories.AddAsync(category);
             await _uow.SaveChangesAsync();
@@ -58,6 +59,7 @@ namespace HelpDesk.Application.Services
 
             category.IsActive = !category.IsActive;
             category.LastModifiedAt = DateTime.UtcNow;
+            category.LastModifiedBy = _currentUser.GetCurrentUserId().ToString();
 
             _uow.Categories.Update(category);
             await _uow.SaveChangesAsync();

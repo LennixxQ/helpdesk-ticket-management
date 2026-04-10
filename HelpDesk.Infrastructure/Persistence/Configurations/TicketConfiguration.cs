@@ -1,5 +1,4 @@
 ﻿using HelpDesk.Domain.Entities;
-using HelpDesk.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

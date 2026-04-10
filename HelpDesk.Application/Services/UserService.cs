@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using HelpDesk.Application.Commands.UserCommand;
 using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs;

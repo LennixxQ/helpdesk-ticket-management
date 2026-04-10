@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using HelpDesk.Application.Commands.CommentCommand;
 using HelpDesk.Application.Commands.TicketCommand;
 using HelpDesk.Application.Common;
