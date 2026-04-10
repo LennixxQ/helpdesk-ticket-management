@@ -128,16 +128,16 @@ namespace HelpDesk.Application.Services
 
         }
 
-        public async Task<BaseResponse<PagedResult<TicketDto>>> GetAllAsync(int page, int pageSize, TicketStatus? status, TicketPriority? priority, Guid? categoryId, Guid? agentId, Guid currentUserId, UserRole currentUserRole)
+        public async Task<BaseResponse<PagedResult<TicketDto>>> GetAllAsync(PaginationDto dto, Guid currentUserId, UserRole currentUserRole)
         {
             Guid? filterByUser = currentUserRole == UserRole.User ? currentUserId : null;
-            Guid? filterByAgent = currentUserRole == UserRole.Agent ? currentUserId : agentId;
+            Guid? filterByAgent = currentUserRole == UserRole.Agent ? currentUserId : dto.agentId;
 
 
             var paged = await _uow.Tickets.GetAllPagedAsync(
-                page, pageSize, status, priority, categoryId, filterByAgent, filterByUser);
+                dto.page, dto.pageSize, dto.status, dto.priority, dto.categoryId, filterByAgent, filterByUser);
 
-            var dto = new PagedResult<TicketDto>
+            var resultDto = new PagedResult<TicketDto>
             {
                 Items = _mapper.Map<List<TicketDto>>(paged.Items),
                 TotalCount = paged.TotalCount,
@@ -145,7 +145,7 @@ namespace HelpDesk.Application.Services
                 PageSize = paged.PageSize
             };
 
-            return BaseResponse<PagedResult<TicketDto>>.Ok(dto);
+            return BaseResponse<PagedResult<TicketDto>>.Ok(resultDto);
         }
 
         public async Task<BaseResponse<TicketDto>> GetByIdAsync(Guid id, Guid currentUserId, UserRole currentUserRole)

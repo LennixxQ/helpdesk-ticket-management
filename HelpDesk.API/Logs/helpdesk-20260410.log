@@ -1620,3 +1620,519 @@ VALUES (@p7, @p8, @p9, @p10, @p11),
 2026-04-10 13:14:30.258 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.CategoriesController.Toggle (HelpDesk.API)'
 2026-04-10 13:14:30.280 +05:30 [INF] HTTP PUT /api/categories/ActivateCategory responded 200 in 254.7901 ms
 2026-04-10 13:14:30.296 +05:30 [INF] Request finished HTTP/2 PUT https://localhost:7119/api/categories/ActivateCategory - 200 null application/json; charset=utf-8 309.7821ms
+2026-04-10 13:28:46.131 +05:30 [INF] Executed DbCommand (132ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-10 13:28:46.890 +05:30 [INF] Executed DbCommand (465ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-10 13:28:46.966 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-04-10 13:28:47.005 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2026-04-10 13:28:47.109 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2026-04-10 13:28:47.221 +05:30 [INF] Database migrations applied.
+2026-04-10 13:28:47.336 +05:30 [INF] User profile is available. Using 'C:\Users\Vivek\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-10 13:28:48.630 +05:30 [INF] Executed DbCommand (67ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-10 13:28:48.855 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-10 13:28:48.898 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2026-04-10 13:28:48.988 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-10 13:28:49.525 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:28:49.572 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:28:49.615 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:28:49.660 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:28:49.706 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[Name] = @__name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:28:49.924 +05:30 [INF] Database seeding completed.
+2026-04-10 13:28:49.949 +05:30 [INF] Database seeding complete.
+2026-04-10 13:28:51.307 +05:30 [INF] Now listening on: https://localhost:7119
+2026-04-10 13:28:51.325 +05:30 [INF] Now listening on: http://localhost:5219
+2026-04-10 13:28:51.542 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-10 13:28:51.562 +05:30 [INF] Hosting environment: Development
+2026-04-10 13:28:51.578 +05:30 [INF] Content root path: C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API
+2026-04-10 13:39:12.419 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7119/api/auth/login - null null
+2026-04-10 13:39:12.679 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:13.384 +05:30 [INF] HTTP OPTIONS /api/auth/login responded 204 in 719.5117 ms
+2026-04-10 13:39:13.439 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7119/api/auth/login - 204 null null 1060.8885ms
+2026-04-10 13:39:13.503 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/auth/login - application/json 61
+2026-04-10 13:39:13.631 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:14.064 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-10 13:39:14.657 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginRequest) on controller HelpDesk.API.Controllers.AuthController (HelpDesk.API).
+2026-04-10 13:39:14.909 +05:30 [INF] Login attempt for email: vivek.chauhan@helpdesk.com
+2026-04-10 13:39:15.180 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2026-04-10 13:39:16.450 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:39:16.573 +05:30 [INF] Executed action HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API) in 1817.5055ms
+2026-04-10 13:39:17.408 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.AuthController.Login (HelpDesk.API)'
+2026-04-10 13:39:17.499 +05:30 [INF] HTTP POST /api/auth/login responded 200 in 3868.9659 ms
+2026-04-10 13:39:17.559 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/auth/login - 200 null application/json; charset=utf-8 4060.1962ms
+2026-04-10 13:39:17.675 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7119/api/dashboard - null null
+2026-04-10 13:39:17.724 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:17.764 +05:30 [INF] HTTP OPTIONS /api/dashboard responded 204 in 40.1778 ms
+2026-04-10 13:39:17.800 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7119/api/dashboard - 204 null null 126.9399ms
+2026-04-10 13:39:17.808 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/dashboard - null null
+2026-04-10 13:39:17.940 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:18.584 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API)'
+2026-04-10 13:39:18.726 +05:30 [INF] Route matched with {action = "GetDashboard", controller = "Dashboard"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDashboard() on controller HelpDesk.API.Controllers.DashboardController (HelpDesk.API).
+2026-04-10 13:39:19.040 +05:30 [INF] Admin requesting dashboard data.
+2026-04-10 13:39:19.342 +05:30 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title]
+FROM [Tickets] AS [t]
+2026-04-10 13:39:19.988 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:39:20.134 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:39:20.206 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:39:20.279 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:39:20.376 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:39:20.452 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:39:20.690 +05:30 [INF] Executed DbCommand (159ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:39:20.766 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:39:21.180 +05:30 [INF] Executed DbCommand (68ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:39:21.255 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:39:21.708 +05:30 [INF] Executed DbCommand (177ms) [Parameters=[@__p_2='?' (DbType = Int32), @__now_Year_0='?' (DbType = Int32), @__now_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_2) [t].[AssignedAgentId] AS [AgentId], COUNT(*) AS [Count]
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = N'Resolved' AND [t].[AssignedAgentId] IS NOT NULL AND [t].[LastModifiedAt] IS NOT NULL AND DATEPART(year, [t].[LastModifiedAt]) = @__now_Year_0 AND DATEPART(month, [t].[LastModifiedAt]) = @__now_Month_1
+GROUP BY [t].[AssignedAgentId]
+ORDER BY COUNT(*) DESC
+2026-04-10 13:39:22.225 +05:30 [INF] Executed DbCommand (295ms) [Parameters=[@__agentIds_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[FullName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] IN (
+    SELECT [a0].[value]
+    FROM OPENJSON(@__agentIds_0) WITH ([value] uniqueidentifier '$') AS [a0]
+)
+2026-04-10 13:39:22.529 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__now_Year_0='?' (DbType = Int32), @__now_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE DATEPART(year, [t].[CreatedAt]) = @__now_Year_0 AND DATEPART(month, [t].[CreatedAt]) = @__now_Month_1
+2026-04-10 13:39:22.595 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__last_Year_0='?' (DbType = Int32), @__last_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE DATEPART(year, [t].[CreatedAt]) = @__last_Year_0 AND DATEPART(month, [t].[CreatedAt]) = @__last_Month_1
+2026-04-10 13:39:22.651 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.DashboardDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 13:39:22.758 +05:30 [INF] Executed action HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API) in 3970.7459ms
+2026-04-10 13:39:22.805 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API)'
+2026-04-10 13:39:22.841 +05:30 [INF] HTTP GET /api/dashboard responded 200 in 4901.3552 ms
+2026-04-10 13:39:22.873 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/dashboard - 200 null application/json; charset=utf-8 5065.6409ms
+2026-04-10 13:39:37.328 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7119/api/tickets/GetAllTicket?page=1&pageSize=10 - null null
+2026-04-10 13:39:37.765 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:38.247 +05:30 [INF] HTTP OPTIONS /api/tickets/GetAllTicket responded 204 in 481.5430 ms
+2026-04-10 13:39:38.280 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7119/api/tickets/GetAllTicket?page=1&pageSize=10 - 204 null null 952.4522ms
+2026-04-10 13:39:38.288 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7119/api/tickets/GetAllTicket?page=1&pageSize=10 - application/json 2
+2026-04-10 13:39:38.402 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:38.460 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.GetAll (HelpDesk.API)'
+2026-04-10 13:39:38.525 +05:30 [INF] Route matched with {action = "GetAll", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(HelpDesk.Application.DTOs.PaginationDto) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-10 13:39:39.975 +05:30 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+2026-04-10 13:39:40.476 +05:30 [INF] Executed DbCommand (69ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [c].[Id], [c].[CreatedAt], [c].[CreatedBy], [c].[IsActive], [c].[LastModifiedAt], [c].[LastModifiedBy], [c].[Name], [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id], [a0].[AccessFailedCount], [a0].[ConcurrencyStamp], [a0].[CreatedAt], [a0].[CreatedBy], [a0].[Email], [a0].[EmailConfirmed], [a0].[FullName], [a0].[IsActive], [a0].[LastModifiedAt], [a0].[LastModifiedBy], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[Role], [a0].[SecurityStamp], [a0].[TwoFactorEnabled], [a0].[UserName]
+FROM (
+    SELECT [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title]
+    FROM [Tickets] AS [t]
+    ORDER BY [t].[CreatedAt] DESC
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t0]
+INNER JOIN [Categories] AS [c] ON [t0].[CategoryId] = [c].[Id]
+INNER JOIN [AspNetUsers] AS [a] ON [t0].[RaisedByUserId] = [a].[Id]
+LEFT JOIN [AspNetUsers] AS [a0] ON [t0].[AssignedAgentId] = [a0].[Id]
+ORDER BY [t0].[CreatedAt] DESC
+2026-04-10 13:39:40.956 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.Common.PagedResult`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 13:39:41.145 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.GetAll (HelpDesk.API) in 2552.6909ms
+2026-04-10 13:39:41.198 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.GetAll (HelpDesk.API)'
+2026-04-10 13:39:41.246 +05:30 [INF] HTTP POST /api/tickets/GetAllTicket responded 200 in 2844.6535 ms
+2026-04-10 13:39:41.278 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7119/api/tickets/GetAllTicket?page=1&pageSize=10 - 200 null application/json; charset=utf-8 2992.0289ms
+2026-04-10 13:39:58.279 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7119/api/tickets/getByIdTicket?ticketId=c6b4c518-0e65-4abd-a2b4-9df546f587fa - null null
+2026-04-10 13:39:58.284 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7119/api/users/agents/active - null null
+2026-04-10 13:39:58.328 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:58.376 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:58.421 +05:30 [INF] HTTP OPTIONS /api/tickets/getByIdTicket responded 204 in 92.6149 ms
+2026-04-10 13:39:58.475 +05:30 [INF] HTTP OPTIONS /api/users/agents/active responded 204 in 99.4836 ms
+2026-04-10 13:39:58.521 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7119/api/tickets/getByIdTicket?ticketId=c6b4c518-0e65-4abd-a2b4-9df546f587fa - 204 null null 241.7844ms
+2026-04-10 13:39:58.585 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7119/api/users/agents/active - 204 null null 300.7044ms
+2026-04-10 13:39:58.532 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/tickets/getByIdTicket?ticketId=c6b4c518-0e65-4abd-a2b4-9df546f587fa - null null
+2026-04-10 13:39:58.594 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/users/agents/active - null null
+2026-04-10 13:39:59.144 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:59.195 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:39:59.246 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-10 13:39:59.292 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.GetActiveAgents (HelpDesk.API)'
+2026-04-10 13:39:59.348 +05:30 [INF] Route matched with {action = "GetById", controller = "Tickets"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(System.Guid) on controller HelpDesk.API.Controllers.TicketsController (HelpDesk.API).
+2026-04-10 13:39:59.389 +05:30 [INF] Route matched with {action = "GetActiveAgents", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetActiveAgents() on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-10 13:39:59.623 +05:30 [INF] Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Role] = 2 AND [a].[IsActive] = CAST(1 AS bit)
+ORDER BY [a].[FullName]
+2026-04-10 13:39:59.716 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.Collections.Generic.List`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:39:59.767 +05:30 [INF] Executed DbCommand (72ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t0].[Id], [t0].[AssignedAgentId], [t0].[CategoryId], [t0].[CreatedAt], [t0].[CreatedBy], [t0].[Description], [t0].[LastModifiedAt], [t0].[LastModifiedBy], [t0].[Priority], [t0].[RaisedByUserId], [t0].[Status], [t0].[Title], [t0].[Id0], [t0].[CreatedAt0], [t0].[CreatedBy0], [t0].[IsActive], [t0].[LastModifiedAt0], [t0].[LastModifiedBy0], [t0].[Name], [t0].[Id1], [t0].[AccessFailedCount], [t0].[ConcurrencyStamp], [t0].[CreatedAt1], [t0].[CreatedBy1], [t0].[Email], [t0].[EmailConfirmed], [t0].[FullName], [t0].[IsActive0], [t0].[LastModifiedAt1], [t0].[LastModifiedBy1], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[Role], [t0].[SecurityStamp], [t0].[TwoFactorEnabled], [t0].[UserName], [t0].[Id2], [t0].[AccessFailedCount0], [t0].[ConcurrencyStamp0], [t0].[CreatedAt2], [t0].[CreatedBy2], [t0].[Email0], [t0].[EmailConfirmed0], [t0].[FullName0], [t0].[IsActive1], [t0].[LastModifiedAt2], [t0].[LastModifiedBy2], [t0].[LockoutEnabled0], [t0].[LockoutEnd0], [t0].[NormalizedEmail0], [t0].[NormalizedUserName0], [t0].[PasswordHash0], [t0].[PhoneNumber0], [t0].[PhoneNumberConfirmed0], [t0].[Role0], [t0].[SecurityStamp0], [t0].[TwoFactorEnabled0], [t0].[UserName0], [t1].[Id], [t1].[Content], [t1].[CreatedAt], [t1].[CreatedBy], [t1].[LastModifiedAt], [t1].[LastModifiedBy], [t1].[TicketId], [t1].[UserId], [t1].[Id0], [t1].[AccessFailedCount], [t1].[ConcurrencyStamp], [t1].[CreatedAt0], [t1].[CreatedBy0], [t1].[Email], [t1].[EmailConfirmed], [t1].[FullName], [t1].[IsActive], [t1].[LastModifiedAt0], [t1].[LastModifiedBy0], [t1].[LockoutEnabled], [t1].[LockoutEnd], [t1].[NormalizedEmail], [t1].[NormalizedUserName], [t1].[PasswordHash], [t1].[PhoneNumber], [t1].[PhoneNumberConfirmed], [t1].[Role], [t1].[SecurityStamp], [t1].[TwoFactorEnabled], [t1].[UserName]
+FROM (
+    SELECT TOP(1) [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title], [c].[Id] AS [Id0], [c].[CreatedAt] AS [CreatedAt0], [c].[CreatedBy] AS [CreatedBy0], [c].[IsActive], [c].[LastModifiedAt] AS [LastModifiedAt0], [c].[LastModifiedBy] AS [LastModifiedBy0], [c].[Name], [a].[Id] AS [Id1], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt] AS [CreatedAt1], [a].[CreatedBy] AS [CreatedBy1], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive] AS [IsActive0], [a].[LastModifiedAt] AS [LastModifiedAt1], [a].[LastModifiedBy] AS [LastModifiedBy1], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a0].[Id] AS [Id2], [a0].[AccessFailedCount] AS [AccessFailedCount0], [a0].[ConcurrencyStamp] AS [ConcurrencyStamp0], [a0].[CreatedAt] AS [CreatedAt2], [a0].[CreatedBy] AS [CreatedBy2], [a0].[Email] AS [Email0], [a0].[EmailConfirmed] AS [EmailConfirmed0], [a0].[FullName] AS [FullName0], [a0].[IsActive] AS [IsActive1], [a0].[LastModifiedAt] AS [LastModifiedAt2], [a0].[LastModifiedBy] AS [LastModifiedBy2], [a0].[LockoutEnabled] AS [LockoutEnabled0], [a0].[LockoutEnd] AS [LockoutEnd0], [a0].[NormalizedEmail] AS [NormalizedEmail0], [a0].[NormalizedUserName] AS [NormalizedUserName0], [a0].[PasswordHash] AS [PasswordHash0], [a0].[PhoneNumber] AS [PhoneNumber0], [a0].[PhoneNumberConfirmed] AS [PhoneNumberConfirmed0], [a0].[Role] AS [Role0], [a0].[SecurityStamp] AS [SecurityStamp0], [a0].[TwoFactorEnabled] AS [TwoFactorEnabled0], [a0].[UserName] AS [UserName0]
+    FROM [Tickets] AS [t]
+    INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+    INNER JOIN [AspNetUsers] AS [a] ON [t].[RaisedByUserId] = [a].[Id]
+    LEFT JOIN [AspNetUsers] AS [a0] ON [t].[AssignedAgentId] = [a0].[Id]
+    WHERE [t].[Id] = @__id_0
+) AS [t0]
+LEFT JOIN (
+    SELECT [c0].[Id], [c0].[Content], [c0].[CreatedAt], [c0].[CreatedBy], [c0].[LastModifiedAt], [c0].[LastModifiedBy], [c0].[TicketId], [c0].[UserId], [a1].[Id] AS [Id0], [a1].[AccessFailedCount], [a1].[ConcurrencyStamp], [a1].[CreatedAt] AS [CreatedAt0], [a1].[CreatedBy] AS [CreatedBy0], [a1].[Email], [a1].[EmailConfirmed], [a1].[FullName], [a1].[IsActive], [a1].[LastModifiedAt] AS [LastModifiedAt0], [a1].[LastModifiedBy] AS [LastModifiedBy0], [a1].[LockoutEnabled], [a1].[LockoutEnd], [a1].[NormalizedEmail], [a1].[NormalizedUserName], [a1].[PasswordHash], [a1].[PhoneNumber], [a1].[PhoneNumberConfirmed], [a1].[Role], [a1].[SecurityStamp], [a1].[TwoFactorEnabled], [a1].[UserName]
+    FROM [Comments] AS [c0]
+    INNER JOIN [AspNetUsers] AS [a1] ON [c0].[UserId] = [a1].[Id]
+) AS [t1] ON [t0].[Id] = [t1].[TicketId]
+ORDER BY [t0].[Id], [t0].[Id0], [t0].[Id1], [t0].[Id2], [t1].[Id]
+2026-04-10 13:39:59.801 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.GetActiveAgents (HelpDesk.API) in 276.0359ms
+2026-04-10 13:39:59.885 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.TicketDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 13:39:59.900 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.GetActiveAgents (HelpDesk.API)'
+2026-04-10 13:39:59.965 +05:30 [INF] Executed action HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API) in 521.2292ms
+2026-04-10 13:40:00.210 +05:30 [INF] HTTP GET /api/users/agents/active responded 200 in 1014.5347 ms
+2026-04-10 13:40:00.433 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.TicketsController.GetById (HelpDesk.API)'
+2026-04-10 13:40:00.473 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/users/agents/active - 200 null application/json; charset=utf-8 1880.9797ms
+2026-04-10 13:40:00.522 +05:30 [INF] HTTP GET /api/tickets/getByIdTicket responded 200 in 1377.9265 ms
+2026-04-10 13:40:00.609 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/tickets/getByIdTicket?ticketId=c6b4c518-0e65-4abd-a2b4-9df546f587fa - 200 null application/json; charset=utf-8 2078.5184ms
+2026-04-10 13:40:16.832 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7119/api/users/getAll - null null
+2026-04-10 13:40:16.873 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:40:16.916 +05:30 [INF] HTTP OPTIONS /api/users/getAll responded 204 in 42.7845 ms
+2026-04-10 13:40:16.952 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7119/api/users/getAll - 204 null null 121.6209ms
+2026-04-10 13:40:16.964 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/users/getAll - null null
+2026-04-10 13:40:17.355 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:40:17.401 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API)'
+2026-04-10 13:40:17.458 +05:30 [INF] Route matched with {action = "GetAll", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller HelpDesk.API.Controllers.UsersController (HelpDesk.API).
+2026-04-10 13:40:17.550 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[CreatedAt], [a].[CreatedBy], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LastModifiedAt], [a].[LastModifiedBy], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[Role], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+2026-04-10 13:40:17.613 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.Collections.Generic.List`1[[HelpDesk.Application.DTOs.UserDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:40:17.661 +05:30 [INF] Executed action HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API) in 150.388ms
+2026-04-10 13:40:17.708 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.UsersController.GetAll (HelpDesk.API)'
+2026-04-10 13:40:17.745 +05:30 [INF] HTTP GET /api/users/getAll responded 200 in 389.7670 ms
+2026-04-10 13:40:17.771 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/users/getAll - 200 null application/json; charset=utf-8 808.3709ms
+2026-04-10 13:40:46.328 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7119/api/categories - null null
+2026-04-10 13:40:46.428 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:40:46.496 +05:30 [INF] HTTP OPTIONS /api/categories responded 204 in 68.4817 ms
+2026-04-10 13:40:46.541 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7119/api/categories - 204 null null 214.3589ms
+2026-04-10 13:40:46.564 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/categories - null null
+2026-04-10 13:40:46.691 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:40:46.736 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.CategoriesController.GetAll (HelpDesk.API)'
+2026-04-10 13:40:46.793 +05:30 [INF] Route matched with {action = "GetAll", controller = "Categories"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller HelpDesk.API.Controllers.CategoriesController (HelpDesk.API).
+2026-04-10 13:40:47.247 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CreatedAt], [c].[CreatedBy], [c].[IsActive], [c].[LastModifiedAt], [c].[LastModifiedBy], [c].[Name]
+FROM [Categories] AS [c]
+2026-04-10 13:40:47.356 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[System.Collections.Generic.List`1[[HelpDesk.Application.DTOs.CategoryDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:40:47.430 +05:30 [INF] Executed action HelpDesk.API.Controllers.CategoriesController.GetAll (HelpDesk.API) in 231.7299ms
+2026-04-10 13:40:47.492 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.CategoriesController.GetAll (HelpDesk.API)'
+2026-04-10 13:40:47.546 +05:30 [INF] HTTP GET /api/categories responded 200 in 855.0928 ms
+2026-04-10 13:40:47.580 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/categories - 200 null application/json; charset=utf-8 1020.3718ms
+2026-04-10 13:40:54.963 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7119/api/dashboard - null null
+2026-04-10 13:40:55.074 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:40:55.114 +05:30 [INF] HTTP OPTIONS /api/dashboard responded 204 in 40.2468 ms
+2026-04-10 13:40:55.144 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7119/api/dashboard - 204 null null 185.7202ms
+2026-04-10 13:40:55.153 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/dashboard - null null
+2026-04-10 13:40:55.229 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:40:55.302 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API)'
+2026-04-10 13:40:55.337 +05:30 [INF] Route matched with {action = "GetDashboard", controller = "Dashboard"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDashboard() on controller HelpDesk.API.Controllers.DashboardController (HelpDesk.API).
+2026-04-10 13:40:55.390 +05:30 [INF] Admin requesting dashboard data.
+2026-04-10 13:40:55.431 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title]
+FROM [Tickets] AS [t]
+2026-04-10 13:40:55.498 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:40:55.559 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:40:55.611 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:40:55.665 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:40:55.721 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:40:55.787 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:40:55.849 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:40:55.905 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:40:55.970 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:40:56.425 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:40:56.510 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__p_2='?' (DbType = Int32), @__now_Year_0='?' (DbType = Int32), @__now_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_2) [t].[AssignedAgentId] AS [AgentId], COUNT(*) AS [Count]
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = N'Resolved' AND [t].[AssignedAgentId] IS NOT NULL AND [t].[LastModifiedAt] IS NOT NULL AND DATEPART(year, [t].[LastModifiedAt]) = @__now_Year_0 AND DATEPART(month, [t].[LastModifiedAt]) = @__now_Month_1
+GROUP BY [t].[AssignedAgentId]
+ORDER BY COUNT(*) DESC
+2026-04-10 13:40:56.583 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__agentIds_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[FullName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] IN (
+    SELECT [a0].[value]
+    FROM OPENJSON(@__agentIds_0) WITH ([value] uniqueidentifier '$') AS [a0]
+)
+2026-04-10 13:40:56.639 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__now_Year_0='?' (DbType = Int32), @__now_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE DATEPART(year, [t].[CreatedAt]) = @__now_Year_0 AND DATEPART(month, [t].[CreatedAt]) = @__now_Month_1
+2026-04-10 13:40:56.710 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__last_Year_0='?' (DbType = Int32), @__last_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE DATEPART(year, [t].[CreatedAt]) = @__last_Year_0 AND DATEPART(month, [t].[CreatedAt]) = @__last_Month_1
+2026-04-10 13:40:56.766 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.DashboardDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 13:40:56.817 +05:30 [INF] Executed action HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API) in 1430.7996ms
+2026-04-10 13:40:56.858 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API)'
+2026-04-10 13:40:56.905 +05:30 [INF] HTTP GET /api/dashboard responded 200 in 1675.6169 ms
+2026-04-10 13:40:56.941 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/dashboard - 200 null application/json; charset=utf-8 1788.4449ms
+2026-04-10 13:43:25.332 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7119/api/dashboard - null null
+2026-04-10 13:43:25.366 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:43:25.379 +05:30 [INF] HTTP OPTIONS /api/dashboard responded 204 in 13.6367 ms
+2026-04-10 13:43:25.390 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7119/api/dashboard - 204 null null 58.4524ms
+2026-04-10 13:43:25.394 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7119/api/dashboard - null null
+2026-04-10 13:43:25.427 +05:30 [INF] CORS policy execution successful.
+2026-04-10 13:43:25.442 +05:30 [INF] Executing endpoint 'HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API)'
+2026-04-10 13:43:25.458 +05:30 [INF] Route matched with {action = "GetDashboard", controller = "Dashboard"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDashboard() on controller HelpDesk.API.Controllers.DashboardController (HelpDesk.API).
+2026-04-10 13:43:25.482 +05:30 [INF] Admin requesting dashboard data.
+2026-04-10 13:43:25.507 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[AssignedAgentId], [t].[CategoryId], [t].[CreatedAt], [t].[CreatedBy], [t].[Description], [t].[LastModifiedAt], [t].[LastModifiedBy], [t].[Priority], [t].[RaisedByUserId], [t].[Status], [t].[Title]
+FROM [Tickets] AS [t]
+2026-04-10 13:43:25.534 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:43:25.721 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:43:25.744 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:43:25.765 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:43:25.786 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:43:25.808 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__status_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = @__status_0
+2026-04-10 13:43:25.830 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:43:25.851 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:43:25.872 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:43:25.893 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__priority_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE [t].[Priority] = @__priority_0
+2026-04-10 13:43:25.924 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__p_2='?' (DbType = Int32), @__now_Year_0='?' (DbType = Int32), @__now_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_2) [t].[AssignedAgentId] AS [AgentId], COUNT(*) AS [Count]
+FROM [Tickets] AS [t]
+WHERE [t].[Status] = N'Resolved' AND [t].[AssignedAgentId] IS NOT NULL AND [t].[LastModifiedAt] IS NOT NULL AND DATEPART(year, [t].[LastModifiedAt]) = @__now_Year_0 AND DATEPART(month, [t].[LastModifiedAt]) = @__now_Month_1
+GROUP BY [t].[AssignedAgentId]
+ORDER BY COUNT(*) DESC
+2026-04-10 13:43:25.953 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__agentIds_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[FullName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] IN (
+    SELECT [a0].[value]
+    FROM OPENJSON(@__agentIds_0) WITH ([value] uniqueidentifier '$') AS [a0]
+)
+2026-04-10 13:43:25.980 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__now_Year_0='?' (DbType = Int32), @__now_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE DATEPART(year, [t].[CreatedAt]) = @__now_Year_0 AND DATEPART(month, [t].[CreatedAt]) = @__now_Month_1
+2026-04-10 13:43:26.004 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__last_Year_0='?' (DbType = Int32), @__last_Month_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Tickets] AS [t]
+WHERE DATEPART(year, [t].[CreatedAt]) = @__last_Year_0 AND DATEPART(month, [t].[CreatedAt]) = @__last_Month_1
+2026-04-10 13:43:26.026 +05:30 [INF] Executing OkObjectResult, writing value of type 'HelpDesk.Application.Common.BaseResponse`1[[HelpDesk.Application.DTOs.DashboardDto, HelpDesk.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 13:43:26.046 +05:30 [INF] Executed action HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API) in 568.6654ms
+2026-04-10 13:43:26.061 +05:30 [INF] Executed endpoint 'HelpDesk.API.Controllers.DashboardController.GetDashboard (HelpDesk.API)'
+2026-04-10 13:43:26.079 +05:30 [INF] HTTP GET /api/dashboard responded 200 in 651.9642 ms
+2026-04-10 13:43:26.090 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7119/api/dashboard - 200 null application/json; charset=utf-8 695.7086ms
+2026-04-10 15:04:12.339 +05:30 [FTL] An error occurred during migration/seeding.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): A connection was successfully established with the server, but then an error occurred during the login process. (provider: Shared Memory Provider, error: 0 - No process is on the other end of the pipe.)
+ ---> System.ComponentModel.Win32Exception (233): No process is on the other end of the pipe.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ThrowExceptionAndWarning(Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.SNIWritePacket(PacketHandle packet, UInt32& sniError, Boolean canAccumulate, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.WriteSni(Boolean canAccumulate)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.WritePacket(Byte flushMode, Boolean canAccumulate)
+   at Microsoft.Data.SqlClient.TdsParser.TdsLogin(SqlLogin rec, FeatureExtension requestedFeatures, SessionData recoverySessionData, FederatedAuthenticationFeatureExtensionData fedAuthFeatureExtensionData, SqlConnectionEncryptOption encrypt)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.Login(ServerInfo server, TimeoutTimer timeout, String newPassword, SecureString newSecurePassword, SqlConnectionEncryptOption encrypt)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerDatabaseCreator.<>c__DisplayClass20_0.<<ExistsAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerDatabaseCreator.<>c__DisplayClass20_0.<<ExistsAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerDatabaseCreator.<>c__DisplayClass20_0.<<ExistsAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:eaaf3634-b054-4225-938d-1fbefd8c1351
+Error Number:233,State:0,Class:20
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.HistoryRepository.ExistsAsync(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API\Program.cs:line 72
+2026-04-10 15:04:12.485 +05:30 [FTL] HelpDesk API terminated unexpectedly.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): A connection was successfully established with the server, but then an error occurred during the login process. (provider: Shared Memory Provider, error: 0 - No process is on the other end of the pipe.)
+ ---> System.ComponentModel.Win32Exception (233): No process is on the other end of the pipe.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.ThrowExceptionAndWarning(Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.SNIWritePacket(PacketHandle packet, UInt32& sniError, Boolean canAccumulate, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.WriteSni(Boolean canAccumulate)
+   at Microsoft.Data.SqlClient.TdsParserStateObject.WritePacket(Byte flushMode, Boolean canAccumulate)
+   at Microsoft.Data.SqlClient.TdsParser.TdsLogin(SqlLogin rec, FeatureExtension requestedFeatures, SessionData recoverySessionData, FederatedAuthenticationFeatureExtensionData fedAuthFeatureExtensionData, SqlConnectionEncryptOption encrypt)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.Login(ServerInfo server, TimeoutTimer timeout, String newPassword, SecureString newSecurePassword, SqlConnectionEncryptOption encrypt)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerDatabaseCreator.<>c__DisplayClass20_0.<<ExistsAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerDatabaseCreator.<>c__DisplayClass20_0.<<ExistsAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerDatabaseCreator.<>c__DisplayClass20_0.<<ExistsAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:eaaf3634-b054-4225-938d-1fbefd8c1351
+Error Number:233,State:0,Class:20
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.HistoryRepository.ExistsAsync(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in C:\Users\Vivek\Desktop\Project\HelpDesk Ticket Managemet System\HelpDesk.API\Program.cs:line 72

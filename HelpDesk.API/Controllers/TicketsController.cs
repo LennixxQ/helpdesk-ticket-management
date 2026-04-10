@@ -35,7 +35,7 @@ namespace HelpDesk.API.Controllers
         [HttpPost("GetAllTicket")]
         public async Task<IActionResult> GetAll([FromQuery] PaginationDto dto)
         {
-            var response = await _ticketService.GetAllAsync(dto.page, dto.pageSize, dto.status, dto.priority, dto.categoryId, dto.agentId, CurrentUserId, CurrentUserRole);
+            var response = await _ticketService.GetAllAsync(dto, CurrentUserId, CurrentUserRole);
             return Ok(response);
         }
 
