@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, computed, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/paginator';
 import { CategoryModel } from '../../../core/models/category.model';
 import { AdminService } from '../../../core/services/admin.service';
 
@@ -24,6 +25,7 @@ import { AdminService } from '../../../core/services/admin.service';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    MatPaginatorModule,
   ],
   templateUrl: './category-management.html',
   styleUrl: './category-management.scss'
@@ -35,6 +37,21 @@ export class CategoryManagementComponent implements OnInit {
   isLoading = signal(true);
   isSaving = signal(false);
   categories = signal<CategoryModel[]>([]);
+
+  // ── Pagination ─────────────────────────────────────────────
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  pageIndex = signal(0);
+  pageSize = signal(8);
+
+  pagedCategories = computed(() => {
+    const start = this.pageIndex() * this.pageSize();
+    return this.categories().slice(start, start + this.pageSize());
+  });
+
+  onPageChange(event: PageEvent): void {
+    this.pageIndex.set(event.pageIndex);
+    this.pageSize.set(event.pageSize);
+  }
 
   nameControl = new FormControl('', [
     Validators.required,

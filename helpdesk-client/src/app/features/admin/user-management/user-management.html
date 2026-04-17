@@ -115,7 +115,7 @@
     <!-- Users Table -->
     @if (!isLoading()) {
     <div class="table-card">
-        <table mat-table [dataSource]="dataSource" matSort class="users-table">
+        <table mat-table [dataSource]="pagedUsers" matSort class="users-table">
 
             <!-- Avatar -->
             <ng-container matColumnDef="avatar">
@@ -198,6 +198,17 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="user-row"></tr>
 
         </table>
+
+        <!-- Paginator -->
+        <mat-paginator
+            [length]="users().length"
+            [pageSize]="pageSize()"
+            [pageIndex]="pageIndex()"
+            [pageSizeOptions]="[5, 10, 25, 50]"
+            (page)="onPageChange($event)"
+            showFirstLastButtons
+            class="table-paginator">
+        </mat-paginator>
     </div>
     }
 

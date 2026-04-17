@@ -13,7 +13,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSortModule, MatSort } from '@angular/material/sort';
-import { ViewChild } from '@angular/core';
+import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/paginator';
+import { ViewChild, HostListener } from '@angular/core';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { UserModel, UserRole } from '../../../core/models/user.model';
 import { AdminService } from '../../../core/services/admin.service';
@@ -36,7 +37,7 @@ import { AdminService } from '../../../core/services/admin.service';
     MatTooltipModule,
     MatChipsModule,
     MatSortModule,
-    ConfirmationDialogComponent,
+    MatPaginatorModule,
   ],
   templateUrl: './user-management.html',
   styleUrl: './user-management.scss'
@@ -56,7 +57,30 @@ export class UserManagementComponent implements OnInit {
   users = signal<UserModel[]>([]);
   dataSource = new MatTableDataSource<UserModel>();
 
-  readonly displayedColumns = ['avatar', 'name', 'email', 'role', 'status', 'createdAt', 'actions'];
+  isMobile = signal(window.innerWidth < 768);
+
+  @HostListener('window:resize')
+  onResize() { this.isMobile.set(window.innerWidth < 768); }
+
+  get displayedColumns(): string[] {
+    return this.isMobile()
+      ? ['avatar', 'name', 'role', 'actions']
+      : ['avatar', 'name', 'email', 'role', 'status', 'createdAt', 'actions'];
+  }
+
+  // ── Pagination ─────────────────────────────────────────────
+  pageIndex = signal(0);
+  pageSize = signal(10);
+
+  get pagedUsers(): UserModel[] {
+    const start = this.pageIndex() * this.pageSize();
+    return this.users().slice(start, start + this.pageSize());
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageIndex.set(event.pageIndex);
+    this.pageSize.set(event.pageSize);
+  }
 
   readonly roles: UserRole[] = ['Admin', 'Agent', 'User'];
 

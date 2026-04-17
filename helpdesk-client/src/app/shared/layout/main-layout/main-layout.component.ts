@@ -15,8 +15,8 @@ import { AuthService } from '../../../core/services/auth.service';
 export class MainLayoutComponent {
   private auth = inject(AuthService);
 
-  isSidebarCollapsed = signal(false);
   isMobile = signal(window.innerWidth < 768);
+  isSidebarCollapsed = signal(window.innerWidth < 768);
 
   @HostListener('window:resize')
   onResize() {

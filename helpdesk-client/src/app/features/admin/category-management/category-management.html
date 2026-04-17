@@ -86,7 +86,7 @@
             }
 
             <div class="categories-grid">
-                @for (cat of categories(); track cat.id) {
+                @for (cat of pagedCategories(); track cat.id) {
                 <div class="category-item" [class.inactive]="!cat.isActive">
 
                     <div class="cat-left">
@@ -112,6 +112,17 @@
                 }
             </div>
             }
+
+            <!-- Paginator -->
+            <mat-paginator
+                [length]="categories().length"
+                [pageSize]="pageSize()"
+                [pageIndex]="pageIndex()"
+                [pageSizeOptions]="[5, 8, 15, 25]"
+                (page)="onPageChange($event)"
+                showFirstLastButtons
+                class="cat-paginator">
+            </mat-paginator>
         </div>
 
     </div>

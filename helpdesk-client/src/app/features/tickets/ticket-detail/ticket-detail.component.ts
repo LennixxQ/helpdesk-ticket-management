@@ -41,7 +41,6 @@ import { TicketService } from '../../../core/services/ticket.service';
     MatDialogModule,
     StatusBadgeComponent,
     PriorityBadgeComponent,
-    ConfirmationDialogComponent,
   ],
   templateUrl: './ticket-detail.html',
   styleUrl: './ticket-detail.scss'

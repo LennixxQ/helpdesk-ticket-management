@@ -1,5 +1,5 @@
 import {
-  Component, inject, signal, OnInit, computed, ViewChild
+  Component, inject, signal, OnInit, computed, ViewChild, HostListener
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -66,7 +66,13 @@ export class TicketListComponent implements OnInit {
   readonly statuses: TicketStatus[] = ['Open', 'InProgress', 'OnHold', 'Resolved', 'Closed', 'Reopened'];
   readonly priorities: TicketPriority[] = ['Low', 'Medium', 'High', 'Critical'];
 
+  isMobile = signal(window.innerWidth < 768);
+
+  @HostListener('window:resize')
+  onResize() { this.isMobile.set(window.innerWidth < 768); }
+
   readonly displayedColumns = computed(() => {
+    if (this.isMobile()) return ['title', 'status', 'actions'];
     const base = ['id', 'title', 'category', 'priority', 'status', 'createdAt', 'actions'];
     if (this.auth.isAdmin()) return ['id', 'title', 'category', 'priority', 'status', 'assignedAgent', 'createdAt', 'actions'];
     return base;

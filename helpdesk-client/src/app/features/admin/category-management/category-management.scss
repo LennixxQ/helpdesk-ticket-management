@@ -114,6 +114,10 @@
     border: 1px solid rgba(123, 158, 229, 0.08);
     position: sticky;
     top: calc(var(--navbar-height) + 28px);
+
+    @media (max-width: 900px) {
+        position: static;
+    }
 }
 
 .form-title {
@@ -301,4 +305,12 @@
             background: #FCE4EC !important;
         }
     }
+}
+
+// ── Paginator ────────────────────────────────────────────────
+mat-paginator.cat-paginator {
+    border-top: 1px solid rgba(123, 158, 229, 0.1);
+    background: var(--color-primary-light) !important;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    margin-top: 8px;
 }
