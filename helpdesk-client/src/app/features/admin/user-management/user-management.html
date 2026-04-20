@@ -70,7 +70,7 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Role</mat-label>
-                    <mat-select formControlName="role">
+                    <mat-select formControlName="role" panelClass="role-select-panel" disableRipple>
                         @for (role of roles; track role) {
                         <mat-option [value]="role">{{ role }}</mat-option>
                         }
@@ -115,7 +115,7 @@
     <!-- Users Table -->
     @if (!isLoading()) {
     <div class="table-card">
-        <table mat-table [dataSource]="pagedUsers" matSort class="users-table">
+        <table mat-table [dataSource]="pagedUsers()" matSort class="users-table">
 
             <!-- Avatar -->
             <ng-container matColumnDef="avatar">
@@ -153,12 +153,15 @@
             <ng-container matColumnDef="role">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
                 <td mat-cell *matCellDef="let user">
-                    <mat-select [value]="user.role" class="role-select" [style.color]="roleColor(user.role)"
-                        (selectionChange)="updateRole(user, $event.value)">
-                        @for (role of roles; track role) {
-                        <mat-option [value]="role">{{ role }}</mat-option>
-                        }
-                    </mat-select>
+                    <div class="role-badge-wrapper" [style.background]="roleBg(user.role)"
+                        [style.border-color]="roleColor(user.role) + '40'">
+                        <mat-select [value]="user.role" class="role-select" panelClass="role-select-panel" disableRipple
+                            [style.color]="roleColor(user.role)" (selectionChange)="updateRole(user, $event.value)">
+                            @for (role of roles; track role) {
+                            <mat-option [value]="role">{{ role }}</mat-option>
+                            }
+                        </mat-select>
+                    </div>
                 </td>
             </ng-container>
 
@@ -200,13 +203,8 @@
         </table>
 
         <!-- Paginator -->
-        <mat-paginator
-            [length]="users().length"
-            [pageSize]="pageSize()"
-            [pageIndex]="pageIndex()"
-            [pageSizeOptions]="[5, 10, 25, 50]"
-            (page)="onPageChange($event)"
-            showFirstLastButtons
+        <mat-paginator [length]="filteredUsers().length" [pageSize]="pageSize()" [pageIndex]="pageIndex()"
+            [pageSizeOptions]="[5, 10, 25, 50]" (page)="onPageChange($event)" showFirstLastButtons
             class="table-paginator">
         </mat-paginator>
     </div>

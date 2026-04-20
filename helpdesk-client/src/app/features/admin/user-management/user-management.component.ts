@@ -55,7 +55,7 @@ export class UserManagementComponent implements OnInit {
   isSaving = signal(false);
   showForm = signal(false);
   users = signal<UserModel[]>([]);
-  dataSource = new MatTableDataSource<UserModel>();
+  searchQuery = signal('');
 
   isMobile = signal(window.innerWidth < 768);
 
@@ -68,14 +68,25 @@ export class UserManagementComponent implements OnInit {
       : ['avatar', 'name', 'email', 'role', 'status', 'createdAt', 'actions'];
   }
 
-  // ── Pagination ─────────────────────────────────────────────
+  // ── Search & Pagination ───────────────────────────────────
   pageIndex = signal(0);
   pageSize = signal(10);
 
-  get pagedUsers(): UserModel[] {
+  filteredUsers = computed(() => {
+    const query = this.searchQuery().toLowerCase().trim();
+    if (!query) return this.users();
+
+    return this.users().filter(u =>
+      u.fullName.toLowerCase().includes(query) ||
+      u.email.toLowerCase().includes(query) ||
+      u.role.toLowerCase().includes(query)
+    );
+  });
+
+  pagedUsers = computed(() => {
     const start = this.pageIndex() * this.pageSize();
-    return this.users().slice(start, start + this.pageSize());
-  }
+    return this.filteredUsers().slice(start, start + this.pageSize());
+  });
 
   onPageChange(event: PageEvent): void {
     this.pageIndex.set(event.pageIndex);
@@ -116,7 +127,6 @@ export class UserManagementComponent implements OnInit {
       next: (res) => {
         if (res.success) {
           this.users.set(res.data);
-          this.dataSource.data = res.data;
         }
         this.isLoading.set(false);
       },
@@ -157,7 +167,6 @@ export class UserManagementComponent implements OnInit {
           this.users.update(list =>
             list.map(u => u.id === user.id ? { ...u, role: newRole } : u)
           );
-          this.dataSource.data = this.users();
           this.showSnack(`Role updated to ${newRole}`, 'success');
         }
       }
@@ -185,7 +194,6 @@ export class UserManagementComponent implements OnInit {
             this.users.update(list =>
               list.map(u => u.id === user.id ? { ...u, isActive: false } : u)
             );
-            this.dataSource.data = this.users();
             this.showSnack('User deactivated', 'success');
           }
         }
@@ -196,7 +204,8 @@ export class UserManagementComponent implements OnInit {
   // ── Helpers ────────────────────────────────────────────────
   applyFilter(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = value.trim().toLowerCase();
+    this.searchQuery.set(value);
+    this.pageIndex.set(0); // Reset to first page on search
   }
 
   roleColor(role: UserRole): string {

@@ -273,13 +273,35 @@
     color: var(--color-text-secondary);
 }
 
+.role-badge-wrapper {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-full);
+    border: 1.5px solid transparent;
+    padding: 3px 4px 3px 12px;
+    transition: all var(--transition-fast);
+
+    &:hover {
+        box-shadow: var(--shadow-sm);
+    }
+}
+
 .role-select {
     font-size: 13px !important;
-    font-weight: 600 !important;
-    border: none !important;
+    font-weight: 700 !important;
+    min-width: 72px;
 
     ::ng-deep .mat-mdc-select-trigger {
         padding: 0;
+        height: auto;
+    }
+
+    ::ng-deep .mat-mdc-select-value {
+        font-weight: 700;
+    }
+
+    ::ng-deep .mat-mdc-select-arrow {
+        opacity: 0.6;
     }
 
     ::ng-deep .mdc-line-ripple {

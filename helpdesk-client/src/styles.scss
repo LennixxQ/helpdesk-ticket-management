@@ -142,6 +142,57 @@ a {
     box-shadow: var(--shadow-lg) !important;
 }
 
+// ── Role Select Panel Styles ──────────────────────────────────
+.role-select-panel.mat-mdc-select-panel {
+    background: #fff !important;
+    border-radius: var(--radius-md) !important;
+    padding: 8px !important;
+    box-shadow: 0 10px 30px rgba(123, 158, 229, 0.25) !important;
+    border: 1px solid rgba(123, 158, 229, 0.15);
+    margin-top: 4px;
+    min-width: 140px !important;
+
+    .mat-mdc-option {
+        border-radius: var(--radius-sm) !important;
+        margin-bottom: 2px;
+        transition: all var(--transition-fast);
+        min-height: 44px !important;
+        padding: 0 12px !important;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .mdc-list-item__primary-text {
+            font-size: 13.5px !important;
+            font-weight: 500 !important;
+            color: var(--color-text-secondary) !important;
+        }
+
+        &:hover:not(.mdc-list-item--disabled) {
+            background-color: var(--color-primary-light) !important;
+
+            .mdc-list-item__primary-text {
+                color: var(--color-primary) !important;
+                font-weight: 600 !important;
+            }
+        }
+
+        &.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+            background-color: var(--color-primary) !important;
+
+            .mdc-list-item__primary-text {
+                color: #fff !important;
+                font-weight: 700 !important;
+            }
+
+            .mat-pseudo-checkbox {
+                display: none;
+            }
+        }
+    }
+}
+
 // ── Snackbar Styles ───────────────────────────────────────────
 .snack-success .mdc-snackbar__surface {
     background: #D6F5E8 !important;
