@@ -5,6 +5,7 @@ obj/
 *.suo
 .vs/
 appsettings.Development.json
+Logs/
 
 # Angular
 node_modules/
