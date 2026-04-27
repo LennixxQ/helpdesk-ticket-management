@@ -39,9 +39,9 @@ namespace HelpDesk.API.Controllers
 
         [HttpGet("getById")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetById([FromQuery] Guid userId)
+        public async Task<IActionResult> GetById([FromQuery] UserIdRequest request)
         {
-            var user = await _userService.GetByIdAsync(userId);
+            var user = await _userService.GetByIdAsync(request.userId);
             return user.Success ? Ok(user) : NotFound(user);
         }
 
@@ -71,5 +71,6 @@ namespace HelpDesk.API.Controllers
         }
 
         public record UserIdDto(Guid UserId);
+        public record UserIdRequest(Guid userId);
     }
 }
