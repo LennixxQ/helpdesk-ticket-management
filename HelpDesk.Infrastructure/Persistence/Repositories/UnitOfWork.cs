@@ -11,6 +11,14 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
         public ICategoryRepository Categories { get; }
         public IAuditLogRepository AuditLogs { get; }
         public ICommentRepository Comments { get; }
+        IDepartmentRepository Departments { get; }
+        ISlaRepository Sla { get; }
+        IKbArticleRepository KbArticles { get; }
+        IKbArticleVersionRepository KbArticleVersions { get; }
+        ICsatRepository Csat { get; }
+        IRecurringTemplateRepository RecurringTemplates { get; }
+        ISystemSettingRepository SystemSettings { get; }
+        INotificationPreferenceRepository NotificationPreferences { get; }
 
         public UnitOfWork(AppDbContext context)
         {
@@ -20,6 +28,14 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
             Categories = new CategoryRepository(context);
             AuditLogs = new AuditLogRepository(context);
             Comments = new CommentRepository(context);
+            Departments = new DepartmentRepository(context);
+            Sla = new SlaRepository(context);
+            KbArticles = new KbArticleRepository(context);
+            KbArticleVersions = new KbArticleVersionRepository(context);
+            Csat = new CsatRepository(context);
+            RecurringTemplates = new RecurringTemplateRepository(context);
+            SystemSettings = new SystemSettingRepository(context);
+            NotificationPreferences = new NotificationPreferenceRepository(context);
         }
 
         public async Task<int> SaveChangesAsync()

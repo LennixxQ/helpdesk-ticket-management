@@ -9,9 +9,18 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.HasKey(c => c.Id);
+            
             builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
+            
+            builder.Property(c => c.Description).HasMaxLength(500);
+            
             builder.Property(c => c.IsActive).IsRequired().HasDefaultValue(true);
+            
             builder.HasIndex(c => c.Name).IsUnique();
+            
+            builder.Property(c => c.CreatedBy).IsRequired().HasMaxLength(256);
+            
+            builder.Property(c => c.LastModifiedBy).HasMaxLength(256);
         }
     }
 }

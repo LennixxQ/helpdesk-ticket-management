@@ -1,6 +1,7 @@
 ﻿using HelpDesk.Domain.Entities;
 using HelpDesk.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -78,6 +79,46 @@ namespace HelpDesk.Infrastructure.Persistence.Seed
                         });
                     }
                 }
+
+                if (!await context.Departments.AnyAsync(d => d.Name == "General"))
+                {
+                    context.Departments.Add(new Department
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "General",
+                        IsActive = true,
+                        CreatedAt = DateTime.UtcNow,
+                        CreatedBy = "Vivek-ADMIN",
+                        LastModifiedAt = DateTime.Now,
+                        LastModifiedBy = "Vivek-ADMIN"
+                    });
+                }
+
+                if (!await context.SlaPolicies.AnyAsync())
+                {
+                    var policies = new List<SlaPolicy>
+                {
+                    new() { Id = Guid.NewGuid(), Priority = TicketPriority.Critical, FirstResponseMinutes = 60,   ResolutionMinutes = 240,  IsActive = true, CreatedAt = DateTime.UtcNow, CreatedBy = "Vivek-ADMIN", LastModifiedAt = DateTime.UtcNow, LastModifiedBy = "Vivek-ADMIN" },
+                    new() { Id = Guid.NewGuid(), Priority = TicketPriority.High,     FirstResponseMinutes = 240,  ResolutionMinutes = 480,  IsActive = true, CreatedAt = DateTime.UtcNow, CreatedBy = "Vivek-ADMIN", LastModifiedAt = DateTime.UtcNow, LastModifiedBy = "Vivek-ADMIN" },
+                    new() { Id = Guid.NewGuid(), Priority = TicketPriority.Medium,   FirstResponseMinutes = 480,  ResolutionMinutes = 4320, IsActive = true, CreatedAt = DateTime.UtcNow, CreatedBy = "Vivek-ADMIN", LastModifiedAt = DateTime.UtcNow, LastModifiedBy = "Vivek-ADMIN" },
+                    new() { Id = Guid.NewGuid(), Priority = TicketPriority.Low,      FirstResponseMinutes = 1440, ResolutionMinutes = 7200, IsActive = true, CreatedAt = DateTime.UtcNow, CreatedBy = "Vivek-ADMIN", LastModifiedAt = DateTime.UtcNow, LastModifiedBy = "Vivek-ADMIN" },
+                };
+                    context.SlaPolicies.AddRange(policies);
+                }
+
+                if (!await context.SystemSettings.AnyAsync())
+            {
+                var settings = new List<SystemSetting>
+                {
+                    new() { Id = Guid.NewGuid(), Key = "SystemName",              Value = "HelpDesk",            Description = "Display name shown in header and emails",          UpdatedAt = DateTime.UtcNow },
+                    new() { Id = Guid.NewGuid(), Key = "SupportEmail",            Value = "chauhanvivek1800@gmail.com", Description = "From address used in all outgoing notifications", UpdatedAt = DateTime.UtcNow },
+                    new() { Id = Guid.NewGuid(), Key = "DefaultTimeZone",         Value = "UTC",                  Description = "Timezone for dashboard and report display",        UpdatedAt = DateTime.UtcNow },
+                    new() { Id = Guid.NewGuid(), Key = "SessionTimeoutMinutes",   Value = "60",                   Description = "Inactivity timeout in minutes (15–480)",           UpdatedAt = DateTime.UtcNow },
+                    new() { Id = Guid.NewGuid(), Key = "SurveyEmailDelayMinutes", Value = "30",                   Description = "Delay after ticket close before CSAT email sent",  UpdatedAt = DateTime.UtcNow },
+                    new() { Id = Guid.NewGuid(), Key = "ArchivalPolicyMonths",    Value = "0",                    Description = "Months after which closed tickets are archived (0 = disabled)", UpdatedAt = DateTime.UtcNow },
+                };
+                context.SystemSettings.AddRange(settings);
+            }
 
                 await context.SaveChangesAsync();
                 logger.LogInformation("Database seeding completed.");

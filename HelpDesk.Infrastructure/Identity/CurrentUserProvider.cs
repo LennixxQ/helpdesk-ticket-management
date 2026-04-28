@@ -29,7 +29,7 @@ namespace HelpDesk.Infrastructure.Identity
 
         public string GetCurrentUserName()
         {
-            var email = User?.FindFirst(ClaimTypes.Email)?.Value ?? User?.FindFirst("unique_name")?.Value ?? User?.FindFirst("name")?.Value ?? string.Empty;
+            var email = User?.FindFirst(ClaimTypes.Email)?.Value ?? User?.FindFirst("unique_name")?.Value ?? User?.FindFirst("name")?.Value ?? "admin@helpdesk.com";
             return email;
         }
 
@@ -49,7 +49,5 @@ namespace HelpDesk.Infrastructure.Identity
         }
 
         private ClaimsPrincipal? User => _httpContextAccessor.HttpContext?.User;
-
-
     }
 }

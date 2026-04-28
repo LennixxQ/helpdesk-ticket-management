@@ -9,8 +9,11 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
         void IEntityTypeConfiguration<AuditLogDetail>.Configure(EntityTypeBuilder<AuditLogDetail> builder)
         {
             builder.HasKey(d => d.Id);
+            
             builder.Property(d => d.FieldName).IsRequired().HasMaxLength(100);
+            
             builder.Property(d => d.OldValue).HasMaxLength(2000);
+            
             builder.Property(d => d.NewValue).HasMaxLength(2000);
         }
     }
