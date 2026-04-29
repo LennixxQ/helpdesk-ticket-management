@@ -5,5 +5,7 @@ namespace HelpDesk.Application.Interfaces.Repositories
 {
     public interface ICommentRepository : IGenericRepository<Comment>
     {
+        Task<IEnumerable<Comment>> GetByTicketIdAsync(Guid ticketId);
+        Task AddAsync(Comment comment);
     }
 }

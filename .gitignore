@@ -17,6 +17,7 @@ appsettings.*.json
 !appsettings.json
 *.env
 
+
 # OS
 .DS_Store
 Thumbs.db
