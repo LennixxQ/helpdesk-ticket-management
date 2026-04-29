@@ -11,5 +11,8 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<AuditLog>> GetByEntityIdAsync(Guid entityId) =>
             await _context.AuditLogs.Include(a => a.Details).Where(a => a.EntityId == entityId).OrderByDescending(a => a.PerformedAt).ToListAsync();
+
+        public async Task AddAsync(AuditLog log)
+            => await _context.AuditLogs.AddAsync(log);
     }
 }

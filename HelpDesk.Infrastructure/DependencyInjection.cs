@@ -38,6 +38,8 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
 
             return services;
         }

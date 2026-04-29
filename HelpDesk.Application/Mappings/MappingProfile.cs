@@ -1,8 +1,9 @@
-﻿using AutoMapper;
+using AutoMapper;
 using HelpDesk.Application.Commands.CategoryCommand;
 using HelpDesk.Application.Commands.TicketCommand;
 using HelpDesk.Application.Commands.UserCommand;
 using HelpDesk.Application.DTOs;
+using HelpDesk.Application.DTOs.Department;
 using HelpDesk.Domain.Entities;
 
 namespace HelpDesk.Application.Mappings;
@@ -44,6 +45,9 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.PostedByUserName,opt => opt.MapFrom(src => src.User != null ? src.User.FullName : string.Empty));
 
         CreateMap<Category, CategoryDto>();
+
+        CreateMap<Department, DepartmentDto>()
+            .ForMember(dest => dest.DepartmentHeadName, opt => opt.MapFrom(src => src.DepartmentHead != null ? src.DepartmentHead.FullName : string.Empty));
 
         CreateMap<User, UserDto>()
             .ForMember(d => d.DepartmentName, o => o.MapFrom(s =>s.Department != null ? s.Department.Name : null))
