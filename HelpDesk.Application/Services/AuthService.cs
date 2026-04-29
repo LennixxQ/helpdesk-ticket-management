@@ -1,4 +1,5 @@
 ﻿using HelpDesk.Application.Common;
+using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -9,11 +10,13 @@ namespace HelpDesk.Application.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IJwtTokenService _jwtTokenService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AuthService(UserManager<User> userManager, IJwtTokenService jwtTokenService)
+        public AuthService(UserManager<User> userManager, IJwtTokenService jwtTokenService, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _jwtTokenService = jwtTokenService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<BaseResponse<string>> LoginAsync(string email, string password)

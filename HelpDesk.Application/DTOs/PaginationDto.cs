@@ -10,5 +10,6 @@ namespace HelpDesk.Application.DTOs
         public TicketPriority? priority { get; set; } = null;
         public Guid? categoryId { get; set; } = null;
         public Guid? agentId { get; set; } = null;
+        public string? SearchTerm { get; set; } = null;
     }
 }

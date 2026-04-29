@@ -8,5 +8,6 @@ namespace HelpDesk.Application.Commands.UserCommand
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public UserRole Role { get; set; }
+        public Guid? DepartmentId { get; set; }
     }
 }

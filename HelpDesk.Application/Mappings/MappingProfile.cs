@@ -29,10 +29,16 @@ public class MappingProfile : Profile
 
         CreateMap<Ticket, TicketDto>()
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty))
+            .ForMember(d => d.DepartmentName, o => o.MapFrom(s => s.Department != null ? s.Department.Name : null))
             .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.ToString()))
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
             .ForMember(dest => dest.RaisedByUserName, opt => opt.MapFrom(src => src.RaisedByUser != null ? src.RaisedByUser.FullName : string.Empty))
+            .ForMember(d => d.Comments, o => o.MapFrom(s => s.Comments))
             .ForMember(dest => dest.AssignedAgentName, opt => opt.MapFrom(src => src.AssignedAgent != null ? src.AssignedAgent.FullName : null));
+
+        CreateMap<Ticket, CreateTicketResponseDto>()
+            .ForMember(d => d.Status, o => o.MapFrom(s => s.Status.ToString()))
+            .ForMember(d => d.Message, o => o.MapFrom(s => "Ticket created successfully."));
 
         CreateMap<Comment, CommentDto>()
             .ForMember(dest => dest.PostedByUserName,opt => opt.MapFrom(src => src.User != null ? src.User.FullName : string.Empty));
@@ -40,7 +46,8 @@ public class MappingProfile : Profile
         CreateMap<Category, CategoryDto>();
 
         CreateMap<User, UserDto>()
-            .ForMember(dest => dest.Role,opt => opt.MapFrom(src => src.Role.ToString()));
+            .ForMember(d => d.DepartmentName, o => o.MapFrom(s =>s.Department != null ? s.Department.Name : null))
+            .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.ToString()));
 
         CreateMap<AuditLog, AuditLogDto>();
         CreateMap<AuditLogDetail, AuditLogDetailDto>();
