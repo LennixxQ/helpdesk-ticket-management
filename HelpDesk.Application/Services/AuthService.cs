@@ -8,29 +8,32 @@ namespace HelpDesk.Application.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly UserManager<User> _userManager;
+        private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IJwtTokenService _jwtTokenService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AuthService(UserManager<User> userManager, IJwtTokenService jwtTokenService, IUnitOfWork unitOfWork)
+        public AuthService(IPasswordHasher<User> passwordHasher, IJwtTokenService jwtTokenService, IUnitOfWork unitOfWork)
         {
-            _userManager = userManager;
+            _passwordHasher = passwordHasher;
             _jwtTokenService = jwtTokenService;
             _unitOfWork = unitOfWork;
         }
 
         public async Task<BaseResponse<string>> LoginAsync(string email, string password)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user is null || !user.IsActive)
-                return BaseResponse<string>.Fail("Invalid Credentials");
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+                return BaseResponse<string>.Fail("Email and password are required.");
 
-            var isValid = await _userManager.CheckPasswordAsync(user, password);
-            if(!isValid)
-                return BaseResponse<string>.Fail("Invalid Credentials");
+            var user = await _unitOfWork.Users.GetByEmailAsync(email);
+            if (user is null || !user.IsActive)
+                return BaseResponse<string>.Fail("Invalid email or password.");
+
+            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash!, password);
+            if (result == PasswordVerificationResult.Failed)
+                return BaseResponse<string>.Fail("Invalid email or password.");
 
             var token = _jwtTokenService.GenerateToken(user);
-            return BaseResponse<string>.Ok(token, "Login Successful!");
+            return BaseResponse<string>.Ok(token, "Login successful.");
         }
     }
 }
