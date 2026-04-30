@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HelpDesk.Application.Common
+﻿namespace HelpDesk.Application.Common
 {
     public class BaseResponse<T>
     {
@@ -19,5 +15,14 @@ namespace HelpDesk.Application.Common
 
         public static BaseResponse<T> Fail(List<string> errors) =>
             new() { Success = false, Message = "Validation failed.", Errors = errors };
+    }
+
+    public class BaseResponse : BaseResponse<object>
+    {
+        public static BaseResponse Ok(string message = "Success") =>
+            new() { Success = true, Message = message };
+
+        public static new BaseResponse Fail(string message, List<string>? errors = null) =>
+            new() { Success = false, Message = message, Errors = errors ?? new() };
     }
 }

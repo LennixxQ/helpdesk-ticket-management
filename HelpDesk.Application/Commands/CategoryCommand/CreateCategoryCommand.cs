@@ -3,6 +3,6 @@
     public class CreateCategoryCommand
     {
         public string Name { get; set; } = string.Empty;
-        public Guid? DepartmentId { get; set; }
+        public string? Description { get; set; }
     }
 }

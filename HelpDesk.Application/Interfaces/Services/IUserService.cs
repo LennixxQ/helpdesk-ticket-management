@@ -1,6 +1,6 @@
 ﻿using HelpDesk.Application.Commands.UserCommand;
 using HelpDesk.Application.Common;
-using HelpDesk.Application.DTOs;
+using HelpDesk.Application.DTOs.User;
 
 namespace HelpDesk.Application.Interfaces.Services
 {

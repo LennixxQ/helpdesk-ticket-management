@@ -7,11 +7,9 @@ namespace HelpDesk.Application.Validators
     {
         public AssignTicketValidator()
         {
-            RuleFor(x => x.TicketId)
-                .NotEmpty().WithMessage("TicketId is required.");
+            RuleFor(x => x.TicketId).NotEmpty().WithMessage("TicketId is required.");
 
-            RuleFor(x => x.AgentId)
-                .NotEmpty().WithMessage("AgentId is required.");
+            RuleFor(x => x.AgentId).NotEmpty().WithMessage("AgentId is required.");
         }
     }
 }

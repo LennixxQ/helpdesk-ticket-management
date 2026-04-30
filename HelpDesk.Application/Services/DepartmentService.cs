@@ -1,10 +1,11 @@
 using AutoMapper;
+using HelpDesk.Application.Commands.DepartmentCommand;
 using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs.Department;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
+using HelpDesk.Application.Validators;
 using HelpDesk.Domain.Entities;
-using HelpDesk.Domain.Exceptions;
 
 namespace HelpDesk.Application.Services
 {
@@ -12,124 +13,112 @@ namespace HelpDesk.Application.Services
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly CreateDepartmentValidator _validator;
 
         public DepartmentService(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
             _mapper = mapper;
+            _validator = new CreateDepartmentValidator();
         }
 
-        public async Task<BaseResponse<object>> AssignHeadAsync(Guid departmentId, Guid userId)
+        public async Task<BaseResponse<List<DepartmentDto>>> GetAllAsync()
         {
-            var department = await _uow.Departments.GetByIdAsync(departmentId) ?? throw new NotFoundException("Department", departmentId);
-
-            var user = await _uow.Users.GetByIdAsync(userId) ?? throw new NotFoundException("User", userId);
-
-            department.DepartmentHeadId = userId;
-            _uow.Departments.Update(department);
-            await _uow.SaveChangesAsync();
-
-            return BaseResponse<object>.Ok(new object(), "Department head assigned.");
+            var depts = await _uow.Departments.GetAllAsync();
+            return BaseResponse<List<DepartmentDto>>.Ok(_mapper.Map<List<DepartmentDto>>(depts));
         }
 
-        public async Task<BaseResponse<DepartmentDto>> CreateAsync(CreateDepartmentDto dto)
+        public async Task<BaseResponse<DepartmentDto>> GetByIdAsync(Guid id)
         {
-            if (string.IsNullOrWhiteSpace(dto.Name))
-                return BaseResponse<DepartmentDto>.Fail("Department name is required.");
+            var dept = await _uow.Departments.GetByIdAsync(id);
+            if (dept is null) return BaseResponse<DepartmentDto>.Fail("Department not found.");
+            return BaseResponse<DepartmentDto>.Ok(_mapper.Map<DepartmentDto>(dept));
+        }
 
-            if (await _uow.Departments.NameExistsAsync(dto.Name))
-                return BaseResponse<DepartmentDto>.Fail("A department with this name already exists.");
+        public async Task<BaseResponse<DepartmentSummaryDto>> GetSummaryAsync(Guid id)
+        {
+            var dept = await _uow.Departments.GetByIdAsync(id);
+            if (dept is null) return BaseResponse<DepartmentSummaryDto>.Fail("Department not found.");
 
-            var department = new Department
+            var (activeUsers, openTickets, last30) = await _uow.Departments.GetSummaryAsync(id);
+            return BaseResponse<DepartmentSummaryDto>.Ok(new DepartmentSummaryDto
             {
-                Name = dto.Name,
-                DepartmentHeadId = dto.DepartmentHeadId,
-                IsActive = true
+                Id = id,
+                Name = dept.Name,
+                ActiveUserCount = activeUsers,
+                OpenTicketCount = openTickets,
+                TicketsLast30Days = last30
+            });
+        }
+
+        public async Task<BaseResponse<DepartmentDto>> CreateAsync(CreateDepartmentCommand command)
+        {
+            var validation = await _validator.ValidateAsync(command);
+            if (!validation.IsValid)
+                return BaseResponse<DepartmentDto>.Fail("Validation failed.",
+                    validation.Errors.Select(e => e.ErrorMessage).ToList());
+
+            var existing = await _uow.Departments.GetByNameAsync(command.Name);
+            if (existing is not null)
+                return BaseResponse<DepartmentDto>.Fail("Department already exists.");
+
+            var dept = new Department
+            {
+                Id = Guid.NewGuid(),
+                Name = command.Name,
+                DepartmentHeadId = command.DepartmentHeadId,
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = "system"
             };
-
-            if (dto.DepartmentHeadId.HasValue)
-            {
-                department.DepartmentHead = await _uow.Users.GetByIdAsync(dto.DepartmentHeadId.Value);
-            }
-
-            await _uow.Departments.AddAsync(department);
+            await _uow.Departments.AddAsync(dept);
             await _uow.SaveChangesAsync();
 
-            return BaseResponse<DepartmentDto>.Ok(_mapper.Map<DepartmentDto>(department), "Department created.");
+            return BaseResponse<DepartmentDto>.Ok(_mapper.Map<DepartmentDto>(dept), "Department created.");
+        }
+
+        public async Task<BaseResponse<DepartmentDto>> UpdateAsync(UpdateDepartmentCommand command)
+        {
+            var dept = await _uow.Departments.GetByIdAsync(command.Id);
+            if (dept is null) return BaseResponse<DepartmentDto>.Fail("Department not found.");
+
+            dept.Name = command.Name;
+            dept.DepartmentHeadId = command.DepartmentHeadId;
+            dept.LastModifiedAt = DateTime.UtcNow;
+            _uow.Departments.Update(dept);
+            await _uow.SaveChangesAsync();
+
+            return BaseResponse<DepartmentDto>.Ok(_mapper.Map<DepartmentDto>(dept), "Department updated.");
         }
 
         public async Task<BaseResponse<object>> DeactivateAsync(Guid id)
         {
-            var department = await _uow.Departments.GetByIdAsync(id)
-            ?? throw new NotFoundException("Department", id);
+            var dept = await _uow.Departments.GetByIdAsync(id);
+            if (dept is null) return BaseResponse<object>.Fail("Department not found.");
+            if (dept.Name == "General") return BaseResponse<object>.Fail("Cannot deactivate General department.");
 
-            if (department.Name == "General")
-                return BaseResponse<object>.Fail("The 'General' department cannot be deactivated.");
-
-            var hasActiveUsers = department.Members.Any(u => u.IsActive);
-            if (hasActiveUsers)
-                return BaseResponse<object>.Fail("Cannot deactivate a department with active users.");
-
-            department.IsActive = false;
-            department.LastModifiedAt = DateTime.UtcNow;
-            _uow.Departments.Update(department);
+            dept.IsActive = false;
+            dept.LastModifiedAt = DateTime.UtcNow;
+            _uow.Departments.Update(dept);
             await _uow.SaveChangesAsync();
 
             return BaseResponse<object>.Ok(new object(), "Department deactivated.");
         }
 
-        public async Task<BaseResponse<List<DepartmentDto>>> GetAllAsync()
+        public async Task<BaseResponse<object>> AssignHeadAsync(Guid departmentId, Guid userId)
         {
-            var departments = await _uow.Departments.GetAllAsync();
-            return BaseResponse<List<DepartmentDto>>.Ok(_mapper.Map<List<DepartmentDto>>(departments));
-        }
+            var dept = await _uow.Departments.GetByIdAsync(departmentId);
+            if (dept is null) return BaseResponse<object>.Fail("Department not found.");
 
-        public async Task<BaseResponse<DepartmentDto>> GetByIdAsync(Guid id)
-        {
-            var department = await _uow.Departments.GetByIdAsync(id) ?? throw new NotFoundException("Department", id);
+            var user = await _uow.Users.GetByIdAsync(userId);
+            if (user is null) return BaseResponse<object>.Fail("User not found.");
 
-            return BaseResponse<DepartmentDto>.Ok(_mapper.Map<DepartmentDto>(department));
-        }
-
-        public async Task<BaseResponse<DepartmentSummaryDto>> GetSummaryAsync(Guid id)
-        {
-            var department = await _uow.Departments.GetByIdAsync(id) ?? throw new NotFoundException("Department", id);
-
-            var summary = await _uow.Departments.GetSummaryAsync(id);
-
-            return BaseResponse<DepartmentSummaryDto>.Ok(new DepartmentSummaryDto
-            {
-                Id = id,
-                Name = department.Name,
-                ActiveUserCount = summary.ActiveUserCount,
-                OpenTicketCount = summary.OpenTicketCount,
-                TicketsLast30Days = summary.TicketsLast30Days
-            });
-        }
-
-        public async Task<BaseResponse<DepartmentDto>> UpdateAsync(Guid id, UpdateDepartmentDto dto)
-        {
-            var department = await _uow.Departments.GetByIdAsync(id)
-            ?? throw new NotFoundException("Department", id);
-
-            department.Name = dto.Name;
-            
-            if (department.DepartmentHeadId != dto.DepartmentHeadId)
-            {
-                department.DepartmentHeadId = dto.DepartmentHeadId;
-                if (dto.DepartmentHeadId.HasValue)
-                {
-                    department.DepartmentHead = await _uow.Users.GetByIdAsync(dto.DepartmentHeadId.Value);
-                }
-                else
-                {
-                    department.DepartmentHead = null;
-                }
-            }
-            _uow.Departments.Update(department);
+            dept.DepartmentHeadId = userId;
+            dept.LastModifiedAt = DateTime.UtcNow;
+            _uow.Departments.Update(dept);
             await _uow.SaveChangesAsync();
 
-            return BaseResponse<DepartmentDto>.Ok(_mapper.Map<DepartmentDto>(department), "Department updated.");
+            return BaseResponse<object>.Ok(new object(), "Department head assigned.");
         }
     }
 }

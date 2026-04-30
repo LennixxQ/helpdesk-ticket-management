@@ -1,4 +1,4 @@
-﻿namespace HelpDesk.Application.DTOs
+﻿namespace HelpDesk.Application.DTOs.Category
 {
     public class CategoryDto
     {

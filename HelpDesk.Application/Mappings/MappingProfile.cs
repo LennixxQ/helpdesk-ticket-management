@@ -1,9 +1,14 @@
 using AutoMapper;
-using HelpDesk.Application.Commands.CategoryCommand;
-using HelpDesk.Application.Commands.TicketCommand;
-using HelpDesk.Application.Commands.UserCommand;
-using HelpDesk.Application.DTOs;
+using HelpDesk.Application.DTOs.Category;
+using HelpDesk.Application.DTOs.Comment;
+using HelpDesk.Application.DTOs.Csat;
 using HelpDesk.Application.DTOs.Department;
+using HelpDesk.Application.DTOs.Escalation;
+using HelpDesk.Application.DTOs.KbArticle;
+using HelpDesk.Application.DTOs.RecurringTemplate;
+using HelpDesk.Application.DTOs.SystemSetting;
+using HelpDesk.Application.DTOs.Ticket;
+using HelpDesk.Application.DTOs.User;
 using HelpDesk.Domain.Entities;
 
 namespace HelpDesk.Application.Mappings;
@@ -12,48 +17,44 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<CreateTicketCommand, Ticket>()
-            .ForMember(dest => dest.Id, opt => opt.Ignore())
-            .ForMember(dest => dest.Status, opt => opt.Ignore())
-            .ForMember(dest => dest.AssignedAgentId, opt => opt.Ignore())
-            .ForMember(dest => dest.RaisedByUserId, opt => opt.Ignore());
+        CreateMap<User, UserDto>()
+            .ForMember(d => d.DepartmentName, o => o.MapFrom(s =>
+                s.Department != null ? s.Department.Name : null));
 
-        CreateMap<CreateUserCommand, User>()
-            .ForMember(dest => dest.Id, opt => opt.Ignore())
-            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email))
-            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true))
-            .ForMember(dest => dest.PasswordHash, opt => opt.Ignore());
+        CreateMap<Category, CategoryDto>();
 
-        CreateMap<CreateCategoryCommand, Category>()
-            .ForMember(dest => dest.Id, opt => opt.Ignore())
-            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true));
+        CreateMap<Comment, CommentDto>()
+            .ForMember(d => d.AuthorName, o => o.MapFrom(s => s.User.FullName));
 
         CreateMap<Ticket, TicketDto>()
-            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty))
+            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.Name))
             .ForMember(d => d.DepartmentName, o => o.MapFrom(s => s.Department != null ? s.Department.Name : null))
-            .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.ToString()))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
-            .ForMember(dest => dest.RaisedByUserName, opt => opt.MapFrom(src => src.RaisedByUser != null ? src.RaisedByUser.FullName : string.Empty))
-            .ForMember(d => d.Comments, o => o.MapFrom(s => s.Comments))
-            .ForMember(dest => dest.AssignedAgentName, opt => opt.MapFrom(src => src.AssignedAgent != null ? src.AssignedAgent.FullName : null));
+            .ForMember(d => d.Escalation, o => o.MapFrom(s => s.EscalationRecord));
 
         CreateMap<Ticket, CreateTicketResponseDto>()
             .ForMember(d => d.Status, o => o.MapFrom(s => s.Status.ToString()))
             .ForMember(d => d.Message, o => o.MapFrom(s => "Ticket created successfully."));
 
-        CreateMap<Comment, CommentDto>()
-            .ForMember(dest => dest.PostedByUserName,opt => opt.MapFrom(src => src.User != null ? src.User.FullName : string.Empty));
-
-        CreateMap<Category, CategoryDto>();
-
         CreateMap<Department, DepartmentDto>()
-            .ForMember(dest => dest.DepartmentHeadName, opt => opt.MapFrom(src => src.DepartmentHead != null ? src.DepartmentHead.FullName : string.Empty));
+            .ForMember(d => d.DepartmentHeadName, o => o.MapFrom(s =>
+                s.DepartmentHead != null ? s.DepartmentHead.FullName : null));
 
-        CreateMap<User, UserDto>()
-            .ForMember(d => d.DepartmentName, o => o.MapFrom(s =>s.Department != null ? s.Department.Name : null))
-            .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.ToString()));
+        CreateMap<KbArticle, KbArticleDto>()
+            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.Name))
+            .ForMember(d => d.AuthorName, o => o.MapFrom(s => s.Author.FullName));
 
-        CreateMap<AuditLog, AuditLogDto>();
-        CreateMap<AuditLogDetail, AuditLogDetailDto>();
+        CreateMap<KbArticle, KbArticleSummaryDto>()
+            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.Name));
+
+        CreateMap<EscalationRecord, EscalationDto>()
+            .ForMember(d => d.EscalatedByName, o => o.MapFrom(s => s.EscalatedBy))
+            .ForMember(d => d.IsAcknowledged, o => o.MapFrom(s => s.AcknowledgedAt.HasValue));
+
+        CreateMap<CsatResponse, CsatResponseDto>();
+
+        CreateMap<RecurringTemplate, RecurringTemplateDto>()
+            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.Name));
+
+        CreateMap<SystemSetting, SystemSettingDto>();
     }
 }

@@ -1,7 +1,7 @@
 using AutoMapper;
 using HelpDesk.Application.Commands.UserCommand;
 using HelpDesk.Application.Common;
-using HelpDesk.Application.DTOs;
+using HelpDesk.Application.DTOs.User;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Application.Validators;
@@ -14,61 +14,49 @@ namespace HelpDesk.Application.Services
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
-        private readonly UserManager<User> _userManager;
-        private readonly ICurrentUserProvider _currentUser;
+        private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly CreateUserValidator _validator;
 
-        public UserService(IUnitOfWork uow, IMapper mapper, UserManager<User> userManager, ICurrentUserProvider currentUser)
+        public UserService(IUnitOfWork uow, IMapper mapper, IPasswordHasher<User> passwordHasher)
         {
             _uow = uow;
             _mapper = mapper;
-            _userManager = userManager;
-            _currentUser = currentUser;
+            _passwordHasher = passwordHasher;
+            _validator = new CreateUserValidator();
         }
 
         public async Task<BaseResponse<UserDto>> CreateUserAsync(CreateUserCommand command)
         {
-            var validator = new CreateUserValidator();
-            var result = await validator.ValidateAsync(command);
-            if (!result.IsValid)
-                return BaseResponse<UserDto>.Fail(result.Errors.Select(e => e.ErrorMessage).ToList());
+            var validation = await _validator.ValidateAsync(command);
+            if (!validation.IsValid)
+                return BaseResponse<UserDto>.Fail("Validation failed.",
+                    validation.Errors.Select(e => e.ErrorMessage).ToList());
 
-            var existing = await _userManager.FindByEmailAsync(command.Email);
-            if(existing is not null)
-                return BaseResponse<UserDto>.Fail("Email already in use.");
+            var existing = await _uow.Users.GetByEmailAsync(command.Email);
+            if (existing is not null)
+                return BaseResponse<UserDto>.Fail("A user with this email already exists.");
 
-            var user = _mapper.Map<User>(command);
-            user.CreatedAt = DateTime.UtcNow;
-            user.CreatedBy = "Vivek-Admin";
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                FullName = command.FullName,
+                Email = command.Email,
+                UserName = command.Email,
+                NormalizedEmail = command.Email.ToUpper(),
+                NormalizedUserName = command.Email.ToUpper(),
+                Role = command.Role,
+                DepartmentId = command.DepartmentId,
+                IsActive = true,
+                CreatedBy = "system",
+                CreatedAt = DateTime.UtcNow,
+                EmailConfirmed = true
+            };
+            user.PasswordHash = _passwordHasher.HashPassword(user, command.Password);
 
-            var createResult = await _userManager.CreateAsync(user, command.Password);
-            if (!createResult.Succeeded)
-                return BaseResponse<UserDto>.Fail(createResult.Errors.Select(e => e.Description).ToList());
-
-            await _userManager.AddToRoleAsync(user, command.Role.ToString());
-
-            return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user), "User created successfully.");
-
-        }
-
-        public async Task<BaseResponse<UserDto>> DeactivateAsync(Guid userId)
-        {
-            var user = await _uow.Users.GetByIdAsync(userId);
-            if (user is null)
-                return BaseResponse<UserDto>.Fail("User not found.");
-
-            user.IsActive = false;
-            user.LastModifiedAt = DateTime.UtcNow;
-
-            _uow.Users.Update(user);
+            await _uow.Users.AddAsync(user);
             await _uow.SaveChangesAsync();
 
-            return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user), "User deactivated.");
-        }
-
-        public async Task<BaseResponse<List<UserDto>>> GetActiveAgentsAsync()
-        {
-            var agents = await _uow.Users.GetActiveAgentsAsync();
-            return BaseResponse<List<UserDto>>.Ok(_mapper.Map<List<UserDto>>(agents));
+            return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user), "User created successfully.");
         }
 
         public async Task<BaseResponse<List<UserDto>>> GetAllUsersAsync()
@@ -80,29 +68,40 @@ namespace HelpDesk.Application.Services
         public async Task<BaseResponse<UserDto>> GetByIdAsync(Guid id)
         {
             var user = await _uow.Users.GetByIdAsync(id);
-            if (user is null)
-                return BaseResponse<UserDto>.Fail("User not found.");
+            if (user is null) return BaseResponse<UserDto>.Fail("User not found.");
             return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user));
         }
 
         public async Task<BaseResponse<UserDto>> UpdateRoleAsync(UpdateUserRoleCommand command)
         {
             var user = await _uow.Users.GetByIdAsync(command.UserId);
-            if (user is null)
-                return BaseResponse<UserDto>.Fail("User not found.");
+            if (user is null) return BaseResponse<UserDto>.Fail("User not found.");
 
-            var oldRole = user.Role.ToString();
             user.Role = command.NewRole;
             user.LastModifiedAt = DateTime.UtcNow;
-
-            await _userManager.RemoveFromRoleAsync(user, oldRole);
-            await _userManager.AddToRoleAsync(user, command.NewRole.ToString());
-
             _uow.Users.Update(user);
             await _uow.SaveChangesAsync();
 
             return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user), "Role updated.");
+        }
 
+        public async Task<BaseResponse<UserDto>> DeactivateAsync(Guid userId)
+        {
+            var user = await _uow.Users.GetByIdAsync(userId);
+            if (user is null) return BaseResponse<UserDto>.Fail("User not found.");
+
+            user.IsActive = false;
+            user.LastModifiedAt = DateTime.UtcNow;
+            _uow.Users.Update(user);
+            await _uow.SaveChangesAsync();
+
+            return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user), "User deactivated.");
+        }
+
+        public async Task<BaseResponse<List<UserDto>>> GetActiveAgentsAsync()
+        {
+            var agents = await _uow.Users.GetActiveAgentsAsync();
+            return BaseResponse<List<UserDto>>.Ok(_mapper.Map<List<UserDto>>(agents));
         }
     }
 }

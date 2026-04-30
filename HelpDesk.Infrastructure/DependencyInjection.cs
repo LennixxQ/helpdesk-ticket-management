@@ -40,6 +40,11 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IKbArticleService, KbArticleService>();
+            services.AddScoped<IEscalationService, EscalationService>();
+            services.AddScoped<ICsatService, CsatService>();
+            services.AddScoped<IRecurringTemplateService, RecurringTemplateService>();
+            services.AddScoped<ISystemSettingService, SystemSettingService>();
 
             return services;
         }

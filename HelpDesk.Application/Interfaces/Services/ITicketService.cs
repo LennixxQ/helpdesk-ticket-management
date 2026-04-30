@@ -2,6 +2,8 @@ using HelpDesk.Application.Commands.CommentCommand;
 using HelpDesk.Application.Commands.TicketCommand;
 using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs;
+using HelpDesk.Application.DTOs.Comment;
+using HelpDesk.Application.DTOs.Ticket;
 using HelpDesk.Domain.Enums;
 
 namespace HelpDesk.Application.Interfaces.Services

@@ -1,5 +1,5 @@
 ﻿using HelpDesk.Application.Common;
-using HelpDesk.Application.DTOs;
+using HelpDesk.Application.DTOs.Dashboard;
 
 namespace HelpDesk.Application.Interfaces.Services
 {

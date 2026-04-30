@@ -1,12 +1,11 @@
-﻿namespace HelpDesk.Application.DTOs
+﻿namespace HelpDesk.Application.DTOs.Comment
 {
     public class CommentDto
     {
         public Guid Id { get; set; }
         public string Content { get; set; } = string.Empty;
-        public string PostedByUserName { get; set; } = string.Empty;
+        public string AuthorName { get; set; } = string.Empty;
         public Guid UserId { get; set; }
-        public Guid TicketId { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }
