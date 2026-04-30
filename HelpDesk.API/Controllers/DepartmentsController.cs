@@ -1,7 +1,6 @@
 ﻿using HelpDesk.Application.DTOs.Department;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
-using HelpDesk.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +44,7 @@ namespace HelpDesk.API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateDepartmentDto dto)
         {
+            _logger.LogInformation("Derpartment Created: {Name}", dto.Name);
             var result = await _departmentService.CreateAsync(dto);
             return result.Success ? Ok(result) : BadRequest(result);
         }
@@ -52,6 +52,7 @@ namespace HelpDesk.API.Controllers
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] UpdateDepartmentWithIdDto dto)
         {
+            _logger.LogInformation("Department {Name} Details Updated", dto.Name);
             var result = await _departmentService.UpdateAsync(dto.DepartmentId, dto);
             return result.Success ? Ok(result) : BadRequest(result);
         }
@@ -66,6 +67,7 @@ namespace HelpDesk.API.Controllers
         [HttpPost("assignHead")]
         public async Task<IActionResult> AssignHead([FromBody] AssignDepartmentHeadRequest request)
         {
+            _logger.LogInformation("Department {Name} Head Assigned {ID}", request.DepartmentId, request.UserId);
             var result = await _departmentService.AssignHeadAsync(request.DepartmentId, request.UserId);
             return Ok(result);
         }

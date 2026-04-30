@@ -28,4 +28,5 @@ public class RecurringTemplate : BaseEntity
     public User? AssignToAgent { get; set; }
     public User RaiseOnBehalfOf { get; set; } = null!;
     public ICollection<RecurringTemplateRun> Runs { get; set; } = new List<RecurringTemplateRun>();
+
 }

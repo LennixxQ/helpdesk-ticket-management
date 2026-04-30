@@ -12,8 +12,6 @@ public class User : IdentityUser<Guid>
     public string CreatedBy { get; set; } = string.Empty;
     public DateTime? LastModifiedAt { get; set; }
     public string? LastModifiedBy { get; set; }
-
-
     public Guid? DepartmentId { get; set; }
 
 
@@ -21,7 +19,7 @@ public class User : IdentityUser<Guid>
     public ICollection<Ticket> RaisedTickets { get; set; } = new List<Ticket>();
     public ICollection<Ticket> AssignedTickets { get; set; } = new List<Ticket>();
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-    public ICollection<AuditLog> AuditLogs { get; set; } = [];
-    public ICollection<NotificationPreference> NotificationPreferences { get; set; } = [];
+    public ICollection<AuditLog> AuditLogs { get; set; } = new List<AuditLog>();
+    public ICollection<NotificationPreference> NotificationPreferences { get; set; } = new List<NotificationPreference>();
 
 }
