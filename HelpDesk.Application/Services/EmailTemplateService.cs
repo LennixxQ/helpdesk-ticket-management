@@ -1,6 +1,7 @@
-﻿using HelpDesk.Application.Interfaces.Services;
+using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Domain.Entities;
 using RazorLight;
+using System.Reflection;
 
 namespace HelpDesk.Application.Services
 {
@@ -8,9 +9,14 @@ namespace HelpDesk.Application.Services
     {
         private readonly IRazorLightEngine _engine;
 
-        public EmailTemplateService()
+        public EmailTemplateService(Assembly? templateAssembly = null)
         {
-            _engine = new RazorLightEngineBuilder().UseEmbeddedResourcesProject(typeof(EmailTemplateService).Assembly).SetOperatingAssembly(typeof(EmailTemplateService).Assembly).UseMemoryCachingProvider().Build();
+            var assembly = templateAssembly ?? typeof(EmailTemplateService).Assembly;
+            _engine = new RazorLightEngineBuilder()
+                .UseEmbeddedResourcesProject(assembly)
+                .SetOperatingAssembly(assembly)
+                .UseMemoryCachingProvider()
+                .Build();
         }
 
         public async Task<string> RenderTicketEmailAsync(TicketEmailModel model)
@@ -23,6 +29,11 @@ namespace HelpDesk.Application.Services
             {
                 return BuildFallbackHtml(model);
             }
+        }
+
+        public async Task<string> RenderTicketViewAsync(HelpDesk.Application.DTOs.Ticket.TicketDto model)
+        {
+            return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.TicketView", model);
         }
 
         public string RenderPlainText(TicketEmailModel model) => 

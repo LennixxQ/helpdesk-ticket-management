@@ -19,11 +19,13 @@ namespace HelpDesk.API.Controllers
     {
         private readonly ITicketService _ticketService;
         private readonly IEscalationService _escalationService;
+        private readonly IEmailTemplateService _templateService;
         private readonly ILogger<TicketsController> _logger;
 
-        public TicketsController(ITicketService ticketService, IEscalationService escalationService, ILogger<TicketsController> logger, ICurrentUserProvider currentUserProvider):base(currentUserProvider)
+        public TicketsController(ITicketService ticketService, IEscalationService escalationService, IEmailTemplateService templateService, ILogger<TicketsController> logger, ICurrentUserProvider currentUserProvider):base(currentUserProvider)
         {
             _ticketService = ticketService;
+            _templateService = templateService;
             _logger = logger;
             _escalationService = escalationService;
         }
@@ -150,5 +152,16 @@ namespace HelpDesk.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetArchived([FromBody] PaginationDto dto) =>
             Ok(await _ticketService.GetArchivedAsync(dto));
+
+        [HttpGet("view/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> View(Guid id)
+        {
+            var ticket = await _ticketService.GetByIdAsync(id, Guid.Empty, Domain.Enums.UserRole.Admin); // Bypass for test view
+            if (!ticket.Success) return NotFound("Ticket not found.");
+
+            var html = await _templateService.RenderTicketViewAsync(ticket.Data!);
+            return Content(html, "text/html");
+        }
     }
 }

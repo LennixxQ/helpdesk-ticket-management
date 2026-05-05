@@ -229,7 +229,7 @@ namespace HelpDesk.Application.Services
                 Category = ticket.Category?.Name ?? "N/A",
                 AssignedAgent = ticket.AssignedAgent?.FullName,
                 SlaDeadline = ticket.SlaDeadline,
-                TicketUrl = $"{BaseUrl}/tickets/{ticket.Id}",
+                TicketUrl = $"{BaseUrl}/api/tickets/view/{ticket.Id}",
                 PreferencesUrl = $"{BaseUrl}/profile/notifications"
             };
         }

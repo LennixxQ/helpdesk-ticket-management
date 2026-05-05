@@ -22,13 +22,15 @@ namespace HelpDesk.Application.Services
         private readonly CreateTicketValidator _createValidator;
         private readonly AssignTicketValidator _assignValidator;
         private readonly AddCommentValidator _commentValidator;
+        private readonly INotificationService _notificationService;
         private readonly SlaOverrideValidator _slaOverrideValidator;
 
-        public TicketService(IUnitOfWork uow,IMapper mapper,ISlaDeadlineCalculator slaCalculator)
+        public TicketService(IUnitOfWork uow,IMapper mapper,ISlaDeadlineCalculator slaCalculator, INotificationService notificationService)
         {
             _uow = uow;
             _mapper = mapper;
             _slaCalculator = slaCalculator;
+            _notificationService = notificationService;
             _createValidator = new CreateTicketValidator();
             _assignValidator = new AssignTicketValidator();
             _commentValidator = new AddCommentValidator();
@@ -85,6 +87,9 @@ namespace HelpDesk.Application.Services
                 await _uow.SaveChangesAsync();
             }
 
+            // Notify parties (PRD 5.2)
+            await _notificationService.SendTicketCreatedAsync(ticket);
+
             return BaseResponse<CreateTicketResponseDto>.Ok(
                 _mapper.Map<CreateTicketResponseDto>(ticket), "Ticket created.");
         }
@@ -116,6 +121,13 @@ namespace HelpDesk.Application.Services
             await _uow.SaveChangesAsync();
 
             var updated = await _uow.Tickets.GetByIdWithDetailsAsync(ticket.Id);
+
+            // Notify parties (PRD 5.2)
+            if (updated != null)
+            {
+                await _notificationService.SendTicketAssignedAsync(updated);
+            }
+
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(updated), "Ticket assigned.");
         }
 
@@ -124,6 +136,8 @@ namespace HelpDesk.Application.Services
         {
             var ticket = await _uow.Tickets.GetByIdWithDetailsAsync(command.TicketId);
             if (ticket is null) return BaseResponse<TicketDto>.Fail("Ticket not found.");
+
+            var oldStatus = ticket.Status;
 
             if (currentUserRole == UserRole.Agent && ticket.AssignedAgentId != currentUserId)
                 return BaseResponse<TicketDto>.Fail("You can only update tickets assigned to you.");
@@ -176,6 +190,19 @@ namespace HelpDesk.Application.Services
             await _uow.SaveChangesAsync();
 
             var updated = await _uow.Tickets.GetByIdWithDetailsAsync(ticket.Id);
+
+            // Notify parties (PRD 5.2)
+            if (updated != null)
+            {
+                await _notificationService.SendStatusChangedAsync(updated, oldStatus.ToString());
+
+                // If resolved, send CSAT survey request (PRD 5.2 / 11.2)
+                if (command.NewStatus == TicketStatus.Resolved)
+                {
+                    await _notificationService.SendCsatSurveyAsync(updated);
+                }
+            }
+
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(updated), "Status updated.");
         }
 
@@ -216,6 +243,10 @@ namespace HelpDesk.Application.Services
             await _uow.SaveChangesAsync();
 
             comment.User = user;
+
+            // Notify parties (PRD 5.2)
+            await _notificationService.SendCommentAddedAsync(ticket, comment);
+
             return BaseResponse<CommentDto>.Ok(_mapper.Map<CommentDto>(comment), "Comment added.");
         }
 
@@ -288,12 +319,20 @@ namespace HelpDesk.Application.Services
                     CreatedAt = DateTime.UtcNow,
                     CreatedBy = "system"
                 };
+                await _notificationService.SendTicketEscalatedAsync(ticket, ticket.EscalationRecord);
             }
 
             _uow.Tickets.Update(ticket);
             await _uow.SaveChangesAsync();
 
             var updated = await _uow.Tickets.GetByIdWithDetailsAsync(ticket.Id);
+            
+            // Notify parties (PRD 5.2)
+            if (updated != null)
+            {
+                await _notificationService.SendStatusChangedAsync(updated, "Reopened");
+            }
+
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(updated), "Ticket reopened.");
         }
 

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using HelpDesk.Application.Commands.EscalationCommand;
 using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs.Escalation;
@@ -15,11 +15,13 @@ namespace HelpDesk.Application.Services
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly EscalateTicketValidator _validator;
+        private readonly INotificationService _notificationService;
 
-        public EscalationService(IUnitOfWork uow, IMapper mapper)
+        public EscalationService(IUnitOfWork uow, IMapper mapper, INotificationService notificationService)
         {
             _uow = uow;
             _mapper = mapper;
+            _notificationService = notificationService;
             _validator = new EscalateTicketValidator();
         }
 
@@ -71,6 +73,9 @@ namespace HelpDesk.Application.Services
             ticket.EscalationRecord = escalation;
             _uow.Tickets.Update(ticket);
             await _uow.SaveChangesAsync();
+
+            // Notify parties (PRD 10.3)
+            await _notificationService.SendTicketEscalatedAsync(ticket, escalation);
 
             escalation.EscalatedByUser = user;
             return BaseResponse<EscalationDto>.Ok(_mapper.Map<EscalationDto>(escalation), "Ticket escalated.");

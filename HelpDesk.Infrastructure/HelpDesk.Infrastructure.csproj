@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <PackageReference Include="Cronos" Version="0.8.3" />
@@ -21,11 +21,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HelpDesk.Application\HelpDesk.Application.csproj" />
+    <Folder Include="Templates\EmailTemplates\" />
+    <EmbeddedResource Include="Templates\**\*.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Templates\EmailTemplates\" />
+    <ProjectReference Include="..\HelpDesk.Application\HelpDesk.Application.csproj" />
+    <ProjectReference Include="..\HelpDesk.Domain\HelpDesk.Domain.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

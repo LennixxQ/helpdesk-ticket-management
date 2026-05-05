@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Interfaces.Repositories;
+using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Repositories.GenericInterface;
 using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Application.Services;
@@ -54,7 +54,7 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<IRecurringTemplateService, RecurringTemplateService>();
             services.AddScoped<ISystemSettingService, SystemSettingService>();
             services.AddScoped<IEmailService, EmailService>();
-            services.AddScoped<IEmailTemplateService, EmailTemplateService>();
+            services.AddScoped<IEmailTemplateService>(_ => new EmailTemplateService(typeof(DependencyInjection).Assembly));
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<ISlaDeadlineCalculator, SlaDeadlineCalculator>();
 

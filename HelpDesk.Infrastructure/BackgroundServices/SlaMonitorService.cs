@@ -43,6 +43,7 @@ public class SlaMonitorService : BackgroundService
         using var scope = _scopeFactory.CreateScope();
         var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
         var businessHoursService = scope.ServiceProvider.GetRequiredService<IBusinessHoursService>();
+        var notificationService = scope.ServiceProvider.GetRequiredService<INotificationService>();
 
         var now = DateTime.UtcNow;
 
@@ -80,6 +81,12 @@ public class SlaMonitorService : BackgroundService
                 };
             }
 
+            // Notify parties (PRD 5.2)
+            await notificationService.SendSlaBreachedAsync(record.Ticket);
+            if (record.Ticket.EscalationRecord != null)
+            {
+                await notificationService.SendTicketEscalatedAsync(record.Ticket, record.Ticket.EscalationRecord);
+            }
 
             _logger.LogWarning("SLA BREACHED — TicketId: {TicketId} | Priority: {Priority} | Deadline was: {Deadline}",record.TicketId,record.Ticket.Priority,record.SlaDeadline);
         }
@@ -93,20 +100,22 @@ public class SlaMonitorService : BackgroundService
             record.Status = SlaStatus.Warning;
             record.Ticket.SlaStatus = SlaStatus.Warning;
 
+            // Notify parties (PRD 5.2)
+            await notificationService.SendSlaWarningAsync(record.Ticket);
 
             _logger.LogInformation("SLA Warning — TicketId: {TicketId} | 75%+ elapsed | Deadline: {Deadline}",record.TicketId,record.SlaDeadline);
         }
 
         // ── Auto-escalate: Critical unassigned > 30 min ─────────────────
-        await AutoEscalateCriticalUnassignedAsync(uow, businessHoursService, now, ct);
+        await AutoEscalateCriticalUnassignedAsync(uow, businessHoursService, notificationService, now, ct);
 
         // ── Auto-escalate: OnHold > 3 business days ─────────────────────
-        await AutoEscalateOnHoldAsync(uow, businessHoursService, now, ct);
+        await AutoEscalateOnHoldAsync(uow, businessHoursService, notificationService, now, ct);
 
         await uow.SaveChangesAsync();
     }
 
-    private async Task AutoEscalateCriticalUnassignedAsync(IUnitOfWork uow,IBusinessHoursService bhs,DateTime now,CancellationToken ct)
+    private async Task AutoEscalateCriticalUnassignedAsync(IUnitOfWork uow,IBusinessHoursService bhs, INotificationService notificationService, DateTime now,CancellationToken ct)
     {
         if (!bhs.IsBusinessHour(now)) return;
 
@@ -119,7 +128,7 @@ public class SlaMonitorService : BackgroundService
             ticket.IsEscalated = true;
             ticket.LastModifiedAt = now;
 
-            ticket.EscalationRecord = new Domain.Entities.EscalationRecord
+            var escalation = new Domain.Entities.EscalationRecord
             {
                 TicketId = ticket.Id,
                 Reason = "System Auto-Escalation: Critical ticket unassigned for 30+ minutes.",
@@ -130,13 +139,17 @@ public class SlaMonitorService : BackgroundService
                 CreatedAt = now,
                 CreatedBy = "Help Desk"
             };
+            ticket.EscalationRecord = escalation;
+            uow.Tickets.Update(ticket);
 
+            // Notify parties (PRD 10.4)
+            await notificationService.SendTicketEscalatedAsync(ticket, escalation);
 
             _logger.LogWarning("AUTO-ESCALATED (Critical Unassigned) — TicketId: {TicketId} | Created: {CreatedAt}",ticket.Id, ticket.CreatedAt);
         }
     }
 
-    private async Task AutoEscalateOnHoldAsync(IUnitOfWork uow,IBusinessHoursService bhs,DateTime now,CancellationToken ct)
+    private async Task AutoEscalateOnHoldAsync(IUnitOfWork uow,IBusinessHoursService bhs, INotificationService notificationService, DateTime now,CancellationToken ct)
     {
         if (!bhs.IsBusinessHour(now))
             return;
@@ -156,7 +169,7 @@ public class SlaMonitorService : BackgroundService
                 ticket.IsEscalated = true;
                 ticket.LastModifiedAt = now;
 
-                ticket.EscalationRecord = new Domain.Entities.EscalationRecord
+                var escalation = new Domain.Entities.EscalationRecord
                 {
                     TicketId = ticket.Id,
                     Reason = "System Auto-Escalation: Ticket on hold for 3+ business days.",
@@ -167,6 +180,12 @@ public class SlaMonitorService : BackgroundService
                     CreatedAt = now,
                     CreatedBy = "system"
                 };
+
+                ticket.EscalationRecord = escalation;
+                uow.Tickets.Update(ticket);
+
+                // Notify parties (PRD 10.4)
+                await notificationService.SendTicketEscalatedAsync(ticket, escalation);
 
 
                 _logger.LogWarning("AUTO-ESCALATED (OnHold Too Long) — TicketId: {TicketId} | OnHold since: {Since}",ticket.Id, ticket.LastModifiedAt);
