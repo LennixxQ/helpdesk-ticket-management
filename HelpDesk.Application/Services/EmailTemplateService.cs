@@ -53,6 +53,11 @@ namespace HelpDesk.Application.Services
             return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.TicketView", model);
         }
 
+        public async Task<string> RenderPasswordChangedAsync(SecurityEmailModel model)
+        {
+            return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.PasswordChanged", model);
+        }
+
         public string RenderPlainText(TicketEmailModel model) => 
             $"""
             {model.SystemName} — Ticket Notification

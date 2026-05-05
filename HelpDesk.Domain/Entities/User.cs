@@ -1,4 +1,4 @@
-﻿using HelpDesk.Domain.Enums;
+using HelpDesk.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace HelpDesk.Domain.Entities;
@@ -13,6 +13,8 @@ public class User : IdentityUser<Guid>
     public DateTime? LastModifiedAt { get; set; }
     public string? LastModifiedBy { get; set; }
     public Guid? DepartmentId { get; set; }
+    public string? MfaSecretKey { get; set; }
+    public bool IsMfaEnabled { get; set; } = false;
 
 
     public Department? Department { get; set; }

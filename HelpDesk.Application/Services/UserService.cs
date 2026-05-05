@@ -17,14 +17,16 @@ namespace HelpDesk.Application.Services
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly INotificationService _notificationService;
         private readonly CreateUserValidator _validator;
         private readonly BulkImportRowValidator _bulkValidator;
 
-        public UserService(IUnitOfWork uow,IMapper mapper,IPasswordHasher<User> passwordHasher)
+        public UserService(IUnitOfWork uow,IMapper mapper,IPasswordHasher<User> passwordHasher, INotificationService notificationService)
         {
             _uow = uow;
             _mapper = mapper;
             _passwordHasher = passwordHasher;
+            _notificationService = notificationService;
             _validator = new CreateUserValidator();
             _bulkValidator = new BulkImportRowValidator();
         }
@@ -99,6 +101,32 @@ namespace HelpDesk.Application.Services
             await _uow.SaveChangesAsync();
 
             return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user), "User deactivated.");
+        }
+
+        public async Task<BaseResponse<bool>> ChangePasswordAsync(Guid userId, string currentPassword, string newPassword)
+        {
+            var user = await _uow.Users.GetByIdAsync(userId);
+            if (user is null) return BaseResponse<bool>.Fail("User not found.");
+
+            // 1. Verify Current Password
+            var verifyResult = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash!, currentPassword);
+            if (verifyResult == PasswordVerificationResult.Failed)
+                return BaseResponse<bool>.Fail("Incorrect current password.");
+
+            // 2. Hash New Password
+            user.PasswordHash = _passwordHasher.HashPassword(user, newPassword);
+
+            // 3. Update Security Stamp (This logs out all active sessions!)
+            user.SecurityStamp = Guid.NewGuid().ToString();
+            user.LastModifiedAt = DateTime.UtcNow;
+
+            _uow.Users.Update(user);
+            await _uow.SaveChangesAsync();
+
+            // 4. Send Email Notification
+            await _notificationService.SendPasswordChangedAsync(user);
+
+            return BaseResponse<bool>.Ok(true, "Password changed successfully. Please login again.");
         }
 
         public async Task<BaseResponse<List<UserDto>>> GetActiveAgentsAsync()

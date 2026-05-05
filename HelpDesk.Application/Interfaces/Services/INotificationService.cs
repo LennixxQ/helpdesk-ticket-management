@@ -14,6 +14,7 @@ namespace HelpDesk.Application.Interfaces.Services
         Task SendTicketClosedAsync(Ticket ticket, CancellationToken ct = default);
         Task SendCsatSurveyAsync(Ticket ticket, CancellationToken ct = default);
         Task SendWelcomeAsync(User user, string tempPassword, CancellationToken ct = default);
+        Task SendPasswordChangedAsync(User user, CancellationToken ct = default);
         Task SendTestEmailAsync(Guid adminId, string toEmail, CancellationToken ct = default);
     }
 }

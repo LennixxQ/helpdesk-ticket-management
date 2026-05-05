@@ -57,6 +57,7 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<IEmailTemplateService>(_ => new EmailTemplateService(typeof(DependencyInjection).Assembly));
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<ISlaDeadlineCalculator, SlaDeadlineCalculator>();
+            services.AddScoped<IMfaService, MfaService>();
 
             services.AddSingleton<IBusinessHoursService, BusinessHoursService>();
             services.AddHostedService<SlaMonitorService>();

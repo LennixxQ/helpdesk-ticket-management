@@ -1,4 +1,4 @@
-﻿namespace HelpDesk.Domain.Enums
+namespace HelpDesk.Domain.Enums
 {
     public enum NotificationEventType
     {
@@ -14,6 +14,7 @@
         AgentReassigned = 10,
         AccountCreated = 11,
         AccountDeactivated = 12,
-        SurveyRequest = 13
+        SurveyRequest = 13,
+        PasswordChanged = 14
     }
 }

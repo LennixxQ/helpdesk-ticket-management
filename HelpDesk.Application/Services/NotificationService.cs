@@ -222,6 +222,28 @@ namespace HelpDesk.Application.Services
             }, ct);
         }
 
+        public async Task SendPasswordChangedAsync(User user, CancellationToken ct = default)
+        {
+            var model = new SecurityEmailModel
+            {
+                SystemName = SystemName,
+                RecipientName = user.FullName,
+                ActionTimestamp = DateTime.UtcNow
+            };
+
+            var html = await _templateService.RenderPasswordChangedAsync(model);
+
+            await _emailService.SendAsync(new EmailMessage
+            {
+                RecipientUserId = user.Id,
+                ToEmail = user.Email!,
+                Subject = $"Security Alert: Your {SystemName} password was changed",
+                HtmlBody = html,
+                PlainTextBody = $"Hello {user.FullName}, your {SystemName} password was changed on {model.ActionTimestamp:f} UTC. If you did not do this, contact support immediately.",
+                EventType = NotificationEventType.PasswordChanged.ToString()
+            }, ct);
+        }
+
         public async Task SendTestEmailAsync(Guid adminId, string toEmail, CancellationToken ct = default)
         {
             await _emailService.SendAsync(new EmailMessage

@@ -8,6 +8,7 @@ namespace HelpDesk.Application.Interfaces.Services
         Task<string> RenderCsatSurveyAsync(TicketEmailModel model);
         Task<string> RenderCsatSurveyViewAsync(HelpDesk.Application.DTOs.Ticket.TicketDto model);
         Task<string> RenderTicketViewAsync(HelpDesk.Application.DTOs.Ticket.TicketDto model);
+        Task<string> RenderPasswordChangedAsync(SecurityEmailModel model);
         string RenderPlainText(TicketEmailModel model);
     }
 }

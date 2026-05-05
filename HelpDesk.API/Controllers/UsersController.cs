@@ -1,6 +1,8 @@
 using HelpDesk.API.Records;
 using HelpDesk.Application.Commands.UserCommand;
+using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs.Import;
+using HelpDesk.Application.DTOs.User;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -92,6 +94,18 @@ namespace HelpDesk.API.Controllers
             _logger.LogInformation("Admin {AdminId} bulk importing {Count} users",_currentUserProvider.GetCurrentUserId(), rows.Count);
             var result = await _userService.BulkImportAsync(rows, _currentUserProvider.GetCurrentUserId());
             return result.Success ? Ok(result) : BadRequest(result);
+        }
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+        {
+            if (request.NewPassword != request.ConfirmPassword)
+                return BadRequest(BaseResponse<bool>.Fail("New password and confirmation do not match."));
+
+            var userId = _currentUserProvider.GetCurrentUserId();
+            _logger.LogInformation("User {UserId} changing their password.", userId);
+
+            var response = await _userService.ChangePasswordAsync(userId, request.CurrentPassword, request.NewPassword);
+            return response.Success ? Ok(response) : BadRequest(response);
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿using HelpDesk.Application.Commands.UserCommand;
+using HelpDesk.Application.Commands.UserCommand;
 using HelpDesk.Application.Common;
-using HelpDesk.Application.DTOs;
 using HelpDesk.Application.DTOs.Import;
 using HelpDesk.Application.DTOs.User;
 
@@ -13,6 +12,7 @@ namespace HelpDesk.Application.Interfaces.Services
         Task<BaseResponse<UserDto>> GetByIdAsync(Guid id);
         Task<BaseResponse<UserDto>> UpdateRoleAsync(UpdateUserRoleCommand command);
         Task<BaseResponse<UserDto>> DeactivateAsync(Guid userId);
+        Task<BaseResponse<bool>> ChangePasswordAsync(Guid userId, string currentPassword, string newPassword);
         Task<BaseResponse<List<UserDto>>> GetActiveAgentsAsync();
         Task<BaseResponse<object>> MoveDepartmentAsync(Guid userId, Guid departmentId);
         Task<BaseResponse<BulkImportResultDto>> BulkImportAsync(List<BulkImportRowDto> rows, Guid adminId);
