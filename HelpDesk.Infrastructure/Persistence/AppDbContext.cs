@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Interfaces.Repositories;
+using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Domain.Entities;
 using HelpDesk.Domain.Entities.Common;
 using Microsoft.AspNetCore.Http;
@@ -75,7 +75,8 @@ namespace HelpDesk.Infrastructure.Persistence
                 {
                     entry.Entity.Id = entry.Entity.Id == Guid.Empty ? Guid.NewGuid() : entry.Entity.Id;
                     entry.Entity.CreatedAt = now;
-                    entry.Entity.CreatedBy = currentUser;
+                    if (string.IsNullOrEmpty(entry.Entity.CreatedBy))
+                        entry.Entity.CreatedBy = currentUser;
                 }
                 if (entry.State == EntityState.Modified)
                 {
@@ -106,8 +107,14 @@ namespace HelpDesk.Infrastructure.Persistence
             return result;
         }
 
-        private string GetCurrentUser() =>
-            _currentUserProvider?.GetCurrentUserId().ToString()?? _httpContextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "SYSTEM-ADMIN";
+        private string GetCurrentUser()
+        {
+            var userId = _currentUserProvider?.GetCurrentUserId();
+            if (userId != null && userId != Guid.Empty)
+                return userId.Value.ToString();
+
+            return _httpContextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "SYSTEM";
+        }
 
         private List<AuditEntry> GenerateAuditEntries()
         {

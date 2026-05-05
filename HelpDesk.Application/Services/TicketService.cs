@@ -470,7 +470,7 @@ namespace HelpDesk.Application.Services
                 Comments = comments,
                 SubmittedAt = DateTime.UtcNow,
                 CreatedAt = DateTime.UtcNow,
-                CreatedBy = "system"
+                CreatedBy = ticket.RaisedByUserId.ToString()
             };
 
             await _uow.Csat.AddAsync(csat);
