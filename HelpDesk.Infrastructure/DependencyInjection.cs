@@ -3,6 +3,7 @@ using HelpDesk.Application.Interfaces.Repositories.GenericInterface;
 using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Application.Services;
 using HelpDesk.Domain.Entities;
+using HelpDesk.Infrastructure.BackgroundServices;
 using HelpDesk.Infrastructure.Identity;
 using HelpDesk.Infrastructure.Persistence;
 using HelpDesk.Infrastructure.Persistence.Repositories;
@@ -29,6 +30,14 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IAuditLogRepository, AuditLogRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<ICsatRepository, CsatRepository>();
+            services.AddScoped<IKbArticleRepository, KbArticleRepository>();
+            services.AddScoped<INotificationPreferenceRepository, NotificationPreferenceRepository>();
+            services.AddScoped<IRecurringTemplateRepository, RecurringTemplateRepository>();
+            services.AddScoped<ISlaRepository, SlaRepository>();
+            services.AddScoped<ISystemSettingRepository, SystemSettingRepository>();
+            services.AddScoped<ITicketReportRepository, TicketReportRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITicketService, TicketService>();
@@ -38,13 +47,20 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IKbArticleService, KbArticleService>();
             services.AddScoped<IEscalationService, EscalationService>();
             services.AddScoped<ICsatService, CsatService>();
             services.AddScoped<IRecurringTemplateService, RecurringTemplateService>();
             services.AddScoped<ISystemSettingService, SystemSettingService>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IEmailTemplateService, EmailTemplateService>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<ISlaDeadlineCalculator, SlaDeadlineCalculator>();
+
+            services.AddSingleton<IBusinessHoursService, BusinessHoursService>();
+            services.AddHostedService<SlaMonitorService>();
+            services.AddHostedService<RecurringTicketService>();
 
             return services;
         }

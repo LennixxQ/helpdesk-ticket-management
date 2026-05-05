@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Common;
+﻿using HelpDesk.Domain.Exceptions;
 using System.Net;
 using System.Text.Json;
 namespace HelpDesk.API.Middleware
@@ -22,23 +22,37 @@ namespace HelpDesk.API.Middleware
             } catch(Exception ex)
             {
                 _logger.LogError(ex, "Unhandled exception on {Method} {Path}", context.Request.Method, context.Request.Path);
-                await HandleExceptionAsync(context, ex);
+                await HandleAsync(context, ex);
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception ex)
+        private async Task HandleAsync(HttpContext context, Exception ex)
         {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-
-            var response = BaseResponse<object>.Fail("An unexpected error occurred. Please try again later.");
-
-            var options = new JsonSerializerOptions
+            var (statusCode, message) = ex switch
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                NotFoundException e => (HttpStatusCode.NotFound, e.Message),
+                UnauthorizedDomainException e => (HttpStatusCode.Forbidden, e.Message),
+                DomainException e => (HttpStatusCode.BadRequest, e.Message),
+                _ => (HttpStatusCode.InternalServerError, "An unexpected error occurred.")
             };
 
-            return context.Response.WriteAsync(JsonSerializer.Serialize(response, options));
+            if (statusCode == HttpStatusCode.InternalServerError)
+                _logger.LogError(ex, "Unhandled exception on {Path}", context.Request.Path);
+            else
+                _logger.LogWarning("Handled exception [{Status}] on {Path}: {Message}",
+                    (int)statusCode, context.Request.Path, ex.Message);
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)statusCode;
+
+            await context.Response.WriteAsync(JsonSerializer.Serialize(new
+            {
+                success = false,
+                message,
+                data = (object?)null,
+                errors = new List<string>()
+            },
+            new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
         }
     }
 }

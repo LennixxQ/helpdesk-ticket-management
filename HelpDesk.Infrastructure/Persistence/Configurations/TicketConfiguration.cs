@@ -25,6 +25,7 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
             
             builder.Property(t => t.LastModifiedBy).HasMaxLength(256);
 
+
             builder.HasOne(t => t.Category).WithMany(c => c.Tickets).HasForeignKey(t => t.CategoryId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(t => t.Comments).WithOne(c => c.Ticket).HasForeignKey(c => c.TicketId).OnDelete(DeleteBehavior.Cascade);

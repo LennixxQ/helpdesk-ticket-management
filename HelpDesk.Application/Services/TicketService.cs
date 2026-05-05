@@ -4,6 +4,7 @@ using HelpDesk.Application.Commands.TicketCommand;
 using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs;
 using HelpDesk.Application.DTOs.Comment;
+using HelpDesk.Application.DTOs.Sla;
 using HelpDesk.Application.DTOs.Ticket;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
@@ -17,17 +18,21 @@ namespace HelpDesk.Application.Services
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly ISlaDeadlineCalculator _slaCalculator;
         private readonly CreateTicketValidator _createValidator;
         private readonly AssignTicketValidator _assignValidator;
         private readonly AddCommentValidator _commentValidator;
+        private readonly SlaOverrideValidator _slaOverrideValidator;
 
-        public TicketService(IUnitOfWork uow, IMapper mapper)
+        public TicketService(IUnitOfWork uow,IMapper mapper,ISlaDeadlineCalculator slaCalculator)
         {
             _uow = uow;
             _mapper = mapper;
+            _slaCalculator = slaCalculator;
             _createValidator = new CreateTicketValidator();
             _assignValidator = new AssignTicketValidator();
             _commentValidator = new AddCommentValidator();
+            _slaOverrideValidator = new SlaOverrideValidator();
         }
 
         public async Task<BaseResponse<CreateTicketResponseDto>> CreateAsync(
@@ -58,25 +63,27 @@ namespace HelpDesk.Application.Services
             };
 
             await _uow.Tickets.AddAsync(ticket);
+            await _uow.SaveChangesAsync();
 
-            // Auto-create SLA record
+            // SLA record — business hours aware
             var policy = await _uow.Sla.GetPolicyByPriorityAsync(command.Priority);
             if (policy is not null)
             {
+                var deadline = _slaCalculator.Calculate(DateTime.UtcNow, policy.ResolutionMinutes);
                 var slaRecord = new SlaRecord
                 {
                     Id = Guid.NewGuid(),
                     TicketId = ticket.Id,
-                    SlaDeadline = DateTime.UtcNow.AddMinutes(policy.ResolutionMinutes),
+                    SlaDeadline = deadline,
                     Status = SlaStatus.WithinSla,
                     CreatedAt = DateTime.UtcNow,
                     CreatedBy = currentUserId.ToString()
                 };
                 await _uow.Sla.AddAsync(slaRecord);
-                ticket.SlaDeadline = slaRecord.SlaDeadline;
+                ticket.SlaDeadline = deadline;
+                _uow.Tickets.Update(ticket);
+                await _uow.SaveChangesAsync();
             }
-
-            await _uow.SaveChangesAsync();
 
             return BaseResponse<CreateTicketResponseDto>.Ok(
                 _mapper.Map<CreateTicketResponseDto>(ticket), "Ticket created.");
@@ -105,7 +112,6 @@ namespace HelpDesk.Application.Services
             ticket.AssignedAgentId = command.AgentId;
             ticket.Status = TicketStatus.InProgress;
             ticket.LastModifiedAt = DateTime.UtcNow;
-
             _uow.Tickets.Update(ticket);
             await _uow.SaveChangesAsync();
 
@@ -122,7 +128,6 @@ namespace HelpDesk.Application.Services
             if (currentUserRole == UserRole.Agent && ticket.AssignedAgentId != currentUserId)
                 return BaseResponse<TicketDto>.Fail("You can only update tickets assigned to you.");
 
-            // Validate transition
             var allowed = new Dictionary<TicketStatus, TicketStatus[]>
             {
                 [TicketStatus.Open] = new[] { TicketStatus.InProgress, TicketStatus.Closed },
@@ -133,7 +138,8 @@ namespace HelpDesk.Application.Services
                 [TicketStatus.Reopened] = new[] { TicketStatus.InProgress, TicketStatus.Closed },
             };
 
-            if (!allowed.TryGetValue(ticket.Status, out var validNext) || !validNext.Contains(command.NewStatus))
+            if (!allowed.TryGetValue(ticket.Status, out var validNext) ||
+                !validNext.Contains(command.NewStatus))
                 return BaseResponse<TicketDto>.Fail(
                     $"Cannot transition from '{ticket.Status}' to '{command.NewStatus}'.");
 
@@ -146,19 +152,22 @@ namespace HelpDesk.Application.Services
             if (slaRecord is not null)
             {
                 if (command.NewStatus == TicketStatus.OnHold && slaRecord.PausedAt is null)
+                {
                     slaRecord.PausedAt = DateTime.UtcNow;
+                    _uow.Sla.Update(slaRecord);
+                }
                 else if (command.NewStatus == TicketStatus.InProgress && slaRecord.PausedAt is not null)
                 {
                     slaRecord.TotalPausedMinutes += (int)(DateTime.UtcNow - slaRecord.PausedAt.Value).TotalMinutes;
                     slaRecord.PausedAt = null;
+                    _uow.Sla.Update(slaRecord);
                 }
-                _uow.Sla.Update(slaRecord);
             }
 
             if (command.NewStatus == TicketStatus.Reopened)
             {
                 ticket.ReopenCount++;
-                ticket.IsEscalated = false; // reset escalation on reopen
+                ticket.IsEscalated = false;
             }
 
             ticket.Status = command.NewStatus;
@@ -200,6 +209,7 @@ namespace HelpDesk.Application.Services
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = currentUserId.ToString()
             };
+
             await _uow.Comments.AddAsync(comment);
             ticket.LastModifiedAt = DateTime.UtcNow;
             _uow.Tickets.Update(ticket);
@@ -235,14 +245,13 @@ namespace HelpDesk.Application.Services
                 dto.Page, dto.PageSize, dto.Status, dto.Priority,
                 dto.CategoryId, agentFilter, raisedByFilter);
 
-            var result = new PagedResult<TicketDto>
+            return BaseResponse<PagedResult<TicketDto>>.Ok(new PagedResult<TicketDto>
             {
                 Items = _mapper.Map<List<TicketDto>>(paged.Items),
                 TotalCount = paged.TotalCount,
                 Page = paged.Page,
                 PageSize = paged.PageSize
-            };
-            return BaseResponse<PagedResult<TicketDto>>.Ok(result);
+            });
         }
 
         public async Task<BaseResponse<TicketDto>> ReopenAsync(Guid ticketId)
@@ -255,6 +264,32 @@ namespace HelpDesk.Application.Services
             ticket.Status = TicketStatus.Reopened;
             ticket.ReopenCount++;
             ticket.LastModifiedAt = DateTime.UtcNow;
+
+            // PRD 10.2 — Auto-escalate on 3rd reopen
+            if (ticket.ReopenCount >= 3 && !ticket.IsEscalated)
+            {
+                ticket.IsEscalated = true;
+                ticket.Priority = ticket.Priority switch
+                {
+                    TicketPriority.Low => TicketPriority.Medium,
+                    TicketPriority.Medium => TicketPriority.High,
+                    TicketPriority.High => TicketPriority.Critical,
+                    _ => ticket.Priority
+                };
+                ticket.EscalationRecord = new EscalationRecord
+                {
+                    Id = Guid.NewGuid(),
+                    TicketId = ticket.Id,
+                    Reason = $"System Auto-Escalation: Ticket reopened {ticket.ReopenCount} times.",
+                    Trigger = EscalationTrigger.UserReopenedThreeTimes,
+                    EscalatedBy = "System",
+                    EscalatedByUserId = null,
+                    EscalatedAt = DateTime.UtcNow,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = "system"
+                };
+            }
+
             _uow.Tickets.Update(ticket);
             await _uow.SaveChangesAsync();
 
@@ -283,6 +318,21 @@ namespace HelpDesk.Application.Services
             var ticket = await _uow.Tickets.GetByIdWithDetailsAsync(ticketId);
             if (ticket is null) return BaseResponse<TicketDto>.Fail("Ticket not found.");
 
+            // PRD 6.3 — Recalculate SLA on priority change
+            var policy = await _uow.Sla.GetPolicyByPriorityAsync(priority);
+            var slaRecord = await _uow.Sla.GetByTicketIdAsync(ticketId);
+            if (policy is not null && slaRecord is not null && !slaRecord.IsOverridden)
+            {
+                var newDeadline = _slaCalculator.Calculate(DateTime.UtcNow, policy.ResolutionMinutes);
+                slaRecord.SlaDeadline = newDeadline;
+                slaRecord.IsBreached = false;
+                slaRecord.Status = SlaStatus.WithinSla;
+                ticket.SlaDeadline = newDeadline;
+                ticket.SlaBreached = false;
+                ticket.SlaStatus = SlaStatus.WithinSla;
+                _uow.Sla.Update(slaRecord);
+            }
+
             ticket.Priority = priority;
             ticket.LastModifiedAt = DateTime.UtcNow;
             _uow.Tickets.Update(ticket);
@@ -290,6 +340,76 @@ namespace HelpDesk.Application.Services
 
             var updated = await _uow.Tickets.GetByIdWithDetailsAsync(ticket.Id);
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(updated), "Priority updated.");
+        }
+
+        public async Task<BaseResponse<object>> OverrideSlaAsync(
+            SlaOverrideRequest request, Guid adminId)
+        {
+            var validation = await _slaOverrideValidator.ValidateAsync(request);
+            if (!validation.IsValid)
+                return BaseResponse<object>.Fail("Validation failed.",
+                    validation.Errors.Select(e => e.ErrorMessage).ToList());
+
+            var ticket = await _uow.Tickets.GetByIdWithDetailsAsync(request.TicketId);
+            if (ticket is null) return BaseResponse<object>.Fail("Ticket not found.");
+
+            var slaRecord = await _uow.Sla.GetByTicketIdAsync(request.TicketId);
+            if (slaRecord is null) return BaseResponse<object>.Fail("No SLA record found.");
+
+            slaRecord.SlaDeadline = request.NewDeadline;
+            slaRecord.IsOverridden = true;
+            slaRecord.OverriddenById = adminId;
+            slaRecord.OverrideReason = request.Reason;
+            slaRecord.IsBreached = false;
+            slaRecord.Status = SlaStatus.WithinSla;
+
+            ticket.SlaDeadline = request.NewDeadline;
+            ticket.SlaBreached = false;
+            ticket.SlaStatus = SlaStatus.WithinSla;
+            ticket.LastModifiedAt = DateTime.UtcNow;
+
+            _uow.Sla.Update(slaRecord);
+            _uow.Tickets.Update(ticket);
+            await _uow.SaveChangesAsync();
+
+            return BaseResponse<object>.Ok(new object(), "SLA deadline overridden successfully.");
+        }
+
+        public async Task<BaseResponse<object>> MarkResolvedViaKbAsync(
+            Guid ticketId, Guid articleId, Guid agentId)
+        {
+            var ticket = await _uow.Tickets.GetByIdWithDetailsAsync(ticketId);
+            if (ticket is null) return BaseResponse<object>.Fail("Ticket not found.");
+
+            if (ticket.AssignedAgentId != agentId)
+                return BaseResponse<object>.Fail("Only the assigned agent can mark resolved via KB.");
+
+            var article = await _uow.KbArticles.GetByIdAsync(articleId);
+            if (article is null) return BaseResponse<object>.Fail("KB article not found.");
+
+            ticket.IsResolvedViaKb = true;
+            ticket.ResolvedViaKbArticleId = articleId;
+            ticket.Status = TicketStatus.Resolved;
+            ticket.LastModifiedAt = DateTime.UtcNow;
+
+            _uow.Tickets.Update(ticket);
+            await _uow.SaveChangesAsync();
+
+            return BaseResponse<object>.Ok(new object(), "Ticket marked as resolved via KB.");
+        }
+
+        public async Task<BaseResponse<PagedResult<TicketDto>>> GetArchivedAsync(PaginationDto dto)
+        {
+            var items = await _uow.TicketReports.GetArchivedPagedAsync(dto.Page, dto.PageSize);
+            var total = await _uow.TicketReports.GetArchivedCountAsync();
+
+            return BaseResponse<PagedResult<TicketDto>>.Ok(new PagedResult<TicketDto>
+            {
+                Items = _mapper.Map<List<TicketDto>>(items),
+                TotalCount = total,
+                Page = dto.Page,
+                PageSize = dto.PageSize
+            });
         }
     }
 }

@@ -8,6 +8,7 @@
         public string Action { get; set; } = string.Empty;
         public string PerformedBy { get; set; } = string.Empty;
         public DateTime PerformedAt { get; set; }
+        public string? IpAddress { get; set; } = string.Empty;
         public List<AuditLogDetailDto> Details { get; set; } = new();
     }
 }

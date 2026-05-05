@@ -5,8 +5,8 @@ namespace HelpDesk.Application.Interfaces.Repositories
 {
     public interface IDepartmentRepository : IGenericRepository<Department>
     {
-        Task<Department?> GetByIdAsync(Guid id);
+        Task<Department?> GetByNameAsync(string name);
         Task<IEnumerable<Department>> GetActiveAsync();
-        Task<DepartmentSummary> GetSummaryAsync(Guid departmentId);
+        Task<(int ActiveUsers, int OpenTickets, int Last30Days)> GetSummaryAsync(Guid departmentId);
     }
 }

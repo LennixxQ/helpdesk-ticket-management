@@ -3,6 +3,7 @@ using HelpDesk.Application.Commands.TicketCommand;
 using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs;
 using HelpDesk.Application.DTOs.Comment;
+using HelpDesk.Application.DTOs.Sla;
 using HelpDesk.Application.DTOs.Ticket;
 using HelpDesk.Domain.Enums;
 
@@ -19,5 +20,8 @@ namespace HelpDesk.Application.Interfaces.Services
         Task<BaseResponse<TicketDto>> ReopenAsync(Guid ticketId);
         Task<BaseResponse<TicketDto>> CloseAsync(Guid ticketId);
         Task<BaseResponse<TicketDto>> UpdatePriorityAsync(Guid ticketId, TicketPriority priority);
+        Task<BaseResponse<object>> OverrideSlaAsync(SlaOverrideRequest request, Guid adminId);
+        Task<BaseResponse<object>> MarkResolvedViaKbAsync(Guid ticketId, Guid articleId, Guid agentId);
+        Task<BaseResponse<PagedResult<TicketDto>>> GetArchivedAsync(PaginationDto dto);
     }
 }

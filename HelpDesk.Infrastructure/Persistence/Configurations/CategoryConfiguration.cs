@@ -19,8 +19,6 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
             builder.HasIndex(c => c.Name).IsUnique();
             
             builder.Property(c => c.CreatedBy).IsRequired().HasMaxLength(256);
-            
-            builder.Property(c => c.LastModifiedBy).HasMaxLength(256);
         }
     }
 }

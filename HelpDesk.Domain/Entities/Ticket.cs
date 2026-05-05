@@ -15,6 +15,12 @@ public class Ticket : BaseEntity
     public DateTime? SlaDeadline { get; set; }
     public SlaStatus SlaStatus { get; set; } = SlaStatus.WithinSla;
     public bool SlaBreached { get; set; } = false;
+    public bool IsResolvedViaKb { get; set; } = false;
+    public Guid? ResolvedViaKbArticleId { get; set; }
+    public DateTime? ArchivedAt { get; set; }
+    public string? AffectedAsset { get; set; }
+    public Guid? RelatedTicketId { get; set; }
+
 
 
     public Guid CategoryId { get; set; }
@@ -30,4 +36,6 @@ public class Ticket : BaseEntity
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     public SlaRecord? SlaRecord { get; set; }
     public EscalationRecord? EscalationRecord { get; set; }
+    public KbArticle? ResolvedViaKbArticle { get; set; }
+    public Ticket? RelatedTicket { get; set; }
 }

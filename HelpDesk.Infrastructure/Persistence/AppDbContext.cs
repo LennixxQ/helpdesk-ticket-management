@@ -44,6 +44,17 @@ namespace HelpDesk.Infrastructure.Persistence
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+            builder.Entity<Ticket>().HasQueryFilter(t => !t.IsDeleted);
+            builder.Entity<Category>().HasQueryFilter(c => !c.IsDeleted);
+            builder.Entity<Comment>().HasQueryFilter(c => !c.IsDeleted);
+            builder.Entity<Department>().HasQueryFilter(d => !d.IsDeleted);
+            builder.Entity<KbArticle>().HasQueryFilter(k => !k.IsDeleted);
+            builder.Entity<SlaRecord>().HasQueryFilter(s => !s.IsDeleted);
+            builder.Entity<EscalationRecord>().HasQueryFilter(e => !e.IsDeleted);
+            builder.Entity<CsatResponse>().HasQueryFilter(c => !c.IsDeleted);
+            builder.Entity<RecurringTemplate>().HasQueryFilter(r => !r.IsDeleted);
+            builder.Entity<NotificationPreference>().HasQueryFilter(n => !n.IsDeleted);
+            builder.Entity<EmailLog>().HasQueryFilter(e => !e.IsDeleted);
 
             builder.Entity<User>().ToTable("Users");
             builder.Entity<IdentityRole<Guid>>().ToTable("Roles");
@@ -77,7 +88,8 @@ namespace HelpDesk.Infrastructure.Persistence
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedAt = now;
-                    entry.Entity.CreatedBy = currentUser;
+                    if (string.IsNullOrEmpty(entry.Entity.CreatedBy))
+                        entry.Entity.CreatedBy = currentUser;
                 }
                 if (entry.State == EntityState.Modified)
                 {

@@ -21,10 +21,6 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
             builder.Property(e => e.CreatedBy).IsRequired().HasMaxLength(256);
 
             builder.HasOne(e => e.Recipient).WithMany().HasForeignKey(e => e.RecipientUserId).OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasIndex(e => e.SentAt);
-
-            builder.HasIndex(e => e.IsSuccess);
         }
     }
 }

@@ -1,4 +1,6 @@
+using HelpDesk.API.Records;
 using HelpDesk.Application.Commands.UserCommand;
+using HelpDesk.Application.DTOs.Import;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -24,7 +26,7 @@ namespace HelpDesk.API.Controllers
         [Authorize(Roles ="Admin")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
         {
-            _logger.LogInformation("Admin Creating User with Email: {Email}", command.Email);
+            _logger.LogInformation("Admin {AdminId} creating user: {Email}", _currentUserProvider.GetCurrentUserId(), command.Email);
             var user = await _userService.CreateUserAsync(command);
             return user.Success ? Ok(user) : BadRequest(user);
         }
@@ -39,9 +41,9 @@ namespace HelpDesk.API.Controllers
 
         [HttpGet("getById")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetById([FromQuery] UserIdRequest request)
+        public async Task<IActionResult> GetById([FromQuery] GetByIdRequest request)
         {
-            var user = await _userService.GetByIdAsync(request.userId);
+            var user = await _userService.GetByIdAsync(request.Id);
             return user.Success ? Ok(user) : NotFound(user);
         }
 
@@ -49,6 +51,7 @@ namespace HelpDesk.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateRole([FromBody] UpdateUserRoleCommand request)
         {
+            _logger.LogInformation("Admin {AdminId} changing role for user {UserId} to {Role}",_currentUserProvider.GetCurrentUserId(), request.UserId, request.NewRole);
             var command = new UpdateUserRoleCommand { UserId = request.UserId, NewRole = request.NewRole };
             var response = await _userService.UpdateRoleAsync(command);
             return response.Success ? Ok(response) : BadRequest(response);
@@ -56,9 +59,10 @@ namespace HelpDesk.API.Controllers
 
         [HttpPut("DeleteUser")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Deactivate([FromBody] UserIdDto request)
+        public async Task<IActionResult> Deactivate([FromBody] GetByIdRequest request)
         {
-            var response = await _userService.DeactivateAsync(request.UserId);
+            _logger.LogInformation("Admin {AdminId} deactivating user {UserId}",_currentUserProvider.GetCurrentUserId(), request.Id);
+            var response = await _userService.DeactivateAsync(request.Id);
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
@@ -70,7 +74,24 @@ namespace HelpDesk.API.Controllers
             return Ok(response);
         }
 
-        public record UserIdDto(Guid UserId);
-        public record UserIdRequest(Guid userId);
+        // POST api/users/moveDepartment
+        [HttpPost("moveDepartment")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> MoveDepartment([FromBody] MoveDepartmentRequest dto)
+        {
+            _logger.LogInformation("Admin {AdminId} moving user {UserId} to dept {DeptId}",_currentUserProvider.GetCurrentUserId(), dto.UserId, dto.DepartmentId);
+            var result = await _userService.MoveDepartmentAsync(dto.UserId, dto.DepartmentId);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
+        // POST api/users/bulkImport
+        [HttpPost("bulkImport")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> BulkImport([FromBody] List<BulkImportRowDto> rows)
+        {
+            _logger.LogInformation("Admin {AdminId} bulk importing {Count} users",_currentUserProvider.GetCurrentUserId(), rows.Count);
+            var result = await _userService.BulkImportAsync(rows, _currentUserProvider.GetCurrentUserId());
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
     }
 }

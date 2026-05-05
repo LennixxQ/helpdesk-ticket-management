@@ -13,8 +13,6 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
             builder.Property(d => d.Name).IsRequired().HasMaxLength(100);
             
             builder.Property(d => d.CreatedBy).IsRequired().HasMaxLength(256);
-            
-            builder.Property(d => d.LastModifiedBy).HasMaxLength(256);
 
             builder.HasOne(d => d.DepartmentHead).WithMany().HasForeignKey(d => d.DepartmentHeadId).OnDelete(DeleteBehavior.SetNull);
 

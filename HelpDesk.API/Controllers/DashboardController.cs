@@ -22,7 +22,7 @@ namespace HelpDesk.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetDashboard()
         {
-            _logger.LogInformation("Admin requesting dashboard data.");
+            _logger.LogInformation("Admin {AdminId} fetching dashboard stats",_currentUserProvider.GetCurrentUserId());
             var response = await _dashboardService.GetDashboardAsync();
             return Ok(response);
         }

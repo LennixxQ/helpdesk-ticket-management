@@ -17,8 +17,6 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
             builder.Property(a => a.IpAddress).HasMaxLength(45);
             
             builder.Property(a => a.PerformedBy).IsRequired().HasMaxLength(256);
-            
-            builder.Property(a => a.PerformedBy).IsRequired().HasMaxLength(256);
 
             builder.HasMany(a => a.Details).WithOne(d => d.AuditLog).HasForeignKey(d => d.AuditLogId).OnDelete(DeleteBehavior.Cascade);
 

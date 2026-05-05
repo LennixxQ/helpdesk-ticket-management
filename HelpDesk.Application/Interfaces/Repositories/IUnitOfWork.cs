@@ -10,11 +10,11 @@
         IDepartmentRepository Departments { get; }
         ISlaRepository Sla { get; }
         IKbArticleRepository KbArticles { get; }
-        IKbArticleVersionRepository KbArticleVersions { get; }
         ICsatRepository Csat { get; }
         IRecurringTemplateRepository RecurringTemplates { get; }
         ISystemSettingRepository SystemSettings { get; }
         INotificationPreferenceRepository NotificationPreferences { get; }
+        ITicketReportRepository TicketReports { get; }
         Task<int> SaveChangesAsync();
     }
 }

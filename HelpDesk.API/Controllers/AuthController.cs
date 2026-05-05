@@ -1,4 +1,5 @@
-﻿using HelpDesk.Application.Interfaces.Repositories;
+﻿using HelpDesk.Application.Commands.AuthCommand;
+using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,10 +24,12 @@ namespace HelpDesk.API.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
             _logger.LogInformation("Login attempt for email: {Email}", loginRequest.Email);
-            var response = await _authService.LoginAsync(loginRequest.Email, loginRequest.Password);
+            var response = await _authService.LoginAsync(new LoginRequest
+            {
+                Email = loginRequest.Email,
+                Password = loginRequest.Password
+            });
             return response.Success ? Ok(response) : Unauthorized(response);
         }
-
-        public record LoginRequest(string Email, string Password);
     }
 }

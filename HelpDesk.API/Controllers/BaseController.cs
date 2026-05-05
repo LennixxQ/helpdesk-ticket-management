@@ -1,11 +1,13 @@
 ﻿using HelpDesk.Application.Interfaces.Repositories;
-using HelpDesk.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HelpDesk.API.Controllers
 {
     [ApiController]
-    public class BaseController : ControllerBase
+    [Authorize]
+    [Route("api/[controller]")]
+    public abstract class BaseController : ControllerBase
     {
         protected readonly ICurrentUserProvider _currentUserProvider;
 
@@ -13,12 +15,5 @@ namespace HelpDesk.API.Controllers
         {
             _currentUserProvider = currentUserProvider;
         }
-
-        protected Guid CurrentUserId => _currentUserProvider.GetCurrentUserId();
-        protected UserRole CurrentUserRole => _currentUserProvider.GetCurrentUserRole();
-        protected string CurrentUserName => _currentUserProvider.GetCurrentUserName();
-        protected string CurrentUserEmail => _currentUserProvider.GetCurrentUserEmail();
-        protected bool IsAuthenticated => _currentUserProvider.IsAuthenticated();
-
     }
 }

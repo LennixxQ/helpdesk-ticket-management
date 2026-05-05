@@ -1,11 +1,13 @@
 using AutoMapper;
 using HelpDesk.Application.Commands.UserCommand;
 using HelpDesk.Application.Common;
+using HelpDesk.Application.DTOs.Import;
 using HelpDesk.Application.DTOs.User;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Application.Validators;
 using HelpDesk.Domain.Entities;
+using HelpDesk.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace HelpDesk.Application.Services
@@ -16,21 +18,22 @@ namespace HelpDesk.Application.Services
         private readonly IMapper _mapper;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly CreateUserValidator _validator;
+        private readonly BulkImportRowValidator _bulkValidator;
 
-        public UserService(IUnitOfWork uow, IMapper mapper, IPasswordHasher<User> passwordHasher)
+        public UserService(IUnitOfWork uow,IMapper mapper,IPasswordHasher<User> passwordHasher)
         {
             _uow = uow;
             _mapper = mapper;
             _passwordHasher = passwordHasher;
             _validator = new CreateUserValidator();
+            _bulkValidator = new BulkImportRowValidator();
         }
 
         public async Task<BaseResponse<UserDto>> CreateUserAsync(CreateUserCommand command)
         {
             var validation = await _validator.ValidateAsync(command);
             if (!validation.IsValid)
-                return BaseResponse<UserDto>.Fail("Validation failed.",
-                    validation.Errors.Select(e => e.ErrorMessage).ToList());
+                return BaseResponse<UserDto>.Fail("Validation failed.",validation.Errors.Select(e => e.ErrorMessage).ToList());
 
             var existing = await _uow.Users.GetByEmailAsync(command.Email);
             if (existing is not null)
@@ -47,8 +50,8 @@ namespace HelpDesk.Application.Services
                 Role = command.Role,
                 DepartmentId = command.DepartmentId,
                 IsActive = true,
-                CreatedBy = "system",
                 CreatedAt = DateTime.UtcNow,
+                CreatedBy = "system",
                 EmailConfirmed = true
             };
             user.PasswordHash = _passwordHasher.HashPassword(user, command.Password);
@@ -102,6 +105,94 @@ namespace HelpDesk.Application.Services
         {
             var agents = await _uow.Users.GetActiveAgentsAsync();
             return BaseResponse<List<UserDto>>.Ok(_mapper.Map<List<UserDto>>(agents));
+        }
+
+        public async Task<BaseResponse<object>> MoveDepartmentAsync(Guid userId, Guid departmentId)
+        {
+            var user = await _uow.Users.GetByIdAsync(userId);
+            if (user is null) return BaseResponse<object>.Fail("User not found.");
+
+            var dept = await _uow.Departments.GetByIdAsync(departmentId);
+            if (dept is null || !dept.IsActive)
+                return BaseResponse<object>.Fail("Department not found or inactive.");
+
+            user.DepartmentId = departmentId;
+            user.LastModifiedAt = DateTime.UtcNow;
+            _uow.Users.Update(user);
+            await _uow.SaveChangesAsync();
+
+            return BaseResponse<object>.Ok(new object(),
+                $"User moved to department '{dept.Name}' successfully.");
+        }
+
+        public async Task<BaseResponse<BulkImportResultDto>> BulkImportAsync(
+            List<BulkImportRowDto> rows, Guid adminId)
+        {
+            var result = new BulkImportResultDto();
+            var errors = new List<string>();
+
+            for (int i = 0; i < rows.Count; i++)
+            {
+                var validation = await _bulkValidator.ValidateAsync(rows[i]);
+                if (!validation.IsValid)
+                    foreach (var err in validation.Errors)errors.Add($"Row {i + 1}: {err.ErrorMessage}");
+            }
+
+            if (errors.Any())
+            {
+                result.Errors = errors;
+                return BaseResponse<BulkImportResultDto>.Fail(
+                    "Validation failed. No accounts created.", errors);
+            }
+
+            for (int i = 0; i < rows.Count; i++)
+            {
+                var row = rows[i];
+                var existing = await _uow.Users.GetByEmailAsync(row.Email);
+                if (existing is not null)
+                {
+                    result.RowsSkipped++;
+                    errors.Add($"Row {i + 1}: Email '{row.Email}' already exists — skipped.");
+                    continue;
+                }
+
+                var role = Enum.TryParse<UserRole>(row.Role, out var r) ? r : UserRole.User;
+                var dept = await _uow.Departments.GetByNameAsync(row.Department);
+                var tempPass = GenerateTempPassword();
+
+                var user = new User
+                {
+                    Id = Guid.NewGuid(),
+                    FullName = row.Name,
+                    Email = row.Email,
+                    UserName = row.Email,
+                    NormalizedEmail = row.Email.ToUpper(),
+                    NormalizedUserName = row.Email.ToUpper(),
+                    Role = role,
+                    DepartmentId = dept?.Id,
+                    IsActive = true,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = adminId.ToString(),
+                    EmailConfirmed = true
+                };
+                user.PasswordHash = _passwordHasher.HashPassword(user, tempPass);
+
+                await _uow.Users.AddAsync(user);
+                result.AccountsCreated++;
+            }
+
+            await _uow.SaveChangesAsync();
+            result.Errors = errors;
+
+            return BaseResponse<BulkImportResultDto>.Ok(result,
+                $"{result.AccountsCreated} accounts created, {result.RowsSkipped} skipped.");
+        }
+
+        private static string GenerateTempPassword()
+        {
+            const string chars = "ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$";
+            var rng = new Random();
+            return new string(Enumerable.Range(0, 12).Select(_ => chars[rng.Next(chars.Length)]).ToArray());
         }
     }
 }

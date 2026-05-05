@@ -13,25 +13,19 @@ namespace HelpDesk.Infrastructure.Identity
         {
             _httpContextAccessor = httpContextAccessor;
         }
+        private ClaimsPrincipal? User => _httpContextAccessor.HttpContext?.User;
 
-        string ICurrentUserProvider.GetCurrentUserEmail()
-        {
-            throw new NotImplementedException();
-        }
+        string ICurrentUserProvider.GetCurrentUserEmail() =>
+            User?.FindFirst(ClaimTypes.Email)?.Value ?? User?.FindFirst("email")?.Value ?? string.Empty;
 
         public Guid GetCurrentUserId()
         {
             var claim = User?.FindFirst(ClaimTypes.NameIdentifier) ?? User?.FindFirst("sub");
-            if (claim is null || !Guid.TryParse(claim.Value, out var id))
-                return Guid.Empty;
-            return id;
+            return claim is not null && Guid.TryParse(claim.Value, out var id) ? id : Guid.Empty;
         }
 
-        public string GetCurrentUserName()
-        {
-            var email = User?.FindFirst(ClaimTypes.Email)?.Value ?? User?.FindFirst("unique_name")?.Value ?? User?.FindFirst("name")?.Value ?? "admin@helpdesk.com";
-            return email;
-        }
+        public string GetCurrentUserName() => 
+            User?.FindFirst(ClaimTypes.Name)?.Value ?? User?.FindFirst("unique_name")?.Value ?? "system";
 
         public UserRole GetCurrentUserRole()
         {
@@ -48,6 +42,5 @@ namespace HelpDesk.Infrastructure.Identity
             return authenticated;
         }
 
-        private ClaimsPrincipal? User => _httpContextAccessor.HttpContext?.User;
     }
 }

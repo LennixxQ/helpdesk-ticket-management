@@ -1,3 +1,4 @@
+using HelpDesk.API.Records;
 using HelpDesk.Application.Commands.CategoryCommand;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
@@ -31,19 +32,25 @@ namespace HelpDesk.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreateCategoryCommand command)
         {
-            _logger.LogInformation("Admin creating category: {Name}", command.Name);
+            _logger.LogInformation("Admin {AdminId} creating category: {Name}",_currentUserProvider.GetCurrentUserId(), command.Name);
             var response = await _categoryService.CreateAsync(command);
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
-        [HttpPut("ActivateCategory")]
+        [HttpPost("update")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Toggle([FromBody] CategoryIdDto command)
+        public async Task<IActionResult> Update([FromBody] UpdateCategoryCommand command)
         {
-            var response = await _categoryService.ToggleActiveAsync(command.CategoryId);
-            return response.Success ? Ok(response) : NotFound(response);
+            var result = await _categoryService.UpdateAsync(command);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        public record CategoryIdDto(Guid CategoryId);
+        [HttpPut("ActivateCategory")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ToggleActive([FromBody] GetByIdRequest command)
+        {
+            var response = await _categoryService.ToggleActiveAsync(command.Id);
+            return response.Success ? Ok(response) : NotFound(response);
+        }
     }
 }

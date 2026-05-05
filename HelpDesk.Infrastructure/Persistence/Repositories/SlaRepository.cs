@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Interfaces.Repositories;
+using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Domain.Entities;
 using HelpDesk.Domain.Enums;
 using HelpDesk.Infrastructure.Persistence.Repositories.BaseRepository;
@@ -12,21 +12,19 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
 
         public SlaRepository(AppDbContext context) : base (context)
         {
+            _context = context;
         }
-
-        public async Task AddAsync(SlaRecord record) =>
-            await _context.SlaRecords.AddAsync(record);
-
-        public async Task<IEnumerable<SlaRecord>> GetBreachingRecordsAsync() =>
-            await _context.SlaRecords.Include(s => s.Ticket)
-            .Where(s => !s.IsBreached && s.PausedAt == null && s.SlaDeadline <= DateTime.UtcNow && s.Ticket.Status != TicketStatus.Closed && s.Ticket.Status != TicketStatus.Resolved)
-            .ToListAsync();
 
         public async Task<SlaRecord?> GetByTicketIdAsync(Guid ticketId) =>
             await _context.SlaRecords.FirstOrDefaultAsync(s => s.TicketId == ticketId);
 
         public async Task<SlaPolicy?> GetPolicyByPriorityAsync(TicketPriority priority) =>
             await _context.SlaPolicies.FirstOrDefaultAsync(p => p.Priority == priority && p.IsActive);
+
+        public async Task<IEnumerable<SlaRecord>> GetBreachingRecordsAsync() =>
+            await _context.SlaRecords.Include(s => s.Ticket)
+            .Where(s => !s.IsBreached && s.PausedAt == null && s.SlaDeadline <= DateTime.UtcNow && s.Ticket.Status != TicketStatus.Closed && s.Ticket.Status != TicketStatus.Resolved)
+            .ToListAsync();
 
         public async Task<IEnumerable<SlaRecord>> GetWarningRecordsAsync()
         {
@@ -42,8 +40,5 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
                 return total > 0 && (elapsed / total) >= 0.75;
             });
         }
-
-        public async void Update(SlaRecord record) => 
-            _context.SlaRecords.Update(record);
     }
 }

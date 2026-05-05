@@ -11,7 +11,7 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
         public UserRepository(AppDbContext context) : base(context) { }
 
         public async Task<User?> GetByEmailAsync(string email) =>
-            await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            await _context.Users.Include(u => u.Department).FirstOrDefaultAsync(u => u.Email == email);
 
         public async Task<IEnumerable<User>> GetByRoleAsync(UserRole role) =>
             await _context.Users.Where(u => u.Role == role).ToListAsync();

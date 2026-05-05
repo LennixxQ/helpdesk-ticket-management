@@ -12,13 +12,13 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
         public IAuditLogRepository AuditLogs { get; }
         public ICommentRepository Comments { get; }
         public IDepartmentRepository Departments { get; }
-        //ISlaRepository Sla { get; }
-        //IKbArticleRepository KbArticles { get; }
-        //IKbArticleVersionRepository KbArticleVersions { get; }
-        //ICsatRepository Csat { get; }
-        //IRecurringTemplateRepository RecurringTemplates { get; }
-        //ISystemSettingRepository SystemSettings { get; }
-        //INotificationPreferenceRepository NotificationPreferences { get; }
+        public ISlaRepository Sla { get; }
+        public IKbArticleRepository KbArticles { get; }
+        public ICsatRepository Csat { get; }
+        public IRecurringTemplateRepository RecurringTemplates { get; }
+        public ISystemSettingRepository SystemSettings { get; }
+        public INotificationPreferenceRepository NotificationPreferences { get; }
+        public ITicketReportRepository TicketReports { get; }
 
         public UnitOfWork(AppDbContext context)
         {
@@ -29,13 +29,13 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
             AuditLogs = new AuditLogRepository(context);
             Comments = new CommentRepository(context);
             Departments = new DepartmentRepository(context);
-            //Sla = new SlaRepository(context);
-            //KbArticles = new KbArticleRepository(context);
-            //KbArticleVersions = new KbArticleVersionRepository(context);
-            //Csat = new CsatRepository(context);
-            //RecurringTemplates = new RecurringTemplateRepository(context);
-            //SystemSettings = new SystemSettingRepository(context);
-            //NotificationPreferences = new NotificationPreferenceRepository(context);
+            Sla = new SlaRepository(context);
+            KbArticles = new KbArticleRepository(context);
+            Csat = new CsatRepository(context);
+            RecurringTemplates = new RecurringTemplateRepository(context);
+            SystemSettings = new SystemSettingRepository(context);
+            NotificationPreferences = new NotificationPreferenceRepository(context);
+            TicketReports = new TicketReportRepository(context);
         }
 
         public async Task<int> SaveChangesAsync()
@@ -45,7 +45,6 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
         } 
 
 
-        public void Dispose() =>
-            _context.Dispose();
+        public void Dispose() => _context.Dispose();
     }
 }

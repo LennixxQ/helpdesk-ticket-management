@@ -1,4 +1,5 @@
 ﻿using HelpDesk.Application.DTOs.Comment;
+using HelpDesk.Application.DTOs.Escalation;
 using HelpDesk.Application.DTOs.User;
 using HelpDesk.Domain.Enums;
 

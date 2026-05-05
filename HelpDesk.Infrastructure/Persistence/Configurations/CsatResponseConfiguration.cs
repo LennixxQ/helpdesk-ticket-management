@@ -23,8 +23,6 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
             builder.HasOne(c => c.ClosingAgent).WithMany().HasForeignKey(c => c.ClosingAgentId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasIndex(c => c.TicketId).IsUnique();
-
-            builder.HasIndex(c => c.ClosingAgentId);
         }
     }
 }
