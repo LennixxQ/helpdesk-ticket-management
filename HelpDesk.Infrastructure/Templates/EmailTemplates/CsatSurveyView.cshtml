@@ -1,0 +1,256 @@
+@model HelpDesk.Application.DTOs.Ticket.TicketDto
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rate Our Service - Ticket #@Model.Id.ToString()[..8]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --star-inactive: #e2e8f0;
+      --star-active: #f59e0b;
+      --border: #e2e8f0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: var(--bg); 
+      color: var(--text-main); 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .survey-card {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 480px;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      text-align: center;
+      animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @@keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .logo-container {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--primary) 0%, #3730a3 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: white;
+    }
+
+    h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.025em; }
+    p.subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.5; }
+
+    .ticket-info {
+      background: #f1f5f9;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #475569;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .rating-group {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-direction: row-reverse; /* For CSS sibling selection trick */
+    }
+
+    .rating-group input { display: none; }
+    .rating-group label {
+      cursor: pointer;
+      color: var(--star-inactive);
+      transition: all 0.2s;
+    }
+
+    .rating-group label:hover,
+    .rating-group label:hover ~ label,
+    .rating-group input:checked ~ label {
+      color: var(--star-active);
+      transform: scale(1.1);
+    }
+
+    .comment-group { text-align: left; margin-bottom: 32px; }
+    .comment-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #334155; }
+    textarea {
+      width: 100%;
+      height: 100px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      font-family: inherit;
+      font-size: 15px;
+      resize: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .submit-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+
+    .success-message { display: none; animation: fadeIn 0.4s ease-out; }
+    @@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: #ecfdf5;
+      color: #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="survey-card" id="surveyCard">
+    <div id="surveyFormContent">
+      <div class="logo-container">
+        <i data-lucide="award" size="32"></i>
+      </div>
+      <h1>How did we do?</h1>
+      <p class="subtitle">Your feedback helps us improve our service. Please rate your experience with this ticket.</p>
+      
+      <div class="ticket-info">
+        <i data-lucide="ticket" size="14"></i>
+        Ticket #@Model.Id.ToString()[..8] &bull; @Model.Title
+      </div>
+
+      <form id="surveyForm">
+        <div class="rating-group">
+          <input type="radio" id="star5" name="rating" value="5" /><label for="star5"><i data-lucide="star" fill="currentColor"></i></label>
+          <input type="radio" id="star4" name="rating" value="4" /><label for="star4"><i data-lucide="star" fill="currentColor"></i></label>
+          <input type="radio" id="star3" name="rating" value="3" /><label for="star3"><i data-lucide="star" fill="currentColor"></i></label>
+          <input type="radio" id="star2" name="rating" value="2" /><label for="star2"><i data-lucide="star" fill="currentColor"></i></label>
+          <input type="radio" id="star1" name="rating" value="1" /><label for="star1"><i data-lucide="star" fill="currentColor"></i></label>
+        </div>
+
+        <div class="comment-group">
+          <label for="comments">Any additional comments? (Optional)</label>
+          <textarea id="comments" name="comments" placeholder="Tell us more about your experience..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          Submit Feedback
+          <i data-lucide="arrow-right" size="18"></i>
+        </button>
+      </form>
+    </div>
+
+    <div class="success-message" id="successMessage">
+      <div class="success-icon">
+        <i data-lucide="check-circle" size="48"></i>
+      </div>
+      <h1>Thank You!</h1>
+      <p class="subtitle">Your feedback has been submitted successfully. We appreciate your time and help.</p>
+      <button class="submit-btn" style="background: #f1f5f9; color: #475569; margin-top: 24px;" onclick="window.close()">
+        Close Window
+      </button>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const form = document.getElementById('surveyForm');
+    const card = document.getElementById('surveyCard');
+    const formContent = document.getElementById('surveyFormContent');
+    const successMsg = document.getElementById('successMessage');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      
+      const rating = form.querySelector('input[name="rating"]:checked')?.value;
+      if (!rating) {
+        alert('Please select a rating before submitting.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i data-lucide="loader-2" class="animate-spin"></i> Submitting...';
+      lucide.createIcons();
+
+      const data = {
+        ticketId: '@Model.Id',
+        rating: parseInt(rating),
+        comments: document.getElementById('comments').value
+      };
+
+      try {
+        const response = await fetch('/api/tickets/submit-survey', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          formContent.style.display = 'none';
+          successMsg.style.display = 'block';
+        } else {
+          alert('Something went wrong. Please try again later.');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Submit Feedback <i data-lucide="arrow-right" size="18"></i>';
+          lucide.createIcons();
+        }
+      } catch (err) {
+        alert('Network error. Please check your connection.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Submit Feedback <i data-lucide="arrow-right" size="18"></i>';
+        lucide.createIcons();
+      }
+    };
+  </script>
+</body>
+</html>

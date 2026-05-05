@@ -95,8 +95,8 @@ namespace HelpDesk.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Reopen([FromBody] GetByIdRequest ticketIdDto)
         {
-            _logger.LogInformation("Admin {AdminId} closing ticket {TicketId}",_currentUserProvider.GetCurrentUserId(), ticketIdDto.Id);
-            var result = await _ticketService.CloseAsync(ticketIdDto.Id);
+            _logger.LogInformation("Admin {AdminId} reopening ticket {TicketId}",_currentUserProvider.GetCurrentUserId(), ticketIdDto.Id);
+            var result = await _ticketService.ReopenAsync(ticketIdDto.Id);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
@@ -152,6 +152,26 @@ namespace HelpDesk.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetArchived([FromBody] PaginationDto dto) =>
             Ok(await _ticketService.GetArchivedAsync(dto));
+
+        [HttpGet("/csat/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Csat(Guid id)
+        {
+            var ticket = await _ticketService.GetByIdAsync(id, Guid.Empty, Domain.Enums.UserRole.Admin); // Bypass for survey
+            if (!ticket.Success) return NotFound("Ticket not found.");
+
+            var html = await _templateService.RenderCsatSurveyViewAsync(ticket.Data!);
+            return Content(html, "text/html");
+        }
+
+        [HttpPost("submit-survey")]
+        [AllowAnonymous]
+        public async Task<IActionResult> SubmitSurvey([FromBody] CsatSubmission submission)
+        {
+            _logger.LogInformation("Submitting CSAT survey for ticket {TicketId}", submission.TicketId);
+            var result = await _ticketService.SubmitCsatAsync(submission.TicketId, submission.Rating, submission.Comments);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
 
         [HttpGet("view/{id}")]
         [AllowAnonymous]

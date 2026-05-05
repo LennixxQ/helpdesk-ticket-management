@@ -1,27 +1,54 @@
-@model HelpDesk.Infrastructure.Templates.TicketEmailModel
+@model HelpDesk.Domain.Entities.TicketEmailModel
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>@Model.SystemName Notification</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
-    .container { max-width: 600px; margin: 30px auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .header { background: #1F3864; padding: 24px 32px; }
-    .header h1 { color: #fff; margin: 0; font-size: 22px; }
-    .header p { color: #a8c4e0; margin: 4px 0 0; font-size: 13px; }
-    .body { padding: 32px; }
-    .badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; }
-    .badge-open       { background: #dbeafe; color: #1e40af; }
-    .badge-inprogress { background: #fef9c3; color: #854d0e; }
-    .badge-resolved   { background: #dcfce7; color: #166534; }
-    .badge-closed     { background: #f1f5f9; color: #475569; }
-    .badge-onhold     { background: #fce7f3; color: #9d174d; }
-    .info-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-    .info-table td { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
-    .info-table td:first-child { color: #64748b; width: 140px; font-weight: 600; }
-    .btn { display: inline-block; background: #1F3864; color: #fff !important; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600; margin: 20px 0; }
-    .footer { background: #f8fafc; padding: 20px 32px; text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #e2e8f0; }
-    .footer a { color: #64748b; }
+    /* Email client resets */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    table { border-collapse: collapse !important; }
+    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f8fafc; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+
+    /* Custom Styles */
+    .container { max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+    .header { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); padding: 48px 40px; text-align: center; }
+    .header h1 { color: #ffffff; margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.025em; }
+    .header p { color: #e0e7ff; margin: 8px 0 0; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+    
+    .content { padding: 40px; }
+    .greeting { font-size: 18px; font-weight: 600; color: #0f172a; margin-bottom: 12px; }
+    .message { font-size: 15px; line-height: 1.6; color: #475569; margin-bottom: 32px; }
+    
+    .info-card { background-color: #f1f5f9; border-radius: 12px; padding: 24px; margin-bottom: 32px; }
+    .info-table { width: 100%; }
+    .info-table td { padding: 8px 0; font-size: 14px; vertical-align: top; }
+    .label { color: #64748b; font-weight: 600; width: 120px; }
+    .value { color: #1e293b; font-weight: 500; }
+    
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    .badge-open       { background-color: #dbeafe; color: #1e40af; }
+    .badge-inprogress { background-color: #fef9c3; color: #854d0e; }
+    .badge-resolved   { background-color: #dcfce7; color: #166534; }
+    .badge-closed     { background-color: #f1f5f9; color: #475569; }
+    .badge-onhold     { background-color: #fce7f3; color: #9d174d; }
+    
+    .priority-high    { color: #ef4444; font-weight: 700; }
+    
+    .btn-container { text-align: center; margin-top: 8px; }
+    .btn { display: inline-block; background-color: #4f46e5; color: #ffffff !important; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-size: 15px; font-weight: 600; transition: background-color 0.2s; }
+    
+    .footer { padding: 32px 40px; background-color: #fafafa; border-top: 1px solid #f1f5f9; text-align: center; }
+    .footer p { margin: 0; font-size: 13px; color: #94a3b8; line-height: 1.5; }
+    .footer a { color: #6366f1; text-decoration: none; font-weight: 500; }
+
+    @@media screen and (max-width: 600px) {
+      .container { margin: 0; border-radius: 0; width: 100% !important; }
+      .header, .content, .footer { padding: 32px 24px; }
+    }
   </style>
 </head>
 <body>
@@ -30,59 +57,61 @@
       <h1>@Model.SystemName</h1>
       <p>Ticket Notification</p>
     </div>
-    <div class="body">
-      <p style="font-size:16px; color:#1e293b; margin-top:0;">
-        Hi <strong>@Model.RecipientName</strong>,
-      </p>
-      <p style="color:#475569; font-size:14px;">@Model.MessageBody</p>
+    <div class="content">
+      <div class="greeting">Hi @Model.RecipientName,</div>
+      <div class="message">@Model.MessageBody</div>
 
-      <table class="info-table">
-        <tr>
-          <td>Ticket ID</td>
-          <td><strong>#@Model.TicketId</strong></td>
-        </tr>
-        <tr>
-          <td>Title</td>
-          <td>@Model.TicketTitle</td>
-        </tr>
-        <tr>
-          <td>Status</td>
-          <td><span class="badge badge-@Model.StatusClass">@Model.Status</span></td>
-        </tr>
-        <tr>
-          <td>Priority</td>
-          <td>@Model.Priority</td>
-        </tr>
-        <tr>
-          <td>Category</td>
-          <td>@Model.Category</td>
-        </tr>
-        @if (!string.IsNullOrEmpty(Model.AssignedAgent))
-        {
+      <div class="info-card">
+        <table class="info-table">
           <tr>
-            <td>Assigned To</td>
-            <td>@Model.AssignedAgent</td>
+            <td class="label">Ticket ID</td>
+            <td class="value">#@Model.TicketId.ToUpper()</td>
           </tr>
-        }
-        @if (Model.SlaDeadline.HasValue)
-        {
           <tr>
-            <td>SLA Deadline</td>
-            <td>@Model.SlaDeadline.Value.ToString("dd MMM yyyy, HH:mm") UTC</td>
+            <td class="label">Subject</td>
+            <td class="value">@Model.TicketTitle</td>
           </tr>
-        }
-      </table>
+          <tr>
+            <td class="label">Status</td>
+            <td class="value">
+              <span class="badge badge-@Model.StatusClass">@Model.Status</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Priority</td>
+            <td class="value @(Model.Priority.ToLower().Contains("high") ? "priority-high" : "")">@Model.Priority</td>
+          </tr>
+          <tr>
+            <td class="label">Category</td>
+            <td class="value">@Model.Category</td>
+          </tr>
+          @if (!string.IsNullOrEmpty(Model.AssignedAgent))
+          {
+            <tr>
+              <td class="label">Assigned To</td>
+              <td class="value">@Model.AssignedAgent</td>
+            </tr>
+          }
+          @if (Model.SlaDeadline.HasValue)
+          {
+            <tr>
+              <td class="label">SLA Deadline</td>
+              <td class="value">@Model.SlaDeadline.Value.ToString("MMM dd, yyyy HH:mm") UTC</td>
+            </tr>
+          }
+        </table>
+      </div>
 
-      <a href="@Model.TicketUrl" class="btn">View Ticket →</a>
+      <div class="btn-container">
+        <a href="@Model.TicketUrl" class="btn">View Ticket Details</a>
+      </div>
     </div>
     <div class="footer">
       <p>
-        This email was sent by <strong>@Model.SystemName</strong> Help Desk.<br/>
-        <a href="@Model.PreferencesUrl">Manage notification preferences</a>
-        &nbsp;|&nbsp;
-        Reply to this email to respond directly.
+        Sent via <strong>@Model.SystemName Help Desk</strong>.<br/>
+        <a href="@Model.PreferencesUrl">Notification Settings</a> &nbsp;•&nbsp; Reply to this email to respond.
       </p>
     </div>
   </div>
 </body>
-</html>
+</html>

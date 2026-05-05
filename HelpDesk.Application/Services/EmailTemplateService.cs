@@ -31,6 +31,23 @@ namespace HelpDesk.Application.Services
             }
         }
 
+        public async Task<string> RenderCsatSurveyAsync(TicketEmailModel model)
+        {
+            try
+            {
+                return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.CsatSurvey", model);
+            }
+            catch
+            {
+                return BuildFallbackHtml(model);
+            }
+        }
+
+        public async Task<string> RenderCsatSurveyViewAsync(HelpDesk.Application.DTOs.Ticket.TicketDto model)
+        {
+            return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.CsatSurveyView", model);
+        }
+
         public async Task<string> RenderTicketViewAsync(HelpDesk.Application.DTOs.Ticket.TicketDto model)
         {
             return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.TicketView", model);

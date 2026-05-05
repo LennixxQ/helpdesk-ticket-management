@@ -194,10 +194,17 @@ namespace HelpDesk.Application.Services
             // Notify parties (PRD 5.2)
             if (updated != null)
             {
-                await _notificationService.SendStatusChangedAsync(updated, oldStatus.ToString());
+                if (command.NewStatus == TicketStatus.Closed)
+                {
+                    await _notificationService.SendTicketClosedAsync(updated);
+                }
+                else
+                {
+                    await _notificationService.SendStatusChangedAsync(updated, oldStatus.ToString());
+                }
 
-                // If resolved, send CSAT survey request (PRD 5.2 / 11.2)
-                if (command.NewStatus == TicketStatus.Resolved)
+                // If resolved or closed, send CSAT survey request (PRD 5.2 / 11.2)
+                if (command.NewStatus is TicketStatus.Resolved or TicketStatus.Closed)
                 {
                     await _notificationService.SendCsatSurveyAsync(updated);
                 }
@@ -349,6 +356,14 @@ namespace HelpDesk.Application.Services
             await _uow.SaveChangesAsync();
 
             var updated = await _uow.Tickets.GetByIdWithDetailsAsync(ticket.Id);
+
+            // Notify parties (PRD 5.2)
+            if (updated != null)
+            {
+                await _notificationService.SendTicketClosedAsync(updated);
+                await _notificationService.SendCsatSurveyAsync(updated);
+            }
+
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(updated), "Ticket closed.");
         }
 
@@ -435,6 +450,33 @@ namespace HelpDesk.Application.Services
             await _uow.SaveChangesAsync();
 
             return BaseResponse<object>.Ok(new object(), "Ticket marked as resolved via KB.");
+        }
+
+        public async Task<BaseResponse<object>> SubmitCsatAsync(Guid ticketId, int rating, string? comments)
+        {
+            var ticket = await _uow.Tickets.GetByIdWithDetailsAsync(ticketId);
+            if (ticket is null) return BaseResponse<object>.Fail("Ticket not found.");
+
+            if (await _uow.Csat.ExistsForTicketAsync(ticketId))
+                return BaseResponse<object>.Fail("Survey already submitted for this ticket.");
+
+            var csat = new CsatResponse
+            {
+                Id = Guid.NewGuid(),
+                TicketId = ticketId,
+                RespondentId = ticket.RaisedByUserId,
+                ClosingAgentId = ticket.AssignedAgentId ?? Guid.Empty,
+                Score = rating,
+                Comments = comments,
+                SubmittedAt = DateTime.UtcNow,
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = "system"
+            };
+
+            await _uow.Csat.AddAsync(csat);
+            await _uow.SaveChangesAsync();
+
+            return BaseResponse<object>.Ok(new object(), "Thank you for your feedback!");
         }
 
         public async Task<BaseResponse<PagedResult<TicketDto>>> GetArchivedAsync(PaginationDto dto)

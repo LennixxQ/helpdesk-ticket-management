@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.DTOs.Report;
+using HelpDesk.Application.DTOs.Report;
 using HelpDesk.Domain.Enums;
 
 namespace HelpDesk.API.Records
@@ -17,4 +17,5 @@ namespace HelpDesk.API.Records
     public record ResolvedViaKbRequest(Guid TicketId, Guid ArticleId);
     public record MoveDepartmentRequest(Guid UserId, Guid DepartmentId);
     public record TestEmailRequest(string ToEmail);
+    public record CsatSubmission(Guid TicketId, int Rating, string? Comments);
 }

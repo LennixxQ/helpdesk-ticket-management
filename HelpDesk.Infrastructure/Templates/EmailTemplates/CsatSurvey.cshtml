@@ -1,0 +1,71 @@
+@model HelpDesk.Domain.Entities.TicketEmailModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Satisfaction Survey - @Model.SystemName</title>
+  <style>
+    /* Email client resets */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    table { border-collapse: collapse !important; }
+    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f8fafc; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+
+    /* Custom Styles */
+    .container { max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+    .header { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); padding: 48px 40px; text-align: center; }
+    .header h1 { color: #ffffff; margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.025em; }
+    .header p { color: #e0e7ff; margin: 8px 0 0; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+    
+    .content { padding: 40px; text-align: center; }
+    .stars { font-size: 32px; color: #f59e0b; margin-bottom: 24px; letter-spacing: 4px; }
+    .greeting { font-size: 20px; font-weight: 600; color: #0f172a; margin-bottom: 12px; }
+    .message { font-size: 16px; line-height: 1.6; color: #475569; margin-bottom: 32px; }
+    
+    .ticket-box { background-color: #f8fafc; border: 1px dashed #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 32px; font-size: 14px; color: #64748b; }
+    
+    .btn-container { margin-top: 8px; }
+    .btn { display: inline-block; background-color: #4f46e5; color: #ffffff !important; padding: 16px 40px; border-radius: 12px; text-decoration: none; font-size: 16px; font-weight: 700; transition: background-color 0.2s; box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2); }
+    
+    .footer { padding: 32px 40px; background-color: #fafafa; border-top: 1px solid #f1f5f9; text-align: center; }
+    .footer p { margin: 0; font-size: 13px; color: #94a3b8; line-height: 1.5; }
+    .footer a { color: #6366f1; text-decoration: none; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>@Model.SystemName</h1>
+      <p>Satisfaction Survey</p>
+    </div>
+    <div class="content">
+      <div class="stars">★★★★★</div>
+      <div class="greeting">How did we do?</div>
+      <div class="message">
+        Hi @Model.RecipientName, your ticket was recently resolved. 
+        We value your feedback and would love to know about your experience with our support team.
+      </div>
+
+      <div class="ticket-box">
+        Ticket #@Model.TicketId.ToUpper() &bull; @Model.TicketTitle
+      </div>
+
+      <div class="btn-container">
+        <a href="@Model.TicketUrl" class="btn">Share Your Feedback</a>
+      </div>
+      
+      <p style="margin-top: 32px; font-size: 13px; color: #94a3b8;">
+        This survey takes less than 30 seconds to complete.
+      </p>
+    </div>
+    <div class="footer">
+      <p>
+        Sent via <strong>@Model.SystemName Help Desk</strong>.<br/>
+        <a href="@Model.PreferencesUrl">Notification Settings</a> &nbsp;•&nbsp; Link expires in 7 days.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -159,6 +159,16 @@ namespace HelpDesk.Application.Services
             }
         }
 
+        public async Task SendTicketClosedAsync(Ticket ticket, CancellationToken ct = default)
+        {
+            var raiser = await _uow.Users.GetByIdAsync(ticket.RaisedByUserId);
+            if (raiser is null) return;
+            if (!await IsEnabledAsync(raiser.Id, NotificationEventType.TicketClosed)) return;
+
+            var model = BuildModel(ticket, raiser.FullName, $"Your ticket #{ticket.Id.ToString()[..8]} has been closed. Thank you for your patience.");
+            await SendAsync(raiser, model, NotificationEventType.TicketClosed.ToString(), ct);
+        }
+
         public async Task SendCsatSurveyAsync(Ticket ticket, CancellationToken ct = default)
         {
             var raiser = await _uow.Users.GetByIdAsync(ticket.RaisedByUserId);
@@ -166,9 +176,23 @@ namespace HelpDesk.Application.Services
             if (!await IsEnabledAsync(raiser.Id, NotificationEventType.SurveyRequest)) return;
 
             var surveyUrl = $"{BaseUrl}/csat/{ticket.Id}";
-            var model = BuildModel(ticket, raiser.FullName,$"Your ticket has been resolved! We'd love to hear your feedback.\n\nPlease take 30 seconds to rate your experience.");model.TicketUrl = surveyUrl;
+            var model = BuildModel(ticket, raiser.FullName, "Your ticket has been resolved! We'd love to hear your feedback.\n\nPlease take 30 seconds to rate your experience.");
+            model.TicketUrl = surveyUrl;
 
-            await SendAsync(raiser, model, NotificationEventType.SurveyRequest.ToString(), ct);
+            // For testing: 1 minute delay for survey email (PRD specifies 30m)
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(TimeSpan.FromMinutes(1), ct);
+                    var html = await _templateService.RenderCsatSurveyAsync(model);
+                    await SendAsync(raiser, model, NotificationEventType.SurveyRequest.ToString(), ct, html);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Delayed CSAT survey send failed for ticket {TicketId}", ticket.Id);
+                }
+            });
         }
 
         public async Task SendWelcomeAsync(User user, string tempPassword, CancellationToken ct = default)
@@ -238,9 +262,10 @@ namespace HelpDesk.Application.Services
             User user,
             TicketEmailModel model,
             string eventType,
-            CancellationToken ct)
+            CancellationToken ct,
+            string? htmlOverride = null)
         {
-            var html = await _templateService.RenderTicketEmailAsync(model);
+            var html = htmlOverride ?? await _templateService.RenderTicketEmailAsync(model);
             var plainText = _templateService.RenderPlainText(model);
 
             // Fire and forget — don't await to keep API response fast

@@ -17,6 +17,7 @@ namespace HelpDesk.Application.Interfaces.Services
         Task<BaseResponse<CommentDto>> AddCommentAsync(AddCommentCommand command, Guid currentUserId, UserRole currentUserRole);
         Task<BaseResponse<TicketDto>> GetByIdAsync(Guid id, Guid currentUserId, UserRole currentUserRole);
         Task<BaseResponse<PagedResult<TicketDto>>> GetAllAsync(PaginationDto dto, Guid currentUserId, UserRole currentUserRole);
+        Task<BaseResponse<object>> SubmitCsatAsync(Guid ticketId, int rating, string? comments);
         Task<BaseResponse<TicketDto>> ReopenAsync(Guid ticketId);
         Task<BaseResponse<TicketDto>> CloseAsync(Guid ticketId);
         Task<BaseResponse<TicketDto>> UpdatePriorityAsync(Guid ticketId, TicketPriority priority);
