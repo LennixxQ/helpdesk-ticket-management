@@ -1,5 +1,6 @@
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
+using HelpDesk.Domain.Entities;
 using HelpDesk.Domain.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -149,7 +150,7 @@ public class SlaMonitorService : BackgroundService
         }
     }
 
-    private async Task AutoEscalateOnHoldAsync(IUnitOfWork uow,IBusinessHoursService bhs, INotificationService notificationService, DateTime now,CancellationToken ct)
+    private async Task AutoEscalateOnHoldAsync(IUnitOfWork uow, IBusinessHoursService bhs, INotificationService notificationService, DateTime now, CancellationToken ct)
     {
         if (!bhs.IsBusinessHour(now))
             return;
@@ -178,17 +179,16 @@ public class SlaMonitorService : BackgroundService
                     EscalatedByUserId = null,
                     EscalatedAt = now,
                     CreatedAt = now,
-                    CreatedBy = "system"
+                    CreatedBy = "System"
                 };
 
                 ticket.EscalationRecord = escalation;
                 uow.Tickets.Update(ticket);
 
-                // Notify parties (PRD 10.4)
+                // Notify Admin and Department Head (PRD 10.4)
                 await notificationService.SendTicketEscalatedAsync(ticket, escalation);
 
-
-                _logger.LogWarning("AUTO-ESCALATED (OnHold Too Long) — TicketId: {TicketId} | OnHold since: {Since}",ticket.Id, ticket.LastModifiedAt);
+                _logger.LogWarning("AUTO-ESCALATED (OnHold Too Long) — TicketId: {TicketId} | OnHold since: {Since}", ticket.Id, ticket.LastModifiedAt);
             }
         }
     }

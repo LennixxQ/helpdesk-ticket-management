@@ -12,6 +12,7 @@ namespace HelpDesk.Application.Interfaces.Services
         Task SendSlaWarningAsync(Ticket ticket, CancellationToken ct = default);
         Task SendSlaBreachedAsync(Ticket ticket, CancellationToken ct = default);
         Task SendTicketClosedAsync(Ticket ticket, CancellationToken ct = default);
+        Task SendTicketReopenedAsync(Ticket ticket, string reopenedBy, CancellationToken ct = default);
         Task SendCsatSurveyAsync(Ticket ticket, CancellationToken ct = default);
         Task SendWelcomeAsync(User user, string tempPassword, CancellationToken ct = default);
         Task SendPasswordChangedAsync(User user, CancellationToken ct = default);

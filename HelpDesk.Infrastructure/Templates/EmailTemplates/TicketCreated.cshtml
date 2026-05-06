@@ -96,7 +96,7 @@
           {
             <tr>
               <td class="label">SLA Deadline</td>
-              <td class="value">@Model.SlaDeadline.Value.ToString("MMM dd, yyyy HH:mm") UTC</td>
+              <td class="value">@Model.SlaDeadline.Value.ToString("MMM dd, yyyy HH:mm") @Model.TimeZoneName</td>
             </tr>
           }
         </table>

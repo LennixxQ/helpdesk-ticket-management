@@ -20,8 +20,9 @@ namespace HelpDesk.Application.Services
         private readonly INotificationService _notificationService;
         private readonly CreateUserValidator _validator;
         private readonly BulkImportRowValidator _bulkValidator;
+        private readonly ICurrentUserProvider _currentUserProvider;
 
-        public UserService(IUnitOfWork uow,IMapper mapper,IPasswordHasher<User> passwordHasher, INotificationService notificationService)
+        public UserService(IUnitOfWork uow,IMapper mapper,IPasswordHasher<User> passwordHasher, INotificationService notificationService, ICurrentUserProvider currentUserProvider)
         {
             _uow = uow;
             _mapper = mapper;
@@ -29,6 +30,7 @@ namespace HelpDesk.Application.Services
             _notificationService = notificationService;
             _validator = new CreateUserValidator();
             _bulkValidator = new BulkImportRowValidator();
+            _currentUserProvider = currentUserProvider;
         }
 
         public async Task<BaseResponse<UserDto>> CreateUserAsync(CreateUserCommand command)
@@ -53,13 +55,16 @@ namespace HelpDesk.Application.Services
                 DepartmentId = command.DepartmentId,
                 IsActive = true,
                 CreatedAt = DateTime.UtcNow,
-                CreatedBy = "system",
+                CreatedBy = _currentUserProvider.GetCurrentUserName(),
                 EmailConfirmed = true
             };
             user.PasswordHash = _passwordHasher.HashPassword(user, command.Password);
 
             await _uow.Users.AddAsync(user);
             await _uow.SaveChangesAsync();
+
+            // Send Welcome Email
+            await _notificationService.SendWelcomeAsync(user, command.Password);
 
             return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user), "User created successfully.");
         }
@@ -207,6 +212,9 @@ namespace HelpDesk.Application.Services
 
                 await _uow.Users.AddAsync(user);
                 result.AccountsCreated++;
+
+                // Send Welcome Email
+                await _notificationService.SendWelcomeAsync(user, tempPass);
             }
 
             await _uow.SaveChangesAsync();

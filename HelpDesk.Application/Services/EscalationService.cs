@@ -25,28 +25,29 @@ namespace HelpDesk.Application.Services
             _validator = new EscalateTicketValidator();
         }
 
-        public async Task<BaseResponse<EscalationDto>> EscalateAsync(
-            EscalateTicketCommand command, Guid currentUserId)
+        public async Task<BaseResponse<EscalationDto>> EscalateAsync(EscalateTicketCommand command, Guid currentUserId)
         {
             var validation = await _validator.ValidateAsync(command);
             if (!validation.IsValid)
-                return BaseResponse<EscalationDto>.Fail("Validation failed.",
-                    validation.Errors.Select(e => e.ErrorMessage).ToList());
+                return BaseResponse<EscalationDto>.Fail("Validation failed.",validation.Errors.Select(e => e.ErrorMessage).ToList());
 
             var ticket = await _uow.Tickets.GetByIdWithDetailsAsync(command.TicketId);
-            if (ticket is null) return BaseResponse<EscalationDto>.Fail("Ticket not found.");
+            if (ticket is null)
+                return BaseResponse<EscalationDto>.Fail("Ticket not found.");
 
             if (ticket.IsEscalated)
                 return BaseResponse<EscalationDto>.Fail("Ticket is already escalated.");
 
             var user = await _uow.Users.GetByIdAsync(currentUserId);
-            if (user is null) return BaseResponse<EscalationDto>.Fail("User not found.");
+            if (user is null)
+                return BaseResponse<EscalationDto>.Fail("User not found.");
 
             if (user.Role == UserRole.Agent && ticket.AssignedAgentId != currentUserId)
                 return BaseResponse<EscalationDto>.Fail("Agents can only escalate their assigned tickets.");
 
             // Auto-raise priority
-            ticket.Priority = ticket.Priority switch
+            ticket.Priority = ticket.Priority
+                switch
             {
                 TicketPriority.Low => TicketPriority.Medium,
                 TicketPriority.Medium => TicketPriority.High,
@@ -59,7 +60,6 @@ namespace HelpDesk.Application.Services
 
             var escalation = new EscalationRecord
             {
-                Id = Guid.NewGuid(),
                 TicketId = command.TicketId,
                 Reason = command.Reason,
                 Trigger = EscalationTrigger.Manual,

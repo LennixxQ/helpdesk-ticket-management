@@ -47,7 +47,7 @@ namespace HelpDesk.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getByIdTicket")]
+        [HttpPost("getByIdTicket")]
         public async Task<IActionResult> GetById([FromBody] GetByIdRequest dto)
         {
             var result = await _ticketService.GetByIdAsync(dto.Id,_currentUserProvider.GetCurrentUserId(), _currentUserProvider.GetCurrentUserRole());

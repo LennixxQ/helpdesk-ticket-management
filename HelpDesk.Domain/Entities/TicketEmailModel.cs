@@ -1,4 +1,4 @@
-﻿namespace HelpDesk.Domain.Entities
+namespace HelpDesk.Domain.Entities
 {
     public class TicketEmailModel
     {
@@ -15,5 +15,6 @@
         public DateTime? SlaDeadline { get; set; }
         public string TicketUrl { get; set; } = string.Empty;
         public string PreferencesUrl { get; set; } = string.Empty;
+        public string TimeZoneName { get; set; } = "UTC";
     }
 }

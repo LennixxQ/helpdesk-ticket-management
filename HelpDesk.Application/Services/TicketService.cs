@@ -24,8 +24,9 @@ namespace HelpDesk.Application.Services
         private readonly AddCommentValidator _commentValidator;
         private readonly INotificationService _notificationService;
         private readonly SlaOverrideValidator _slaOverrideValidator;
+        private readonly ICurrentUserProvider _currentUserProvider;
 
-        public TicketService(IUnitOfWork uow,IMapper mapper,ISlaDeadlineCalculator slaCalculator, INotificationService notificationService)
+        public TicketService(ICurrentUserProvider currentUserProvider, IUnitOfWork uow,IMapper mapper,ISlaDeadlineCalculator slaCalculator, INotificationService notificationService)
         {
             _uow = uow;
             _mapper = mapper;
@@ -35,10 +36,10 @@ namespace HelpDesk.Application.Services
             _assignValidator = new AssignTicketValidator();
             _commentValidator = new AddCommentValidator();
             _slaOverrideValidator = new SlaOverrideValidator();
+            _currentUserProvider = currentUserProvider;
         }
 
-        public async Task<BaseResponse<CreateTicketResponseDto>> CreateAsync(
-            CreateTicketCommand command, Guid currentUserId, UserRole currentUserRole)
+        public async Task<BaseResponse<CreateTicketResponseDto>> CreateAsync(CreateTicketCommand command, Guid currentUserId, UserRole currentUserRole)
         {
             var validation = await _createValidator.ValidateAsync(command);
             if (!validation.IsValid)
@@ -131,8 +132,7 @@ namespace HelpDesk.Application.Services
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(updated), "Ticket assigned.");
         }
 
-        public async Task<BaseResponse<TicketDto>> UpdateStatusAsync(
-            UpdateTicketStatusCommand command, Guid currentUserId, UserRole currentUserRole)
+        public async Task<BaseResponse<TicketDto>> UpdateStatusAsync(UpdateTicketStatusCommand command, Guid currentUserId, UserRole currentUserRole)
         {
             var ticket = await _uow.Tickets.GetByIdWithDetailsAsync(command.TicketId);
             if (ticket is null) return BaseResponse<TicketDto>.Fail("Ticket not found.");
@@ -170,7 +170,7 @@ namespace HelpDesk.Application.Services
                     slaRecord.PausedAt = DateTime.UtcNow;
                     _uow.Sla.Update(slaRecord);
                 }
-                else if (command.NewStatus == TicketStatus.InProgress && slaRecord.PausedAt is not null)
+                else if (command.NewStatus is TicketStatus.InProgress or TicketStatus.Resolved or TicketStatus.Closed && slaRecord.PausedAt is not null)
                 {
                     slaRecord.TotalPausedMinutes += (int)(DateTime.UtcNow - slaRecord.PausedAt.Value).TotalMinutes;
                     slaRecord.PausedAt = null;
@@ -213,8 +213,7 @@ namespace HelpDesk.Application.Services
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(updated), "Status updated.");
         }
 
-        public async Task<BaseResponse<CommentDto>> AddCommentAsync(
-            AddCommentCommand command, Guid currentUserId, UserRole currentUserRole)
+        public async Task<BaseResponse<CommentDto>> AddCommentAsync(AddCommentCommand command, Guid currentUserId, UserRole currentUserRole)
         {
             var validation = await _commentValidator.ValidateAsync(command);
             if (!validation.IsValid)
@@ -257,8 +256,7 @@ namespace HelpDesk.Application.Services
             return BaseResponse<CommentDto>.Ok(_mapper.Map<CommentDto>(comment), "Comment added.");
         }
 
-        public async Task<BaseResponse<TicketDto>> GetByIdAsync(
-            Guid id, Guid currentUserId, UserRole currentUserRole)
+        public async Task<BaseResponse<TicketDto>> GetByIdAsync(Guid id, Guid currentUserId, UserRole currentUserRole)
         {
             var ticket = await _uow.Tickets.GetByIdWithDetailsAsync(id);
             if (ticket is null) return BaseResponse<TicketDto>.Fail("Ticket not found.");
@@ -273,8 +271,7 @@ namespace HelpDesk.Application.Services
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(ticket));
         }
 
-        public async Task<BaseResponse<PagedResult<TicketDto>>> GetAllAsync(
-            PaginationDto dto, Guid currentUserId, UserRole currentUserRole)
+        public async Task<BaseResponse<PagedResult<TicketDto>>> GetAllAsync(PaginationDto dto, Guid currentUserId, UserRole currentUserRole)
         {
             Guid? raisedByFilter = currentUserRole == UserRole.User ? currentUserId : null;
             Guid? agentFilter = currentUserRole == UserRole.Agent ? currentUserId : null;
@@ -303,6 +300,22 @@ namespace HelpDesk.Application.Services
             ticket.ReopenCount++;
             ticket.LastModifiedAt = DateTime.UtcNow;
 
+            var slaRecord = await _uow.Sla.GetByTicketIdAsync(ticket.Id);
+            if (slaRecord != null)
+            {
+                // Strict 4-business-hour SLA for reopened tickets to prevent gaming the system
+                slaRecord.SlaDeadline = _slaCalculator.Calculate(DateTime.UtcNow, 240);
+                slaRecord.PausedAt = null;
+                slaRecord.TotalPausedMinutes = 0; // Clear old pause data
+                slaRecord.Status = SlaStatus.WithinSla;
+                slaRecord.IsBreached = false;
+                _uow.Sla.Update(slaRecord);
+
+                ticket.SlaDeadline = slaRecord.SlaDeadline;
+                ticket.SlaStatus = SlaStatus.WithinSla;
+                ticket.SlaBreached = false;
+            }
+
             // PRD 10.2 — Auto-escalate on 3rd reopen
             if (ticket.ReopenCount >= 3 && !ticket.IsEscalated)
             {
@@ -324,7 +337,7 @@ namespace HelpDesk.Application.Services
                     EscalatedByUserId = null,
                     EscalatedAt = DateTime.UtcNow,
                     CreatedAt = DateTime.UtcNow,
-                    CreatedBy = "system"
+                    CreatedBy = _currentUserProvider.GetCurrentUserId().ToString()
                 };
                 await _notificationService.SendTicketEscalatedAsync(ticket, ticket.EscalationRecord);
             }
@@ -337,7 +350,7 @@ namespace HelpDesk.Application.Services
             // Notify parties (PRD 5.2)
             if (updated != null)
             {
-                await _notificationService.SendStatusChangedAsync(updated, "Reopened");
+                await _notificationService.SendTicketReopenedAsync(ticket, "Reopened");
             }
 
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(updated), "Ticket reopened.");

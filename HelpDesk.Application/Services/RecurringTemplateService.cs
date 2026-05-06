@@ -46,7 +46,6 @@ namespace HelpDesk.Application.Services
 
             var template = new RecurringTemplate
             {
-                Id = Guid.NewGuid(),
                 TemplateName = command.TemplateName,
                 TicketTitle = command.TicketTitle,
                 Description = command.Description,
@@ -90,7 +89,6 @@ namespace HelpDesk.Application.Services
 
             var ticket = new Ticket
             {
-                Id = Guid.NewGuid(),
                 Title = template.TicketTitle,
                 Description = template.Description,
                 CategoryId = template.CategoryId,

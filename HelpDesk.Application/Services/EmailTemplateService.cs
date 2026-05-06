@@ -9,7 +9,9 @@ namespace HelpDesk.Application.Services
     {
         private readonly IRazorLightEngine _engine;
 
-        public EmailTemplateService(Assembly? templateAssembly = null)
+        private readonly ITimeZoneConverterService? _timeZoneConverter;
+
+        public EmailTemplateService(Assembly? templateAssembly = null, ITimeZoneConverterService? timeZoneConverter = null)
         {
             var assembly = templateAssembly ?? typeof(EmailTemplateService).Assembly;
             _engine = new RazorLightEngineBuilder()
@@ -17,6 +19,7 @@ namespace HelpDesk.Application.Services
                 .SetOperatingAssembly(assembly)
                 .UseMemoryCachingProvider()
                 .Build();
+            _timeZoneConverter = timeZoneConverter;
         }
 
         public async Task<string> RenderTicketEmailAsync(TicketEmailModel model)
@@ -50,12 +53,26 @@ namespace HelpDesk.Application.Services
 
         public async Task<string> RenderTicketViewAsync(HelpDesk.Application.DTOs.Ticket.TicketDto model)
         {
-            return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.TicketView", model);
+            var viewBag = new System.Dynamic.ExpandoObject();
+            var dict = viewBag as IDictionary<string, object>;
+            var tzName = _timeZoneConverter?.GetTimeZoneAbbreviation() ?? "UTC";
+            dict.Add("TimeZoneName", tzName);
+            dict.Add("FormatDate", new Func<DateTime, string>(dt => 
+                _timeZoneConverter != null 
+                    ? $"{_timeZoneConverter.ConvertToLocal(dt):MMM dd, HH:mm} {tzName}"
+                    : $"{dt:MMM dd, HH:mm} UTC"));
+
+            return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.TicketView", model, viewBag);
         }
 
         public async Task<string> RenderPasswordChangedAsync(SecurityEmailModel model)
         {
             return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.PasswordChanged", model);
+        }
+
+        public async Task<string> RenderWelcomeAsync(WelcomeEmailModel model)
+        {
+            return await _engine.CompileRenderAsync("HelpDesk.Infrastructure.Templates.EmailTemplates.Welcome", model);
         }
 
         public string RenderPlainText(TicketEmailModel model) => 
@@ -72,7 +89,7 @@ namespace HelpDesk.Application.Services
             Priority  : {model.Priority}
             Category  : {model.Category}
             {(model.AssignedAgent != null ? $"Assigned To: {model.AssignedAgent}" : "")}
-            {(model.SlaDeadline.HasValue ? $"SLA Deadline: {model.SlaDeadline:dd MMM yyyy, HH:mm} UTC" : "")}
+            {(model.SlaDeadline.HasValue ? $"SLA Deadline: {model.SlaDeadline:dd MMM yyyy, HH:mm} {model.TimeZoneName}" : "")}
 
             View ticket: {model.TicketUrl}
 

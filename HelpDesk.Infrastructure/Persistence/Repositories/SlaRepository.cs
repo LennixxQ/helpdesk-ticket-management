@@ -29,8 +29,7 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
         public async Task<IEnumerable<SlaRecord>> GetWarningRecordsAsync()
         {
             var now = DateTime.UtcNow;
-            var records = await _context.SlaRecords
-                .Include(s => s.Ticket)
+            var records = await _context.SlaRecords.Include(s => s.Ticket)
                 .Where(s => !s.IsBreached && s.Status != SlaStatus.Warning && s.PausedAt == null && s.Ticket.Status != TicketStatus.Closed && s.Ticket.Status != TicketStatus.Resolved)
                 .ToListAsync();
 

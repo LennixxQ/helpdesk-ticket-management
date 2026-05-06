@@ -54,9 +54,11 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<IRecurringTemplateService, RecurringTemplateService>();
             services.AddScoped<ISystemSettingService, SystemSettingService>();
             services.AddScoped<IEmailService, EmailService>();
-            services.AddScoped<IEmailTemplateService>(_ => new EmailTemplateService(typeof(DependencyInjection).Assembly));
+            services.AddScoped<IEmailTemplateService>(sp => 
+                new EmailTemplateService(typeof(DependencyInjection).Assembly, sp.GetRequiredService<ITimeZoneConverterService>()));
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<ISlaDeadlineCalculator, SlaDeadlineCalculator>();
+            services.AddScoped<ITimeZoneConverterService, TimeZoneConverterService>();
             services.AddScoped<IMfaService, MfaService>();
 
             services.AddSingleton<IBusinessHoursService, BusinessHoursService>();

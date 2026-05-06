@@ -387,7 +387,7 @@
                     <span class="meta-label">Created At</span>
                     <span class="meta-value">
                         <i data-lucide="calendar" size="14"></i>
-                        @Model.CreatedAt.ToString("MMM dd, yyyy HH:mm")
+                        @ViewBag.FormatDate(Model.CreatedAt)
                     </span>
                 </div>
                 @if (!string.IsNullOrEmpty(Model.DepartmentName))
@@ -406,7 +406,7 @@
                         <span class="meta-label">Last Updated</span>
                         <span class="meta-value">
                             <i data-lucide="refresh-cw" size="14"></i>
-                            @Model.LastModifiedAt.Value.ToString("MMM dd, HH:mm")
+                            @ViewBag.FormatDate(Model.LastModifiedAt.Value)
                         </span>
                     </div>
                 }
@@ -426,7 +426,7 @@
                         <span class="meta-label">SLA Deadline</span>
                         <span class="meta-value @(Model.SlaBreached ? "priority-high" : "")">
                             <i data-lucide="clock" size="14"></i>
-                            @Model.SlaDeadline.Value.ToString("MMM dd, HH:mm")
+                            @ViewBag.FormatDate(Model.SlaDeadline.Value)
                         </span>
                     </div>
                 }
@@ -460,7 +460,7 @@
                                 <div class="comment-item">
                                     <div class="comment-header">
                                         <span class="comment-author">@comment.AuthorName</span>
-                                        <span class="comment-date">@comment.CreatedAt.ToString("MMM dd, HH:mm")</span>
+                                        <span class="comment-date">@ViewBag.FormatDate(comment.CreatedAt)</span>
                                     </div>
                                     <div class="comment-content">@comment.Content</div>
                                 </div>

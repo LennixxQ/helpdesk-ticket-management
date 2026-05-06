@@ -16,8 +16,9 @@ namespace HelpDesk.Application.Services
         private readonly IConfiguration _config;
         private readonly ILogger<NotificationService> _logger;
         private readonly Microsoft.Extensions.DependencyInjection.IServiceScopeFactory _scopeFactory;
+        private readonly ITimeZoneConverterService _timeZoneConverter;
 
-        public NotificationService(IEmailService emailService,IEmailTemplateService templateService,IUnitOfWork uow,IConfiguration config,ILogger<NotificationService> logger, Microsoft.Extensions.DependencyInjection.IServiceScopeFactory scopeFactory)
+        public NotificationService(IEmailService emailService,IEmailTemplateService templateService,IUnitOfWork uow,IConfiguration config,ILogger<NotificationService> logger, Microsoft.Extensions.DependencyInjection.IServiceScopeFactory scopeFactory, ITimeZoneConverterService timeZoneConverter)
         {
             _emailService = emailService;
             _templateService = templateService;
@@ -25,6 +26,7 @@ namespace HelpDesk.Application.Services
             _config = config;
             _logger = logger;
             _scopeFactory = scopeFactory;
+            _timeZoneConverter = timeZoneConverter;
         }
 
         private string BaseUrl => _config["AppSettings:BaseUrl"] ?? "http://localhost:4200";
@@ -140,8 +142,7 @@ namespace HelpDesk.Application.Services
         {
             var recipients = new List<User>();
 
-            var raiser = await _uow.Users.GetByIdAsync(ticket.RaisedByUserId);
-            if (raiser is not null) recipients.Add(raiser);
+            // PRD Update: Do not notify the end-user of SLA breaches to protect internal metrics.
 
             if (ticket.AssignedAgentId.HasValue)
             {
@@ -167,6 +168,46 @@ namespace HelpDesk.Application.Services
 
             var model = BuildModel(ticket, raiser.FullName, $"Your ticket #{ticket.Id.ToString()[..8]} has been closed. Thank you for your patience.");
             await SendAsync(raiser, model, NotificationEventType.TicketClosed.ToString(), ct);
+        }
+
+        public async Task SendTicketReopenedAsync(Ticket ticket, string reopenedBy, CancellationToken ct = default)
+        {
+            var recipients = new HashSet<Guid>();
+            
+            // If assigned, notify the agent
+            if (ticket.AssignedAgentId.HasValue)
+            {
+                recipients.Add(ticket.AssignedAgentId.Value);
+            }
+            else
+            {
+                // If not assigned, notify all active admins
+                var admins = await _uow.Users.GetByRoleAsync(UserRole.Admin);
+                foreach (var admin in admins.Where(a => a.IsActive))
+                {
+                    recipients.Add(admin.Id);
+                }
+            }
+
+            foreach (var userId in recipients)
+            {
+                if (!await IsEnabledAsync(userId, NotificationEventType.TicketReopened)) continue;
+                
+                var user = await _uow.Users.GetByIdAsync(userId);
+                if (user is null) continue;
+
+                var model = BuildModel(ticket, user.FullName, $"Ticket #{ticket.Id} has been REOPENED by {reopenedBy}. Please review the ticket.");
+                await SendAsync(user, model, NotificationEventType.TicketReopened.ToString(), ct);
+            }
+
+            // Also notify the raiser that it was successfully reopened (if they didn't reopen it themselves)
+            // Or just always notify the raiser
+            var raiser = await _uow.Users.GetByIdAsync(ticket.RaisedByUserId);
+            if (raiser is not null && await IsEnabledAsync(raiser.Id, NotificationEventType.TicketReopened))
+            {
+                var model = BuildModel(ticket, raiser.FullName, $"Your ticket #{ticket.Id} has been successfully reopened.");
+                await SendAsync(raiser, model, NotificationEventType.TicketReopened.ToString(), ct);
+            }
         }
 
         public async Task SendCsatSurveyAsync(Ticket ticket, CancellationToken ct = default)
@@ -197,19 +238,16 @@ namespace HelpDesk.Application.Services
 
         public async Task SendWelcomeAsync(User user, string tempPassword, CancellationToken ct = default)
         {
-            var html = $"""
-            <html><body style="font-family:Arial,sans-serif;padding:20px;">
-            <h2>{SystemName} — Welcome!</h2>
-            <p>Hi <strong>{user.FullName}</strong>,</p>
-            <p>Your account has been created. Here are your login details:</p>
-            <table style="border-collapse:collapse;margin:16px 0;">
-              <tr><td style="padding:8px;font-weight:600;color:#64748b;">Email:</td><td style="padding:8px;">{user.Email}</td></tr>
-              <tr><td style="padding:8px;font-weight:600;color:#64748b;">Password:</td><td style="padding:8px;">{tempPassword}</td></tr>
-            </table>
-            <p>Please change your password after first login.</p>
-            <a href="{BaseUrl}/login" style="background:#1F3864;color:#fff;padding:10px 20px;text-decoration:none;border-radius:4px;">Login Now</a>
-            </body></html>
-            """;
+            var model = new WelcomeEmailModel
+            {
+                SystemName = SystemName,
+                RecipientName = user.FullName,
+                Email = user.Email!,
+                TempPassword = tempPassword,
+                LoginUrl = $"{BaseUrl}/login"
+            };
+
+            var html = await _templateService.RenderWelcomeAsync(model);
 
             await _emailService.SendAsync(new EmailMessage
             {
@@ -217,7 +255,7 @@ namespace HelpDesk.Application.Services
                 ToEmail = user.Email!,
                 Subject = $"Welcome to {SystemName}",
                 HtmlBody = html,
-                PlainTextBody = $"Welcome {user.FullName}! Email: {user.Email} | Password: {tempPassword} | Login: {BaseUrl}/login",
+                PlainTextBody = $"Welcome {user.FullName}! Your account has been created. Email: {user.Email} | Password: {tempPassword} | Login: {BaseUrl}/login",
                 EventType = NotificationEventType.AccountCreated.ToString()
             }, ct);
         }
@@ -228,7 +266,8 @@ namespace HelpDesk.Application.Services
             {
                 SystemName = SystemName,
                 RecipientName = user.FullName,
-                ActionTimestamp = DateTime.UtcNow
+                ActionTimestamp = _timeZoneConverter.ConvertToLocal(DateTime.UtcNow),
+                TimeZoneName = _timeZoneConverter.GetTimeZoneAbbreviation()
             };
 
             var html = await _templateService.RenderPasswordChangedAsync(model);
@@ -239,7 +278,7 @@ namespace HelpDesk.Application.Services
                 ToEmail = user.Email!,
                 Subject = $"Security Alert: Your {SystemName} password was changed",
                 HtmlBody = html,
-                PlainTextBody = $"Hello {user.FullName}, your {SystemName} password was changed on {model.ActionTimestamp:f} UTC. If you did not do this, contact support immediately.",
+                PlainTextBody = $"Hello {user.FullName}, your {SystemName} password was changed on {model.ActionTimestamp:f} {model.TimeZoneName}. If you did not do this, contact support immediately.",
                 EventType = NotificationEventType.PasswordChanged.ToString()
             }, ct);
         }
@@ -262,7 +301,7 @@ namespace HelpDesk.Application.Services
         private TicketEmailModel BuildModel(Ticket ticket,string recipientName,string messageBody,bool isUrgent = false)
         {
             var statusClass = ticket.Status.ToString().ToLower().Replace("inprogress", "inprogress");
-            return new TicketEmailModel
+            var model = new TicketEmailModel
             {
                 SystemName = SystemName,
                 RecipientName = recipientName,
@@ -274,10 +313,17 @@ namespace HelpDesk.Application.Services
                 Priority = ticket.Priority.ToString(),
                 Category = ticket.Category?.Name ?? "N/A",
                 AssignedAgent = ticket.AssignedAgent?.FullName,
-                SlaDeadline = ticket.SlaDeadline,
                 TicketUrl = $"{BaseUrl}/api/tickets/view/{ticket.Id}",
-                PreferencesUrl = $"{BaseUrl}/profile/notifications"
+                PreferencesUrl = $"{BaseUrl}/profile/notifications",
+                TimeZoneName = _timeZoneConverter.GetTimeZoneAbbreviation()
             };
+
+            if (ticket.SlaDeadline.HasValue)
+            {
+                model.SlaDeadline = _timeZoneConverter.ConvertToLocal(ticket.SlaDeadline.Value);
+            }
+            
+            return model;
         }
 
         private async Task SendAsync(
