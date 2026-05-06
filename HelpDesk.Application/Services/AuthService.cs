@@ -17,14 +17,16 @@ namespace HelpDesk.Application.Services
         private readonly IJwtTokenService _jwtService;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IConfiguration _config;
+        private readonly IAuditService _auditService;
         private readonly LoginValidator _validator;
 
-        public AuthService(IUnitOfWork uow, IJwtTokenService jwtService, IPasswordHasher<User> passwordHasher, IConfiguration config)
+        public AuthService(IUnitOfWork uow, IJwtTokenService jwtService, IPasswordHasher<User> passwordHasher, IConfiguration config, IAuditService auditService)
         {
             _uow = uow;
             _jwtService = jwtService;
             _passwordHasher = passwordHasher;
             _config = config;
+            _auditService = auditService;
             _validator = new LoginValidator();
         }
 
@@ -37,15 +39,22 @@ namespace HelpDesk.Application.Services
 
             var user = await _uow.Users.GetByEmailAsync(request.Email);
             if (user is null || !user.IsActive)
+            {
+                await _auditService.LogActionAsync("USER_LOGIN_FAILED", "User", Guid.Empty, $"Attempted email: {request.Email} (User not found or inactive)");
                 return BaseResponse<LoginResponse>.Fail("Invalid email or password.");
+            }
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash!, request.Password);
             if (result == PasswordVerificationResult.Failed)
+            {
+                await _auditService.LogActionAsync("USER_LOGIN_FAILED", "User", user.Id, "Invalid password attempt.");
                 return BaseResponse<LoginResponse>.Fail("Invalid email or password.");
+            }
 
             if (user.IsMfaEnabled)
             {
                 var mfaToken = _jwtService.GenerateMfaToken(user);
+                await _auditService.LogActionAsync("USER_LOGIN_MFA_CHALLENGE", "User", user.Id);
                 return BaseResponse<LoginResponse>.Ok(new LoginResponse
                 {
                     MfaSessionToken = mfaToken,
@@ -54,6 +63,7 @@ namespace HelpDesk.Application.Services
             }
 
             var token = _jwtService.GenerateToken(user);
+            await _auditService.LogActionAsync("USER_LOGIN_SUCCESS", "User", user.Id);
             return BaseResponse<LoginResponse>.Ok(new LoginResponse
             {
                 Token = token

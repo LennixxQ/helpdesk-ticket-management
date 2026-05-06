@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.DTOs.Export;
+using HelpDesk.Application.DTOs.Export;
 using HelpDesk.Application.DTOs.Report;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
@@ -16,16 +16,19 @@ namespace HelpDesk.Application.Services
     public class ReportService : IReportService
     {
         private readonly IUnitOfWork _uow;
+        private readonly IAuditService _auditService;
 
-        public ReportService(IUnitOfWork uow)
+        public ReportService(IUnitOfWork uow, IAuditService auditService)
         {
             _uow = uow;
+            _auditService = auditService;
             QuestPDF.Settings.License = LicenseType.Community;
         }
 
         public async Task<byte[]> ExportAuditLogCsvAsync(DateTime from, DateTime to)
         {
             var records = await _uow.AuditLogs.GetForExportAsync(from, to);
+            await _auditService.LogActionAsync("REPORT_EXPORTED", "AuditLog", null, $"Format: CSV, Range: {from:d} to {to:d}");
             return WriteCsv(records);
         }
 
@@ -49,6 +52,7 @@ namespace HelpDesk.Application.Services
                 IsEscalated = t.IsEscalated ? "Yes" : "No"
             }).ToList();
 
+            await _auditService.LogActionAsync("REPORT_EXPORTED", "Tickets", null, $"Format: CSV, Range: {filter.From:d} to {filter.To:d}");
             return WriteCsv(records);
         }
 
@@ -154,12 +158,14 @@ namespace HelpDesk.Application.Services
                 });
             });
 
+            await _auditService.LogActionAsync("REPORT_EXPORTED", "Tickets", null, $"Format: PDF, Range: {filter.From:d} to {filter.To:d}");
             return document.GeneratePdf();
         }
 
         public async Task<ReportDataDto> GetTicketVolumeReportAsync(ReportFilterDto filter)
         {
             var tickets = await _uow.TicketReports.GetForReportAsync(filter);
+            await _auditService.LogActionAsync("REPORT_GENERATED", "TicketVolume", null, $"Range: {filter.From:d} to {filter.To:d}");
             return new ReportDataDto
             {
                 TotalTickets = tickets.Count,
@@ -181,6 +187,8 @@ namespace HelpDesk.Application.Services
 
             var agent = await _uow.Users.GetByIdAsync(agentId.Value);
             var tickets = await _uow.TicketReports.GetForReportAsync(filter with { AgentId = agentId });
+
+            await _auditService.LogActionAsync("REPORT_GENERATED", "AgentPerformance", agentId, $"Agent: {agent?.FullName}, Range: {filter.From:d} to {filter.To:d}");
 
             var resolved = tickets.Where(t =>
                 t.Status == TicketStatus.Resolved || t.Status == TicketStatus.Closed).ToList();
@@ -210,6 +218,7 @@ namespace HelpDesk.Application.Services
         public async Task<SlaComplianceReportDto> GetSlaComplianceReportAsync(ReportFilterDto filter)
         {
             var tickets = await _uow.TicketReports.GetForReportAsync(filter);
+            await _auditService.LogActionAsync("REPORT_GENERATED", "SlaCompliance", null, $"Range: {filter.From:d} to {filter.To:d}");
             var withSla = tickets.Where(t => t.SlaDeadline.HasValue).ToList();
 
             var withinSla = withSla.Count(t => !t.SlaBreached);

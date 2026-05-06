@@ -67,6 +67,18 @@ namespace HelpDesk.Infrastructure.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+            // ENFORCE APPEND-ONLY AUDIT LOG (PRD 8.3)
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.Entity is AuditLog or AuditLogDetail)
+                {
+                    if (entry.State == EntityState.Modified || entry.State == EntityState.Deleted)
+                    {
+                        throw new InvalidOperationException("Audit logs are append-only and cannot be modified or deleted.");
+                    }
+                }
+            }
+
             var currentUser = GetCurrentUser();
             var now = DateTime.UtcNow;
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())
@@ -122,6 +134,11 @@ namespace HelpDesk.Infrastructure.Persistence
             var entries = new List<AuditEntry>();
             var currentUser = GetCurrentUser();
 
+            var user = _httpContextAccessor?.HttpContext?.User;
+            var actorName = user?.FindFirst("FullName")?.Value ?? user?.Identity?.Name ?? "SYSTEM";
+            var actorEmail = user?.FindFirst(ClaimTypes.Email)?.Value ?? "";
+            var actorRole = user?.FindFirst(ClaimTypes.Role)?.Value ?? "";
+
             foreach (var entry in ChangeTracker.Entries())
             {
                 if (entry.Entity is AuditLog || entry.Entity is AuditLogDetail)
@@ -134,6 +151,9 @@ namespace HelpDesk.Infrastructure.Persistence
                     EntityName = entry.Entity.GetType().Name,
                     Action = entry.State.ToString(),
                     PerformedBy = currentUser,
+                    ActorName = actorName,
+                    ActorEmail = actorEmail,
+                    ActorRole = actorRole,
                     PerformedAt = DateTime.UtcNow,
                     IpAddress = _httpContextAccessor?.HttpContext?.Connection?.RemoteIpAddress?.ToString()
                 };
@@ -189,6 +209,9 @@ namespace HelpDesk.Infrastructure.Persistence
                     EntityId = entry.EntityId,
                     Action = entry.Action,
                     PerformedBy = entry.PerformedBy,
+                    ActorName = entry.ActorName,
+                    ActorEmail = entry.ActorEmail,
+                    ActorRole = entry.ActorRole,
                     PerformedAt = entry.PerformedAt,
                     IpAddress = entry.IpAddress,
                     Details = entry.Details

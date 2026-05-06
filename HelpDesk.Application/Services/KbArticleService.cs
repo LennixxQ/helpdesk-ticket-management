@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using HelpDesk.Application.Commands.KbCommand;
 using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs.KbArticle;
@@ -13,12 +13,14 @@ namespace HelpDesk.Application.Services
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly IAuditService _auditService;
         private readonly CreateKbArticleValidator _validator;
 
-        public KbArticleService(IUnitOfWork uow, IMapper mapper)
+        public KbArticleService(IUnitOfWork uow, IMapper mapper, IAuditService auditService)
         {
             _uow = uow;
             _mapper = mapper;
+            _auditService = auditService;
             _validator = new CreateKbArticleValidator();
         }
 
@@ -44,6 +46,8 @@ namespace HelpDesk.Application.Services
             article.ViewCount++;
             _uow.KbArticles.Update(article);
             await _uow.SaveChangesAsync();
+
+            await _auditService.LogActionAsync("KB_ARTICLE_VIEWED", "KbArticle", article.Id, $"Title: {article.Title}");
 
             return BaseResponse<KbArticleDto>.Ok(_mapper.Map<KbArticleDto>(article));
         }
@@ -111,6 +115,9 @@ namespace HelpDesk.Application.Services
             article.LastModifiedAt = DateTime.UtcNow;
             _uow.KbArticles.Update(article);
             await _uow.SaveChangesAsync();
+
+            await _auditService.LogActionAsync("KB_ARTICLE_PUBLISHED", "KbArticle", article.Id, $"Title: {article.Title}");
+
             return BaseResponse<object>.Ok(new object(), "Article published.");
         }
 
@@ -156,6 +163,9 @@ namespace HelpDesk.Application.Services
 
             _uow.KbArticles.Update(article);
             await _uow.SaveChangesAsync();
+
+            await _auditService.LogActionAsync("KB_ARTICLE_FEEDBACK", "KbArticle", article.Id, isHelpful ? "Marked as Helpful" : "Marked as Not Helpful");
+
             return BaseResponse<object>.Ok(new object(), "Feedback recorded.");
         }
     }

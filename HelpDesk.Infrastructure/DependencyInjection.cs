@@ -8,6 +8,7 @@ using HelpDesk.Infrastructure.Identity;
 using HelpDesk.Infrastructure.Persistence;
 using HelpDesk.Infrastructure.Persistence.Repositories;
 using HelpDesk.Infrastructure.Persistence.Repositories.BaseRepository;
+using HelpDesk.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -60,6 +61,7 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<ISlaDeadlineCalculator, SlaDeadlineCalculator>();
             services.AddScoped<ITimeZoneConverterService, TimeZoneConverterService>();
             services.AddScoped<IMfaService, MfaService>();
+            services.AddScoped<IAuditService, AuditService>();
 
             services.AddSingleton<IBusinessHoursService, BusinessHoursService>();
             services.AddHostedService<SlaMonitorService>();
