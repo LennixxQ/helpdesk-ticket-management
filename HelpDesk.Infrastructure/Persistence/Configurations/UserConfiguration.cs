@@ -1,4 +1,4 @@
-﻿using HelpDesk.Domain.Entities;
+using HelpDesk.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,7 +14,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.LastModifiedBy).HasMaxLength(256);
 
-        builder.Property(u => u.Role).IsRequired().HasConversion<string>().HasMaxLength(50);
+        builder.Property(u => u.Role).IsRequired();
 
         builder.Property(u => u.IsActive).IsRequired().HasDefaultValue(true);
 

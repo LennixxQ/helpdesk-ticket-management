@@ -1,4 +1,4 @@
-﻿using HelpDesk.Domain.Entities;
+using HelpDesk.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,7 +10,7 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(n => n.Id);
             
-            builder.Property(n => n.EventType).IsRequired().HasConversion<string>().HasMaxLength(100);
+            builder.Property(n => n.EventType).IsRequired();
             
             builder.Property(n => n.CreatedBy).IsRequired().HasMaxLength(256);
 

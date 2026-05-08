@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Commands.KbCommand;
+using HelpDesk.Application.Commands.KbCommand;
 using HelpDesk.Application.Common;
 using HelpDesk.Application.DTOs.KbArticle;
 using HelpDesk.Domain.Enums;
@@ -17,5 +17,7 @@ namespace HelpDesk.Application.Interfaces.Services
         Task<BaseResponse<List<KbArticleSummaryDto>>> SearchAsync(string keyword);
         Task<BaseResponse<List<KbArticleSummaryDto>>> SuggestAsync(string title);
         Task<BaseResponse<object>> SubmitFeedbackAsync(Guid id, bool isHelpful);
+        Task<BaseResponse<List<KbArticleVersionDto>>> GetVersionHistoryAsync(Guid articleId);
+        Task<BaseResponse<KbArticleDto>> RestoreVersionAsync(Guid articleId, int versionNumber, Guid currentUserId);
     }
 }

@@ -1,5 +1,8 @@
-﻿namespace HelpDesk.Domain.Enums
+using System.Text.Json.Serialization;
+
+namespace HelpDesk.Domain.Enums
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum KbArticleStatus
     {
         Draft = 1,

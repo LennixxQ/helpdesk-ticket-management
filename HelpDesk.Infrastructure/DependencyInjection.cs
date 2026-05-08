@@ -34,6 +34,7 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<ICsatRepository, CsatRepository>();
             services.AddScoped<IKbArticleRepository, KbArticleRepository>();
+            services.AddScoped<IKbArticleVersionRepository, KbArticleVersionRepository>();
             services.AddScoped<INotificationPreferenceRepository, NotificationPreferenceRepository>();
             services.AddScoped<IRecurringTemplateRepository, RecurringTemplateRepository>();
             services.AddScoped<ISlaRepository, SlaRepository>();

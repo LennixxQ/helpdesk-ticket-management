@@ -6,5 +6,6 @@ namespace HelpDesk.Application.Commands.TicketCommand
     {
         public Guid TicketId { get; set; }
         public TicketStatus NewStatus { get; set; }
+        public Guid? KbArticleId { get; set; }
     }
 }

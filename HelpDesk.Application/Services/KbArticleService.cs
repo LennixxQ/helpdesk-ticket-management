@@ -24,14 +24,31 @@ namespace HelpDesk.Application.Services
             _validator = new CreateKbArticleValidator();
         }
 
-        public async Task<BaseResponse<List<KbArticleSummaryDto>>> GetAllAsync(
-            KbArticleStatus? status, UserRole currentUserRole)
+        public async Task<BaseResponse<List<KbArticleSummaryDto>>> GetAllAsync(KbArticleStatus? status, UserRole currentUserRole)
         {
-            if (currentUserRole == UserRole.User) status = KbArticleStatus.Published;
-            var articles = status.HasValue
-                ? await _uow.KbArticles.GetByStatusAsync(status.Value)
-                : await _uow.KbArticles.GetAllAsync();
-            return BaseResponse<List<KbArticleSummaryDto>>.Ok(_mapper.Map<List<KbArticleSummaryDto>>(articles));
+            try
+            {
+                if (currentUserRole == UserRole.User) status = KbArticleStatus.Published;
+                
+                IEnumerable<KbArticle> articles;
+                if (status.HasValue)
+                {
+                    articles = await _uow.KbArticles.GetByStatusAsync(status.Value);
+                }
+                else
+                {
+                    articles = await _uow.KbArticles.GetAllAsync();
+                }
+
+                var list = articles?.ToList() ?? new List<KbArticle>();
+                var mapped = _mapper.Map<List<KbArticleSummaryDto>>(list);
+                
+                return BaseResponse<List<KbArticleSummaryDto>>.Ok(mapped ?? new List<KbArticleSummaryDto>());
+            }
+            catch (Exception ex)
+            {
+                return BaseResponse<List<KbArticleSummaryDto>>.Fail($"Error fetching articles: {ex.Message}");
+            }
         }
 
         public async Task<BaseResponse<KbArticleDto>> GetByIdAsync(
@@ -91,6 +108,18 @@ namespace HelpDesk.Application.Services
                 (article.AuthorId != currentUserId || article.Status == KbArticleStatus.Published))
                 return BaseResponse<KbArticleDto>.Fail("Agents can only edit their own draft articles.");
 
+            // PRD 9.5: Every save must create a new version entry
+            var oldVersion = new KbArticleVersion
+            {
+                KbArticleId = article.Id,
+                VersionNumber = article.VersionNumber,
+                Title = article.Title,
+                Content = article.Content,
+                SavedByUserId = article.LastUpdatedById,
+                SavedAt = article.LastModifiedAt ?? article.CreatedAt
+            };
+            await _uow.KbArticleVersions.AddAsync(oldVersion);
+
             article.Title = command.Title;
             article.Content = command.Content;
             article.Tags = command.Tags;
@@ -98,8 +127,11 @@ namespace HelpDesk.Application.Services
             article.LastUpdatedById = currentUserId;
             article.VersionNumber++;
             article.LastModifiedAt = DateTime.UtcNow;
+            
             _uow.KbArticles.Update(article);
             await _uow.SaveChangesAsync();
+
+            await _auditService.LogActionAsync("KB_ARTICLE_EDITED", "KbArticle", article.Id, $"New Version: {article.VersionNumber}");
 
             return BaseResponse<KbArticleDto>.Ok(_mapper.Map<KbArticleDto>(article), "Article updated.");
         }
@@ -167,6 +199,48 @@ namespace HelpDesk.Application.Services
             await _auditService.LogActionAsync("KB_ARTICLE_FEEDBACK", "KbArticle", article.Id, isHelpful ? "Marked as Helpful" : "Marked as Not Helpful");
 
             return BaseResponse<object>.Ok(new object(), "Feedback recorded.");
+        }
+
+        public async Task<BaseResponse<List<KbArticleVersionDto>>> GetVersionHistoryAsync(Guid articleId)
+        {
+            var versions = await _uow.KbArticleVersions.GetByArticleIdAsync(articleId);
+            return BaseResponse<List<KbArticleVersionDto>>.Ok(_mapper.Map<List<KbArticleVersionDto>>(versions));
+        }
+
+        public async Task<BaseResponse<KbArticleDto>> RestoreVersionAsync(Guid articleId, int versionNumber, Guid currentUserId)
+        {
+            var versions = await _uow.KbArticleVersions.GetByArticleIdAsync(articleId);
+            var targetVersion = versions.FirstOrDefault(v => v.VersionNumber == versionNumber);
+            if (targetVersion is null) return BaseResponse<KbArticleDto>.Fail("Version not found.");
+
+            var article = await _uow.KbArticles.GetByIdAsync(articleId);
+            if (article is null) return BaseResponse<KbArticleDto>.Fail("Article not found.");
+
+            // Archive the CURRENT state as a new version before restoring
+            var currentAsVersion = new KbArticleVersion
+            {
+                KbArticleId = article.Id,
+                VersionNumber = article.VersionNumber,
+                Title = article.Title,
+                Content = article.Content,
+                SavedByUserId = article.LastUpdatedById,
+                SavedAt = article.LastModifiedAt ?? article.CreatedAt
+            };
+            await _uow.KbArticleVersions.AddAsync(currentAsVersion);
+
+            // Restore
+            article.Title = targetVersion.Title;
+            article.Content = targetVersion.Content;
+            article.VersionNumber++; // Restoration increments the version
+            article.LastUpdatedById = currentUserId;
+            article.LastModifiedAt = DateTime.UtcNow;
+
+            _uow.KbArticles.Update(article);
+            await _uow.SaveChangesAsync();
+
+            await _auditService.LogActionAsync("KB_ARTICLE_RESTORED", "KbArticle", article.Id, $"Restored from v{versionNumber} to v{article.VersionNumber}");
+
+            return BaseResponse<KbArticleDto>.Ok(_mapper.Map<KbArticleDto>(article), $"Article restored to version {versionNumber}.");
         }
     }
 }

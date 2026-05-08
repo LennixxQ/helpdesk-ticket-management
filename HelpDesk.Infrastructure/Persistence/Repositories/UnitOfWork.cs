@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Interfaces.Repositories;
+using HelpDesk.Application.Interfaces.Repositories;
 
 namespace HelpDesk.Infrastructure.Persistence.Repositories
 {
@@ -14,6 +14,7 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
         public IDepartmentRepository Departments { get; }
         public ISlaRepository Sla { get; }
         public IKbArticleRepository KbArticles { get; }
+        public IKbArticleVersionRepository KbArticleVersions { get; }
         public ICsatRepository Csat { get; }
         public IRecurringTemplateRepository RecurringTemplates { get; }
         public ISystemSettingRepository SystemSettings { get; }
@@ -31,6 +32,7 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
             Departments = new DepartmentRepository(context);
             Sla = new SlaRepository(context);
             KbArticles = new KbArticleRepository(context);
+            KbArticleVersions = new KbArticleVersionRepository(context);
             Csat = new CsatRepository(context);
             RecurringTemplates = new RecurringTemplateRepository(context);
             SystemSettings = new SystemSettingRepository(context);

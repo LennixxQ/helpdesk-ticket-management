@@ -1,4 +1,4 @@
-﻿using HelpDesk.Domain.Entities;
+using HelpDesk.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,7 +16,7 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
 
             builder.Property(k => k.Tags).HasMaxLength(500);
 
-            builder.Property(k => k.Status).IsRequired().HasConversion<string>().HasMaxLength(50);
+            builder.Property(k => k.Status).IsRequired();
 
             builder.Property(k => k.CreatedBy).IsRequired().HasMaxLength(256);
 

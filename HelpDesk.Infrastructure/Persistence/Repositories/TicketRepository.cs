@@ -1,4 +1,4 @@
-﻿using HelpDesk.Application.Common;
+using HelpDesk.Application.Common;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Domain.Entities;
 using HelpDesk.Domain.Enums;
@@ -15,8 +15,8 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
             await _context.Tickets.Include(t => t.Category).Include(t => t.RaisedByUser).Include(t => t.AssignedAgent).Include(t => t.Department)
             .Include(t => t.SlaRecord).Include(t => t.EscalationRecord).ThenInclude(e => e!.EscalatedByUser).Include(t => t.Comments).ThenInclude(c => c.User).FirstOrDefaultAsync(t => t.Id == id);
 
-        public async Task<PagedResult<Ticket>> GetAllPagedAsync(int page, int pageSize,TicketStatus? status = null, TicketPriority? priority = null,
-            Guid? categoryId = null, Guid? agentId = null, Guid? raisedByUserId = null)
+        public async Task<PagedResult<Ticket>> GetAllPagedAsync(int page, int pageSize, TicketStatus? status = null, TicketPriority? priority = null,
+            Guid? categoryId = null, Guid? agentId = null, Guid? raisedByUserId = null, Guid? departmentId = null)
         {
             var query = _context.Tickets.Include(t => t.Category).Include(t => t.RaisedByUser).Include(t => t.AssignedAgent).AsQueryable();
 
@@ -25,6 +25,7 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
             if (categoryId.HasValue) query = query.Where(t => t.CategoryId == categoryId.Value);
             if (agentId.HasValue) query = query.Where(t => t.AssignedAgentId == agentId.Value);
             if (raisedByUserId.HasValue) query = query.Where(t => t.RaisedByUserId == raisedByUserId.Value);
+            if (departmentId.HasValue) query = query.Where(t => t.DepartmentId == departmentId.Value);
 
             var totalCount = await query.CountAsync();
             var items = await query.OrderByDescending(t => t.CreatedAt).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();

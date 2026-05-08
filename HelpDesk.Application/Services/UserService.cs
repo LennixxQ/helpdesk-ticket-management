@@ -21,13 +21,15 @@ namespace HelpDesk.Application.Services
         private readonly CreateUserValidator _validator;
         private readonly BulkImportRowValidator _bulkValidator;
         private readonly ICurrentUserProvider _currentUserProvider;
+        private readonly IAuditService _auditService;
 
-        public UserService(IUnitOfWork uow,IMapper mapper,IPasswordHasher<User> passwordHasher, INotificationService notificationService, ICurrentUserProvider currentUserProvider)
+        public UserService(IUnitOfWork uow, IMapper mapper, IPasswordHasher<User> passwordHasher, INotificationService notificationService, ICurrentUserProvider currentUserProvider, IAuditService auditService)
         {
             _uow = uow;
             _mapper = mapper;
             _passwordHasher = passwordHasher;
             _notificationService = notificationService;
+            _auditService = auditService;
             _validator = new CreateUserValidator();
             _bulkValidator = new BulkImportRowValidator();
             _currentUserProvider = currentUserProvider;
@@ -92,6 +94,8 @@ namespace HelpDesk.Application.Services
             _uow.Users.Update(user);
             await _uow.SaveChangesAsync();
 
+            await _auditService.LogActionAsync("USER_ROLE_UPDATED", "User", user.Id, $"New Role: {command.NewRole}");
+
             return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user), "Role updated.");
         }
 
@@ -104,6 +108,8 @@ namespace HelpDesk.Application.Services
             user.LastModifiedAt = DateTime.UtcNow;
             _uow.Users.Update(user);
             await _uow.SaveChangesAsync();
+
+            await _auditService.LogActionAsync("USER_DEACTIVATED", "User", user.Id);
 
             return BaseResponse<UserDto>.Ok(_mapper.Map<UserDto>(user), "User deactivated.");
         }
@@ -127,6 +133,8 @@ namespace HelpDesk.Application.Services
 
             _uow.Users.Update(user);
             await _uow.SaveChangesAsync();
+
+            await _auditService.LogActionAsync("USER_PASSWORD_CHANGED", "User", user.Id);
 
             // 4. Send Email Notification
             await _notificationService.SendPasswordChangedAsync(user);
@@ -218,6 +226,9 @@ namespace HelpDesk.Application.Services
             }
 
             await _uow.SaveChangesAsync();
+            
+            await _auditService.LogActionAsync("USER_BULK_IMPORT_COMPLETED", "User", Guid.Empty, $"{result.AccountsCreated} accounts created.");
+            
             result.Errors = errors;
 
             return BaseResponse<BulkImportResultDto>.Ok(result,

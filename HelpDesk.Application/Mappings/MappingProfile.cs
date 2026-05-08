@@ -24,10 +24,10 @@ public class MappingProfile : Profile
         CreateMap<Category, CategoryDto>();
 
         CreateMap<Comment, CommentDto>()
-            .ForMember(d => d.AuthorName, o => o.MapFrom(s => s.User.FullName));
+            .ForMember(d => d.AuthorName, o => o.MapFrom(s => s.User != null ? s.User.FullName : "Unknown User"));
 
         CreateMap<Ticket, TicketDto>()
-            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.Name))
+            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category != null ? s.Category.Name : "General"))
             .ForMember(d => d.DepartmentName, o => o.MapFrom(s => s.Department != null ? s.Department.Name : null))
             .ForMember(d => d.Escalation, o => o.MapFrom(s => s.EscalationRecord));
 
@@ -40,11 +40,15 @@ public class MappingProfile : Profile
                 s.DepartmentHead != null ? s.DepartmentHead.FullName : null));
 
         CreateMap<KbArticle, KbArticleDto>()
-            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.Name))
-            .ForMember(d => d.AuthorName, o => o.MapFrom(s => s.Author.FullName));
+            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category != null ? s.Category.Name : "Uncategorized"))
+            .ForMember(d => d.AuthorName, o => o.MapFrom(s => s.Author != null ? s.Author.FullName : "System"));
 
         CreateMap<KbArticle, KbArticleSummaryDto>()
-            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.Name));
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : "Uncategorized"))
+            .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.Author != null ? src.Author.FullName : "System"));
+
+        CreateMap<KbArticleVersion, KbArticleVersionDto>()
+            .ForMember(dest => dest.SavedByUserName, opt => opt.MapFrom(src => src.SavedByUser != null ? src.SavedByUser.FullName : "System"));
 
         CreateMap<EscalationRecord, EscalationDto>()
             .ForMember(d => d.EscalatedByName, o => o.MapFrom(s => s.EscalatedBy))
@@ -53,7 +57,7 @@ public class MappingProfile : Profile
         CreateMap<CsatResponse, CsatResponseDto>();
 
         CreateMap<RecurringTemplate, RecurringTemplateDto>()
-            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.Name));
+            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category != null ? s.Category.Name : "General"));
 
         CreateMap<SystemSetting, SystemSettingDto>();
     }

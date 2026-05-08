@@ -1,4 +1,4 @@
-﻿using HelpDesk.Domain.Enums;
+using HelpDesk.Domain.Enums;
 
 namespace HelpDesk.Application.DTOs.KbArticle
 {
@@ -9,5 +9,7 @@ namespace HelpDesk.Application.DTOs.KbArticle
         public string CategoryName { get; set; } = string.Empty;
         public int ViewCount { get; set; }
         public KbArticleStatus Status { get; set; }
+        public string AuthorName { get; set; } = string.Empty;
+        public DateTime? LastModifiedAt { get; set; }
     }
 }

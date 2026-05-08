@@ -1,4 +1,4 @@
-﻿using HelpDesk.Domain.Entities;
+using HelpDesk.Domain.Entities;
 using HelpDesk.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -15,11 +15,11 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
             
             builder.Property(t => t.Description).IsRequired().HasMaxLength(2000);
             
-            builder.Property(t => t.Priority).IsRequired().HasConversion<string>().HasMaxLength(50);
+            builder.Property(t => t.Priority).IsRequired();
             
-            builder.Property(t => t.Status).IsRequired().HasConversion<string>().HasMaxLength(50).HasDefaultValue(TicketStatus.Open);
+            builder.Property(t => t.Status).IsRequired().HasDefaultValue(TicketStatus.Open);
             
-            builder.Property(t => t.SlaStatus).HasConversion<string>().HasMaxLength(50);
+            builder.Property(t => t.SlaStatus);
             
             builder.Property(t => t.CreatedBy).IsRequired().HasMaxLength(256);
             

@@ -1,4 +1,4 @@
-﻿using HelpDesk.Domain.Entities;
+using HelpDesk.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,9 +16,9 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
 
             builder.Property(r => r.Description).IsRequired().HasMaxLength(2000);
 
-            builder.Property(r => r.Priority).IsRequired().HasConversion<string>().HasMaxLength(50);
+            builder.Property(r => r.Priority).IsRequired();
 
-            builder.Property(r => r.RecurrencePattern).IsRequired().HasConversion<string>().HasMaxLength(50);
+            builder.Property(r => r.RecurrencePattern).IsRequired();
 
             builder.Property(r => r.CronExpression).HasMaxLength(100);
 

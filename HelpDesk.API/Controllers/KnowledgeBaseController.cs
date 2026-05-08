@@ -1,25 +1,22 @@
-﻿using HelpDesk.API.Records;
+using HelpDesk.API.Records;
 using HelpDesk.Application.Commands.KbCommand;
 using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Domain.Enums;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HelpDesk.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/kb")]
     [ApiController]
     public class KnowledgeBaseController : BaseController
     {
         private readonly IKbArticleService _kbService;
-        private readonly ILogger<KnowledgeBaseController> _logger;
 
-        public KnowledgeBaseController(IKbArticleService kbService, ILogger<KnowledgeBaseController> logger, ICurrentUserProvider currentUser) : base(currentUser)
+        public KnowledgeBaseController(IKbArticleService kbService, ICurrentUserProvider currentUser) : base(currentUser)
         {
             _kbService = kbService;
-            _logger = logger;
         }
 
         [HttpGet("getAll")]
@@ -29,7 +26,7 @@ namespace HelpDesk.API.Controllers
         [HttpPost("getById")]
         public async Task<IActionResult> GetById([FromBody] GetByIdRequest dto)
         {
-            var result = await _kbService.GetByIdAsync(dto.Id,_currentUserProvider.GetCurrentUserId(), _currentUserProvider.GetCurrentUserRole());
+            var result = await _kbService.GetByIdAsync(dto.Id, _currentUserProvider.GetCurrentUserId(), _currentUserProvider.GetCurrentUserRole());
             return result.Success ? Ok(result) : NotFound(result);
         }
 
@@ -45,7 +42,6 @@ namespace HelpDesk.API.Controllers
         [Authorize(Roles = "Admin,Agent")]
         public async Task<IActionResult> Create([FromBody] CreateKbArticleCommand command)
         {
-            _logger.LogInformation("User {UserId} creating KB article: {Title}",_currentUserProvider.GetCurrentUserId(), command.Title);
             var result = await _kbService.CreateAsync(command, _currentUserProvider.GetCurrentUserId());
             return result.Success ? Ok(result) : BadRequest(result);
         }
@@ -54,38 +50,40 @@ namespace HelpDesk.API.Controllers
         [Authorize(Roles = "Admin,Agent")]
         public async Task<IActionResult> Update([FromBody] UpdateKbArticleCommand command)
         {
-            var result = await _kbService.UpdateAsync(command,_currentUserProvider.GetCurrentUserId(), _currentUserProvider.GetCurrentUserRole());
+            var result = await _kbService.UpdateAsync(command, _currentUserProvider.GetCurrentUserId(), _currentUserProvider.GetCurrentUserRole());
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
         [HttpPost("publish")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Publish([FromBody] GetByIdRequest dto)
-        {
-            _logger.LogInformation("Admin {AdminId} publishing KB article {ArticleId}",_currentUserProvider.GetCurrentUserId(), dto.Id);
-            var result = await _kbService.PublishAsync(dto.Id);
-            return result.Success ? Ok(result) : BadRequest(result);
-        }
+        public async Task<IActionResult> Publish([FromBody] GetByIdRequest dto) =>
+            Ok(await _kbService.PublishAsync(dto.Id));
 
         [HttpPost("unpublish")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Unpublish([FromBody] GetByIdRequest dto)
-        {
-            var result = await _kbService.UnpublishAsync(dto.Id);
-            return result.Success ? Ok(result) : BadRequest(result);
-        }
+        public async Task<IActionResult> Unpublish([FromBody] GetByIdRequest dto) =>
+            Ok(await _kbService.UnpublishAsync(dto.Id));
 
         [HttpPost("delete")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete([FromBody] GetByIdRequest dto)
-        {
-            _logger.LogInformation("Admin {AdminId} deleting KB article {ArticleId}",_currentUserProvider.GetCurrentUserId(), dto.Id);
-            var result = await _kbService.DeleteAsync(dto.Id);
-            return result.Success ? Ok(result) : BadRequest(result);
-        }
+        public async Task<IActionResult> Delete([FromBody] GetByIdRequest dto) =>
+            Ok(await _kbService.DeleteAsync(dto.Id));
 
         [HttpPost("submitFeedback")]
         public async Task<IActionResult> Feedback([FromBody] FeedbackRequest dto) =>
             Ok(await _kbService.SubmitFeedbackAsync(dto.ArticleId, dto.IsHelpful));
+
+        [HttpGet("history")]
+        [Authorize(Roles = "Admin,Agent")]
+        public async Task<IActionResult> GetHistory(Guid id) => 
+            Ok(await _kbService.GetVersionHistoryAsync(id));
+
+        [HttpPost("restore")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Restore(Guid id, [FromQuery] int versionNumber)
+        {
+            var result = await _kbService.RestoreVersionAsync(id, versionNumber, _currentUserProvider.GetCurrentUserId());
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
     }
 }

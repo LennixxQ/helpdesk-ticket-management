@@ -1,9 +1,10 @@
-﻿namespace HelpDesk.Domain.Enums
+namespace HelpDesk.Domain.Enums
 {
     public enum UserRole
     {
         Admin = 1,
         Agent = 2,
-        User = 3
+        User = 3,
+        DepartmentHead = 4
     }
 }

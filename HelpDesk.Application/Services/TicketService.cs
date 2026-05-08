@@ -25,13 +25,15 @@ namespace HelpDesk.Application.Services
         private readonly INotificationService _notificationService;
         private readonly SlaOverrideValidator _slaOverrideValidator;
         private readonly ICurrentUserProvider _currentUserProvider;
+        private readonly IAuditService _auditService;
 
-        public TicketService(ICurrentUserProvider currentUserProvider, IUnitOfWork uow,IMapper mapper,ISlaDeadlineCalculator slaCalculator, INotificationService notificationService)
+        public TicketService(ICurrentUserProvider currentUserProvider, IUnitOfWork uow, IMapper mapper, ISlaDeadlineCalculator slaCalculator, INotificationService notificationService, IAuditService auditService)
         {
             _uow = uow;
             _mapper = mapper;
             _slaCalculator = slaCalculator;
             _notificationService = notificationService;
+            _auditService = auditService;
             _createValidator = new CreateTicketValidator();
             _assignValidator = new AssignTicketValidator();
             _commentValidator = new AddCommentValidator();
@@ -182,6 +184,15 @@ namespace HelpDesk.Application.Services
             {
                 ticket.ReopenCount++;
                 ticket.IsEscalated = false;
+                ticket.IsResolvedViaKb = false; // Reset KB flag on reopen
+                ticket.ResolvedViaKbArticleId = null;
+            }
+
+            if (command.NewStatus == TicketStatus.Resolved && command.KbArticleId.HasValue)
+            {
+                ticket.IsResolvedViaKb = true;
+                ticket.ResolvedViaKbArticleId = command.KbArticleId;
+                await _auditService.LogActionAsync("TICKET_RESOLVED_VIA_KB", "Ticket", ticket.Id, $"Linked Article: {command.KbArticleId}");
             }
 
             ticket.Status = command.NewStatus;
@@ -264,8 +275,15 @@ namespace HelpDesk.Application.Services
             var isAdmin = currentUserRole == UserRole.Admin;
             var isRaiser = ticket.RaisedByUserId == currentUserId;
             var isAgent = ticket.AssignedAgentId == currentUserId;
+            var isDeptHead = false;
 
-            if (!isAdmin && !isRaiser && !isAgent)
+            if (currentUserRole == UserRole.DepartmentHead)
+            {
+                var user = await _uow.Users.GetByIdAsync(currentUserId);
+                isDeptHead = user != null && ticket.DepartmentId == user.DepartmentId;
+            }
+
+            if (!isAdmin && !isRaiser && !isAgent && !isDeptHead)
                 return BaseResponse<TicketDto>.Fail("Access denied.");
 
             return BaseResponse<TicketDto>.Ok(_mapper.Map<TicketDto>(ticket));
@@ -275,10 +293,17 @@ namespace HelpDesk.Application.Services
         {
             Guid? raisedByFilter = currentUserRole == UserRole.User ? currentUserId : null;
             Guid? agentFilter = currentUserRole == UserRole.Agent ? currentUserId : null;
+            Guid? departmentFilter = null;
+
+            if (currentUserRole == UserRole.DepartmentHead)
+            {
+                var user = await _uow.Users.GetByIdAsync(currentUserId);
+                departmentFilter = user?.DepartmentId;
+            }
 
             var paged = await _uow.Tickets.GetAllPagedAsync(
                 dto.Page, dto.PageSize, dto.Status, dto.Priority,
-                dto.CategoryId, agentFilter, raisedByFilter);
+                dto.CategoryId, agentFilter, raisedByFilter, departmentFilter);
 
             return BaseResponse<PagedResult<TicketDto>>.Ok(new PagedResult<TicketDto>
             {
@@ -461,6 +486,8 @@ namespace HelpDesk.Application.Services
 
             _uow.Tickets.Update(ticket);
             await _uow.SaveChangesAsync();
+
+            await _auditService.LogActionAsync("TICKET_RESOLVED_VIA_KB", "Ticket", ticket.Id, $"Linked Article: {articleId}");
 
             return BaseResponse<object>.Ok(new object(), "Ticket marked as resolved via KB.");
         }

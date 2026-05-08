@@ -8,12 +8,7 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
 {
     public class SlaRepository : GenericRepository<SlaRecord>, ISlaRepository
     {
-        private readonly AppDbContext _context;
-
-        public SlaRepository(AppDbContext context) : base (context)
-        {
-            _context = context;
-        }
+        public SlaRepository(AppDbContext context) : base(context) { }
 
         public async Task<SlaRecord?> GetByTicketIdAsync(Guid ticketId) =>
             await _context.SlaRecords.FirstOrDefaultAsync(s => s.TicketId == ticketId);
