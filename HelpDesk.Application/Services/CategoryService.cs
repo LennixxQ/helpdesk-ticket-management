@@ -6,6 +6,7 @@ using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Application.Validators;
 using HelpDesk.Domain.Entities;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace HelpDesk.Application.Services
 {
@@ -14,12 +15,15 @@ namespace HelpDesk.Application.Services
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly CreateCategoryValidator _validator;
+        private readonly IMemoryCache _cache;
+        private const string CacheKey = "Categories_List";
 
-        public CategoryService(IUnitOfWork uow, IMapper mapper)
+        public CategoryService(IUnitOfWork uow, IMapper mapper, IMemoryCache cache)
         {
             _uow = uow;
             _mapper = mapper;
             _validator = new CreateCategoryValidator();
+            _cache = cache;
         }
 
         public async Task<BaseResponse<CategoryDto>> CreateAsync(CreateCategoryCommand command)
@@ -44,6 +48,7 @@ namespace HelpDesk.Application.Services
             };
             await _uow.Categories.AddAsync(category);
             await _uow.SaveChangesAsync();
+            _cache.Remove(CacheKey);
 
             return BaseResponse<CategoryDto>.Ok(_mapper.Map<CategoryDto>(category), "Category created.");
         }
@@ -58,14 +63,26 @@ namespace HelpDesk.Application.Services
             category.LastModifiedAt = DateTime.UtcNow;
             _uow.Categories.Update(category);
             await _uow.SaveChangesAsync();
+            _cache.Remove(CacheKey);
 
             return BaseResponse<CategoryDto>.Ok(_mapper.Map<CategoryDto>(category), "Category updated.");
         }
 
         public async Task<BaseResponse<List<CategoryDto>>> GetAllAsync()
         {
-            var cats = await _uow.Categories.GetAllAsync();
-            return BaseResponse<List<CategoryDto>>.Ok(_mapper.Map<List<CategoryDto>>(cats));
+            if (!_cache.TryGetValue(CacheKey, out List<CategoryDto>? cachedCats) || cachedCats == null)
+            {
+                var cats = await _uow.Categories.GetAllAsync();
+                cachedCats = _mapper.Map<List<CategoryDto>>(cats);
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(10))
+                    .SetAbsoluteExpiration(TimeSpan.FromHours(1));
+
+                _cache.Set(CacheKey, cachedCats, cacheOptions);
+            }
+
+            return BaseResponse<List<CategoryDto>>.Ok(cachedCats);
         }
 
         public async Task<BaseResponse<CategoryDto>> ToggleActiveAsync(Guid id)
@@ -77,6 +94,7 @@ namespace HelpDesk.Application.Services
             category.LastModifiedAt = DateTime.UtcNow;
             _uow.Categories.Update(category);
             await _uow.SaveChangesAsync();
+            _cache.Remove(CacheKey);
 
             return BaseResponse<CategoryDto>.Ok(_mapper.Map<CategoryDto>(category),
                 category.IsActive ? "Activated." : "Deactivated.");

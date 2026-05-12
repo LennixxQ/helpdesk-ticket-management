@@ -1,12 +1,10 @@
-using HelpDesk.API.Extensions;
 using HelpDesk.API.Middleware;
 using HelpDesk.Infrastructure;
-using HelpDesk.Infrastructure.Persistence;
-using HelpDesk.Infrastructure.Persistence.Seed;
+using Microsoft.AspNetCore.HttpOverrides;
 using HelpDesk.Application.Mappings;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using HelpDesk.API.Extensions;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -42,6 +40,11 @@ try
     builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
     builder.Services.AddJwtAuthentication(builder.Configuration);
     builder.Services.AddAuthorization();
+    builder.Services.AddResponseCaching();
+    builder.Services.AddResponseCompression(options =>
+    {
+        options.EnableForHttps = true;
+    });
     builder.Services.AddControllers()
         .AddJsonOptions(options =>
         {
@@ -56,31 +59,37 @@ try
         options.AddPolicy("AllowAngular", policy =>
         {
             policy
-                .AllowAnyOrigin()
+                .WithOrigins("http://localhost:4200")  // Restrict to Angular dev server
                 .AllowAnyHeader()
-                .AllowAnyMethod();
+                .AllowAnyMethod()
+                .AllowCredentials();  // Only needed if using cookies
         });
     });
 
     var app = builder.Build();
-    using (var scope = app.Services.CreateScope())
-    {
-        var services = scope.ServiceProvider;
-        try
-        {
-            var db = services.GetRequiredService<AppDbContext>();
-            await db.Database.MigrateAsync();
-            Log.Information("Database migrations applied.");
+    //using (var scope = app.Services.CreateScope())
+    //{
+    //    var services = scope.ServiceProvider;
+    //    try
+    //    {
+    //        var db = services.GetRequiredService<AppDbContext>();
+    //        await db.Database.MigrateAsync();
+    //        Log.Information("Database migrations applied.");
 
-            await DatabaseSeeder.SeedAsync(services);
-            Log.Information("Database seeding complete.");
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "An error occurred during migration/seeding.");
-            throw;
-        }
-    }
+    //        await DatabaseSeeder.SeedAsync(services);
+    //        Log.Information("Database seeding complete.");
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Log.Fatal(ex, "An error occurred during migration/seeding.");
+    //        throw;
+    //    }
+    //}
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    });
+
     app.UseMiddleware<ExceptionHandlingMiddleware>();
         app.UseSwagger();
         app.UseSwaggerUI(options =>
@@ -97,6 +106,8 @@ try
 
     app.UseHttpsRedirection();
     app.UseCors("AllowAngular");
+    app.UseResponseCaching();
+    app.UseResponseCompression();
     app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();

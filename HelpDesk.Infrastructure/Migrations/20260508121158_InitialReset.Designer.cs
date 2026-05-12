@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HelpDesk.Infrastructure.Persistence.Migrations
+namespace HelpDesk.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260427141826_V2_NewEntities")]
-    partial class V2_NewEntities
+    [Migration("20260508121158_InitialReset")]
+    partial class InitialReset
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,21 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("ActorEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ActorName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ActorRole")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdditionalNotes")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("EntityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -56,12 +71,11 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("EntityId");
+
+                    b.HasIndex("PerformedAt");
 
                     b.ToTable("AuditLogs");
                 });
@@ -106,15 +120,26 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
@@ -151,7 +176,17 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
@@ -192,7 +227,17 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
@@ -235,15 +280,23 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("DepartmentHeadId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
@@ -280,6 +333,13 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EventType")
@@ -290,6 +350,9 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<string>("FailureReason")
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsSuccess")
                         .HasColumnType("bit");
@@ -318,11 +381,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IsSuccess");
-
                     b.HasIndex("RecipientUserId");
-
-                    b.HasIndex("SentAt");
 
                     b.ToTable("EmailLogs");
                 });
@@ -336,7 +395,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<DateTime?>("AcknowledgedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("AcknowledgedById")
+                    b.Property<Guid?>("AcknowledgedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -344,13 +403,28 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EscalatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("EscalatedById")
+                    b.Property<string>("EscalatedBy")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<Guid?>("EscalatedByUserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
@@ -366,18 +440,14 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("TicketId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Trigger")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Trigger")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AcknowledgedById");
+                    b.HasIndex("AcknowledgedByUserId");
 
-                    b.HasIndex("EscalatedAt");
-
-                    b.HasIndex("EscalatedById");
+                    b.HasIndex("EscalatedByUserId");
 
                     b.HasIndex("TicketId")
                         .IsUnique();
@@ -406,10 +476,20 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HelpfulCount")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
@@ -423,10 +503,8 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<int>("NotHelpfulCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Tags")
                         .HasMaxLength(500)
@@ -451,8 +529,6 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.HasIndex("Status");
-
                     b.ToTable("KbArticles");
                 });
 
@@ -472,7 +548,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("SavedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("SavedById")
+                    b.Property<Guid>("SavedByUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
@@ -487,9 +563,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("KbArticleId");
 
-                    b.HasIndex("SavedById");
-
-                    b.HasIndex("VersionNumber");
+                    b.HasIndex("SavedByUserId");
 
                     b.ToTable("KbArticleVersions");
                 });
@@ -505,12 +579,20 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EventType")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("EventType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsEnabled")
                         .HasColumnType("bit");
@@ -549,7 +631,8 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<Guid>("CreatedByAdminId")
                         .HasColumnType("uniqueidentifier");
@@ -557,6 +640,12 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<string>("CronExpression")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -567,6 +656,9 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedAt")
@@ -584,18 +676,14 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<DateTime?>("NextRunAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Priority")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("RaiseOnBehalfOfId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RecurrencePattern")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("RecurrencePattern")
+                        .HasColumnType("int");
 
                     b.Property<int>("RunCount")
                         .HasColumnType("int");
@@ -659,8 +747,6 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("GeneratedTicketId");
 
-                    b.HasIndex("ScheduledAt");
-
                     b.HasIndex("TemplateId");
 
                     b.ToTable("RecurringTemplateRuns");
@@ -677,6 +763,13 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FirstResponseMinutes")
@@ -685,16 +778,17 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Priority")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
 
                     b.Property<int>("ResolutionMinutes")
                         .HasColumnType("int");
@@ -721,9 +815,19 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsBreached")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsOverridden")
@@ -748,10 +852,8 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("SlaDeadline")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("TicketId")
                         .HasColumnType("uniqueidentifier");
@@ -762,8 +864,6 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SlaDeadline");
-
-                    b.HasIndex("Status");
 
                     b.HasIndex("TicketId")
                         .IsUnique();
@@ -813,6 +913,12 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("AffectedAsset")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ArchivedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid?>("AssignedAgentId")
                         .HasColumnType("uniqueidentifier");
 
@@ -824,6 +930,13 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("DepartmentId")
@@ -837,24 +950,36 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsArchived")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsEscalated")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsResolvedViaKb")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("Priority")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("RaisedByUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("RelatedTicketId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("ReopenCount")
                         .HasColumnType("int");
+
+                    b.Property<Guid?>("ResolvedViaKbArticleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("SlaBreached")
                         .HasColumnType("bit");
@@ -865,9 +990,10 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Property<int>("SlaStatus")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -880,9 +1006,17 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("CreatedAt");
+
                     b.HasIndex("DepartmentId");
 
                     b.HasIndex("RaisedByUserId");
+
+                    b.HasIndex("RelatedTicketId");
+
+                    b.HasIndex("ResolvedViaKbArticleId");
+
+                    b.HasIndex("Status");
 
                     b.ToTable("Tickets");
                 });
@@ -905,7 +1039,8 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
@@ -919,22 +1054,32 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsMfaEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MfaSecretKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -978,7 +1123,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -1006,7 +1151,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -1030,7 +1175,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("RoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
@@ -1054,7 +1199,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("UserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
@@ -1075,7 +1220,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("UserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
@@ -1090,7 +1235,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -1109,14 +1254,7 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("HelpDesk.Domain.Entities.AuditLog", b =>
-                {
-                    b.HasOne("HelpDesk.Domain.Entities.User", null)
-                        .WithMany("AuditLogs")
-                        .HasForeignKey("UserId");
+                    b.ToTable("UserTokens", (string)null);
                 });
 
             modelBuilder.Entity("HelpDesk.Domain.Entities.AuditLogDetail", b =>
@@ -1199,16 +1337,15 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("HelpDesk.Domain.Entities.EscalationRecord", b =>
                 {
-                    b.HasOne("HelpDesk.Domain.Entities.User", "AcknowledgedBy")
+                    b.HasOne("HelpDesk.Domain.Entities.User", "AcknowledgedByUser")
                         .WithMany()
-                        .HasForeignKey("AcknowledgedById")
+                        .HasForeignKey("AcknowledgedByUserId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("HelpDesk.Domain.Entities.User", "EscalatedBy")
+                    b.HasOne("HelpDesk.Domain.Entities.User", "EscalatedByUser")
                         .WithMany()
-                        .HasForeignKey("EscalatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("EscalatedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HelpDesk.Domain.Entities.Ticket", "Ticket")
                         .WithOne("EscalationRecord")
@@ -1216,9 +1353,9 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AcknowledgedBy");
+                    b.Navigation("AcknowledgedByUser");
 
-                    b.Navigation("EscalatedBy");
+                    b.Navigation("EscalatedByUser");
 
                     b.Navigation("Ticket");
                 });
@@ -1258,15 +1395,15 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HelpDesk.Domain.Entities.User", "SavedBy")
+                    b.HasOne("HelpDesk.Domain.Entities.User", "SavedByUser")
                         .WithMany()
-                        .HasForeignKey("SavedById")
+                        .HasForeignKey("SavedByUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("KbArticle");
 
-                    b.Navigation("SavedBy");
+                    b.Navigation("SavedByUser");
                 });
 
             modelBuilder.Entity("HelpDesk.Domain.Entities.NotificationPreference", b =>
@@ -1377,6 +1514,14 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("HelpDesk.Domain.Entities.Ticket", "RelatedTicket")
+                        .WithMany()
+                        .HasForeignKey("RelatedTicketId");
+
+                    b.HasOne("HelpDesk.Domain.Entities.KbArticle", "ResolvedViaKbArticle")
+                        .WithMany()
+                        .HasForeignKey("ResolvedViaKbArticleId");
+
                     b.Navigation("AssignedAgent");
 
                     b.Navigation("Category");
@@ -1384,6 +1529,10 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("RaisedByUser");
+
+                    b.Navigation("RelatedTicket");
+
+                    b.Navigation("ResolvedViaKbArticle");
                 });
 
             modelBuilder.Entity("HelpDesk.Domain.Entities.User", b =>
@@ -1486,8 +1635,6 @@ namespace HelpDesk.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("HelpDesk.Domain.Entities.User", b =>
                 {
                     b.Navigation("AssignedTickets");
-
-                    b.Navigation("AuditLogs");
 
                     b.Navigation("Comments");
 

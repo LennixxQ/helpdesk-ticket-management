@@ -1,4 +1,4 @@
-﻿using HelpDesk.Domain.Entities;
+using HelpDesk.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -22,6 +22,7 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
 
             builder.HasIndex(d => d.Name).IsUnique();
 
+            builder.HasIndex(d => d.IsDeleted);
         }
     }
 }

@@ -84,9 +84,6 @@ export class AuthService {
         if (res.success && res.data) {
           this.storage.setToken(res.data);
           this._token.set(res.data);
-
-          // 🔍 Debug — console mein dekho kya aa raha hai
-          console.log('JWT Payload:', jwtDecode(res.data));
         }
       })
     );

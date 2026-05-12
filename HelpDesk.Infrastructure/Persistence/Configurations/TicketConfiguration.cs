@@ -36,6 +36,8 @@ namespace HelpDesk.Infrastructure.Persistence.Configurations
 
             
             builder.HasIndex(t => t.Status);
+            builder.HasIndex(t => t.IsDeleted);
+            builder.HasIndex(t => new { t.Status, t.CreatedAt });
             
             builder.HasIndex(t => t.AssignedAgentId);
             

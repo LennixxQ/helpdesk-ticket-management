@@ -6,6 +6,7 @@ using HelpDesk.Application.Interfaces.Repositories;
 using HelpDesk.Application.Interfaces.Services;
 using HelpDesk.Application.Validators;
 using HelpDesk.Domain.Entities;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace HelpDesk.Application.Services
 {
@@ -14,18 +15,32 @@ namespace HelpDesk.Application.Services
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly CreateDepartmentValidator _validator;
+        private readonly IMemoryCache _cache;
+        private const string CacheKey = "Departments_List";
 
-        public DepartmentService(IUnitOfWork uow, IMapper mapper)
+        public DepartmentService(IUnitOfWork uow, IMapper mapper, IMemoryCache cache)
         {
             _uow = uow;
             _mapper = mapper;
             _validator = new CreateDepartmentValidator();
+            _cache = cache;
         }
 
         public async Task<BaseResponse<List<DepartmentDto>>> GetAllAsync()
         {
-            var depts = await _uow.Departments.GetAllAsync();
-            return BaseResponse<List<DepartmentDto>>.Ok(_mapper.Map<List<DepartmentDto>>(depts));
+            if (!_cache.TryGetValue(CacheKey, out List<DepartmentDto>? cachedDepts) || cachedDepts == null)
+            {
+                var depts = await _uow.Departments.GetAllAsync();
+                cachedDepts = _mapper.Map<List<DepartmentDto>>(depts);
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(10))
+                    .SetAbsoluteExpiration(TimeSpan.FromHours(1));
+
+                _cache.Set(CacheKey, cachedDepts, cacheOptions);
+            }
+
+            return BaseResponse<List<DepartmentDto>>.Ok(cachedDepts);
         }
 
         public async Task<BaseResponse<DepartmentDto>> GetByIdAsync(Guid id)
@@ -73,6 +88,7 @@ namespace HelpDesk.Application.Services
             };
             await _uow.Departments.AddAsync(dept);
             await _uow.SaveChangesAsync();
+            _cache.Remove(CacheKey);
 
             return BaseResponse<DepartmentDto>.Ok(_mapper.Map<DepartmentDto>(dept), "Department created.");
         }
@@ -87,6 +103,7 @@ namespace HelpDesk.Application.Services
             dept.LastModifiedAt = DateTime.UtcNow;
             _uow.Departments.Update(dept);
             await _uow.SaveChangesAsync();
+            _cache.Remove(CacheKey);
 
             return BaseResponse<DepartmentDto>.Ok(_mapper.Map<DepartmentDto>(dept), "Department updated.");
         }
@@ -101,6 +118,7 @@ namespace HelpDesk.Application.Services
             dept.LastModifiedAt = DateTime.UtcNow;
             _uow.Departments.Update(dept);
             await _uow.SaveChangesAsync();
+            _cache.Remove(CacheKey);
 
             return BaseResponse<object>.Ok(new object(), "Department deactivated.");
         }
@@ -117,6 +135,7 @@ namespace HelpDesk.Application.Services
             dept.LastModifiedAt = DateTime.UtcNow;
             _uow.Departments.Update(dept);
             await _uow.SaveChangesAsync();
+            _cache.Remove(CacheKey);
 
             return BaseResponse<object>.Ok(new object(), "Department head assigned.");
         }

@@ -1,4 +1,4 @@
-﻿using HelpDesk.API.Records;
+using HelpDesk.API.Records;
 using HelpDesk.Application.Commands.DepartmentCommand;
 using HelpDesk.Application.DTOs.Department;
 using HelpDesk.Application.Interfaces.Repositories;
@@ -23,6 +23,7 @@ namespace HelpDesk.API.Controllers
         }
 
         [HttpGet("getAll")]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any, NoStore = false)]
         public async Task<IActionResult> GetAll()
         {
             var result = await _departmentService.GetAllAsync();

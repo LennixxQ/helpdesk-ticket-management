@@ -22,6 +22,7 @@ namespace HelpDesk.API.Controllers
         }
 
         [HttpGet("getAll")]
+        [ResponseCache(Duration = 300, Location = ResponseCacheLocation.Any, NoStore = false)]
         public async Task<IActionResult> GetAll() => 
             Ok(await _settingService.GetAllAsync());
 

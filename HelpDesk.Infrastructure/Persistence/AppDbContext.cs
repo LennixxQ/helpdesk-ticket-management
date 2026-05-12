@@ -111,12 +111,8 @@ namespace HelpDesk.Infrastructure.Persistence
                 }
             }
             var auditEntries = GenerateAuditEntries();
-            var result = await base.SaveChangesAsync(cancellationToken);
-            await FinalizeAuditEntriesAsync(auditEntries);
-            if (auditEntries.Any())
-                await base.SaveChangesAsync(cancellationToken);
-
-            return result;
+            await FinalizeAuditEntriesAsync(auditEntries);  // Add audit entries before save
+            return await base.SaveChangesAsync(cancellationToken);
         }
 
         private string GetCurrentUser()
@@ -155,11 +151,15 @@ namespace HelpDesk.Infrastructure.Persistence
                     ActorEmail = actorEmail,
                     ActorRole = actorRole,
                     PerformedAt = DateTime.UtcNow,
-                    IpAddress = _httpContextAccessor?.HttpContext?.Connection?.RemoteIpAddress?.ToString()
+                    IpAddress = GetClientIp()
                 };
 
                 foreach (var prop in entry.Properties)
                 {
+                    var propertyName = prop.Metadata.Name;
+                    if (propertyName is "CreatedAt" or "CreatedBy" or "LastModifiedAt" or "LastModifiedBy" or "IsDeleted" or "DeletedAt")
+                        continue;
+
                     if (prop.Metadata.IsPrimaryKey())
                     {
                         auditEntry.EntityId = Guid.TryParse(prop.CurrentValue?.ToString(), out var gid) ? gid : Guid.Empty;
@@ -169,7 +169,7 @@ namespace HelpDesk.Infrastructure.Persistence
                     var detail = new AuditLogDetail
                     {
                         Id = Guid.NewGuid(),
-                        FieldName = prop.Metadata.Name
+                        FieldName = propertyName
                     };
 
                     switch (entry.State)
@@ -185,14 +185,22 @@ namespace HelpDesk.Infrastructure.Persistence
                             auditEntry.Details.Add(detail);
                             break;
                         case EntityState.Modified when prop.IsModified:
-                            detail.OldValue = prop.OriginalValue?.ToString();
-                            detail.NewValue = prop.CurrentValue?.ToString();
+                            // Double check if values actually changed to avoid false positives
+                            var oldVal = prop.OriginalValue?.ToString();
+                            var newVal = prop.CurrentValue?.ToString();
+                            if (oldVal == newVal) continue;
+
+                            detail.OldValue = oldVal;
+                            detail.NewValue = newVal;
                             auditEntry.Details.Add(detail);
                             continue;
                     }
                 }
 
-                entries.Add(auditEntry);
+                if (auditEntry.Details.Any() || entry.State is EntityState.Added or EntityState.Deleted)
+                {
+                    entries.Add(auditEntry);
+                }
             }
 
             return entries;
@@ -224,6 +232,20 @@ namespace HelpDesk.Infrastructure.Persistence
             }
 
             return Task.CompletedTask;
+        }
+
+        private string GetClientIp()
+        {
+            var httpContext = _httpContextAccessor?.HttpContext;
+            if (httpContext == null) return "SYSTEM";
+
+            // Check X-Forwarded-For header first (for proxies)
+            if (httpContext.Request.Headers.TryGetValue("X-Forwarded-For", out var forwardedFor))
+            {
+                return forwardedFor.ToString().Split(',').FirstOrDefault()?.Trim() ?? "UNKNOWN";
+            }
+
+            return httpContext.Connection.RemoteIpAddress?.ToString() ?? "UNKNOWN";
         }
     }
 }

@@ -23,6 +23,7 @@ namespace HelpDesk.Infrastructure
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("HelpDesk.Infrastructure")
                 ));
+            services.AddMemoryCache();
 
             services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -63,6 +64,7 @@ namespace HelpDesk.Infrastructure
             services.AddScoped<ITimeZoneConverterService, TimeZoneConverterService>();
             services.AddScoped<IMfaService, MfaService>();
             services.AddScoped<IAuditService, AuditService>();
+            services.AddScoped<IReportService, ReportService>();
 
             services.AddSingleton<IBusinessHoursService, BusinessHoursService>();
             services.AddHostedService<SlaMonitorService>();

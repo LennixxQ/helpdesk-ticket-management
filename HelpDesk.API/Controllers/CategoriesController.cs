@@ -22,6 +22,7 @@ namespace HelpDesk.API.Controllers
         }
 
         [HttpGet]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any, NoStore = false)]
         public async Task<IActionResult> GetAll()
         {
             var getAllCategories = await _categoryService.GetAllAsync();
