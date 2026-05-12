@@ -1,4 +1,9 @@
-export type UserRole = 'Admin' | 'Agent' | 'User';
+export enum UserRole {
+    Admin = 1,
+    Agent = 2,
+    User = 3,
+    DepartmentHead = 4
+}
 
 export interface UserModel {
     id: string;

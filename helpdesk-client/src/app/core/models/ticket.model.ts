@@ -1,9 +1,20 @@
 import { CommentModel } from './comment.model';
 
-export type TicketStatus =
-    'Open' | 'InProgress' | 'OnHold' | 'Resolved' | 'Closed' | 'Reopened';
+export enum TicketStatus {
+    Open = 1,
+    InProgress = 2,
+    OnHold = 3,
+    Resolved = 4,
+    Closed = 5,
+    Reopened = 6
+}
 
-export type TicketPriority = 'Low' | 'Medium' | 'High' | 'Critical';
+export enum TicketPriority {
+    Low = 1,
+    Medium = 2,
+    High = 3,
+    Critical = 4
+}
 
 export interface TicketModel {
     id: string;
