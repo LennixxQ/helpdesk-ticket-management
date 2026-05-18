@@ -1,112 +1,143 @@
 <div class="category-management page-enter">
 
-    <!-- Header -->
-    <div class="page-header">
-        <div>
-            <h1 class="page-title">Category Management</h1>
-            <p class="page-subtitle">Manage ticket categories</p>
+    <!-- Hero Header -->
+    <div class="page-header-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-icon">
+                    <mat-icon>category</mat-icon>
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-title">Category Management</h1>
+                    <p class="page-subtitle">Manage ticket categories and organization</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Stats -->
-    <div class="stats-row">
-        <div class="stat-chip">
-            <div class="stat-icon blue">
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card-modern">
+            <div class="stat-icon-bg blue">
                 <mat-icon>category</mat-icon>
             </div>
-            <div>
-                <div class="stat-val">{{ categories().length }}</div>
-                <div class="stat-lbl">Total</div>
+            <div class="stat-content">
+                <span class="stat-value">{{ categories().length }}</span>
+                <span class="stat-label">Total Categories</span>
             </div>
         </div>
-        <div class="stat-chip">
-            <div class="stat-icon green">
+        <div class="stat-card-modern">
+            <div class="stat-icon-bg green">
                 <mat-icon>check_circle</mat-icon>
             </div>
-            <div>
-                <div class="stat-val">{{ activeCount() }}</div>
-                <div class="stat-lbl">Active</div>
+            <div class="stat-content">
+                <span class="stat-value">{{ activeCount() }}</span>
+                <span class="stat-label">Active</span>
             </div>
         </div>
-        <div class="stat-chip">
-            <div class="stat-icon grey">
+        <div class="stat-card-modern">
+            <div class="stat-icon-bg grey">
                 <mat-icon>cancel</mat-icon>
             </div>
-            <div>
-                <div class="stat-val">{{ inactiveCount() }}</div>
-                <div class="stat-lbl">Inactive</div>
+            <div class="stat-content">
+                <span class="stat-value">{{ inactiveCount() }}</span>
+                <span class="stat-label">Inactive</span>
             </div>
         </div>
     </div>
 
     <div class="content-layout">
 
-        <!-- Create Form -->
-        <div class="form-card">
-            <h3 class="form-title">
-                <mat-icon>add_circle_outline</mat-icon>
-                New Category
-            </h3>
+        <!-- Create Form Card -->
+        <div class="form-card-modern">
+            <div class="form-header">
+                <div class="form-icon">
+                    <mat-icon>add_circle</mat-icon>
+                </div>
+                <div class="form-title-section">
+                    <h3>Create New Category</h3>
+                    <p>Add a new category for ticket classification</p>
+                </div>
+            </div>
 
-            <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Category Name</mat-label>
-                <input matInput [formControl]="nameControl" placeholder="e.g. Hardware, Software..." maxlength="100"
-                    (keydown.enter)="createCategory()" />
-                <mat-icon matPrefix>label_outline</mat-icon>
-                <mat-hint align="end">{{ nameControl.value?.length ?? 0 }}/100</mat-hint>
-                @if (nameControl.invalid && nameControl.touched) {
-                <mat-error>Category name is required</mat-error>
-                }
-            </mat-form-field>
+            <div class="form-body">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Category Name</mat-label>
+                    <input matInput [formControl]="nameControl" placeholder="e.g. Hardware, Software, Network..." maxlength="100"
+                        (keydown.enter)="createCategory()" />
+                    <mat-icon matPrefix>label_outline</mat-icon>
+                    <mat-hint align="end">{{ nameControl.value?.length ?? 0 }}/100</mat-hint>
+                </mat-form-field>
 
-            <button mat-flat-button class="create-btn" [disabled]="isSaving()" (click)="createCategory()">
-                @if (isSaving()) {
-                <mat-spinner diameter="18" />
-                } @else {
-                <mat-icon>add</mat-icon>
-                }
-                Create Category
-            </button>
+                <button mat-flat-button class="btn-create" [disabled]="isSaving()" (click)="createCategory()">
+                    @if (isSaving()) {
+                    <mat-spinner diameter="20"></mat-spinner>
+                    } @else {
+                    <ng-container>
+                        <mat-icon>add</mat-icon>
+                        <span>Create Category</span>
+                    </ng-container>
+                    }
+                </button>
+            </div>
         </div>
 
-        <!-- Categories List -->
-        <div class="list-card">
-            <h3 class="list-title">All Categories</h3>
+        <!-- Categories List Card -->
+        <div class="list-card-modern">
+            <div class="list-header">
+                <div class="list-title-section">
+                    <h3>All Categories</h3>
+                    <span class="list-count">{{ categories().length }} categories</span>
+                </div>
+            </div>
 
             @if (isLoading()) {
-            <div class="loading-center"><mat-spinner diameter="36" /></div>
+            <div class="loading-modern">
+                <mat-spinner diameter="40"></mat-spinner>
+                <p>Loading categories...</p>
+            </div>
             }
 
             @if (!isLoading()) {
             @if (categories().length === 0) {
-            <div class="empty-state">
-                <mat-icon>category</mat-icon>
-                <p>No categories yet. Create one to get started.</p>
+            <div class="empty-state-modern">
+                <div class="empty-illustration">
+                    <mat-icon>category</mat-icon>
+                </div>
+                <h3>No Categories Yet</h3>
+                <p>Create your first category to start organizing tickets</p>
             </div>
-            }
-
+            } @else {
             <div class="categories-grid">
                 @for (cat of pagedCategories(); track cat.id) {
-                <div class="category-item" [class.inactive]="!cat.isActive">
+                <div class="category-item-modern" [class.inactive]="!cat.isActive">
 
-                    <div class="cat-left">
-                        <div class="cat-icon" [class.active-icon]="cat.isActive">
+                    <div class="cat-content">
+                        <div class="cat-icon-box" [class.active]="cat.isActive">
                             <mat-icon>{{ cat.isActive ? 'label' : 'label_off' }}</mat-icon>
                         </div>
-                        <div>
-                            <div class="cat-name">{{ cat.name }}</div>
-                            <div class="cat-status">
-                                {{ cat.isActive ? 'Active — visible in ticket form' : 'Inactive — hidden from users' }}
-                            </div>
+                        <div class="cat-info">
+                            <span class="cat-name">{{ cat.name }}</span>
+                            <span class="cat-status">
+                                @if (cat.isActive) {
+                                <span class="status-badge active">Active</span>
+                                <span class="status-desc">Visible in ticket form</span>
+                                } @else {
+                                <span class="status-badge inactive">Inactive</span>
+                                <span class="status-desc">Hidden from users</span>
+                                }
+                            </span>
                         </div>
                     </div>
 
-                    <button mat-stroked-button class="toggle-btn" [class.activate-btn]="!cat.isActive"
-                        [class.deactivate-btn]="cat.isActive" [matTooltip]="cat.isActive ? 'Deactivate' : 'Activate'"
-                        (click)="toggle(cat)">
-                        <mat-icon>{{ cat.isActive ? 'toggle_on' : 'toggle_off' }}</mat-icon>
-                        {{ cat.isActive ? 'Deactivate' : 'Activate' }}
-                    </button>
+                    <div class="cat-actions">
+                        <button mat-stroked-button class="btn-toggle" [class.activate]="!cat.isActive"
+                            (click)="toggle(cat)">
+                            <mat-icon>{{ cat.isActive ? 'toggle_on' : 'toggle_off' }}</mat-icon>
+                            <span>{{ cat.isActive ? 'Deactivate' : 'Activate' }}</span>
+                        </button>
+                    </div>
 
                 </div>
                 }
@@ -114,15 +145,19 @@
             }
 
             <!-- Paginator -->
-            <mat-paginator
-                [length]="categories().length"
-                [pageSize]="pageSize()"
-                [pageIndex]="pageIndex()"
-                [pageSizeOptions]="[5, 8, 15, 25]"
-                (page)="onPageChange($event)"
-                showFirstLastButtons
-                class="cat-paginator">
-            </mat-paginator>
+            <div class="list-footer">
+                <span class="page-info">Showing {{ pagedCategories().length }} of {{ categories().length }} categories</span>
+                <mat-paginator
+                    [length]="categories().length"
+                    [pageSize]="pageSize()"
+                    [pageIndex]="pageIndex()"
+                    [pageSizeOptions]="[5, 8, 15, 25]"
+                    (page)="onPageChange($event)"
+                    showFirstLastButtons
+                    class="paginator-modern">
+                </mat-paginator>
+            </div>
+            }
         </div>
 
     </div>

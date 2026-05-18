@@ -30,7 +30,7 @@ namespace HelpDesk.Application.Services
         {
             if (!_cache.TryGetValue(CacheKey, out List<DepartmentDto>? cachedDepts) || cachedDepts == null)
             {
-                var depts = await _uow.Departments.GetAllAsync();
+                var depts = await _uow.Departments.GetAllWithIncludesAsync();
                 cachedDepts = _mapper.Map<List<DepartmentDto>>(depts);
 
                 var cacheOptions = new MemoryCacheEntryOptions()
@@ -121,6 +121,20 @@ namespace HelpDesk.Application.Services
             _cache.Remove(CacheKey);
 
             return BaseResponse<object>.Ok(new object(), "Department deactivated.");
+        }
+
+        public async Task<BaseResponse<object>> ActivateAsync(Guid id)
+        {
+            var dept = await _uow.Departments.GetByIdAsync(id);
+            if (dept is null) return BaseResponse<object>.Fail("Department not found.");
+
+            dept.IsActive = true;
+            dept.LastModifiedAt = DateTime.UtcNow;
+            _uow.Departments.Update(dept);
+            await _uow.SaveChangesAsync();
+            _cache.Remove(CacheKey);
+
+            return BaseResponse<object>.Ok(new object(), "Department activated.");
         }
 
         public async Task<BaseResponse<object>> AssignHeadAsync(Guid departmentId, Guid userId)

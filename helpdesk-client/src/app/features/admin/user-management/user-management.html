@@ -1,213 +1,333 @@
 <div class="user-management page-enter">
 
-    <!-- Header -->
-    <div class="page-header">
-        <div>
-            <h1 class="page-title">User Management</h1>
-            <p class="page-subtitle">Manage accounts and roles</p>
-        </div>
-        <button mat-flat-button class="add-btn" (click)="showForm.set(!showForm())">
-            <div class="btn-content">
+    <!-- Hero Header -->
+    <div class="page-header-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-icon">
+                    <mat-icon>groups</mat-icon>
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-title">User Management</h1>
+                    <p class="page-subtitle">Manage user accounts, roles and permissions</p>
+                </div>
+            </div>
+            <button mat-flat-button class="btn-add-user" (click)="openCreateForm()">
                 <mat-icon>{{ showForm() ? 'close' : 'person_add' }}</mat-icon>
                 <span>{{ showForm() ? 'Cancel' : 'Add User' }}</span>
-            </div>
-        </button>
+            </button>
+        </div>
     </div>
 
-    <!-- Stats Row -->
-    <div class="stats-row">
+    <!-- Stats Cards -->
+    <div class="stats-grid">
         @for (stat of statsCards; track stat.label) {
-        <div class="stat-chip">
-            <div class="stat-icon" [style.background]="stat.bg">
+        <div class="stat-card-modern">
+            <div class="stat-icon-bg" [style.background]="stat.bg">
                 <mat-icon [style.color]="stat.color">{{ stat.icon }}</mat-icon>
             </div>
-            <div>
-                <div class="stat-val">{{ stat.value() }}</div>
-                <div class="stat-lbl">{{ stat.label }}</div>
+            <div class="stat-content">
+                <span class="stat-value">{{ stat.value() }}</span>
+                <span class="stat-label">{{ stat.label }}</span>
             </div>
+            <div class="stat-decoration"></div>
         </div>
         }
     </div>
 
     <!-- Create User Form -->
     @if (showForm()) {
-    <div class="form-card">
-        <h3 class="form-title">
-            <mat-icon>person_add</mat-icon>
-            Create New User
-        </h3>
+    <div class="form-card-modern">
+        <div class="form-header">
+            <div class="form-icon">
+                <mat-icon>person_add</mat-icon>
+            </div>
+            <div class="form-title-section">
+                <h3>Create New User</h3>
+                <p>Fill in the details to add a new user to the system</p>
+            </div>
+        </div>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="create-form">
-            <div class="form-row">
-                <mat-form-field appearance="outline">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="create-form-modern">
+            <div class="form-grid">
+                <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Full Name</mat-label>
                     <input matInput formControlName="fullName" placeholder="John Smith" />
                     <mat-icon matPrefix>person_outline</mat-icon>
-                    @if (form.get('fullName')?.invalid && form.get('fullName')?.touched) {
-                    <mat-error>Full name is required</mat-error>
-                    }
                 </mat-form-field>
 
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Email Address</mat-label>
                     <input matInput formControlName="email" type="email" placeholder="john@company.com" />
                     <mat-icon matPrefix>mail_outline</mat-icon>
-                    @if (form.get('email')?.invalid && form.get('email')?.touched) {
-                    <mat-error>Valid email is required</mat-error>
-                    }
                 </mat-form-field>
-            </div>
 
-            <div class="form-row">
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Password</mat-label>
-                    <input matInput formControlName="password" type="password" placeholder="••••••••" />
+                    <input matInput formControlName="password" type="password" placeholder="Min 6 characters" />
                     <mat-icon matPrefix>lock_outline</mat-icon>
-                    @if (form.get('password')?.invalid && form.get('password')?.touched) {
-                    <mat-error>Min 6 characters required</mat-error>
-                    }
                 </mat-form-field>
 
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Role</mat-label>
-                    <mat-select formControlName="role" panelClass="role-select-panel" disableRipple>
-                        @for (role of roles; track role) {
-                        <mat-option [value]="role">{{ role }}</mat-option>
+                    <mat-select formControlName="role" panelClass="role-select-panel">
+                        @for (role of roles; track role.value) {
+                        <mat-option [value]="role.value">{{ role.label }}</mat-option>
                         }
                     </mat-select>
                     <mat-icon matPrefix>admin_panel_settings</mat-icon>
                 </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="departmentId">
+                        <mat-option value="">None / Not assigned</mat-option>
+                        @for (dept of departments(); track dept.id) {
+                        <mat-option [value]="dept.id">{{ dept.name }}</mat-option>
+                        }
+                    </mat-select>
+                    <mat-icon matPrefix>business</mat-icon>
+                </mat-form-field>
             </div>
 
-            <div class="form-actions">
-                <button mat-stroked-button type="button" (click)="showForm.set(false)" class="cancel-btn">
+            <div class="form-actions-modern">
+                <button mat-stroked-button type="button" class="btn-cancel" (click)="showForm.set(false)">
+                    <mat-icon>close</mat-icon>
                     Cancel
                 </button>
-                <button mat-flat-button type="submit" class="submit-btn" [disabled]="isSaving()">
-                    <div class="btn-content">
-                        @if (isSaving()) {
-                        <mat-spinner diameter="18" />
-                        } @else {
+                <button mat-flat-button type="submit" class="btn-submit" [disabled]="isSaving()">
+                    @if (isSaving()) {
+                    <mat-spinner diameter="20"></mat-spinner>
+                    } @else {
+                    <ng-container>
                         <mat-icon>check</mat-icon>
-                        }
                         <span>Create User</span>
-                    </div>
+                    </ng-container>
+                    }
                 </button>
             </div>
         </form>
     </div>
     }
 
-    <!-- Search -->
-    <div class="search-row">
-        <mat-form-field appearance="outline" class="search-field">
-            <mat-label>Search users...</mat-label>
-            <input matInput (input)="applyFilter($event)" placeholder="Name or email" />
+    <!-- Search & Filters -->
+    <div class="search-filter-bar">
+        <mat-form-field appearance="outline" class="search-input">
+            <mat-label>Search users</mat-label>
+            <input matInput (input)="applyFilter($event)" placeholder="Search by name or email..." />
             <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
+        <div class="filter-actions">
+            <span class="result-count">
+                <mat-icon>info</mat-icon>
+                {{ filteredUsers().length }} users found
+            </span>
+        </div>
     </div>
 
     <!-- Loading -->
     @if (isLoading()) {
-    <div class="loading-center"><mat-spinner diameter="44" /></div>
+    <div class="loading-modern">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading users...</p>
+    </div>
     }
 
     <!-- Users Table -->
     @if (!isLoading()) {
-    <div class="table-card">
-        <table mat-table [dataSource]="pagedUsers()" matSort class="users-table">
+    <div class="table-card-modern">
+        <div class="table-header-modern">
+            <span class="table-title">
+                <mat-icon>table_rows</mat-icon>
+                User List
+            </span>
+        </div>
 
-            <!-- Avatar -->
-            <ng-container matColumnDef="avatar">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let user">
-                    <div class="user-avatar"
-                        [style.background]="'linear-gradient(135deg,' + roleColor(user.role) + ', #B5A4E8)'">
-                        {{ getInitial(user.fullName) }}
-                    </div>
-                </td>
-            </ng-container>
+        <div class="table-responsive">
+            <table mat-table [dataSource]="pagedUsers()" matSort class="users-table-modern">
 
-            <!-- Name -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-                <td mat-cell *matCellDef="let user">
-                    <div class="name-cell">
-                        <span class="user-name">{{ user.fullName }}</span>
-                        @if (!user.isActive) {
-                        <span class="inactive-tag">Inactive</span>
-                        }
-                    </div>
-                </td>
-            </ng-container>
+                <!-- Avatar -->
+                <ng-container matColumnDef="avatar">
+                    <th mat-header-cell *matHeaderCellDef>User</th>
+                    <td mat-cell *matCellDef="let user">
+                        <div class="user-avatar-modern"
+                            [style.background]="'linear-gradient(135deg,' + roleColor(user.role) + ', #B5A4E8)'">
+                            {{ getInitial(user.fullName) }}
+                        </div>
+                    </td>
+                </ng-container>
 
-            <!-- Email -->
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-                <td mat-cell *matCellDef="let user">
-                    <span class="email-text">{{ user.email }}</span>
-                </td>
-            </ng-container>
-
-            <!-- Role -->
-            <ng-container matColumnDef="role">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
-                <td mat-cell *matCellDef="let user">
-                    <div class="role-badge-wrapper" [style.background]="roleBg(user.role)"
-                        [style.border-color]="roleColor(user.role) + '40'">
-                        <mat-select [value]="user.role" class="role-select" panelClass="role-select-panel" disableRipple
-                            [style.color]="roleColor(user.role)" (selectionChange)="updateRole(user, $event.value)">
-                            @for (role of roles; track role) {
-                            <mat-option [value]="role">{{ role }}</mat-option>
+                <!-- Name -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                    <td mat-cell *matCellDef="let user">
+                        <div class="user-info-cell">
+                            <span class="user-name">{{ user.fullName }}</span>
+                            @if (user.departmentName) {
+                            <span class="dept-badge" style="font-size: 0.75rem; color: #6B7280; margin-top: 2px; display: block;">{{ user.departmentName }}</span>
                             }
-                        </mat-select>
-                    </div>
-                </td>
-            </ng-container>
+                            @if (!user.isActive) {
+                            <span class="inactive-badge">Inactive</span>
+                            }
+                        </div>
+                    </td>
+                </ng-container>
 
-            <!-- Status -->
-            <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef>Status</th>
-                <td mat-cell *matCellDef="let user">
-                    <span class="status-pill" [class.active]="user.isActive" [class.inactive]="!user.isActive">
-                        <span class="dot"></span>
-                        {{ user.isActive ? 'Active' : 'Inactive' }}
-                    </span>
-                </td>
-            </ng-container>
+                <!-- Email -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                    <td mat-cell *matCellDef="let user">
+                        <span class="email-cell">
+                            <mat-icon>mail</mat-icon>
+                            {{ user.email }}
+                        </span>
+                    </td>
+                </ng-container>
 
-            <!-- Created At -->
-            <ng-container matColumnDef="createdAt">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Joined</th>
-                <td mat-cell *matCellDef="let user">
-                    <span class="date-text">{{ user.createdAt | date:'MMM d, y' }}</span>
-                </td>
-            </ng-container>
+                <!-- Role -->
+                <ng-container matColumnDef="role">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+                    <td mat-cell *matCellDef="let user">
+                        <div class="role-chip" [style.background]="roleBg(user.role)" [style.color]="roleColor(user.role)">
+                            <mat-icon>{{ user.role === 'Admin' ? 'admin_panel_settings' : user.role === 'Agent' ? 'support_agent' : user.role === 'DepartmentHead' || user.role === 'Department Head' ? 'supervisor_account' : 'person' }}</mat-icon>
+                            {{ user.role === 'DepartmentHead' ? 'Dept Head' : user.role }}
+                        </div>
+                    </td>
+                </ng-container>
 
-            <!-- Actions -->
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let user">
-                    @if (user.isActive) {
-                    <button mat-icon-button class="deactivate-btn" matTooltip="Deactivate user"
-                        (click)="deactivate(user)">
-                        <mat-icon>person_off</mat-icon>
-                    </button>
-                    }
-                </td>
-            </ng-container>
+                <!-- Status -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>Status</th>
+                    <td mat-cell *matCellDef="let user">
+                        <div class="status-indicator" [class.active]="user.isActive" [class.inactive]="!user.isActive">
+                            <span class="status-dot"></span>
+                            {{ user.isActive ? 'Active' : 'Inactive' }}
+                        </div>
+                    </td>
+                </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="user-row"></tr>
+                <!-- Created At -->
+                <ng-container matColumnDef="createdAt">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Joined</th>
+                    <td mat-cell *matCellDef="let user">
+                        <span class="date-cell">
+                            <mat-icon>calendar_today</mat-icon>
+                            {{ user.createdAt | date:'MMM d, y' }}
+                        </span>
+                    </td>
+                </ng-container>
 
-        </table>
+                <!-- Actions -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let user">
+                        <div class="action-buttons">
+                            @if (user.isActive) {
+                            <button mat-icon-button class="btn-action edit" matTooltip="Edit User" (click)="openEditForm(user)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button class="btn-action" matTooltip="Deactivate" (click)="deactivate(user)">
+                                <mat-icon>person_off</mat-icon>
+                            </button>
+                            }
+                        </div>
+                    </td>
+                </ng-container>
 
-        <!-- Paginator -->
-        <mat-paginator [length]="filteredUsers().length" [pageSize]="pageSize()" [pageIndex]="pageIndex()"
-            [pageSizeOptions]="[5, 10, 25, 50]" (page)="onPageChange($event)" showFirstLastButtons
-            class="table-paginator">
-        </mat-paginator>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="user-row-modern"></tr>
+
+            </table>
+        </div>
+
+        <div class="table-footer-modern">
+            <span class="page-info">
+                Showing {{ pagedUsers().length }} of {{ filteredUsers().length }} users
+            </span>
+            <mat-paginator [length]="filteredUsers().length" [pageSize]="pageSize()" [pageIndex]="pageIndex()"
+                [pageSizeOptions]="[5, 10, 25, 50]" (page)="onPageChange($event)" showFirstLastButtons
+                class="paginator-modern">
+            </mat-paginator>
+        </div>
     </div>
     }
+
+    <!-- Edit User Dialog Popup Modal -->
+    <ng-template #editDialog>
+        <div class="edit-dialog-content p-4" style="background: #ffffff; border-radius: 12px; max-width: 100%;">
+            <div class="dialog-header d-flex align-items-center mb-4">
+                <div class="form-icon edit d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px; border-radius: 10px; background: #FFF3CD;">
+                    <mat-icon style="color: #EA580C; font-size: 24px; width: 24px; height: 24px;">edit</mat-icon>
+                </div>
+                <div class="form-title-section">
+                    <h3 class="m-0" style="font-weight: 700; color: #1f2937; font-size: 1.25rem;">Edit User Settings</h3>
+                    <p class="m-0 text-muted" style="font-size: 0.85rem;">Modify role and department settings for this user</p>
+                </div>
+            </div>
+
+            <form [formGroup]="form" (ngSubmit)="onDialogSubmit()" class="create-form-modern">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Full Name</mat-label>
+                            <input matInput formControlName="fullName" placeholder="John Smith" />
+                            <mat-icon matPrefix>person_outline</mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Email Address</mat-label>
+                            <input matInput formControlName="email" type="email" placeholder="john@company.com" />
+                            <mat-icon matPrefix>mail_outline</mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Role</mat-label>
+                            <mat-select formControlName="role" panelClass="role-select-panel">
+                                @for (role of roles; track role.value) {
+                                <mat-option [value]="role.value">{{ role.label }}</mat-option>
+                                }
+                            </mat-select>
+                            <mat-icon matPrefix>admin_panel_settings</mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Department</mat-label>
+                            <mat-select formControlName="departmentId">
+                                <mat-option value="">None / Not assigned</mat-option>
+                                @for (dept of departments(); track dept.id) {
+                                <mat-option [value]="dept.id">{{ dept.name }}</mat-option>
+                                }
+                            </mat-select>
+                            <mat-icon matPrefix>business</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="form-actions-modern d-flex justify-content-end gap-2 mt-4">
+                    <button mat-stroked-button type="button" class="btn-cancel" (click)="closeDialog()">
+                        <mat-icon>close</mat-icon>
+                        Cancel
+                    </button>
+                    <button mat-flat-button type="submit" class="btn-submit" [disabled]="isSaving()" style="background: #3B82F6; color: white;">
+                        @if (isSaving()) {
+                        <mat-spinner diameter="20"></mat-spinner>
+                        } @else {
+                        <ng-container>
+                            <mat-icon>check</mat-icon>
+                            <span>Save Changes</span>
+                        </ng-container>
+                        }
+                    </button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
 
 </div>

@@ -41,7 +41,19 @@ namespace HelpDesk.API.Controllers
         public async Task<IActionResult> SlaCompliance([FromBody] ReportFilterDto filter)
             => Ok(await _reportService.GetSlaComplianceReportAsync(filter));
 
-        // GET api/reports/agentSelf
+        // GET api/reports/topAgent
+        [HttpGet("topAgent")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> TopAgent([FromQuery] DateTime? from, [FromQuery] DateTime? to)
+        {
+            var filter = new ReportFilterDto
+            {
+                From = from ?? DateTime.UtcNow.AddDays(-30),
+                To = to ?? DateTime.UtcNow
+            };
+            _logger.LogInformation("Admin {Id} getting top agent report", _currentUserProvider.GetCurrentUserId());
+            return Ok(await _reportService.GetTopAgentReportAsync(filter));
+        }
         [HttpGet("agentSelf")]
         [Authorize(Roles = "Agent")]
         public async Task<IActionResult> AgentSelf()

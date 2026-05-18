@@ -14,10 +14,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ViewChild, HostListener } from '@angular/core';
+import { ViewChild, HostListener, TemplateRef } from '@angular/core';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { UserModel, UserRole } from '../../../core/models/user.model';
 import { AdminService } from '../../../core/services/admin.service';
+import { DepartmentService, DepartmentModel } from '../../../core/services/department.service';
+import { forkJoin, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-management',
@@ -44,17 +46,21 @@ import { AdminService } from '../../../core/services/admin.service';
 })
 export class UserManagementComponent implements OnInit {
   private adminService = inject(AdminService);
+  private departmentService = inject(DepartmentService);
   private snackBar = inject(MatSnackBar);
   private dialog = inject(MatDialog);
   private fb = inject(FormBuilder);
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('editDialog') editDialog!: TemplateRef<any>;
+  private dialogRef: any;
 
   // ── State ──────────────────────────────────────────────────
   isLoading = signal(true);
   isSaving = signal(false);
   showForm = signal(false);
   users = signal<UserModel[]>([]);
+  departments = signal<DepartmentModel[]>([]);
   searchQuery = signal('');
 
   isMobile = signal(window.innerWidth < 768);
@@ -78,8 +84,7 @@ export class UserManagementComponent implements OnInit {
 
     return this.users().filter(u =>
       u.fullName.toLowerCase().includes(query) ||
-      u.email.toLowerCase().includes(query) ||
-      u.role.toLowerCase().includes(query)
+      u.email.toLowerCase().includes(query)
     );
   });
 
@@ -93,31 +98,49 @@ export class UserManagementComponent implements OnInit {
     this.pageSize.set(event.pageSize);
   }
 
-  readonly roles: UserRole[] = ['Admin', 'Agent', 'User'];
+  protected readonly UserRole = UserRole;
+
+  readonly roles: { value: UserRole; label: string }[] = [
+    { value: UserRole.Admin, label: 'Admin' },
+    { value: UserRole.Agent, label: 'Agent' },
+    { value: UserRole.User, label: 'User' },
+    { value: UserRole.DepartmentHead, label: 'Department Head' }
+  ];
 
   // ── Stats ──────────────────────────────────────────────────
   totalUsers = computed(() => this.users().length);
-  totalAdmins = computed(() => this.users().filter(u => u.role === 'Admin').length);
-  totalAgents = computed(() => this.users().filter(u => u.role === 'Agent').length);
+  totalAdmins = computed(() => this.users().filter(u => u.role === UserRole.Admin).length);
+  totalAgents = computed(() => this.users().filter(u => u.role === UserRole.Agent).length);
   totalActive = computed(() => this.users().filter(u => u.isActive).length);
 
   readonly statsCards = [
-    { label: 'Total Users', value: this.totalUsers, icon: 'group', color: '#7B9EE5', bg: '#EEF3FC' },
-    { label: 'Admins', value: this.totalAdmins, icon: 'admin_panel_settings', color: '#B5A4E8', bg: '#F3EEFF' },
-    { label: 'Agents', value: this.totalAgents, icon: 'support_agent', color: '#82D8C8', bg: '#E8F8F5' },
-    { label: 'Active', value: this.totalActive, icon: 'check_circle', color: '#1A8C5A', bg: '#D6F5E8' },
+    { label: 'Total Users', value: this.totalUsers, icon: 'group', color: '#3B82F6', bg: '#DBEAFE' },
+    { label: 'Admins', value: this.totalAdmins, icon: 'admin_panel_settings', color: '#8B5CF6', bg: '#EDE9FE' },
+    { label: 'Agents', value: this.totalAgents, icon: 'support_agent', color: '#0D9488', bg: '#CCFBF1' },
+    { label: 'Active', value: this.totalActive, icon: 'check_circle', color: '#059669', bg: '#D1FAE5' },
   ];
 
   // ── Form ───────────────────────────────────────────────────
   form: FormGroup = this.fb.group({
+    id: [''],
     fullName: ['', [Validators.required, Validators.maxLength(100)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    role: ['User', Validators.required],
+    role: [UserRole.User, Validators.required],
+    departmentId: ['']
   });
 
   ngOnInit(): void {
     this.loadUsers();
+    this.loadDepartments();
+  }
+
+  loadDepartments(): void {
+    this.departmentService.getAll().subscribe({
+      next: (res) => {
+        if (res.success) this.departments.set(res.data);
+      }
+    });
   }
 
   loadUsers(): void {
@@ -134,16 +157,52 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  // ── Create User ────────────────────────────────────────────
+  // ── Form Triggers ──────────────────────────────────────────
+  openCreateForm(): void {
+    this.form.reset({ role: UserRole.User, id: '', departmentId: '' });
+    this.form.get('password')?.setValidators([Validators.required, Validators.minLength(6)]);
+    this.form.get('password')?.updateValueAndValidity();
+    this.showForm.set(true);
+  }
+
+  openEditForm(user: UserModel): void {
+    this.form.patchValue({
+      id: user.id,
+      fullName: user.fullName,
+      email: user.email,
+      role: user.role,
+      departmentId: user.departmentId || ''
+    });
+    this.form.get('password')?.clearValidators();
+    this.form.get('password')?.setValue('');
+    this.form.get('password')?.updateValueAndValidity();
+    
+    this.dialogRef = this.dialog.open(this.editDialog, {
+      width: '550px',
+      maxWidth: '95vw',
+      panelClass: 'edit-user-dialog-container'
+    });
+  }
+
+  closeDialog(): void {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+    this.form.reset({ role: UserRole.User, id: '', departmentId: '' });
+  }
+
+  // ── Create User (Inline Form) ──────────────────────────────
   onSubmit(): void {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
     this.isSaving.set(true);
-    this.adminService.createUser(this.form.value).subscribe({
+
+    const data = this.form.value;
+    this.adminService.createUser(data).subscribe({
       next: (res) => {
         this.isSaving.set(false);
         if (res.success) {
           this.showSnack('User created successfully', 'success');
-          this.form.reset({ role: 'User' });
+          this.form.reset({ role: UserRole.User });
           this.showForm.set(false);
           this.loadUsers();
         } else {
@@ -153,6 +212,51 @@ export class UserManagementComponent implements OnInit {
       error: () => {
         this.isSaving.set(false);
         this.showSnack('Failed to create user', 'error');
+      }
+    });
+  }
+
+  // ── Update User (Dialog Form) ──────────────────────────────
+  onDialogSubmit(): void {
+    if (this.form.invalid) { this.form.markAllAsTouched(); return; }
+    this.isSaving.set(true);
+
+    const data = this.form.value;
+    const originalUser = this.users().find(u => u.id === data.id);
+    if (!originalUser) {
+      this.isSaving.set(false);
+      return;
+    }
+
+    // Check if fields actually changed
+    const roleChanged = originalUser.role !== data.role;
+    const deptChanged = (originalUser.departmentId || '') !== (data.departmentId || '');
+
+    const updates: Observable<any>[] = [];
+    if (roleChanged) {
+      updates.push(this.adminService.updateRole(data.id, { newRole: data.role }));
+    }
+    if (deptChanged) {
+      updates.push(this.adminService.moveDepartment(data.id, data.departmentId || '00000000-0000-0000-0000-000000000000'));
+    }
+
+    if (updates.length === 0) {
+      this.isSaving.set(false);
+      this.closeDialog();
+      this.showSnack('No changes detected', 'success');
+      return;
+    }
+
+    forkJoin(updates).subscribe({
+      next: () => {
+        this.isSaving.set(false);
+        this.showSnack('User updated successfully', 'success');
+        this.closeDialog();
+        this.loadUsers();
+      },
+      error: (err) => {
+        this.isSaving.set(false);
+        this.showSnack(err?.error?.message || 'Failed to update user', 'error');
       }
     });
   }
@@ -208,22 +312,26 @@ export class UserManagementComponent implements OnInit {
     this.pageIndex.set(0); // Reset to first page on search
   }
 
-  roleColor(role: UserRole): string {
-    const map: Record<UserRole, string> = {
-      Admin: '#7B9EE5',
-      Agent: '#82D8C8',
-      User: '#F2A7C3'
+  roleColor(role: UserRole | string | number): string {
+    const map: Record<number, string> = {
+      [UserRole.Admin]: '#3B82F6',
+      [UserRole.Agent]: '#0D9488',
+      [UserRole.User]: '#8B5CF6',
+      [UserRole.DepartmentHead]: '#EA580C'
     };
-    return map[role];
+    const roleNum = typeof role === 'string' ? parseInt(role) : role;
+    return map[roleNum] || '#8B5CF6';
   }
 
-  roleBg(role: UserRole): string {
-    const map: Record<UserRole, string> = {
-      Admin: '#EEF3FC',
-      Agent: '#E8F8F5',
-      User: '#FDE8F0'
+  roleBg(role: UserRole | string | number): string {
+    const map: Record<number, string> = {
+      [UserRole.Admin]: '#DBEAFE',
+      [UserRole.Agent]: '#CCFBF1',
+      [UserRole.User]: '#EDE9FE',
+      [UserRole.DepartmentHead]: '#FFEDD5'
     };
-    return map[role];
+    const roleNum = typeof role === 'string' ? parseInt(role) : role;
+    return map[roleNum] || '#EDE9FE';
   }
 
   getInitial(name: string): string {

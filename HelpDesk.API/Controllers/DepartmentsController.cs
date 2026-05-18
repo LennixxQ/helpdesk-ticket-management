@@ -67,6 +67,14 @@ namespace HelpDesk.API.Controllers
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
+        [HttpPost("activate")]
+        public async Task<IActionResult> Activate([FromBody] GetByIdRequest request)
+        {
+            _logger.LogInformation("Admin {AdminId} activating department {DeptId}",_currentUserProvider.GetCurrentUserId(), request.Id);
+            var result = await _departmentService.ActivateAsync(request.Id);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
         [HttpPost("assignHead")]
         public async Task<IActionResult> AssignHead([FromBody] AssignHeadRequest request)
         {

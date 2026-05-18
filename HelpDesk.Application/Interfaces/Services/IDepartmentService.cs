@@ -12,6 +12,7 @@ namespace HelpDesk.Application.Interfaces.Services
         Task<BaseResponse<DepartmentDto>> CreateAsync(CreateDepartmentCommand command);
         Task<BaseResponse<DepartmentDto>> UpdateAsync(UpdateDepartmentCommand command);
         Task<BaseResponse<object>> DeactivateAsync(Guid id);
+        Task<BaseResponse<object>> ActivateAsync(Guid id);
         Task<BaseResponse<object>> AssignHeadAsync(Guid departmentId, Guid userId);
     }
 }

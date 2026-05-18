@@ -178,10 +178,10 @@
                         <div class="p-label">{{ p.label }}</div>
                         <div class="p-desc">
                             @switch (p.value) {
-                            @case ('Low') { Minor issue, no urgency }
-                            @case ('Medium') { Moderate impact on work }
-                            @case ('High') { Significant disruption }
-                            @case ('Critical') { System down, immediate help }
+                            @case (TicketPriority.Low) { Minor issue, no urgency }
+                            @case (TicketPriority.Medium) { Moderate impact on work }
+                            @case (TicketPriority.High) { Significant disruption }
+                            @case (TicketPriority.Critical) { System down, immediate help }
                             }
                         </div>
                     </div>

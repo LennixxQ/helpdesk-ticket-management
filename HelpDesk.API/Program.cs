@@ -59,10 +59,9 @@ try
         options.AddPolicy("AllowAngular", policy =>
         {
             policy
-                .WithOrigins("http://localhost:4200")  // Restrict to Angular dev server
+                .AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();  // Only needed if using cookies
+                .AllowAnyMethod();
         });
     });
 

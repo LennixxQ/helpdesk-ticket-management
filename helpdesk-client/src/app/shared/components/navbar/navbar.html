@@ -6,21 +6,25 @@
             <mat-icon>menu</mat-icon>
         </button>
 
-        <div class="brand">
-            <span class="page-title">HelpDesk</span>
+        <div class="breadcrumb">
+            <span class="breadcrumb-item">HelpDesk</span>
+            <mat-icon class="breadcrumb-separator">chevron_right</mat-icon>
+            <span class="breadcrumb-current">Portal</span>
         </div>
     </div>
 
     <!-- Right: Actions + Profile -->
     <div class="navbar-right">
 
-        <!-- New Ticket Button -->
-        @if (auth.isAdmin() || auth.isUser() || !auth.currentRole()) {
-        <button mat-stroked-button routerLink="/tickets/new" class="new-ticket-btn">
-            <mat-icon>add</mat-icon>
-            New Ticket
-        </button>
-        }
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            @if (auth.isAdmin() || auth.isUser()) {
+            <button mat-stroked-button routerLink="/tickets/new" class="quick-action-btn">
+                <mat-icon>add_circle</mat-icon>
+                <span>New Ticket</span>
+            </button>
+            }
+        </div>
 
         <!-- Profile Menu -->
         <div class="profile-section" [matMenuTriggerFor]="profileMenu">
@@ -29,7 +33,7 @@
             </div>
             <div class="user-info">
                 <span class="user-name">{{ userDisplayName }}</span>
-                <span class="user-role">{{ auth.currentRole() }}</span>
+                <span class="user-role">{{ userRoleLabel }}</span>
             </div>
             <mat-icon class="chevron">expand_more</mat-icon>
         </div>
@@ -41,12 +45,25 @@
                     {{ userInitial }}
                 </div>
                 <div>
-                    <div class="menu-name">{{ auth.currentUserName() }}</div>
-                    <div class="menu-role">{{ auth.currentRole() }}</div>
+                    <div class="menu-name">{{ userDisplayName }}</div>
+                    <div class="menu-email">{{ auth.currentUser()?.['email'] }}</div>
                 </div>
             </div>
             <mat-divider />
-            <button mat-menu-item (click)="logout()">
+            <button mat-menu-item routerLink="/profile">
+                <mat-icon>person</mat-icon>
+                <span>Profile</span>
+            </button>
+            <button mat-menu-item routerLink="/profile/security">
+                <mat-icon>security</mat-icon>
+                <span>Security</span>
+            </button>
+            <button mat-menu-item routerLink="/notifications">
+                <mat-icon>notifications</mat-icon>
+                <span>Notifications</span>
+            </button>
+            <mat-divider />
+            <button mat-menu-item class="logout-item" (click)="logout()">
                 <mat-icon>logout</mat-icon>
                 <span>Sign Out</span>
             </button>

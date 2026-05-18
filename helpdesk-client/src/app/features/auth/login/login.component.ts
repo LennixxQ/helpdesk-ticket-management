@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
+import { StorageService } from '../../../core/services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);
-  private auth = inject(AuthService);
+  private authService = inject(AuthService);
+  private storageService = inject(StorageService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
@@ -65,15 +67,24 @@ export class LoginComponent {
 
     this.isLoading.set(true);
 
-    this.auth.login(this.form.value).subscribe({
+    this.authService.login(this.form.value).subscribe({
       next: (res) => {
         this.isLoading.set(false);
         if (res.success) {
-          this.snackBar.open('Welcome back! 👋', 'Close', {
-            duration: 3000,
-            panelClass: ['snack-success']
-          });
-          this.auth.redirectByRole();
+          // Check if MFA is required
+          const mfaSessionToken = res.data?.mfaSessionToken;
+          if (mfaSessionToken) {
+            // Redirect to MFA verification page
+            this.router.navigate(['/mfa-verify'], { queryParams: { token: mfaSessionToken } });
+          } else {
+            // Normal login - proceed to dashboard
+            console.log('Login successful');
+            this.snackBar.open('Welcome back!', 'Close', {
+              duration: 3000,
+              panelClass: ['snack-success']
+            });
+            this.router.navigate(['/dashboard']);
+          }
         } else {
           this.snackBar.open(res.message || 'Login failed', 'Close', {
             duration: 4000,
@@ -81,8 +92,9 @@ export class LoginComponent {
           });
         }
       },
-      error: () => {
+      error: (err) => {
         this.isLoading.set(false);
+        console.error('Login error:', err);
         this.snackBar.open('Invalid email or password', 'Close', {
           duration: 4000,
           panelClass: ['snack-error']

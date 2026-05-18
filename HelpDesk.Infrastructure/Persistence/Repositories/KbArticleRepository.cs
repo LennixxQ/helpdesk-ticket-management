@@ -10,6 +10,14 @@ public class KbArticleRepository : GenericRepository<KbArticle>, IKbArticleRepos
 {
     public KbArticleRepository(AppDbContext context) : base(context) { }
 
+    public async Task<IEnumerable<KbArticle>> GetAllWithIncludesAsync() =>
+        await _context.KbArticles
+            .Include(k => k.Author)
+            .Include(k => k.Category)
+            .Include(k => k.LastUpdatedBy)
+            .OrderByDescending(k => k.CreatedAt)
+            .ToListAsync();
+
     public async Task<KbArticle?> GetByIdWithDetailsAsync(Guid id) =>
         await _context.KbArticles.Include(k => k.Author).Include(k => k.LastUpdatedBy)
         .Include(k => k.Category).FirstOrDefaultAsync(k => k.Id == id);

@@ -45,11 +45,13 @@ export class TicketCreateComponent implements OnInit {
   categories = signal<CategoryModel[]>([]);
   users = signal<UserModel[]>([]);
 
-  readonly priorities: { value: TicketPriority; label: string; icon: string }[] = [
-    { value: 'Low', label: 'Low', icon: 'arrow_downward' },
-    { value: 'Medium', label: 'Medium', icon: 'remove' },
-    { value: 'High', label: 'High', icon: 'arrow_upward' },
-    { value: 'Critical', label: 'Critical', icon: 'priority_high' },
+  protected readonly TicketPriority = TicketPriority;
+
+  readonly priorities: { value: number; label: string; icon: string }[] = [
+    { value: TicketPriority.Low, label: 'Low', icon: 'arrow_downward' },
+    { value: TicketPriority.Medium, label: 'Medium', icon: 'remove' },
+    { value: TicketPriority.High, label: 'High', icon: 'arrow_upward' },
+    { value: TicketPriority.Critical, label: 'Critical', icon: 'priority_high' },
   ];
 
   form: FormGroup = this.fb.group({

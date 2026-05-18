@@ -65,6 +65,9 @@ namespace HelpDesk.Application.Services
             await _uow.Users.AddAsync(user);
             await _uow.SaveChangesAsync();
 
+            // Create default notification preferences for the user
+            await CreateDefaultNotificationPreferencesAsync(user.Id);
+
             // Send Welcome Email
             await _notificationService.SendWelcomeAsync(user, command.Password);
 
@@ -89,8 +92,32 @@ namespace HelpDesk.Application.Services
             var user = await _uow.Users.GetByIdAsync(command.UserId);
             if (user is null) return BaseResponse<UserDto>.Fail("User not found.");
 
+            var oldRole = user.Role;
             user.Role = command.NewRole;
             user.LastModifiedAt = DateTime.UtcNow;
+
+            // If the user's role is changed to DepartmentHead and they have a DepartmentId,
+            // automatically set them as the Head of that Department!
+            if (command.NewRole == UserRole.DepartmentHead && user.DepartmentId.HasValue)
+            {
+                var dept = await _uow.Departments.GetByIdAsync(user.DepartmentId.Value);
+                if (dept != null)
+                {
+                    dept.DepartmentHeadId = user.Id;
+                    _uow.Departments.Update(dept);
+                }
+            }
+            // If they are no longer DepartmentHead, but were the Head of their Department, clear it!
+            else if (oldRole == UserRole.DepartmentHead && command.NewRole != UserRole.DepartmentHead && user.DepartmentId.HasValue)
+            {
+                var dept = await _uow.Departments.GetByIdAsync(user.DepartmentId.Value);
+                if (dept != null && dept.DepartmentHeadId == user.Id)
+                {
+                    dept.DepartmentHeadId = null;
+                    _uow.Departments.Update(dept);
+                }
+            }
+
             _uow.Users.Update(user);
             await _uow.SaveChangesAsync();
 
@@ -157,9 +184,30 @@ namespace HelpDesk.Application.Services
             if (dept is null || !dept.IsActive)
                 return BaseResponse<object>.Fail("Department not found or inactive.");
 
+            var oldDeptId = user.DepartmentId;
             user.DepartmentId = departmentId;
             user.LastModifiedAt = DateTime.UtcNow;
             _uow.Users.Update(user);
+
+            // If the user's role is DepartmentHead, update the department head in the Department table too!
+            if (user.Role == UserRole.DepartmentHead)
+            {
+                // Clear from old department
+                if (oldDeptId.HasValue)
+                {
+                    var oldDept = await _uow.Departments.GetByIdAsync(oldDeptId.Value);
+                    if (oldDept != null && oldDept.DepartmentHeadId == user.Id)
+                    {
+                        oldDept.DepartmentHeadId = null;
+                        _uow.Departments.Update(oldDept);
+                    }
+                }
+
+                // Set in new department
+                dept.DepartmentHeadId = user.Id;
+                _uow.Departments.Update(dept);
+            }
+
             await _uow.SaveChangesAsync();
 
             return BaseResponse<object>.Ok(new object(),
@@ -221,6 +269,9 @@ namespace HelpDesk.Application.Services
                 await _uow.Users.AddAsync(user);
                 result.AccountsCreated++;
 
+                // Create default notification preferences
+                await CreateDefaultNotificationPreferencesAsync(user.Id);
+
                 // Send Welcome Email
                 await _notificationService.SendWelcomeAsync(user, tempPass);
             }
@@ -240,6 +291,12 @@ namespace HelpDesk.Application.Services
             const string chars = "ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$";
             var rng = new Random();
             return new string(Enumerable.Range(0, 12).Select(_ => chars[rng.Next(chars.Length)]).ToArray());
+        }
+
+        // PRD 5.3 - Create default notification preferences for new users
+        private async Task CreateDefaultNotificationPreferencesAsync(Guid userId)
+        {
+            await _uow.NotificationPreferences.EnsurePreferencesExistAsync(userId);
         }
     }
 }

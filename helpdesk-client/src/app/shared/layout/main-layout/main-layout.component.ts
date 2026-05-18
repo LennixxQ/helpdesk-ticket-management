@@ -32,4 +32,8 @@ export class MainLayoutComponent {
   get sidebarWidth() {
     return this.isSidebarCollapsed() ? '72px' : '260px';
   }
+
+  get isFullWidth() {
+    return this.isSidebarCollapsed();
+  }
 }

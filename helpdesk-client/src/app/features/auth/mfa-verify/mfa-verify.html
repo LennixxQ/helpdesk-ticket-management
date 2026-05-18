@@ -1,0 +1,68 @@
+<div class="mfa-verify-page d-flex align-items-center justify-content-center min-vh-100">
+  <div class="card border-0 shadow-lg mfa-card rounded-4 overflow-hidden">
+    <!-- Header with a beautiful gradient -->
+    <div class="mfa-header text-center text-white py-5 px-4">
+      <div class="mfa-icon d-flex align-items-center justify-content-center mx-auto mb-3 shadow">
+        <mat-icon class="fs-2 h-auto w-auto text-white">security</mat-icon>
+      </div>
+      <h2 class="h4 fw-bold mb-2">Two-Factor Authentication</h2>
+      <p class="small text-white-50 mb-0">Enter the 6-digit verification code from your authenticator app.</p>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body p-4 p-sm-5 d-flex flex-column gap-4">
+      <div class="form-group mb-2">
+        <label for="mfaCode" class="form-label fw-semibold text-secondary mb-2 small text-uppercase tracking-wider">
+          Verification Code
+        </label>
+        <div class="input-group input-group-lg shadow-sm border rounded-3 overflow-hidden">
+          <span class="input-group-text bg-white border-0 text-muted pe-1">
+            <mat-icon class="fs-5">pin</mat-icon>
+          </span>
+          <input 
+            id="mfaCode"
+            type="text" 
+            class="form-control border-0 py-3 text-center fw-bold fs-3 tracking-widest" 
+            placeholder="000000" 
+            maxlength="6" 
+            [formControl]="codeControl" 
+            (keyup.enter)="verify()"
+            autocomplete="one-time-code"
+            inputmode="numeric"
+            pattern="[0-9]*"
+          >
+        </div>
+        @if (codeControl.touched && codeControl.invalid) {
+          <div class="text-danger small mt-2 d-flex align-items-center gap-1">
+            <mat-icon class="fs-6 h-auto w-auto">error_outline</mat-icon>
+            <span>Please enter a 6-digit verification code.</span>
+          </div>
+        }
+      </div>
+
+      <!-- Verify Button -->
+      <button 
+        class="btn btn-primary btn-lg w-100 py-3 fw-semibold shadow-sm transition-all d-flex align-items-center justify-content-center gap-2" 
+        [disabled]="isLoading() || codeControl.invalid" 
+        (click)="verify()"
+      >
+        @if (isLoading()) {
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span>Verifying...</span>
+        } @else {
+          <mat-icon class="fs-5 h-auto w-auto">verified</mat-icon>
+          <span>Verify & Continue</span>
+        }
+      </button>
+
+      <!-- Back to Login -->
+      <button 
+        class="btn btn-link text-decoration-none text-secondary w-100 py-2 fw-medium d-flex align-items-center justify-content-center gap-1 hover-bg-light rounded-3 transition-all" 
+        (click)="goBack()"
+      >
+        <mat-icon class="fs-5 h-auto w-auto">arrow_back</mat-icon>
+        <span>Back to Login</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,8 @@ import { environment } from '../../../environments/environment';
 import { BaseResponse } from '../models/base-response.model';
 import { UserModel, CreateUserRequest, UpdateRoleRequest } from '../models/user.model';
 
+export type { UserModel, CreateUserRequest, UpdateRoleRequest };
+
 @Injectable({ providedIn: 'root' })
 export class UserService {
     private readonly apiUrl = `${environment.apiUrl}/users`;
@@ -16,7 +18,7 @@ export class UserService {
     }
 
     getAll(): Observable<BaseResponse<UserModel[]>> {
-        return this.http.get<BaseResponse<UserModel[]>>(this.apiUrl);
+        return this.http.get<BaseResponse<UserModel[]>>(`${this.apiUrl}/getAll`);
     }
 
     getById(id: string): Observable<BaseResponse<UserModel>> {

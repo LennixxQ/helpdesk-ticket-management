@@ -19,6 +19,9 @@ namespace HelpDesk.Infrastructure.Persistence.Repositories
         public async Task<IEnumerable<Department>> GetActiveAsync() =>
             await _context.Departments.Where(d => d.IsActive).Include(d => d.DepartmentHead).ToListAsync();
 
+        public async Task<IEnumerable<Department>> GetAllWithIncludesAsync() =>
+            await _context.Departments.Include(d => d.DepartmentHead).ToListAsync();
+
         public async Task<Department?> GetByIdAsync(Guid id) =>
             await _context.Departments.Include(d => d.DepartmentHead).Include(d => d.Members).FirstOrDefaultAsync(d => d.Id == id);
 

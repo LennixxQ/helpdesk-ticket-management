@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -k -X POST \"https://192.168.1.155:7119/api/auth/login\" -H \"Content-Type: application/json\" -d \"{\\\\\"email\\\\\":\\\\\"test@test.com\\\\\",\\\\\"password\\\\\":\\\\\"test\\\\\"}\" -v)",
+      "Bash(npm install *)"
+    ]
+  }
+}

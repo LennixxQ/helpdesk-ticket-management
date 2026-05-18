@@ -12,8 +12,16 @@
     z-index: 100;
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
-    background: #fff;
-    box-shadow: 2px 0 12px rgba(123, 158, 229, 0.10);
+    background: var(--color-bg-sidebar);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+
+    &:not(.collapsed) {
+        width: 260px;
+    }
+
+    &.collapsed {
+        width: 72px;
+    }
 }
 
 .main-area {
@@ -21,7 +29,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
 }
 
 .navbar-container {
@@ -32,20 +40,28 @@
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(123, 158, 229, 0.12);
-    box-shadow: 0 2px 8px rgba(123, 158, 229, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .page-content {
     flex: 1;
     padding: 28px 32px;
     animation: fadeInUp 0.35s ease forwards;
-    max-width: 1400px;
     width: 100%;
-    margin: 0 auto;
+    min-height: calc(100vh - var(--navbar-height));
+    box-sizing: border-box;
+    --sidebar-width: 260px;
+    padding-left: calc(var(--sidebar-width) + 32px);
+    transition: padding-left 0.3s ease;
+
+    &.full-width {
+        --sidebar-width: 72px;
+    }
 
     @media (max-width: 768px) {
         padding: 16px;
+        padding-left: calc(72px + 16px);
     }
 }
 

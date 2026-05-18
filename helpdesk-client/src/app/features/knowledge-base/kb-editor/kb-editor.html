@@ -1,0 +1,220 @@
+<div class="kb-editor-page">
+
+    <!-- Hero Header -->
+    <div class="page-header-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <button mat-icon-button routerLink="/kb" class="back-btn">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <div class="hero-icon">
+                    <mat-icon>{{ isEditMode() ? 'edit' : 'add_circle' }}</mat-icon>
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-title">{{ isEditMode() ? '✏️ Edit Article' : '🆕 Create New Article' }}</h1>
+                    <p class="page-subtitle">{{ isEditMode() ? 'Update your knowledge base article' : 'Add a new article to share with your team' }}</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button mat-stroked-button (click)="cancel()" class="btn-cancel">
+                    <mat-icon>close</mat-icon>
+                    Cancel
+                </button>
+                <button mat-flat-button (click)="save()" [disabled]="isSaving()" class="btn-save">
+                    @if (isSaving()) {
+                        <mat-spinner diameter="20"></mat-spinner>
+                    } @else {
+                        <mat-icon>save</mat-icon>
+                    }
+                    {{ isEditMode() ? '💾 Update' : '🚀 Create' }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    @if (isLoading()) {
+    <div class="loading-modern">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading article...</p>
+    </div>
+    } @else {
+    <div class="editor-grid" [formGroup]="editorForm">
+        <!-- Main Editor -->
+        <div class="editor-main">
+            <!-- Title Card -->
+            <div class="editor-card-modern">
+                <div class="card-header-modern">
+                    <div class="header-icon">📝</div>
+                    <div class="header-text">
+                        <h3>📌 Article Title</h3>
+                        <p>Give your article a clear, descriptive title</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <mat-form-field appearance="outline" class="full-width title-field">
+                        <mat-label>Enter article title</mat-label>
+                        <input matInput formControlName="title" placeholder="e.g., How to Reset Your Password">
+                        <mat-icon matPrefix>title</mat-icon>
+                        @if (editorForm.get('title')?.hasError('required') && editorForm.get('title')?.touched) {
+                            <mat-error>Title is required</mat-error>
+                        }
+                        @if (editorForm.get('title')?.hasError('minlength')) {
+                            <mat-error>Title must be at least 5 characters</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- Content Card -->
+            <div class="editor-card-modern">
+                <div class="card-header-modern">
+                    <div class="header-icon">📄</div>
+                    <div class="header-text">
+                        <h3>📃 Article Content</h3>
+                        <p>Write your article content with HTML formatting support</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Write your content here...</mat-label>
+                        <textarea matInput formControlName="content" rows="25" class="content-textarea"></textarea>
+                        @if (editorForm.get('content')?.hasError('required') && editorForm.get('content')?.touched) {
+                            <mat-error>Content is required</mat-error>
+                        }
+                        @if (editorForm.get('content')?.hasError('minlength')) {
+                            <mat-error>Content must be at least 20 characters</mat-error>
+                        }
+                    </mat-form-field>
+
+                    <div class="editor-tips-modern">
+                        <div class="tips-header">
+                            <span class="tips-icon">💡</span>
+                            <span class="tips-title">Formatting Tips</span>
+                        </div>
+                        <div class="tips-content">
+                            <code>&lt;h2&gt;</code> - Section heading |
+                            <code>&lt;p&gt;</code> - Paragraph |
+                            <code>&lt;ul&gt;/&lt;ol&gt;</code> - Lists |
+                            <code>&lt;code&gt;</code> - Inline code |
+                            <code>&lt;pre&gt;</code> - Code block |
+                            <code>&lt;blockquote&gt;</code> - Quote
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="editor-sidebar">
+            <!-- Category Settings -->
+            <div class="sidebar-card-modern">
+                <div class="card-header-modern purple">
+                    <div class="header-icon">🏷️</div>
+                    <div class="header-text">
+                        <h3>🔧 Settings</h3>
+                        <p>Configure article metadata</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="label-icon">📁</span>
+                            Category
+                        </label>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Select category</mat-label>
+                            <mat-select formControlName="categoryId">
+                                @for (cat of categories(); track cat.id) {
+                                    <mat-option [value]="cat.id">
+                                        <span class="cat-option">
+                                            <span class="cat-icon">{{ getCategoryEmoji(cat.name) }}</span>
+                                            {{ cat.name }}
+                                        </span>
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="label-icon">🏷️</span>
+                            Tags
+                        </label>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Add tags (comma separated)</mat-label>
+                            <input matInput formControlName="tags" placeholder="e.g., windows, password, security">
+                            <mat-icon matPrefix>label</mat-icon>
+                            <mat-hint>Separate tags with commas</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Writing Tips -->
+            <div class="sidebar-card-modern tips-card">
+                <div class="card-header-modern amber">
+                    <div class="header-icon">📋</div>
+                    <div class="header-text">
+                        <h3>✍️ Writing Tips</h3>
+                        <p>Best practices for article writing</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="tips-list-modern">
+                        <li>
+                            <span class="tip-bullet">✅</span>
+                            <span>Use clear, descriptive titles that match user searches</span>
+                        </li>
+                        <li>
+                            <span class="tip-bullet">✅</span>
+                            <span>Break content into sections with headers</span>
+                        </li>
+                        <li>
+                            <span class="tip-bullet">✅</span>
+                            <span>Include step-by-step instructions for procedures</span>
+                        </li>
+                        <li>
+                            <span class="tip-bullet">✅</span>
+                            <span>Add relevant tags for better searchability</span>
+                        </li>
+                        <li>
+                            <span class="tip-bullet">✅</span>
+                            <span>Use code blocks for technical content</span>
+                        </li>
+                        <li>
+                            <span class="tip-bullet">✅</span>
+                            <span>Keep articles focused on a single topic</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="sidebar-card-modern stats-card">
+                <div class="card-header-modern green">
+                    <div class="header-icon">📊</div>
+                    <div class="header-text">
+                        <h3>⚡ Quick Stats</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="stat-row">
+                        <span class="stat-label">Title Length</span>
+                        <span class="stat-value">{{ editorForm.get('title')?.value?.length || 0 }} chars</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Content Length</span>
+                        <span class="stat-value">{{ editorForm.get('content')?.value?.length || 0 }} chars</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Tags Count</span>
+                        <span class="stat-value">{{ getTagsCount() }} tags</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

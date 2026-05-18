@@ -18,26 +18,26 @@ export class StatusBadgeComponent {
   @Input() status!: TicketStatus;
 
   get statusClass(): string {
-    const map: Record<TicketStatus, string> = {
-      Open: 'badge-open',
-      InProgress: 'badge-inprogress',
-      OnHold: 'badge-onhold',
-      Resolved: 'badge-resolved',
-      Closed: 'badge-closed',
-      Reopened: 'badge-reopened',
+    const map: Record<number, string> = {
+      [TicketStatus.Open]: 'badge-open',
+      [TicketStatus.InProgress]: 'badge-inprogress',
+      [TicketStatus.OnHold]: 'badge-onhold',
+      [TicketStatus.Resolved]: 'badge-resolved',
+      [TicketStatus.Closed]: 'badge-closed',
+      [TicketStatus.Reopened]: 'badge-reopened',
     };
     return map[this.status] ?? 'badge-open';
   }
 
   get label(): string {
-    const map: Record<TicketStatus, string> = {
-      Open: 'Open',
-      InProgress: 'In Progress',
-      OnHold: 'On Hold',
-      Resolved: 'Resolved',
-      Closed: 'Closed',
-      Reopened: 'Reopened',
+    const map: Record<number, string> = {
+      [TicketStatus.Open]: 'Open',
+      [TicketStatus.InProgress]: 'In Progress',
+      [TicketStatus.OnHold]: 'On Hold',
+      [TicketStatus.Resolved]: 'Resolved',
+      [TicketStatus.Closed]: 'Closed',
+      [TicketStatus.Reopened]: 'Reopened',
     };
-    return map[this.status] ?? this.status;
+    return map[this.status] ?? 'Unknown';
   }
 }

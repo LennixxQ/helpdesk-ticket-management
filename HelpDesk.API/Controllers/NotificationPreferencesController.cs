@@ -22,7 +22,12 @@ namespace HelpDesk.API.Controllers
         [HttpGet("getMine")]
         public async Task<IActionResult> GetMine()
         {
-            var prefs = await _uow.NotificationPreferences.GetByIdAsync(_currentUserProvider.GetCurrentUserId());
+            var userId = _currentUserProvider.GetCurrentUserId();
+
+            // PRD 5.3 - Ensure preferences exist for user (creates defaults if missing)
+            await _uow.NotificationPreferences.EnsurePreferencesExistAsync(userId);
+
+            var prefs = await _uow.NotificationPreferences.GetByUserIdAsync(userId);
             return Ok(new { success = true, data = prefs });
         }
 

@@ -1,0 +1,177 @@
+<div class="security-page">
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-icon">
+        <mat-icon>security</mat-icon>
+      </div>
+      <div class="header-text">
+        <h1 class="page-title">Security & Authentication</h1>
+        <p class="page-subtitle">Manage your account security and two-factor authentication</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="security-grid">
+    <!-- MFA Card -->
+    <div class="security-card mfa-card" [class.enabled]="isMfaEnabled()">
+      <div class="card-header">
+        <div class="card-icon mfa-icon" [class.active]="isMfaEnabled()">
+          <mat-icon>{{ isMfaEnabled() ? 'verified_user' : 'lock' }}</mat-icon>
+        </div>
+        <div class="card-info">
+          <h3>Two-Factor Authentication</h3>
+          <p>{{ isMfaEnabled() ? 'Enabled' : 'Disabled' }}</p>
+        </div>
+        <div class="status-badge" [class.active]="isMfaEnabled()">
+          <mat-icon>{{ isMfaEnabled() ? 'check_circle' : 'cancel' }}</mat-icon>
+          <span>{{ isMfaEnabled() ? 'Active' : 'Inactive' }}</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        @if (isMfaEnabled()) {
+          <div class="mfa-enabled-content">
+            <div class="info-alert success">
+              <mat-icon>info</mat-icon>
+              <span>Your account is protected with two-factor authentication</span>
+            </div>
+            <p class="description">Your account is secured with an additional layer of protection. You'll need your authenticator app to sign in.</p>
+            <div class="action-buttons d-flex gap-3 flex-wrap">
+              <button mat-stroked-button class="disable-btn" (click)="openDisableMfaDialog()" [disabled]="isLoadingMfa()">
+                <mat-icon>refresh</mat-icon>
+                Change Authenticator
+              </button>
+              <button mat-flat-button color="warn" class="disable-mfa-btn" (click)="showDisableForm.set(!showDisableForm())" [disabled]="isLoadingMfa()">
+                <mat-icon>{{ showDisableForm() ? 'expand_less' : 'block' }}</mat-icon>
+                {{ showDisableForm() ? 'Cancel Disabling' : 'Disable MFA' }}
+              </button>
+            </div>
+
+            @if (showDisableForm()) {
+              <div class="disable-panel mt-4 p-4 border rounded-3 bg-light">
+                <h4 class="h6 fw-bold mb-2 text-danger">Disable Two-Factor Authentication</h4>
+                <p class="small text-secondary mb-3">To turn off MFA, please enter the 6-digit verification code from your authenticator app.</p>
+                
+                <div class="form-group mb-3">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Verification Code</mat-label>
+                    <input matInput [formControl]="disableCodeControl" placeholder="000000" maxlength="6" (keyup.enter)="confirmDisable()">
+                    <mat-icon matPrefix>pin</mat-icon>
+                  </mat-form-field>
+                </div>
+                
+                <div class="d-flex gap-2 justify-content-end">
+                  <button mat-button (click)="showDisableForm.set(false)">Cancel</button>
+                  <button mat-flat-button color="warn" (click)="confirmDisable()" [disabled]="isLoadingMfa() || disableCodeControl.invalid">
+                    Confirm Disable
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="mfa-disabled-content">
+            <p class="description">Add an extra layer of security to your account. You'll need an authenticator app to sign in.</p>
+            <div class="features-list">
+              <div class="feature-item">
+                <mat-icon>check_circle</mat-icon>
+                <span>Protects against password theft</span>
+              </div>
+              <div class="feature-item">
+                <mat-icon>check_circle</mat-icon>
+                <span>Requires physical access to your phone</span>
+              </div>
+              <div class="feature-item">
+                <mat-icon>check_circle</mat-icon>
+                <span>Works with any authenticator app</span>
+              </div>
+            </div>
+
+            @if (showMfaSetup()) {
+              <div class="setup-panel">
+                @if (isLoadingMfa()) {
+                  <div class="loading-state">
+                    <mat-spinner diameter="40"></mat-spinner>
+                    <p>Generating QR code...</p>
+                  </div>
+                } @else if (mfaSetupData()) {
+                  <div class="qr-section">
+                    <h4>Scan this QR code</h4>
+                    <div class="qr-container">
+                      <img [src]="mfaSetupData()!.qrCodeDataUri" alt="MFA QR Code" class="qr-image">
+                    </div>
+                    <div class="manual-entry">
+                      <p class="manual-label">Or enter this code manually:</p>
+                      <div class="secret-key" (click)="copyToClipboard(mfaSetupData()!.secretKey)">
+                        <code>{{ mfaSetupData()!.secretKey }}</code>
+                        <mat-icon>content_copy</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="verify-section">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Verification Code</mat-label>
+                      <input matInput [formControl]="setupCodeControl" placeholder="Enter 6-digit code" maxlength="6">
+                      <mat-icon matPrefix>pin</mat-icon>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="form-actions">
+                    <button mat-button class="cancel-btn" (click)="cancelSetup()">Cancel</button>
+                    <button mat-flat-button color="primary" class="verify-btn" (click)="verifyAndEnableMfa()" [disabled]="isLoadingMfa() || setupForm.invalid">
+                      <mat-icon>verify</mat-icon>
+                      Enable MFA
+                    </button>
+                  </div>
+                }
+              </div>
+            } @else {
+              <button mat-flat-button class="enable-btn" (click)="openMfaSetup()">
+                <mat-icon>add</mat-icon>
+                Enable Two-Factor Authentication
+              </button>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Security Info Card -->
+    <div class="security-card info-card">
+      <div class="card-header">
+        <div class="card-icon info-icon">
+          <mat-icon>info</mat-icon>
+        </div>
+        <div class="card-info">
+          <h3>Security Tips</h3>
+          <p>Best practices for your account</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul class="tips-list">
+          <li>
+            <mat-icon>check</mat-icon>
+            <span>Use a strong, unique password</span>
+          </li>
+          <li>
+            <mat-icon>check</mat-icon>
+            <span>Enable two-factor authentication</span>
+          </li>
+          <li>
+            <mat-icon>check</mat-icon>
+            <span>Never share your login credentials</span>
+          </li>
+          <li>
+            <mat-icon>check</mat-icon>
+            <span>Log out from shared devices</span>
+          </li>
+          <li>
+            <mat-icon>check</mat-icon>
+            <span>Keep your email address updated</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

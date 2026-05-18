@@ -1,0 +1,170 @@
+<div class="kb-list page-enter">
+
+    <!-- Hero Header -->
+    <div class="page-header-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-icon">
+                    <mat-icon>menu_book</mat-icon>
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-title">Knowledge Base</h1>
+                    <p class="page-subtitle">Browse help articles, guides & documentation</p>
+                </div>
+            </div>
+            @if (auth.isAdmin() || auth.isAgent()) {
+            <a mat-flat-button class="btn-create-article" routerLink="/kb/create">
+                <mat-icon>add</mat-icon>
+                <span>Create Article</span>
+            </a>
+            }
+        </div>
+    </div>
+
+    <!-- Stats Banner -->
+    <div class="stats-banner">
+        <div class="stat-item">
+            <span class="stat-emoji">📚</span>
+            <div class="stat-info">
+                <span class="stat-value">{{ articles().length }}</span>
+                <span class="stat-label">Total Articles</span>
+            </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-emoji">👁️</span>
+            <div class="stat-info">
+                <span class="stat-value">{{ getTotalViews() }}</span>
+                <span class="stat-label">Total Views</span>
+            </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-emoji">🏷️</span>
+            <div class="stat-info">
+                <span class="stat-value">{{ categories().length - 1 }}</span>
+                <span class="stat-label">Categories</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="search-filter-section">
+        <div class="search-box-modern">
+            <mat-icon>search</mat-icon>
+            <input matInput [formControl]="searchControl" (keyup.enter)="searchArticles()"
+                placeholder="Search articles by title or content..." />
+            @if (searchControl.value) {
+            <button mat-icon-button (click)="searchControl.setValue(''); loadArticles()">
+                <mat-icon>close</mat-icon>
+            </button>
+            }
+        </div>
+
+        <div class="category-tabs">
+            @for (cat of categories(); track cat) {
+            <button class="cat-tab" [class.active]="selectedCategory() === (cat === 'All' ? '' : cat)"
+                (click)="selectCategory(cat)">
+                @switch (cat) {
+                    @case ('All') { <span>🌟</span> }
+                    @case ('Hardware') { <span>🖥️</span> }
+                    @case ('Software') { <span>📀</span> }
+                    @case ('Network') { <span>📡</span> }
+                    @case ('HR') { <span>👥</span> }
+                    @case ('Security') { <span>🔒</span> }
+                    @case ('General') { <span>📋</span> }
+                    @default { <span>📁</span> }
+                }
+                <span>{{ cat }}</span>
+                @if (cat !== 'All') {
+                <span class="cat-count">{{ getCategoryCount(cat) }}</span>
+                }
+            </button>
+            }
+        </div>
+    </div>
+
+    <!-- Loading -->
+    @if (isLoading()) {
+    <div class="loading-modern">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading articles...</p>
+    </div>
+    }
+
+    <!-- Articles Grid -->
+    @if (!isLoading()) {
+    @if (filteredArticles().length === 0) {
+    <div class="empty-state-modern">
+        <div class="empty-illustration">
+            <span class="empty-emoji">📭</span>
+        </div>
+        <h3>No Articles Found</h3>
+        <p>Try adjusting your search or browse different categories.</p>
+        <button mat-flat-button class="btn-browse" (click)="searchControl.setValue(''); selectCategory('All'); loadArticles()">
+            <mat-icon>explore</mat-icon>
+            Browse All Articles
+        </button>
+    </div>
+    } @else {
+    <div class="articles-section">
+        <div class="section-header">
+            <span class="section-title">
+                <mat-icon>article</mat-icon>
+                Articles
+            </span>
+            <span class="article-count">{{ filteredArticles().length }} articles found</span>
+        </div>
+
+        <div class="articles-grid">
+            @for (article of filteredArticles(); track article.id) {
+            <div class="article-card-modern" (click)="viewArticle(article.id)">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-top">
+                        <div class="category-badge-modern" [style.background]="getCategoryBgColor(article.categoryName)" [style.color]="getCategoryTextColor(article.categoryName)">
+                            <span class="badge-icon">{{ getCategoryEmoji(article.categoryName) }}</span>
+                            <span class="badge-text">{{ article.categoryName }}</span>
+                        </div>
+                        @if (article.status === 1) {
+                        <span class="status-badge draft">Draft</span>
+                        }
+                    </div>
+
+                    <h3 class="article-title-modern">
+                        <mat-icon class="title-icon">description</mat-icon>
+                        {{ article.title }}
+                    </h3>
+
+                    <p class="article-meta-modern">
+                        <span class="author">
+                            <mat-icon>person</mat-icon>
+                            {{ article.authorName }}
+                        </span>
+                        <span class="separator">•</span>
+                        <span class="views">
+                            <mat-icon>visibility</mat-icon>
+                            {{ article.viewCount }} views
+                        </span>
+                    </p>
+
+                    <div class="card-footer">
+                        <span class="date-info">
+                            <mat-icon>schedule</mat-icon>
+                            {{ article.lastModifiedAt | date:'MMM d, y' }}
+                        </span>
+                        <div class="read-more">
+                            <span>Read more</span>
+                            <mat-icon>arrow_forward</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    }
+    }
+
+</div>

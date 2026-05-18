@@ -7,5 +7,6 @@
         public bool IsActive { get; set; }
         public Guid? DepartmentHeadId { get; set; }
         public string? DepartmentHeadName { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

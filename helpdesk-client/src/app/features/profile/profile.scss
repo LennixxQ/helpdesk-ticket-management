@@ -1,0 +1,527 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 32px;
+}
+
+// ══════════════════════════════════════════════════════════════
+// HERO HEADER
+// ══════════════════════════════════════════════════════════════
+.page-header-hero {
+    position: relative;
+    background: linear-gradient(135deg, #1E3A5F 0%, #10B981 100%);
+    border-radius: 20px;
+    padding: 32px;
+    overflow: hidden;
+
+    .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+            radial-gradient(circle at 10% 90%, rgba(255,255,255,0.1) 0%, transparent 40%),
+            radial-gradient(circle at 90% 10%, rgba(255,255,255,0.08) 0%, transparent 40%);
+    }
+
+    .hero-content {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .hero-left {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .avatar-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            color: #fff;
+            font-size: 36px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .avatar-ring {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            animation: ring-pulse 2s ease-in-out infinite;
+        }
+    }
+
+    .hero-text {
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 4px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            margin: 0 0 10px;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+
+            &.role-admin {
+                background: rgba(239, 68, 68, 0.3);
+                color: #FCA5A5;
+            }
+            &.role-agent {
+                background: rgba(245, 158, 11, 0.3);
+                color: #FCD34D;
+            }
+            &.role-user {
+                background: rgba(99, 102, 241, 0.3);
+                color: #C7D2FE;
+            }
+        }
+    }
+}
+
+@keyframes ring-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════════════════════
+.tabs-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.tabs-row {
+    display: flex;
+    gap: 12px;
+}
+
+.tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border: 2px solid transparent;
+    background: transparent;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748B;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+    }
+
+    &:hover:not(.active) {
+        background: #F1F5F9;
+        color: #1E293B;
+    }
+
+    &.active {
+        background: #10B981;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// PROFILE CARD
+// ══════════════════════════════════════════════════════════════
+.profile-card-modern {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 24px;
+        background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+        border-bottom: 1px solid #D1FAE5;
+
+        .header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #10B981, #059669);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+
+            mat-icon {
+                font-size: 24px;
+                width: 24px;
+                height: 24px;
+                color: #fff;
+            }
+        }
+
+        .header-text {
+            h3 {
+                font-size: 18px;
+                font-weight: 700;
+                color: #065F46;
+                margin: 0 0 4px;
+            }
+
+            p {
+                font-size: 13px;
+                color: #047857;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 24px;
+}
+
+.form-field {
+    ::ng-deep {
+        .mat-mdc-form-field-subscript-wrapper {
+            margin-top: 4px;
+        }
+
+        .mat-mdc-text-field-wrapper {
+            background: #F8FAFC;
+        }
+
+        .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+        .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+        .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+            border-color: #E2E8F0;
+        }
+
+        mat-icon {
+            color: #64748B;
+            margin-right: 8px;
+        }
+    }
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.save-btn {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px;
+    background: linear-gradient(135deg, #10B981, #059669) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: 0 28px !important;
+    height: 48px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    transition: all 0.3s ease !important;
+
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    }
+
+    mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        margin-right: 0 !important;
+    }
+
+    span {
+        font-size: 14px;
+    }
+}
+
+.full-width { grid-column: 1 / -1; }
+
+// ══════════════════════════════════════════════════════════════
+// SECURITY CARD
+// ══════════════════════════════════════════════════════════════
+.security-card-modern {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 24px;
+        background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+        border-bottom: 1px solid #FED7AA;
+
+        .header-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+
+            mat-icon {
+                font-size: 24px;
+                width: 24px;
+                height: 24px;
+                color: #fff;
+            }
+        }
+
+        .header-text {
+            h3 {
+                font-size: 18px;
+                font-weight: 700;
+                color: #92400E;
+                margin: 0 0 4px;
+            }
+
+            p {
+                font-size: 13px;
+                color: #B45309;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.security-form {
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+
+    ::ng-deep {
+        .mat-mdc-form-field-subscript-wrapper {
+            margin-top: 4px;
+        }
+
+        .mat-mdc-text-field-wrapper {
+            background: #FFFBEB;
+        }
+
+        mat-icon {
+            color: #D97706;
+            margin-right: 8px;
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// MFA CARD
+// ══════════════════════════════════════════════════════════════
+.mfa-card-modern {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .mfa-content {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .mfa-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #6366F1, #4F46E5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+
+            mat-icon {
+                font-size: 28px;
+                width: 28px;
+                height: 28px;
+                color: #fff;
+            }
+        }
+
+        .mfa-info {
+            h3 {
+                font-size: 17px;
+                font-weight: 700;
+                color: #1E293B;
+                margin: 0 0 4px;
+            }
+
+            p {
+                font-size: 13px;
+                color: #64748B;
+                margin: 0;
+            }
+        }
+    }
+
+    .mfa-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .mfa-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: #FEF2F2;
+            border-radius: 10px;
+            color: #DC2626;
+            font-size: 13px;
+            font-weight: 600;
+
+            mat-icon {
+                font-size: 18px;
+                width: 18px;
+                height: 18px;
+            }
+
+            &.enabled {
+                background: #ECFDF5;
+                color: #059669;
+            }
+        }
+
+        .mfa-btn {
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            padding: 0 20px !important;
+            height: 44px !important;
+            border: 2px solid #6366F1 !important;
+            color: #6366F1 !important;
+            transition: all 0.3s ease !important;
+
+            &:hover {
+                background: #6366F1 !important;
+                color: #fff !important;
+            }
+
+            mat-icon {
+                margin-right: 6px;
+            }
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// RESPONSIVE
+// ══════════════════════════════════════════════════════════════
+@media (max-width: 768px) {
+    .page-header-hero {
+        padding: 24px;
+
+        .hero-text .page-title {
+            font-size: 22px;
+        }
+
+        .avatar-wrapper .avatar {
+            width: 72px;
+            height: 72px;
+            font-size: 28px;
+        }
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .security-form {
+        padding: 20px;
+    }
+
+    .mfa-card-modern {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mfa-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .mfa-btn {
+        width: 100%;
+    }
+}

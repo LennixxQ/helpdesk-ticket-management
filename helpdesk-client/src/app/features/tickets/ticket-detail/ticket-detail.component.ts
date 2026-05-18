@@ -64,17 +64,23 @@ export class TicketDetailComponent implements OnInit {
   // ── Controls ───────────────────────────────────────────────
   commentControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
   agentControl = new FormControl<string>('');
-  statusControl = new FormControl<TicketStatus | ''>('');
-  priorityControl = new FormControl<TicketPriority | ''>('');
+  statusControl = new FormControl<number | ''>('');
+  priorityControl = new FormControl<number | ''>('');
 
-  readonly agentStatuses: TicketStatus[] = ['InProgress', 'OnHold', 'Resolved'];
-  readonly adminStatuses: TicketStatus[] = ['InProgress', 'OnHold', 'Resolved', 'Closed', 'Reopened'];
-  readonly priorities: TicketPriority[] = ['Low', 'Medium', 'High', 'Critical'];
+  readonly agentStatuses = [TicketStatus.InProgress, TicketStatus.OnHold, TicketStatus.Resolved];
+  readonly adminStatuses = [TicketStatus.InProgress, TicketStatus.OnHold, TicketStatus.Resolved, TicketStatus.Closed, TicketStatus.Reopened];
+  readonly priorities = [TicketPriority.Low, TicketPriority.Medium, TicketPriority.High, TicketPriority.Critical];
 
-  readonly statusLabel: Record<TicketStatus, string> = {
-    Open: 'Open', InProgress: 'In Progress', OnHold: 'On Hold',
-    Resolved: 'Resolved', Closed: 'Closed', Reopened: 'Reopened'
+  readonly statusLabel: Record<number, string> = {
+    [TicketStatus.Open]: 'Open',
+    [TicketStatus.InProgress]: 'In Progress',
+    [TicketStatus.OnHold]: 'On Hold',
+    [TicketStatus.Resolved]: 'Resolved',
+    [TicketStatus.Closed]: 'Closed',
+    [TicketStatus.Reopened]: 'Reopened'
   };
+
+  protected readonly TicketStatus = TicketStatus;
 
   availableStatuses = computed(() =>
     this.auth.isAdmin() ? this.adminStatuses : this.agentStatuses
@@ -90,10 +96,12 @@ export class TicketDetailComponent implements OnInit {
     this.ticketService.getById(id).subscribe({
       next: (res) => {
         if (res.success) {
-          this.ticket.set(res.data);
-          this.statusControl.setValue(res.data.status);
-          this.priorityControl.setValue(res.data.priority);
-          this.agentControl.setValue(res.data.assignedAgentId ?? '');
+          // Backend maps AssignedAgent.FullName to assignedAgentName, etc.
+          const t = res.data;
+          this.ticket.set(t);
+          this.statusControl.setValue(t.status);
+          this.priorityControl.setValue(t.priority);
+          this.agentControl.setValue(t.assignedAgentId ?? '');
         }
         this.isLoading.set(false);
       },
@@ -155,7 +163,6 @@ export class TicketDetailComponent implements OnInit {
     if (!priority || !ticketId) return;
 
     this.isSaving.set(true);
-    // ✅ PUT /api/tickets/UpdatePriority
     this.ticketService.updatePriority(ticketId, priority).subscribe({
       next: (res) => {
         this.isSaving.set(false);
@@ -246,5 +253,15 @@ export class TicketDetailComponent implements OnInit {
 
   shortId(id: string): string {
     return '#' + id.substring(0, 8).toUpperCase();
+  }
+
+  getPriorityLabel(priority: TicketPriority): string {
+    const map: Record<number, string> = {
+      [TicketPriority.Low]: 'Low',
+      [TicketPriority.Medium]: 'Medium',
+      [TicketPriority.High]: 'High',
+      [TicketPriority.Critical]: 'Critical',
+    };
+    return map[priority] ?? 'Unknown';
   }
 }

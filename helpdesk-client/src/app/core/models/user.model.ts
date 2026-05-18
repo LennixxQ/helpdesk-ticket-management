@@ -12,6 +12,8 @@ export interface UserModel {
     role: UserRole;
     isActive: boolean;
     createdAt: string;
+    departmentId?: string;
+    departmentName?: string;
 }
 
 export interface CreateUserRequest {

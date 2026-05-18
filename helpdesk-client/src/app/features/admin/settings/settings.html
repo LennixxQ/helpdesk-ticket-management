@@ -1,0 +1,138 @@
+<div class="settings-page">
+
+    <!-- Hero Header -->
+    <div class="page-header-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-icon">
+                    <mat-icon>settings</mat-icon>
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-title">System Settings</h1>
+                    <p class="page-subtitle">Configure your helpdesk preferences and system behavior</p>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat-badge">
+                    <mat-icon>build</mat-icon>
+                    <span>{{ allSettings().length }} Settings</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    @if (isLoading()) {
+    <div class="loading-center">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading settings...</p>
+    </div>
+    }
+
+    @if (!isLoading()) {
+    <div class="settings-container">
+        <!-- Settings Panels -->
+        <mat-accordion multi>
+            @for (group of settingsGroups(); track group.title) {
+              @if (group.settings.length > 0) {
+                <mat-expansion-panel [expanded]="expandedPanel() === group.icon" (opened)="expandedPanel.set(group.icon)" class="setting-panel">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <div class="panel-header">
+                        <div class="panel-icon" [style.background]="group.color">
+                          <mat-icon>{{ group.icon }}</mat-icon>
+                        </div>
+                        <div class="panel-info">
+                          <span class="panel-title">{{ group.title }}</span>
+                          <span class="panel-subtitle">{{ group.settings.length }} configuration{{ group.settings.length !== 1 ? 's' : '' }}</span>
+                        </div>
+                      </div>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <div class="settings-list">
+                    @for (setting of group.settings; track setting.key) {
+                      <div class="setting-row">
+                        <div class="setting-info">
+                          <span class="setting-name">{{ getDisplayName(setting.key) }}</span>
+                          @if (setting.description) {
+                            <span class="setting-desc">{{ setting.description }}</span>
+                          }
+                          <span class="setting-key-badge">{{ setting.key }}</span>
+                        </div>
+
+                        <div class="setting-control">
+                          @if (savingKey() === setting.key) {
+                            <mat-spinner diameter="20"></mat-spinner>
+                          } @else if (isBoolValue(setting.value)) {
+                            <mat-slide-toggle
+                              [checked]="setting.value === 'true'"
+                              (change)="onToggleChange(setting, $event.checked)"
+                              color="primary">
+                            </mat-slide-toggle>
+                          } @else {
+                            <mat-form-field appearance="outline" class="setting-input">
+                              <input matInput
+                                     [type]="getInputType(setting)"
+                                     [value]="setting.value"
+                                     (change)="getInputType(setting) === 'number' ? onNumberChange(setting, $event) : onInputChange(setting, $event)"
+                                     (blur)="onInputChange(setting, $event)">
+                            </mat-form-field>
+                          }
+                        </div>
+                      </div>
+                    }
+                  </div>
+
+                  <!-- Email Test Section -->
+                  @if (group.icon === 'email') {
+                    <div class="test-section">
+                      <div class="section-divider"></div>
+                      <div class="test-content">
+                        <div class="test-info">
+                          <div class="test-icon-wrapper">
+                            <mat-icon>mail_outline</mat-icon>
+                          </div>
+                          <div class="test-text">
+                            <h4>Test Email Configuration</h4>
+                            <p>Send a test email to verify your SMTP settings are working correctly</p>
+                          </div>
+                        </div>
+                        <div class="test-form">
+                          <mat-form-field appearance="outline" class="test-input">
+                            <mat-label>Recipient Email</mat-label>
+                            <input matInput [formControl]="testEmailControl" placeholder="test@example.com">
+                            <mat-icon matPrefix>email</mat-icon>
+                            @if (testEmailControl.hasError('email') && testEmailControl.touched) {
+                              <mat-error>Enter a valid email</mat-error>
+                            }
+                          </mat-form-field>
+                          <button mat-flat-button
+                                  class="test-btn"
+                                  (click)="sendTestEmail()"
+                                  [disabled]="testEmailControl.invalid || isSendingTest()">
+                            @if (isSendingTest()) {
+                              <ng-container>
+                                <mat-spinner diameter="20"></mat-spinner>
+                                <span>Sending...</span>
+                              </ng-container>
+                            } @else {
+                              <ng-container>
+                                <mat-icon>send</mat-icon>
+                                <span>Send Test Email</span>
+                              </ng-container>
+                            }
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </mat-expansion-panel>
+              }
+            }
+        </mat-accordion>
+    </div>
+    }
+
+</div>

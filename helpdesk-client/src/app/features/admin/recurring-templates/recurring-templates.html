@@ -1,0 +1,196 @@
+<div class="recurring-templates page-enter">
+
+    <!-- Hero Header -->
+    <div class="page-header-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-icon">
+                    <mat-icon>event_repeat</mat-icon>
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-title">Recurring Templates</h1>
+                    <p class="page-subtitle">Automate recurring ticket creation on a schedule</p>
+                </div>
+            </div>
+            <button mat-flat-button class="add-btn" (click)="showCreateForm.set(!showCreateForm())">
+                <mat-icon>{{ showCreateForm() ? 'close' : 'add' }}</mat-icon>
+                {{ showCreateForm() ? 'Cancel' : 'New Template' }}
+            </button>
+        </div>
+    </div>
+
+    <!-- Create Form -->
+    @if (showCreateForm()) {
+    <div class="create-card-modern">
+        <div class="card-header">
+            <div class="header-icon">
+                <mat-icon>auto_awesome</mat-icon>
+            </div>
+            <div class="header-text">
+                <h3>Create New Template</h3>
+                <p>Set up automated ticket creation</p>
+            </div>
+        </div>
+        <form class="form-grid" (ngSubmit)="submitCreate()">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Template Name</mat-label>
+                <mat-icon matPrefix>label</mat-icon>
+                <input matInput [formControl]="createForm.get('templateName')" placeholder="e.g., Weekly Server Backup Check" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Ticket Title</mat-label>
+                <mat-icon matPrefix>title</mat-icon>
+                <input matInput [formControl]="createForm.get('ticketTitle')" placeholder="e.g., Check server backups" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field full-width">
+                <mat-label>Description</mat-label>
+                <mat-icon matPrefix>description</mat-icon>
+                <textarea matInput [formControl]="createForm.get('description')" rows="2" placeholder="Optional description..."></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Category</mat-label>
+                <mat-icon matPrefix>category</mat-icon>
+                <mat-select [formControl]="createForm.get('categoryId')">
+                    @for (cat of categories(); track cat.id) {
+                    <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Priority</mat-label>
+                <mat-icon matPrefix>flag</mat-icon>
+                <mat-select [formControl]="createForm.get('priority')">
+                    <mat-option [value]="1">Low</mat-option>
+                    <mat-option [value]="2">Medium</mat-option>
+                    <mat-option [value]="3">High</mat-option>
+                    <mat-option [value]="4">Critical</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Recurrence</mat-label>
+                <mat-icon matPrefix>repeat</mat-icon>
+                <mat-select [formControl]="createForm.get('recurrencePattern')">
+                    <mat-option [value]="1">Daily</mat-option>
+                    <mat-option [value]="2">Weekly</mat-option>
+                    <mat-option [value]="3">Monthly</mat-option>
+                    <mat-option [value]="4">Custom</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="form-actions">
+                <button mat-stroked-button type="button" class="cancel-btn" (click)="showCreateForm.set(false)">Cancel</button>
+                <button mat-flat-button type="submit" class="submit-btn" [disabled]="isSaving()">
+                    @if (isSaving()) {
+                        <ng-container>
+                            <mat-spinner diameter="20"></mat-spinner>
+                            <span>Creating...</span>
+                        </ng-container>
+                    } @else {
+                        <ng-container>
+                            <mat-icon>add_circle</mat-icon>
+                            <span>Create Template</span>
+                        </ng-container>
+                    }
+                </button>
+            </div>
+        </form>
+    </div>
+    }
+
+    <!-- Loading -->
+    @if (isLoading()) {
+    <div class="loading-center">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading templates...</p>
+    </div>
+    }
+
+    <!-- Templates Grid -->
+    @if (!isLoading()) {
+    @if (templates().length === 0) {
+    <div class="empty-state-modern">
+        <div class="empty-icon">
+            <mat-icon>event_repeat</mat-icon>
+        </div>
+        <h3>No Templates Yet</h3>
+        <p>Create recurring templates to automate ticket creation.</p>
+        <button mat-flat-button class="add-btn-large" (click)="showCreateForm.set(true)">
+            <mat-icon>add</mat-icon>
+            Create First Template
+        </button>
+    </div>
+    } @else {
+    <div class="templates-grid">
+        @for (template of templates(); track template.id) {
+        <div class="template-card-modern" [class.inactive]="!template.isActive">
+            <div class="card-header">
+                <div class="pattern-badge" [class]="'pattern-' + template.recurrencePattern">
+                    <mat-icon>{{ recurrenceIcons[template.recurrencePattern] || 'schedule' }}</mat-icon>
+                    <span>{{ recurrenceLabels[template.recurrencePattern] || 'Custom' }}</span>
+                </div>
+                <mat-slide-toggle [checked]="template.isActive" (change)="toggleActive(template)"
+                    matTooltip="{{ template.isActive ? 'Deactivate' : 'Activate' }}" color="primary">
+                </mat-slide-toggle>
+            </div>
+
+            <div class="template-content">
+                <h3 class="template-name">{{ template.templateName }}</h3>
+                <p class="ticket-title">{{ template.ticketTitle }}</p>
+            </div>
+
+            <div class="template-meta">
+                <div class="meta-row">
+                    <span class="meta-label">
+                        <mat-icon>category</mat-icon>
+                        Category
+                    </span>
+                    <span class="meta-value">{{ template.categoryName }}</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">
+                        <mat-icon>flag</mat-icon>
+                        Priority
+                    </span>
+                    <span class="priority-badge" [class]="'priority-' + template.priority">
+                        {{ priorityLabels[template.priority] || 'Medium' }}
+                    </span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">
+                        <mat-icon>play_circle</mat-icon>
+                        Runs
+                    </span>
+                    <span class="meta-value">{{ template.runCount }}</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">
+                        <mat-icon>schedule</mat-icon>
+                        Next Run
+                    </span>
+                    <span class="meta-value highlight">{{ formatDate(template.nextRunAt) }}</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">
+                        <mat-icon>history</mat-icon>
+                        Last Run
+                    </span>
+                    <span class="meta-value">{{ formatDate(template.lastRunAt) }}</span>
+                </div>
+            </div>
+
+            <div class="card-actions">
+                <button mat-stroked-button class="trigger-btn" (click)="triggerManual(template)" matTooltip="Run now">
+                    <mat-icon>play_arrow</mat-icon>
+                    Run Now
+                </button>
+                <button mat-icon-button class="delete-btn" (click)="deleteTemplate(template)" matTooltip="Delete">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+    }
+    }
+
+</div>

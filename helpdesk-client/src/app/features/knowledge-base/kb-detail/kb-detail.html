@@ -1,0 +1,130 @@
+<div class="kb-detail-page">
+  @if (isLoading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="48"></mat-spinner>
+      <p>Loading article...</p>
+    </div>
+  } @else if (article()) {
+    <div class="article-container">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a routerLink="/kb">Knowledge Base</a>
+        <mat-icon>chevron_right</mat-icon>
+        <span>{{ article()!.categoryName }}</span>
+      </div>
+
+      <!-- Article Header -->
+      <div class="article-header">
+        <div class="header-content">
+          <div class="meta-row">
+            <span class="category-badge" [attr.data-category]="article()!.categoryName">
+              <mat-icon>folder</mat-icon>
+              {{ article()!.categoryName }}
+            </span>
+            <span class="status-badge" [class]="getStatusClass(article()!.status)">
+              {{ getStatusLabel(article()!.status) }}
+            </span>
+          </div>
+          <h1 class="article-title">{{ article()!.title }}</h1>
+          <div class="article-meta">
+            <div class="meta-item">
+              <mat-icon>person</mat-icon>
+              <span>{{ article()!.authorName }}</span>
+            </div>
+            <div class="meta-item">
+              <mat-icon>visibility</mat-icon>
+              <span>{{ article()!.viewCount }} views</span>
+            </div>
+            <div class="meta-item">
+              <mat-icon>schedule</mat-icon>
+              <span>{{ formatDate(article()!.lastModifiedAt || article()!.createdAt) }}</span>
+            </div>
+          </div>
+        </div>
+
+        @if (canEdit()) {
+          <div class="header-actions">
+            <button mat-stroked-button [routerLink]="['/kb/edit', article()!.id]">
+              <mat-icon>edit</mat-icon>
+              Edit
+            </button>
+            @if (auth.isAdmin()) {
+              <button mat-stroked-button (click)="togglePublish()">
+                <mat-icon>{{ article()!.status === 2 ? 'unpublished' : 'publish' }}</mat-icon>
+                {{ article()!.status === 2 ? 'Unpublish' : 'Publish' }}
+              </button>
+              <button mat-stroked-button color="warn" (click)="deleteArticle()">
+                <mat-icon>delete</mat-icon>
+                Delete
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Article Content -->
+      <div class="article-content">
+        <div class="content-body" [innerHTML]="article()!.content"></div>
+
+        <!-- Tags -->
+        @if (article()!.tags) {
+          <div class="article-tags">
+            @for (tag of article()!.tags!.split(','); track tag) {
+              <span class="tag">{{ tag.trim() }}</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Feedback Section -->
+      <div class="feedback-section">
+        <div class="feedback-card">
+          <div class="feedback-content">
+            <h3>Was this article helpful?</h3>
+            <p>Help us improve our documentation</p>
+          </div>
+          @if (showFeedback()) {
+            <div class="feedback-buttons">
+              <button mat-stroked-button class="feedback-btn yes" (click)="submitFeedback(true)" [disabled]="isSubmittingFeedback()">
+                <mat-icon>thumb_up</mat-icon>
+                Yes, it helped
+              </button>
+              <button mat-stroked-button class="feedback-btn no" (click)="submitFeedback(false)" [disabled]="isSubmittingFeedback()">
+                <mat-icon>thumb_down</mat-icon>
+                Not really
+              </button>
+              <button mat-icon-button (click)="showFeedback.set(false)" matTooltip="Cancel">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          } @else {
+            <div class="feedback-stats">
+              <div class="stat">
+                <mat-icon>thumb_up</mat-icon>
+                <span>{{ article()!.helpfulCount }}</span>
+              </div>
+              <div class="stat">
+                <mat-icon>thumb_down</mat-icon>
+                <span>{{ article()!.notHelpfulCount }}</span>
+              </div>
+            </div>
+            <button mat-flat-button class="feedback-trigger" (click)="showFeedback.set(true)">
+              <mat-icon>rate_review</mat-icon>
+              Give Feedback
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <mat-icon>article</mat-icon>
+      <h3>Article not found</h3>
+      <p>The article you're looking for doesn't exist or has been removed.</p>
+      <a mat-flat-button color="primary" routerLink="/kb">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Knowledge Base
+      </a>
+    </div>
+  }
+</div>

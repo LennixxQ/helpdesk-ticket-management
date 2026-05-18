@@ -1,0 +1,117 @@
+<div class="notifications page-enter">
+
+    <!-- Hero Header -->
+    <div class="page-header-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-icon">
+                    <mat-icon>notifications</mat-icon>
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-title">Notification Preferences</h1>
+                    <p class="page-subtitle">Configure which notifications you want to receive</p>
+                </div>
+            </div>
+            @if (isAdmin()) {
+            <div class="mandatory-badge">
+                <mat-icon>lock</mat-icon>
+                <span>Some notifications are mandatory for Admin</span>
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Loading -->
+    @if (isLoading()) {
+    <div class="loading-center">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading preferences...</p>
+    </div>
+    }
+
+    @if (!isLoading()) {
+    <div class="notifications-grid">
+        @for (group of notificationGroups; track group.title) {
+        @if ((getPrefsForGroup(group.types) || []).length > 0) {
+        <div class="notification-card-modern">
+            <div class="card-header">
+                <div class="group-icon" [style.background]="group.color">
+                    <mat-icon>{{ group.icon }}</mat-icon>
+                </div>
+                <div class="header-text">
+                    <h3>{{ group.title }}</h3>
+                    <span class="pref-count">{{ getPrefsForGroup(group.types).length }} notification{{ getPrefsForGroup(group.types).length !== 1 ? 's' : '' }}</span>
+                </div>
+                @if (group.mandatoryAdmin && isAdmin()) {
+                <div class="mandatory-tag" matTooltip="Mandatory for Admin - cannot be disabled">
+                    <mat-icon>verified</mat-icon>
+                </div>
+                }
+            </div>
+            <div class="divider"></div>
+            <div class="pref-list">
+                @for (pref of getPrefsForGroup(group.types); track pref.eventType) {
+                <div class="pref-item" [class.disabled]="isMandatoryForAdmin(pref.eventType)">
+                    <div class="pref-content">
+                        <div class="pref-icon" [class.mandatory]="isMandatoryForAdmin(pref.eventType)">
+                            <mat-icon>{{ getEventIcon(pref.eventType) }}</mat-icon>
+                        </div>
+                        <div class="pref-info">
+                            <span class="pref-name">
+                                {{ getEventName(pref.eventType) }}
+                                @if (isMandatoryForAdmin(pref.eventType)) {
+                                <span class="mandatory-indicator">*</span>
+                                }
+                            </span>
+                            <span class="pref-desc">{{ getEventDescription(pref.eventType) }}</span>
+                        </div>
+                    </div>
+                    <div class="toggle-wrapper">
+                        @if (isMandatoryForAdmin(pref.eventType)) {
+                        <mat-icon class="lock-icon" matTooltip="Mandatory notification - cannot be disabled">lock</mat-icon>
+                        } @else {
+                        <mat-slide-toggle
+                            [checked]="pref.isEnabled"
+                            (change)="toggle(pref)"
+                            color="primary">
+                        </mat-slide-toggle>
+                        }
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        }
+        }
+    </div>
+
+    @if ((preferences() || []).length === 0) {
+    <div class="empty-state-modern">
+        <div class="empty-icon">
+            <mat-icon>notifications_off</mat-icon>
+        </div>
+        <h3>No Preferences Found</h3>
+        <p>Your notification preferences have not been configured yet.</p>
+        <button mat-flat-button class="refresh-btn" (click)="loadPreferences()">
+            <mat-icon>refresh</mat-icon>
+            Reload Preferences
+        </button>
+    </div>
+    }
+    }
+
+    <!-- Info Footer -->
+    <div class="info-footer">
+        <mat-icon>info</mat-icon>
+        <div class="info-text">
+            <strong>About Notification Preferences:</strong>
+            <ul>
+                <li>Changes take effect immediately — no batch processing delay</li>
+                <li>SLA breach and escalation notifications cannot be disabled for Admin accounts (per PRD 5.3)</li>
+                <li>Department Heads receive escalation notifications for tickets from their department</li>
+            </ul>
+        </div>
+    </div>
+
+</div>

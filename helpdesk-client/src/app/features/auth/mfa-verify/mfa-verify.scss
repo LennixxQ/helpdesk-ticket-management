@@ -1,0 +1,66 @@
+.mfa-verify-page {
+  background: linear-gradient(135deg, var(--color-primary, #003366) 0%, var(--color-primary-light, #104E8B) 100%);
+  padding: 20px;
+}
+
+.mfa-card {
+  width: 100%;
+  max-width: 440px;
+  background: white;
+}
+
+.mfa-header {
+  background: linear-gradient(135deg, var(--color-primary, #003366) 0%, var(--color-primary-light, #104E8B) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  .mfa-icon {
+    width: 68px;
+    height: 68px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+  }
+}
+
+.tracking-widest {
+  letter-spacing: 0.25em !important;
+}
+
+.tracking-wider {
+  letter-spacing: 0.08em;
+}
+
+.hover-bg-light:hover {
+  background-color: var(--color-bg-hover, #f1f5f9) !important;
+  color: var(--color-text-primary, #1e293b) !important;
+}
+
+.transition-all {
+  transition: all 0.2s ease-in-out;
+}
+
+.input-group {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:focus-within {
+    border-color: var(--color-primary-light, #104E8B) !important;
+    box-shadow: 0 0 0 0.25rem rgba(16, 78, 139, 0.15) !important;
+  }
+}
+
+// Custom pulse transition for standard button hover/active states
+.btn-primary {
+  background-color: var(--color-primary, #003366);
+  border-color: var(--color-primary, #003366);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-primary-dark, #002244);
+    border-color: var(--color-primary-dark, #002244);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}

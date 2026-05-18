@@ -8,4 +8,7 @@ public interface INotificationPreferenceRepository : IGenericRepository<Notifica
 {
     Task<bool> IsEnabledAsync(Guid userId, NotificationEventType eventType);
     Task UpsertAsync(Guid userId, NotificationEventType eventType, bool isEnabled);
+    Task<List<NotificationPreference>> GetByUserIdAsync(Guid userId);
+    Task AddRangeAsync(IEnumerable<NotificationPreference> preferences);
+    Task EnsurePreferencesExistAsync(Guid userId);
 }

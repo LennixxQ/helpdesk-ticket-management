@@ -1,9 +1,8 @@
 export interface CommentModel {
     id: string;
     content: string;
-    postedByUserName: string;
+    authorName: string;        // Backend field: AuthorName
     userId: string;
-    ticketId: string;
     createdAt: string;
 }
 export interface AddCommentRequest { content: string; }

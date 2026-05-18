@@ -36,4 +36,41 @@ public class NotificationPreferenceRepository : GenericRepository<NotificationPr
             _context.NotificationPreferences.Update(existing);
         }
     }
+
+    public async Task<List<NotificationPreference>> GetByUserIdAsync(Guid userId)
+    {
+        return await _context.NotificationPreferences
+            .Where(n => n.UserId == userId)
+            .ToListAsync();
+    }
+
+    public async Task AddRangeAsync(IEnumerable<NotificationPreference> preferences)
+    {
+        await _context.NotificationPreferences.AddRangeAsync(preferences);
+    }
+
+    // Ensures all notification preferences exist for a user (creates missing ones)
+    public async Task EnsurePreferencesExistAsync(Guid userId)
+    {
+        var existing = await GetByUserIdAsync(userId);
+        if (existing.Count > 0) return;
+
+        var defaults = new List<NotificationPreference>();
+        foreach (NotificationEventType eventType in Enum.GetValues(typeof(NotificationEventType)))
+        {
+            var pref = new NotificationPreference
+            {
+                Id = Guid.NewGuid(),
+                UserId = userId,
+                EventType = eventType,
+                IsEnabled = true,
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = "system"
+            };
+            defaults.Add(pref);
+        }
+
+        await AddRangeAsync(defaults);
+        await _context.SaveChangesAsync();
+    }
 }

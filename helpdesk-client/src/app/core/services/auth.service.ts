@@ -20,6 +20,9 @@ interface JwtPayload {
   'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'?: string;
   'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'?: string;
 
+  // ✅ MFA claim
+  mfaEnabled?: boolean | string;
+
   exp?: number;
   [key: string]: unknown;   // extra claims ignore karo
 }
@@ -51,6 +54,11 @@ export class AuthService {
       u['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] ??
       null;
 
+    if (role === 'Admin' || role === '1') return UserRole.Admin;
+    if (role === 'Agent' || role === '2') return UserRole.Agent;
+    if (role === 'User' || role === '3') return UserRole.User;
+    if (role === 'DepartmentHead' || role === 'Department Head' || role === '4') return UserRole.DepartmentHead;
+
     return role as UserRole | null;
   });
 
@@ -75,15 +83,42 @@ export class AuthService {
       null
     ) as string | null;
   });
+  
+  // ✅ MFA — multiple claim names try karo
+  readonly isMfaEnabledSignal = computed((): boolean => {
+    const u = this.currentUser();
+    if (!u) return false;
 
-  login(request: LoginRequest): Observable<ApiResponse<string>> {
-    return this.http.post<ApiResponse<string>>(
+    const val =
+      u['mfaEnabled'] ??
+      u['mfa_enabled'] ??
+      u['IsMfaEnabled'] ??
+      u['isMfaEnabled'] ??
+      u['http://schemas.microsoft.com/ws/2008/06/identity/claims/mfaEnabled'] ??
+      u['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/mfaEnabled'] ??
+      null;
+
+    return val === true || val === 'true';
+  });
+
+  login(request: LoginRequest): Observable<ApiResponse<any>> {
+    return this.http.post<ApiResponse<any>>(
       `${this.apiUrl}/login`, request
     ).pipe(
       tap(res => {
         if (res.success && res.data) {
-          this.storage.setToken(res.data);
-          this._token.set(res.data);
+          // Extract token - backend returns { token: "...", mfaSessionToken: null, requiresSetup: false }
+          let token: string;
+          if (typeof res.data === 'string') {
+            token = res.data;
+          } else if (res.data.token) {
+            token = res.data.token;
+          } else {
+            token = JSON.stringify(res.data);
+          }
+
+          this.storage.setToken(token);
+          this._token.set(token);
         }
       })
     );
@@ -95,15 +130,20 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  getToken = () => this._token();
-  isAdmin = () => this.currentRole() === 'Admin';
-  isAgent = () => this.currentRole() === 'Agent';
-  isUser = () => this.currentRole() === 'User';
+  // Expose the token signal for external updates
+  getTokenSignal() { return this._token; }
+
+  getToken(): string | null {
+    return this._token();
+  }
+  isAdmin = () => this.currentRole() === UserRole.Admin;
+  isAgent = () => this.currentRole() === UserRole.Agent;
+  isUser = () => this.currentRole() === UserRole.User;
 
   redirectByRole(): void {
     const role = this.currentRole();
-    if (role === 'Admin') this.router.navigate(['/dashboard']);
-    else if (role === 'Agent') this.router.navigate(['/agent/tickets']);
+    if (role === UserRole.Admin) this.router.navigate(['/dashboard']);
+    else if (role === UserRole.Agent) this.router.navigate(['/agent/tickets']);
     else this.router.navigate(['/tickets']);
   }
 }

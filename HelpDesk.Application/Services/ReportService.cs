@@ -268,6 +268,53 @@ namespace HelpDesk.Application.Services
             };
         }
 
+        public async Task<AgentPerformanceReportDto> GetTopAgentReportAsync(ReportFilterDto filter)
+        {
+            var tickets = await _uow.TicketReports.GetForReportAsync(filter);
+
+            var resolved = tickets.Where(t =>
+                t.Status == TicketStatus.Resolved || t.Status == TicketStatus.Closed)
+                .ToList();
+
+            var agentStats = resolved
+                .GroupBy(t => t.AssignedAgentId)
+                .Select(g => new
+                {
+                    AgentId = g.Key,
+                    AgentName = g.FirstOrDefault()?.AssignedAgent?.FullName ?? "Unknown",
+                    ResolvedCount = g.Count()
+                })
+                .Where(a => a.AgentId.HasValue)
+                .OrderByDescending(a => a.ResolvedCount)
+                .FirstOrDefault();
+
+            if (agentStats == null)
+                return new AgentPerformanceReportDto();
+
+            var agentResolved = resolved.Where(t => t.AssignedAgentId == agentStats.AgentId).ToList();
+
+            var avgHours = agentResolved.Any()
+                ? agentResolved.Where(t => t.LastModifiedAt.HasValue)
+                    .Average(t => (t.LastModifiedAt!.Value - t.CreatedAt).TotalHours)
+                : 0;
+
+            var slaPct = agentResolved.Any()
+                ? (double)agentResolved.Count(t => !t.SlaBreached) / agentResolved.Count * 100 : 0;
+
+            var csatScore = await _uow.Csat.GetAverageScoreForAgentAsync(
+                agentStats.AgentId.Value, filter.From, filter.To);
+
+            return new AgentPerformanceReportDto
+            {
+                AgentId = agentStats.AgentId.Value,
+                AgentName = agentStats.AgentName,
+                TotalResolved = agentStats.ResolvedCount,
+                AvgResolutionHours = Math.Round(avgHours, 2),
+                SlaCompliancePct = Math.Round(slaPct, 2),
+                CsatScore = csatScore
+            };
+        }
+
         private static byte[] WriteCsv<T>(IEnumerable<T> records)
         {
             using var ms = new MemoryStream();

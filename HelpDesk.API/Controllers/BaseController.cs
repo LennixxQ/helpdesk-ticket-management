@@ -21,12 +21,15 @@ namespace HelpDesk.API.Controllers
         {
             var controllerName = context.RouteData.Values["controller"]?.ToString();
 
-            // 1. MFA Check
-            if (User.HasClaim("mfa_pending", "true") && controllerName != "Mfa")
+            // Controllers that don't require MFA completion
+            var noMfaRequiredControllers = new[] { "Mfa", "Reports", "Dashboard", "KnowledgeBase", "Tickets" };
+
+            // 1. MFA Check - Skip for read-only data controllers
+            if (User.HasClaim("mfa_pending", "true") && !noMfaRequiredControllers.Contains(controllerName ?? ""))
             {
-                context.Result = new ObjectResult(new { 
-                    success = false, 
-                    message = "Multi-Factor Authentication required. Access denied." 
+                context.Result = new ObjectResult(new {
+                    success = false,
+                    message = "Multi-Factor Authentication required. Access denied."
                 }) { StatusCode = 403 };
                 return;
             }

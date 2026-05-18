@@ -1,53 +1,67 @@
 <div class="agent-tickets page-enter">
 
-    <!-- Header -->
-    <div class="page-header">
-        <div>
-            <h1 class="page-title">My Tickets</h1>
-            <p class="page-subtitle">
-                {{ auth.currentUserName() }} · {{ tickets().length }} assigned tickets
-            </p>
-        </div>
-        <button mat-stroked-button class="refresh-btn" (click)="loadTickets()">
-            <mat-icon>refresh</mat-icon>
-            Refresh
-        </button>
-    </div>
-
-    <!-- Agent Stats -->
-    <div class="agent-stats">
-        <div class="stat-item inprogress">
-            <mat-icon>pending_actions</mat-icon>
-            <div>
-                <span class="s-val">{{ inProgressCount() }}</span>
-                <span class="s-lbl">In Progress</span>
+    <!-- Hero Header -->
+    <div class="page-header-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-icon">
+                    <mat-icon>support_agent</mat-icon>
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-title">My Tickets</h1>
+                    <p class="page-subtitle">{{ auth.currentUserName() }} · {{ tickets().length }} assigned tickets</p>
+                </div>
             </div>
-        </div>
-        <div class="stat-item onhold">
-            <mat-icon>pause_circle</mat-icon>
-            <div>
-                <span class="s-val">{{ onHoldCount() }}</span>
-                <span class="s-lbl">On Hold</span>
-            </div>
-        </div>
-        <div class="stat-item resolved">
-            <mat-icon>check_circle</mat-icon>
-            <div>
-                <span class="s-val">{{ resolvedCount() }}</span>
-                <span class="s-lbl">Resolved</span>
-            </div>
-        </div>
-        <div class="stat-item total">
-            <mat-icon>confirmation_number</mat-icon>
-            <div>
-                <span class="s-val">{{ tickets().length }}</span>
-                <span class="s-lbl">Total</span>
-            </div>
+            <button mat-stroked-button class="btn-refresh" (click)="loadTickets()">
+                <mat-icon>refresh</mat-icon>
+                <span>Refresh</span>
+            </button>
         </div>
     </div>
 
-    <!-- Filter -->
-    <div class="filter-row">
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card-gradient inprogress">
+            <div class="stat-icon-wrap">
+                <mat-icon>pending_actions</mat-icon>
+            </div>
+            <div class="stat-body">
+                <span class="stat-value">{{ inProgressCount() }}</span>
+                <span class="stat-label">In Progress</span>
+            </div>
+        </div>
+        <div class="stat-card-gradient onhold">
+            <div class="stat-icon-wrap">
+                <mat-icon>pause_circle</mat-icon>
+            </div>
+            <div class="stat-body">
+                <span class="stat-value">{{ onHoldCount() }}</span>
+                <span class="stat-label">On Hold</span>
+            </div>
+        </div>
+        <div class="stat-card-gradient resolved">
+            <div class="stat-icon-wrap">
+                <mat-icon>check_circle</mat-icon>
+            </div>
+            <div class="stat-body">
+                <span class="stat-value">{{ resolvedCount() }}</span>
+                <span class="stat-label">Resolved</span>
+            </div>
+        </div>
+        <div class="stat-card-gradient total">
+            <div class="stat-icon-wrap">
+                <mat-icon>confirmation_number</mat-icon>
+            </div>
+            <div class="stat-body">
+                <span class="stat-value">{{ tickets().length }}</span>
+                <span class="stat-label">Total Assigned</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
         <mat-form-field appearance="outline" class="filter-field">
             <mat-label>Filter by Status</mat-label>
             <mat-select [formControl]="statusFilter">
@@ -56,76 +70,80 @@
                 <mat-option [value]="s">{{ statusLabel[s] }}</mat-option>
                 }
             </mat-select>
-            <mat-icon matPrefix>filter_list</mat-icon>
         </mat-form-field>
     </div>
 
     <!-- Loading -->
     @if (isLoading()) {
-    <div class="loading-center"><mat-spinner diameter="44" /></div>
+    <div class="loading-modern">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading your tickets...</p>
+    </div>
     }
 
     <!-- Tickets Grid -->
     @if (!isLoading()) {
     @if (filteredTickets().length === 0) {
-    <div class="empty-state">
-        <div class="empty-icon">
+    <div class="empty-state-modern">
+        <div class="empty-illustration">
             <mat-icon>inbox</mat-icon>
         </div>
-        <h3>No tickets assigned</h3>
-        <p>You don't have any tickets assigned yet. Check back later.</p>
+        <h3>No Tickets Assigned</h3>
+        <p>You don't have any tickets assigned yet. Check back later for new assignments.</p>
     </div>
     } @else {
-    <div class="tickets-grid">
+    <div class="tickets-grid-modern">
         @for (ticket of filteredTickets(); track ticket.id) {
-        <div class="ticket-card hover-lift">
+        <div class="ticket-card-modern">
 
-            <!-- Card Top -->
-            <div class="card-top">
-                <span class="ticket-id">{{ shortId(ticket.id) }}</span>
+            <!-- Card Header -->
+            <div class="card-header">
+                <span class="ticket-id-badge">
+                    <mat-icon>tag</mat-icon>
+                    {{ shortId(ticket.id) }}
+                </span>
                 <app-priority-badge [priority]="ticket.priority" />
             </div>
 
             <!-- Title -->
             <h3 class="ticket-title">{{ ticket.title }}</h3>
 
-            <!-- Meta -->
+            <!-- Meta Info -->
             <div class="ticket-meta">
                 <div class="meta-item">
-                    <mat-icon>folder_open</mat-icon>
+                    <mat-icon>folder</mat-icon>
                     <span>{{ ticket.categoryName }}</span>
                 </div>
                 <div class="meta-item">
-                    <mat-icon>person_outline</mat-icon>
-                    <span>{{ ticket.raisedByUserName }}</span>
+                    <mat-icon>person</mat-icon>
+                    <span>{{ ticket.raisedByUser?.fullName || ticket.raisedByUserName }}</span>
                 </div>
                 <div class="meta-item">
                     <mat-icon>schedule</mat-icon>
-                    <span>{{ ticket.createdAt | date:'MMM d' }}</span>
+                    <span>{{ ticket.createdAt | date:'MMM d, y' }}</span>
                 </div>
             </div>
 
-            <!-- Status + Actions -->
-            <div class="card-footer">
+            <!-- Card Footer -->
+            <div class="card-footer-modern">
                 <app-status-badge [status]="ticket.status" />
 
                 <div class="card-actions">
-                    <!-- Quick status update -->
-                    @if (ticket.status !== 'Resolved') {
-                    <button mat-icon-button class="quick-resolve" matTooltip="Mark as Resolved"
-                        (click)="updateStatus(ticket, 'Resolved')">
+                    @if (ticket.status !== 4) {
+                    <button mat-icon-button class="btn-quick-action resolve" matTooltip="Mark Resolved"
+                        (click)="updateStatus(ticket, 4)">
                         <mat-icon>check_circle_outline</mat-icon>
                     </button>
                     }
-                    @if (ticket.status === 'InProgress') {
-                    <button mat-icon-button class="quick-hold" matTooltip="Put On Hold"
-                        (click)="updateStatus(ticket, 'OnHold')">
+                    @if (ticket.status === 2) {
+                    <button mat-icon-button class="btn-quick-action hold" matTooltip="Put On Hold"
+                        (click)="updateStatus(ticket, 3)">
                         <mat-icon>pause</mat-icon>
                     </button>
                     }
 
-                    <button mat-icon-button [routerLink]="['/tickets', ticket.id]" matTooltip="View details"
-                        class="view-btn">
+                    <button mat-icon-button [routerLink]="['/tickets', ticket.id]" class="btn-view-details"
+                        matTooltip="View Details">
                         <mat-icon>arrow_forward</mat-icon>
                     </button>
                 </div>

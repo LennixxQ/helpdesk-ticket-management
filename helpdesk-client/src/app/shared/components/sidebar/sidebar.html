@@ -1,6 +1,6 @@
 <nav class="sidebar" [class.collapsed]="collapsed">
 
-    <!-- Logo -->
+    <!-- Logo Section -->
     <div class="sidebar-logo">
         <div class="logo-icon">
             <mat-icon>support_agent</mat-icon>
@@ -13,29 +13,93 @@
         }
     </div>
 
-    <!-- Divider -->
-    <div class="sidebar-divider"></div>
+    <!-- User Profile Card -->
+    @if (!collapsed) {
+    <div class="user-profile-card">
+        <div class="user-avatar">
+            {{ currentUserName.charAt(0).toUpperCase() }}
+        </div>
+        <div class="user-info">
+            <span class="user-name">{{ currentUserName }}</span>
+            <span class="user-email">{{ currentUserEmail }}</span>
+        </div>
+    </div>
+    }
 
-    <!-- Nav Items -->
-    <ul class="nav-list">
-        @for (item of visibleItems(); track item.route) {
-        <li>
-            <a class="nav-item" [routerLink]="item.route" routerLinkActive="active"
-                [matTooltip]="collapsed ? item.label : ''" matTooltipPosition="right">
-                <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
-                @if (!collapsed) {
-                <span class="nav-label">{{ item.label }}</span>
-                }
-            </a>
-        </li>
+    <!-- Nav Sections -->
+    @for (section of visibleSections(); track section.title) {
+    <div class="nav-section">
+        @if (!collapsed) {
+        <div class="section-header">
+            <span class="section-line"></span>
+            <span class="section-title">{{ section.title }}</span>
+            <span class="section-line"></span>
+        </div>
         }
-    </ul>
+        <ul class="nav-list">
+            @for (item of section.items; track item.route) {
+            <li>
+                <a class="nav-item" [routerLink]="item.route" routerLinkActive="active"
+                    [matTooltip]="collapsed ? item.label : ''" matTooltipPosition="right">
+                    <span class="nav-icon-wrapper">
+                        <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+                        <span class="icon-glow"></span>
+                    </span>
+                    @if (!collapsed) {
+                    <span class="nav-label">{{ item.label }}</span>
+                    <span class="nav-indicator"></span>
+                    }
+                </a>
+            </li>
+            }
+        </ul>
+    </div>
+    }
 
     <!-- Bottom Section -->
     <div class="sidebar-bottom">
-        <div class="sidebar-divider"></div>
-        <div class="version-tag" [class.hidden]="collapsed">
-            <span>v1.0.0</span>
+        <div class="bottom-divider"></div>
+
+        @if (!collapsed) {
+        <div class="role-card">
+            <div class="role-icon">
+                <mat-icon>verified</mat-icon>
+            </div>
+            <div class="role-info">
+                <span class="role-label">Role</span>
+                <span class="role-value" [style.color]="roleBadgeColor">{{ userRole }}</span>
+            </div>
+            <div class="role-badge" [style.background]="roleBadgeColor">
+                <mat-icon>star</mat-icon>
+            </div>
+        </div>
+        }
+
+        <div class="quick-actions">
+            <a class="action-btn" [routerLink]="'/notifications'" routerLinkActive="active" matTooltip="Notifications" matTooltipPosition="right">
+                <span class="action-icon-wrapper">
+                    <mat-icon>notifications</mat-icon>
+                    <span class="notification-badge">3</span>
+                </span>
+                @if (!collapsed) {
+                <span>Notifications</span>
+                }
+            </a>
+            <a class="action-btn" [routerLink]="'/profile'" routerLinkActive="active" matTooltip="Profile" matTooltipPosition="right">
+                <span class="action-icon-wrapper">
+                    <mat-icon>account_circle</mat-icon>
+                </span>
+                @if (!collapsed) {
+                <span>Profile</span>
+                }
+            </a>
+        </div>
+
+        <div class="version-footer">
+            <div class="version-badge">
+                <mat-icon>code</mat-icon>
+                <span>v1.0.0</span>
+            </div>
         </div>
     </div>
 

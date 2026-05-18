@@ -1,62 +1,68 @@
 <div class="ticket-list page-enter">
 
-    <!-- Header -->
-    <div class="page-header">
-        <div>
-            <h1 class="page-title">
-                @if (auth.isAgent()) { My Assigned Tickets }
-                @else if (auth.isAdmin()) { All Tickets }
-                @else { My Tickets }
-            </h1>
-            <p class="page-subtitle">
-                {{ totalCount() }} ticket{{ totalCount() !== 1 ? 's' : '' }} found
-            </p>
+    <!-- Hero Header -->
+    <div class="page-header-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-icon">
+                    <mat-icon>confirmation_number</mat-icon>
+                </div>
+                <div class="hero-text">
+                    <h1 class="page-title">
+                        @if (auth.isAgent()) { My Assigned Tickets }
+                        @else if (auth.isAdmin()) { All Tickets }
+                        @else { My Tickets }
+                    </h1>
+                    <p class="page-subtitle">{{ totalCount() }} ticket{{ totalCount() !== 1 ? 's' : '' }} found</p>
+                </div>
+            </div>
+            @if (auth.isAdmin() || auth.isUser()) {
+            <a mat-flat-button routerLink="/tickets/new" class="btn-new-ticket">
+                <mat-icon>add</mat-icon>
+                <span>New Ticket</span>
+            </a>
+            }
         </div>
-
-        @if (auth.isAdmin() || auth.isUser()) {
-        <a mat-flat-button routerLink="/tickets/new" class="new-btn">
-            <mat-icon>add</mat-icon>
-            New Ticket
-        </a>
-        }
     </div>
 
-    <!-- Filters -->
-    <div class="filters-row">
-        <mat-form-field appearance="outline" class="filter-field">
-            <mat-label>Status</mat-label>
-            <mat-select [formControl]="statusFilter">
-                <mat-option value="">All Statuses</mat-option>
-                @for (s of statuses; track s) {
-                <mat-option [value]="s">{{ statusLabel[s] }}</mat-option>
-                }
-            </mat-select>
-            <mat-icon matPrefix>filter_list</mat-icon>
-        </mat-form-field>
+    <!-- Filters Bar -->
+    <div class="filters-bar">
+        <div class="filter-group">
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>Status</mat-label>
+                <mat-select [formControl]="statusFilter">
+                    <mat-option value="">All Statuses</mat-option>
+                    @for (s of statuses; track s) {
+                    <mat-option [value]="s">{{ statusLabel[s] }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline" class="filter-field">
-            <mat-label>Priority</mat-label>
-            <mat-select [formControl]="priorityFilter">
-                <mat-option value="">All Priorities</mat-option>
-                @for (p of priorities; track p) {
-                <mat-option [value]="p">{{ p }}</mat-option>
-                }
-            </mat-select>
-            <mat-icon matPrefix>flag</mat-icon>
-        </mat-form-field>
+            <mat-form-field appearance="outline" class="filter-field">
+                <mat-label>Priority</mat-label>
+                <mat-select [formControl]="priorityFilter">
+                    <mat-option value="">All Priorities</mat-option>
+                    @for (p of priorities; track p) {
+                    <mat-option [value]="p">{{ p }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
 
-        @if (hasActiveFilters()) {
-        <button mat-stroked-button class="clear-btn" (click)="clearFilters()">
-            <mat-icon>close</mat-icon>
-            Clear
-        </button>
-        }
+            @if (hasActiveFilters()) {
+            <button mat-stroked-button class="btn-clear-filters" (click)="clearFilters()">
+                <mat-icon>filter_alt_off</mat-icon>
+                Clear Filters
+            </button>
+            }
+        </div>
     </div>
 
     <!-- Loading -->
     @if (isLoading()) {
-    <div class="loading-center">
-        <mat-spinner diameter="44" />
+    <div class="loading-modern">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading tickets...</p>
     </div>
     }
 
@@ -64,12 +70,11 @@
     @if (!isLoading()) {
 
     @if (tickets().length === 0) {
-    <!-- Empty State -->
-    <div class="empty-state">
-        <div class="empty-icon">
+    <div class="empty-state-modern">
+        <div class="empty-illustration">
             <mat-icon>inbox</mat-icon>
         </div>
-        <h3>No tickets found</h3>
+        <h3>No Tickets Found</h3>
         <p>
             @if (hasActiveFilters()) {
             Try adjusting your filters or
@@ -79,7 +84,7 @@
             }
         </p>
         @if (auth.isAdmin() || auth.isUser()) {
-        <a mat-flat-button routerLink="/tickets/new" class="new-btn">
+        <a mat-flat-button routerLink="/tickets/new" class="btn-create-first">
             <mat-icon>add</mat-icon>
             Create First Ticket
         </a>
@@ -88,102 +93,119 @@
     } @else {
 
     <!-- Table Card -->
-    <div class="table-card">
-        <table mat-table [dataSource]="dataSource" matSort class="tickets-table">
+    <div class="table-card-modern">
+        <div class="table-header-bar">
+            <span class="table-title">
+                <mat-icon>list_alt</mat-icon>
+                Ticket List
+            </span>
+            <span class="table-count">{{ totalCount() }} total tickets</span>
+        </div>
 
-            <!-- ID -->
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-                <td mat-cell *matCellDef="let row">
-                    <span class="ticket-id">{{ shortId(row.id) }}</span>
-                </td>
-            </ng-container>
+        <div class="table-scroll-wrapper">
+            <table mat-table [dataSource]="dataSource" matSort class="tickets-table-modern">
 
-            <!-- Title -->
-            <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
-                <td mat-cell *matCellDef="let row">
-                    <div class="title-cell">
-                        <span class="ticket-title">{{ row.title }}</span>
-                        <span class="ticket-category-sub">{{ row.categoryName }}</span>
-                    </div>
-                </td>
-            </ng-container>
-
-            <!-- Category -->
-            <ng-container matColumnDef="category">
-                <th mat-header-cell *matHeaderCellDef>Category</th>
-                <td mat-cell *matCellDef="let row">
-                    <span class="category-tag">{{ row.categoryName }}</span>
-                </td>
-            </ng-container>
-
-            <!-- Priority -->
-            <ng-container matColumnDef="priority">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Priority</th>
-                <td mat-cell *matCellDef="let row">
-                    <app-priority-badge [priority]="row.priority" />
-                </td>
-            </ng-container>
-
-            <!-- Status -->
-            <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-                <td mat-cell *matCellDef="let row">
-                    <app-status-badge [status]="row.status" />
-                </td>
-            </ng-container>
-
-            <!-- Assigned Agent (Admin only) -->
-            <ng-container matColumnDef="assignedAgent">
-                <th mat-header-cell *matHeaderCellDef>Agent</th>
-                <td mat-cell *matCellDef="let row">
-                    @if (row.assignedAgentName) {
-                    <div class="agent-cell">
-                        <div class="mini-avatar">
-                            {{ row.assignedAgentName.charAt(0) }}
+                <!-- ID -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ticket ID</th>
+                    <td mat-cell *matCellDef="let row">
+                        <div class="ticket-id-badge">
+                            <mat-icon>tag</mat-icon>
+                            {{ shortId(row.id) }}
                         </div>
-                        <span>{{ row.assignedAgentName }}</span>
-                    </div>
-                    } @else {
-                    <span class="unassigned">Unassigned</span>
-                    }
-                </td>
-            </ng-container>
+                    </td>
+                </ng-container>
 
-            <!-- Created At -->
-            <ng-container matColumnDef="createdAt">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Raised</th>
-                <td mat-cell *matCellDef="let row">
-                    <span class="date-text">
-                        {{ row.createdAt | date:'MMM d, y' }}
-                    </span>
-                </td>
-            </ng-container>
+                <!-- Title -->
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Subject</th>
+                    <td mat-cell *matCellDef="let row">
+                        <div class="ticket-title-cell">
+                            <span class="ticket-title">{{ row.title }}</span>
+                            <span class="ticket-category">
+                                <mat-icon>category</mat-icon>
+                                {{ row.categoryName }}
+                            </span>
+                        </div>
+                    </td>
+                </ng-container>
 
-            <!-- Actions -->
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let row">
-                    <button mat-icon-button [routerLink]="['/tickets', row.id]" matTooltip="View details"
-                        class="view-btn">
-                        <mat-icon>arrow_forward</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
+                <!-- Category -->
+                <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef>Category</th>
+                    <td mat-cell *matCellDef="let row">
+                        <span class="category-tag">{{ row.categoryName }}</span>
+                    </td>
+                </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns();" class="ticket-row"
-                [routerLink]="['/tickets', row.id]">
-            </tr>
+                <!-- Priority -->
+                <ng-container matColumnDef="priority">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Priority</th>
+                    <td mat-cell *matCellDef="let row">
+                        <app-priority-badge [priority]="row.priority" />
+                    </td>
+                </ng-container>
 
-        </table>
+                <!-- Status -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                    <td mat-cell *matCellDef="let row">
+                        <app-status-badge [status]="row.status" />
+                    </td>
+                </ng-container>
 
-        <!-- Paginator -->
-        <mat-paginator [length]="totalCount()" [pageSize]="pageSize()" [pageSizeOptions]="[10, 25, 50]"
-            (page)="onPageChange($event)" showFirstLastButtons class="table-paginator">
-        </mat-paginator>
+                <!-- Assigned Agent -->
+                <ng-container matColumnDef="assignedAgent">
+                    <th mat-header-cell *matHeaderCellDef>Assigned To</th>
+                    <td mat-cell *matCellDef="let row">
+                        @if (row.assignedAgent?.fullName || row.assignedAgentName) {
+                        <div class="agent-cell">
+                            <div class="agent-avatar">
+                                {{ (row.assignedAgent?.fullName || row.assignedAgentName).charAt(0) }}
+                            </div>
+                            <span>{{ row.assignedAgent?.fullName || row.assignedAgentName }}</span>
+                        </div>
+                        } @else {
+                        <span class="unassigned-badge">Unassigned</span>
+                        }
+                    </td>
+                </ng-container>
 
+                <!-- Created At -->
+                <ng-container matColumnDef="createdAt">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+                    <td mat-cell *matCellDef="let row">
+                        <div class="date-cell">
+                            <mat-icon>schedule</mat-icon>
+                            {{ row.createdAt | date:'MMM d, y' }}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Actions -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button [routerLink]="['/tickets', row.id]" class="btn-view">
+                            <mat-icon>arrow_forward</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns();" class="ticket-row-modern"
+                    [routerLink]="['/tickets', row.id]">
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="table-footer-bar">
+            <span class="page-info">Showing {{ tickets().length }} of {{ totalCount() }} tickets</span>
+            <mat-paginator [length]="totalCount()" [pageSize]="pageSize()" [pageSizeOptions]="[10, 25, 50]"
+                (page)="onPageChange($event)" showFirstLastButtons class="paginator-modern">
+            </mat-paginator>
+        </div>
     </div>
     }
     }

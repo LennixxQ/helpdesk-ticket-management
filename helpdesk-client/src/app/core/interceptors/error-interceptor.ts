@@ -7,7 +7,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   return next(req).pipe(
     catchError((err: HttpErrorResponse) => {
-      if (err.status === 401) { localStorage.clear(); router.navigate(['/login']); }
+      console.error('HTTP Error:', err.status, err.url, err.error);
+      if (err.status === 401) {
+        localStorage.clear();
+        router.navigate(['/login']);
+      }
       if (err.status === 403) router.navigate(['/tickets']);
       return throwError(() => err);
     })

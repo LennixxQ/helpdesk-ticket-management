@@ -57,14 +57,14 @@ export class TicketListComponent implements OnInit {
   tickets = signal<TicketModel[]>([]);
   totalCount = signal(0);
   page = signal(1);
-  pageSize = signal(10);
+  pageSize = signal(25);
 
   // ── Filters ────────────────────────────────────────────────
   statusFilter = new FormControl<TicketStatus | ''>('');
   priorityFilter = new FormControl<TicketPriority | ''>('');
 
-  readonly statuses: TicketStatus[] = ['Open', 'InProgress', 'OnHold', 'Resolved', 'Closed', 'Reopened'];
-  readonly priorities: TicketPriority[] = ['Low', 'Medium', 'High', 'Critical'];
+  readonly statuses = [TicketStatus.Open, TicketStatus.InProgress, TicketStatus.OnHold, TicketStatus.Resolved, TicketStatus.Closed, TicketStatus.Reopened];
+  readonly priorities = [TicketPriority.Low, TicketPriority.Medium, TicketPriority.High, TicketPriority.Critical];
 
   isMobile = signal(window.innerWidth < 768);
 
@@ -81,9 +81,13 @@ export class TicketListComponent implements OnInit {
   dataSource = new MatTableDataSource<TicketModel>();
 
   // ── Status label map ───────────────────────────────────────
-  statusLabel: Record<TicketStatus, string> = {
-    Open: 'Open', InProgress: 'In Progress', OnHold: 'On Hold',
-    Resolved: 'Resolved', Closed: 'Closed', Reopened: 'Reopened'
+  statusLabel: Record<number, string> = {
+    [TicketStatus.Open]: 'Open',
+    [TicketStatus.InProgress]: 'In Progress',
+    [TicketStatus.OnHold]: 'On Hold',
+    [TicketStatus.Resolved]: 'Resolved',
+    [TicketStatus.Closed]: 'Closed',
+    [TicketStatus.Reopened]: 'Reopened'
   };
 
   ngOnInit(): void {

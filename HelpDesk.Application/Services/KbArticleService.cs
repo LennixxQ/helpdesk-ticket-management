@@ -29,7 +29,7 @@ namespace HelpDesk.Application.Services
             try
             {
                 if (currentUserRole == UserRole.User) status = KbArticleStatus.Published;
-                
+
                 IEnumerable<KbArticle> articles;
                 if (status.HasValue)
                 {
@@ -37,7 +37,7 @@ namespace HelpDesk.Application.Services
                 }
                 else
                 {
-                    articles = await _uow.KbArticles.GetAllAsync();
+                    articles = await _uow.KbArticles.GetAllWithIncludesAsync();
                 }
 
                 var list = articles?.ToList() ?? new List<KbArticle>();

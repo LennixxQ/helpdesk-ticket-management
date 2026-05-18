@@ -7,6 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { UserRole } from '../../../core/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -35,12 +36,31 @@ export class NavbarComponent {
 
   get roleColor(): string {
     const role = this.auth.currentRole();
-    if (role === 'Admin') return '#7B9EE5';
-    if (role === 'Agent') return '#82D8C8';
-    return '#F2A7C3';
+    if (role === UserRole.Admin) return '#3B82F6';
+    if (role === UserRole.Agent) return '#0D9488';
+    return '#8B5CF6';
   }
 
   logout() {
     this.auth.logout();
+  }
+
+  getRoleClass(): string {
+    const role = this.auth.currentRole();
+    if (role === UserRole.Admin) return 'admin';
+    if (role === UserRole.Agent) return 'agent';
+    return 'user';
+  }
+
+  get userRoleLabel(): string {
+    const role = this.auth.currentRole();
+    if (role === null || role === undefined) return '';
+    switch (role) {
+      case UserRole.Admin: return 'Admin';
+      case UserRole.Agent: return 'Support Agent';
+      case UserRole.User: return 'User';
+      case UserRole.DepartmentHead: return 'Department Head';
+      default: return '';
+    }
   }
 }

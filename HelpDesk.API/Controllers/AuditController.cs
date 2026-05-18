@@ -26,7 +26,14 @@ namespace HelpDesk.API.Controllers
             return Ok(new
             {
                 success = true,
-                data = new { items, total, dto.Page, dto.PageSize }
+                message = "Audit logs retrieved successfully",
+                data = new
+                {
+                    items,
+                    totalCount = total,
+                    page = dto.Page,
+                    pageSize = dto.PageSize
+                }
             });
         }
 

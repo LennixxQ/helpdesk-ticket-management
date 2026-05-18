@@ -11,5 +11,6 @@ namespace HelpDesk.Application.Interfaces.Services
         Task<AgentPerformanceReportDto> GetAgentPerformanceReportAsync(Guid? agentId, ReportFilterDto filter);
         Task<SlaComplianceReportDto> GetSlaComplianceReportAsync(ReportFilterDto filter);
         Task<AgentSelfServiceReportDto> GetAgentSelfServiceReportAsync(Guid agentId);
+        Task<AgentPerformanceReportDto> GetTopAgentReportAsync(ReportFilterDto filter);
     }
 }

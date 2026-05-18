@@ -40,6 +40,7 @@ namespace HelpDesk.Infrastructure.Identity
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new("SecurityStamp", user.SecurityStamp ?? string.Empty),
+                new("mfaEnabled", user.IsMfaEnabled.ToString().ToLower(), ClaimValueTypes.Boolean),
             };
 
             if (isFinal)

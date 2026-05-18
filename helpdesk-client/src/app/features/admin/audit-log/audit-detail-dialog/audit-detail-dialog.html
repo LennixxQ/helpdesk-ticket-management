@@ -1,0 +1,125 @@
+<div class="audit-detail-dialog">
+    <!-- Header -->
+    <div class="dialog-header">
+        <div class="header-icon" [style.background]="getActionColor(data.action) + '20'">
+            <mat-icon [style.color]="getActionColor(data.action)">{{ getActionIcon(data.action) }}</mat-icon>
+        </div>
+        <div class="header-content">
+            <h2>Audit Log Details</h2>
+            <span class="action-badge" [style.background]="getActionColor(data.action) + '15'" [style.color]="getActionColor(data.action)">
+                {{ data.action }}
+            </span>
+        </div>
+        <button mat-icon-button class="close-btn" (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <!-- Content -->
+    <div class="dialog-content">
+        <!-- Timestamp Section -->
+        <div class="detail-section">
+            <div class="section-header">
+                <mat-icon>schedule</mat-icon>
+                <span>Timestamp</span>
+            </div>
+            <div class="section-body">
+                <div class="time-info">
+                    <span class="date">{{ data.performedAt | date:'EEEE, MMMM d, y' }}</span>
+                    <span class="time">{{ data.performedAt | date:'h:mm:ss a' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- User Section -->
+        <div class="detail-section">
+            <div class="section-header">
+                <mat-icon>person</mat-icon>
+                <span>Performed By</span>
+            </div>
+            <div class="section-body">
+                <div class="user-info">
+                    <div class="user-avatar" [style.background]="'linear-gradient(135deg, ' + getActionColor(data.action) + ', #B5A4E8)'">
+                        {{ data.actorName?.charAt(0)?.toUpperCase() || 'S' }}
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">{{ data.actorName || 'System' }}</span>
+                        @if (data.performedBy) {
+                        <span class="user-id">
+                            ID: {{ data.performedBy }}
+                            <button mat-icon-button class="copy-btn" (click)="copyToClipboard(data.performedBy || '')" matTooltip="Copy ID">
+                                <mat-icon>content_copy</mat-icon>
+                            </button>
+                        </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- Entity Section -->
+        <div class="detail-section">
+            <div class="section-header">
+                <mat-icon>{{ getEntityIcon(data.entityName) }}</mat-icon>
+                <span>Target Entity</span>
+            </div>
+            <div class="section-body">
+                <div class="entity-info">
+                    <div class="entity-type-badge">
+                        <mat-icon>{{ getEntityIcon(data.entityName) }}</mat-icon>
+                        <span>{{ data.entityName || 'Unknown' }}</span>
+                    </div>
+                    @if (data.entityId) {
+                    <div class="entity-id-box">
+                        <span class="label">Entity ID:</span>
+                        <span class="value">{{ data.entityId }}</span>
+                        <button mat-icon-button class="copy-btn" (click)="copyToClipboard(data.entityId || '')" matTooltip="Copy ID">
+                            <mat-icon>content_copy</mat-icon>
+                        </button>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- Additional Details Section -->
+        <div class="detail-section">
+            <div class="section-header">
+                <mat-icon>notes</mat-icon>
+                <span>Additional Details</span>
+            </div>
+            <div class="section-body">
+                @if (data.additionalNotes) {
+                <div class="details-box">
+                    <pre class="details-content">{{ formatJson(data.additionalNotes) }}</pre>
+                </div>
+                } @else {
+                <div class="no-details">
+                    <mat-icon>info</mat-icon>
+                    <span>No additional details recorded</span>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="dialog-footer">
+        <button mat-stroked-button (click)="close()">
+            <mat-icon>close</mat-icon>
+            Close
+        </button>
+        @if (data.entityId) {
+        <button mat-flat-button class="btn-copy" (click)="copyToClipboard(data.entityId || '')">
+            <mat-icon>content_copy</mat-icon>
+            Copy Entity ID
+        </button>
+        }
+    </div>
+</div>

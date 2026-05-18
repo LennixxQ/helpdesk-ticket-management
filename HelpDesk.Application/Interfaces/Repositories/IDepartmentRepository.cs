@@ -7,6 +7,7 @@ namespace HelpDesk.Application.Interfaces.Repositories
     {
         Task<Department?> GetByNameAsync(string name);
         Task<IEnumerable<Department>> GetActiveAsync();
+        Task<IEnumerable<Department>> GetAllWithIncludesAsync();
         Task<(int ActiveUsers, int OpenTickets, int Last30Days)> GetSummaryAsync(Guid departmentId);
     }
 }

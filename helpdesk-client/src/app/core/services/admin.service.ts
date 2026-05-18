@@ -49,6 +49,13 @@ export class AdminService {
         );
     }
 
+    // POST /api/users/moveDepartment (userId + departmentId in body)
+    moveDepartment(userId: string, departmentId: string): Observable<ApiResponse<any>> {
+        return this.http.post<ApiResponse<any>>(
+            `${this.usersApi}/moveDepartment`, { userId, departmentId }
+        );
+    }
+
     // GET /api/users/agents/active
     getActiveAgents(): Observable<ApiResponse<UserModel[]>> {
         return this.http.get<ApiResponse<UserModel[]>>(

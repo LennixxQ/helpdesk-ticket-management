@@ -1,0 +1,350 @@
+<div class="audit-log page-enter">
+
+    <!-- Header with Gradient Background -->
+    <div class="header-section">
+        <div class="header-bg-pattern"></div>
+        <div class="header-content">
+            <div class="header-left">
+                <div class="header-icon-container">
+                    <div class="icon-bg"></div>
+                    <mat-icon class="header-icon">fact_check</mat-icon>
+                </div>
+                <div class="header-text">
+                    <h1 class="page-title">Audit Log</h1>
+                    <p class="page-subtitle">Track and monitor all system activities</p>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat-card glow blue">
+                    <div class="stat-icon-wrap">
+                        <mat-icon>receipt_long</mat-icon>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value">{{ totalCount() }}</span>
+                        <span class="stat-label">Total Entries</span>
+                    </div>
+                </div>
+                <div class="stat-card glow green">
+                    <div class="stat-icon-wrap">
+                        <mat-icon>add_circle</mat-icon>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value">{{ getCreatedCount() }}</span>
+                        <span class="stat-label">Created</span>
+                    </div>
+                </div>
+                <div class="stat-card glow purple">
+                    <div class="stat-icon-wrap">
+                        <mat-icon>edit</mat-icon>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value">{{ getUpdatedCount() }}</span>
+                        <span class="stat-label">Updates</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Filters Pills -->
+    <div class="quick-filters-section">
+        <div class="section-label">
+            <mat-icon>bolt</mat-icon>
+            <span>Quick Filters</span>
+        </div>
+        <div class="filter-pills">
+            <button class="filter-pill" [class.active]="!selectedQuickFilter()" (click)="setQuickFilter('')">
+                <mat-icon>apps</mat-icon>
+                <span>All Activity</span>
+            </button>
+            <button class="filter-pill login" [class.active]="selectedQuickFilter() === 'Login'" (click)="setQuickFilter('Login')">
+                <mat-icon>login</mat-icon>
+                <span>Logins</span>
+            </button>
+            <button class="filter-pill created" [class.active]="selectedQuickFilter() === 'Created'" (click)="setQuickFilter('Created')">
+                <mat-icon>add_circle</mat-icon>
+                <span>Created</span>
+            </button>
+            <button class="filter-pill updated" [class.active]="selectedQuickFilter() === 'Updated'" (click)="setQuickFilter('Updated')">
+                <mat-icon>edit_note</mat-icon>
+                <span>Updates</span>
+            </button>
+            <button class="filter-pill deleted" [class.active]="selectedQuickFilter() === 'Deleted'" (click)="setQuickFilter('Deleted')">
+                <mat-icon>delete_sweep</mat-icon>
+                <span>Deleted</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Advanced Filters Card -->
+    <div class="filters-card-elevated">
+        <div class="filters-card-header">
+            <div class="card-header-left">
+                <div class="header-badge">
+                    <mat-icon>tune</mat-icon>
+                </div>
+                <div class="header-text">
+                    <span class="card-title">Advanced Filters</span>
+                    <span class="card-subtitle">Refine your search results</span>
+                </div>
+            </div>
+            @if (hasActiveFilters()) {
+            <div class="active-filters-count">
+                <span class="badge">{{ getActiveFilterCount() }} active</span>
+            </div>
+            }
+        </div>
+
+        <div class="filters-body">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Start Date</label>
+                    <mat-form-field appearance="outline" class="premium-field">
+                        <mat-label>From</mat-label>
+                        <input matInput [matDatepicker]="startPicker" [formControl]="startDate" placeholder="Select date">
+                        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="filter-group">
+                    <label>End Date</label>
+                    <mat-form-field appearance="outline" class="premium-field">
+                        <mat-label>To</mat-label>
+                        <input matInput [matDatepicker]="endPicker" [formControl]="endDate" placeholder="Select date">
+                        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="filter-group">
+                    <label>Action Type</label>
+                    <mat-form-field appearance="outline" class="premium-field">
+                        <mat-label>Select Action</mat-label>
+                        <mat-select [formControl]="actionFilter">
+                            <mat-option value="">All Actions</mat-option>
+                            @for (action of actionTypes; track action) {
+                            <mat-option [value]="action">
+                                <mat-icon>{{ getActionIcon(action) }}</mat-icon>
+                                {{ action }}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="filter-group">
+                    <label>Entity Type</label>
+                    <mat-form-field appearance="outline" class="premium-field">
+                        <mat-label>Select Entity</mat-label>
+                        <mat-select [formControl]="entityFilter">
+                            <mat-option value="">All Entities</mat-option>
+                            @for (type of entityTypes; track type) {
+                            <mat-option [value]="type">
+                                <mat-icon>{{ getEntityIcon(type) }}</mat-icon>
+                                {{ type }}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="filters-actions">
+                @if (hasActiveFilters()) {
+                <button mat-flat-button class="btn-reset" (click)="clearFilters()">
+                    <mat-icon>restart_alt</mat-icon>
+                    Reset Filters
+                </button>
+                }
+                <button mat-flat-button class="btn-search" (click)="applyFilters()">
+                    <mat-icon>search</mat-icon>
+                    Search Logs
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+    <div class="loading-skeleton">
+        <div class="skeleton-header">
+            <div class="skeleton-line w-40"></div>
+            <div class="skeleton-line w-60"></div>
+        </div>
+        <div class="skeleton-table">
+            @for (item of [1,2,3,4,5]; track item) {
+            <div class="skeleton-row">
+                <div class="skeleton-cell w-20"></div>
+                <div class="skeleton-cell w-25"></div>
+                <div class="skeleton-cell w-15"></div>
+                <div class="skeleton-cell w-20"></div>
+                <div class="skeleton-cell w-20"></div>
+            </div>
+            }
+        </div>
+    </div>
+    }
+
+    <!-- Results Table -->
+    @if (!isLoading()) {
+    <div class="results-card">
+        @if (logs().length === 0) {
+        <div class="empty-state-enhanced">
+            <div class="empty-illustration">
+                <mat-icon>search_off</mat-icon>
+            </div>
+            <h3>No Activity Found</h3>
+            <p>No audit entries match your current filters. Try adjusting your search criteria.</p>
+            <div class="empty-actions">
+                <button mat-stroked-button class="btn-clear" (click)="clearFilters()">
+                    <mat-icon>filter_alt_off</mat-icon>
+                    Clear All Filters
+                </button>
+            </div>
+        </div>
+        } @else {
+        <div class="table-header-bar">
+            <div class="table-info">
+                <div class="table-badge">
+                    <mat-icon>history</mat-icon>
+                </div>
+                <span class="table-title">Activity Timeline</span>
+            </div>
+            <div class="table-meta">
+                <span class="result-count">{{ totalCount() }} total results</span>
+            </div>
+        </div>
+
+        <div class="table-scroll-wrapper">
+            <table mat-table [dataSource]="logs()" class="premium-table">
+
+                <!-- Timeline -->
+                <ng-container matColumnDef="timeline">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let log">
+                        <div class="timeline-wrapper">
+                            <div class="timeline-track">
+                                <div class="timeline-dot" [style.background]="getActionColor(log.action)"></div>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Timestamp -->
+                <ng-container matColumnDef="timestamp">
+                    <th mat-header-cell *matHeaderCellDef>Time</th>
+                    <td mat-cell *matCellDef="let log">
+                        <div class="timestamp-cell">
+                            <span class="date-badge">{{ log.performedAt | date:'MMM d' }}</span>
+                            <span class="time-info">{{ log.performedAt | date:'h:mm:ss a' }}</span>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- User -->
+                <ng-container matColumnDef="user">
+                    <th mat-header-cell *matHeaderCellDef>User</th>
+                    <td mat-cell *matCellDef="let log">
+                        <div class="user-profile">
+                            <div class="avatar" [style.background]="getAvatarColor(log.actorName)">
+                                {{ log.actorName?.charAt(0)?.toUpperCase() || 'S' }}
+                            </div>
+                            <div class="user-details">
+                                <span class="user-name-text">{{ log.actorName || 'System' }}</span>
+                                @if (log.actorId) {
+                                <span class="user-id-text">{{ log.actorId | slice:0:8 }}...</span>
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Action -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef>Action</th>
+                    <td mat-cell *matCellDef="let log">
+                        <div class="action-chip" [style.background]="getActionColor(log.action) + '20'" [style.color]="getActionColor(log.action)" [style.border-color]="getActionColor(log.action) + '40'">
+                            <mat-icon>{{ getActionIcon(log.action) }}</mat-icon>
+                            <span>{{ log.action }}</span>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Entity -->
+                <ng-container matColumnDef="entity">
+                    <th mat-header-cell *matHeaderCellDef>Entity</th>
+                    <td mat-cell *matCellDef="let log">
+                        <div class="entity-card">
+                            <div class="entity-icon-box" [style.background]="getEntityBgColor(log.entityName)">
+                                <mat-icon [style.color]="getEntityIconColor(log.entityName)">{{ getEntityIcon(log.entityName) }}</mat-icon>
+                            </div>
+                            <div class="entity-data">
+                                <span class="entity-name-text">{{ log.entityName || 'N/A' }}</span>
+                                <span class="entity-id-text" [matTooltip]="log.entityId || ''">{{ formatEntityId(log.entityId) }}</span>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Details -->
+                <ng-container matColumnDef="changes">
+                    <th mat-header-cell *matHeaderCellDef>Details</th>
+                    <td mat-cell *matCellDef="let log">
+                        @if (log.additionalNotes) {
+                        <div class="details-preview" [matTooltip]="log.additionalNotes">
+                            <mat-icon>notes</mat-icon>
+                            <span>{{ formatDetails(log.additionalNotes) }}</span>
+                        </div>
+                        } @else {
+                        <span class="no-data">-</span>
+                        }
+                    </td>
+                </ng-container>
+
+                <!-- Menu -->
+                <ng-container matColumnDef="expand">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let log">
+                        <button mat-icon-button [matMenuTriggerFor]="actionMenu" class="menu-trigger">
+                            <mat-icon>more_horiz</mat-icon>
+                        </button>
+                        <mat-menu #actionMenu="matMenu" class="premium-menu">
+                            <button mat-menu-item (click)="viewDetails(log)">
+                                <mat-icon>visibility</mat-icon>
+                                <span>View Full Details</span>
+                            </button>
+                            <button mat-menu-item (click)="copyToClipboard(log.entityId)">
+                                <mat-icon>content_copy</mat-icon>
+                                <span>Copy Entity ID</span>
+                            </button>
+                            <button mat-menu-item (click)="filterByUser(log.actorName)">
+                                <mat-icon>filter_list</mat-icon>
+                                <span>Filter by User</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></tr>
+
+            </table>
+        </div>
+
+        <div class="table-footer-bar">
+            <div class="pagination-info">
+                <span class="page-range">Showing {{ getShowingStart() }}-{{ getShowingEnd() }}</span>
+                <span class="page-total">of {{ totalCount() }} entries</span>
+            </div>
+            <mat-paginator
+                [length]="totalCount()"
+                [pageSize]="pageSize()"
+                [pageIndex]="pageIndex()"
+                [pageSizeOptions]="[10, 20, 50, 100]"
+                (page)="onPageChange($event)"
+                showFirstLastButtons
+                class="premium-paginator">
+            </mat-paginator>
+        </div>
+        }
+    </div>
+    }
+
+</div>

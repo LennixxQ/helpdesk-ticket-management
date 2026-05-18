@@ -24,10 +24,17 @@ export interface TicketModel {
     categoryName: string;
     priority: TicketPriority;
     status: TicketStatus;
+    isEscalated?: boolean;
+    slaStatus?: number;
+    slaDeadline?: string;
+    slaBreached?: boolean;
     raisedByUserId: string;
-    raisedByUserName: string;
+    raisedByUserName?: string;     // Backend: RaisedByUser.FullName via mapper
+    raisedByUser?: any;            // Backend: Full object
     assignedAgentId: string | null;
-    assignedAgentName: string | null;
+    assignedAgentName?: string;    // Backend: AssignedAgent.FullName via mapper
+    assignedAgent?: any;           // Backend: Full object
+    departmentName?: string;
     createdAt: string;
     lastModifiedAt: string | null;
     comments: CommentModel[];

@@ -54,7 +54,7 @@ namespace HelpDesk.API.Controllers
             return result.Success ? Ok(result) : NotFound(result);
         }
 
-        [HttpPut("Agent-assign")]
+        [HttpPost("Agent-assign")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Assign([FromBody] AssignTicketCommand assignTicketCommand)
         {
@@ -63,7 +63,7 @@ namespace HelpDesk.API.Controllers
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut("UpdateTicketStatus")]
+        [HttpPost("UpdateTicketStatus")]
         [Authorize(Roles = "Admin,Agent")]
         public async Task<IActionResult> UpdateStatus([FromBody] UpdateTicketStatusCommand updateTicketStatus)
         {
@@ -73,7 +73,7 @@ namespace HelpDesk.API.Controllers
         }
 
 
-        [HttpPut("UpdatePriority")]
+        [HttpPost("UpdatePriority")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdatePriority([FromBody] UpdatePriorityRequest updatePriorityDto)
         {
@@ -82,7 +82,7 @@ namespace HelpDesk.API.Controllers
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut("CloseTicket")]
+        [HttpPost("CloseTicket")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Close([FromBody] GetByIdRequest ticketIdDto)
         {
@@ -91,7 +91,7 @@ namespace HelpDesk.API.Controllers
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut("Ticket-reopen")]
+        [HttpPost("Ticket-reopen")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Reopen([FromBody] GetByIdRequest ticketIdDto)
         {
