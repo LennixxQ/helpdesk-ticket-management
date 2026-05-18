@@ -63,4 +63,12 @@ export class NavbarComponent {
       default: return '';
     }
   }
+
+  get profilePicUrl(): string | null {
+    return this.auth.profilePic();
+  }
+
+  get profilePicPosition(): string {
+    return this.auth.profilePicPosition();
+  }
 }

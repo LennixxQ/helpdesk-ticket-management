@@ -17,7 +17,11 @@
     @if (!collapsed) {
     <div class="user-profile-card">
         <div class="user-avatar">
-            {{ currentUserName.charAt(0).toUpperCase() }}
+            @if (profilePicUrl) {
+                <img [src]="profilePicUrl" alt="Avatar" class="avatar-img" [style.object-position]="profilePicPosition" />
+            } @else {
+                {{ currentUserName.charAt(0).toUpperCase() }}
+            }
         </div>
         <div class="user-info">
             <span class="user-name">{{ currentUserName }}</span>

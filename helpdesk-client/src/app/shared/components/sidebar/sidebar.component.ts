@@ -122,4 +122,12 @@ export class SidebarComponent {
       default: return '#64748B';
     }
   }
+
+  get profilePicUrl(): string | null {
+    return this.auth.profilePic();
+  }
+
+  get profilePicPosition(): string {
+    return this.auth.profilePicPosition();
+  }
 }

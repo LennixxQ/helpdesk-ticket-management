@@ -3,11 +3,11 @@
     flex-direction: column;
     height: 100%;
     padding: 24px 0 16px;
-    background: linear-gradient(180deg, #104E8B 0%, #003366 50%, #002244 100%);
+    background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary) 50%, var(--color-primary-dark) 100%);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     overflow-y: auto;
     overflow-x: hidden;
-    box-shadow: 4px 0 24px rgba(0, 34, 68, 0.25);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
     &::-webkit-scrollbar {
@@ -44,7 +44,7 @@
     width: 44px;
     height: 44px;
     border-radius: 12px;
-    background: linear-gradient(135deg, #9999FF 0%, #104E8B 100%);
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary-light) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,7 +90,7 @@
 .logo-sub {
     font-size: 10px;
     font-weight: 600;
-    color: #9999FF;
+    color: var(--color-secondary);
     letter-spacing: 0.05em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -124,22 +124,31 @@
     width: 38px;
     height: 38px;
     border-radius: 10px;
-    background: linear-gradient(135deg, #9999FF, #6EE7B7);
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-success-light));
     display: flex;
     align-items: center;
     justify-content: center;
     color: #020a14;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: 0 4px 14px rgba(153, 153, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(153, 153, 255, 0.2);
     position: relative;
     
+    .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        z-index: 1;
+    }
+
     &::after {
         content: '';
         position: absolute;
         inset: 0;
         border-radius: 10px;
         border: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 2;
     }
 }
 
@@ -290,7 +299,7 @@
 
         .nav-icon {
             opacity: 1;
-            color: #9999FF;
+            color: var(--color-secondary);
             transform: scale(1.08);
         }
 
@@ -309,11 +318,11 @@
         background: linear-gradient(90deg, rgba(153, 153, 255, 0.1) 0%, rgba(153, 153, 255, 0.01) 100%);
         color: #ffffff;
         font-weight: 600;
-        border-left: 3px solid #9999FF;
+        border-left: 3px solid var(--color-secondary);
         padding-left: 20px;
 
         .nav-icon-wrapper {
-            background: linear-gradient(135deg, #9999FF 0%, #104E8B 100%);
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary-light) 100%);
             box-shadow: 0 4px 12px rgba(153, 153, 255, 0.3);
         }
 
@@ -560,7 +569,7 @@
             background: transparent;
 
             .nav-icon-wrapper {
-                background: linear-gradient(135deg, #9999FF 0%, #104E8B 100%);
+                background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary-light) 100%);
             }
         }
 

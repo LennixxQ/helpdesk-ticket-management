@@ -4,7 +4,7 @@
     <div class="login-left">
         <div class="left-content">
 
-            <div class="brand-logo">
+            <div class="brand-logo" [class.logo-loading]="isLoading()">
                 <div class="logo-icon">
                     <mat-icon>support_agent</mat-icon>
                 </div>
@@ -75,7 +75,7 @@
                 <button mat-flat-button type="submit" class="submit-btn" [disabled]="isLoading()">
                     <div class="btn-content">
                         @if (isLoading()) {
-                        <mat-spinner diameter="20" />
+                        <mat-icon class="btn-loading-logo">support_agent</mat-icon>
                         <span>Signing in...</span>
                         } @else {
                         <mat-icon>login</mat-icon>

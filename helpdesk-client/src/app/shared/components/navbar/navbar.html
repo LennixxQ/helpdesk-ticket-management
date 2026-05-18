@@ -29,7 +29,11 @@
         <!-- Profile Menu -->
         <div class="profile-section" [matMenuTriggerFor]="profileMenu">
             <div class="avatar" [style.background]="roleColor">
-                {{ userInitial }}
+                @if (profilePicUrl) {
+                    <img [src]="profilePicUrl" alt="Avatar" class="avatar-img" [style.object-position]="profilePicPosition" />
+                } @else {
+                    {{ userInitial }}
+                }
             </div>
             <div class="user-info">
                 <span class="user-name">{{ userDisplayName }}</span>
@@ -42,7 +46,11 @@
         <mat-menu #profileMenu="matMenu" class="profile-menu">
             <div class="menu-header">
                 <div class="menu-avatar" [style.background]="roleColor">
-                    {{ userInitial }}
+                    @if (profilePicUrl) {
+                        <img [src]="profilePicUrl" alt="Avatar" class="avatar-img" [style.object-position]="profilePicPosition" />
+                    } @else {
+                        {{ userInitial }}
+                    }
                 </div>
                 <div>
                     <div class="menu-name">{{ userDisplayName }}</div>

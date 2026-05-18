@@ -18,4 +18,6 @@ namespace HelpDesk.API.Records
     public record MoveDepartmentRequest(Guid UserId, Guid DepartmentId);
     public record TestEmailRequest(string ToEmail);
     public record CsatSubmission(Guid TicketId, int Rating, string? Comments);
+    public record UploadProfilePictureRequest(string Base64Image, string Position);
+    public record ProfilePictureResponse(string? Base64Image, string Position);
 }

@@ -101,6 +101,118 @@ export class AuthService {
     return val === true || val === 'true';
   });
 
+  private _profilePicTrigger = signal<number>(0);
+
+  // ✅ Profile Picture URL from localStorage, keyed by userId
+  readonly profilePic = computed((): string | null => {
+    this._profilePicTrigger(); // reactivity hook
+    const userId = this.currentUserId();
+    if (!userId) return null;
+    return localStorage.getItem(`profile_image_${userId}`);
+  });
+
+  constructor() {
+    // If already logged in, fetch from server
+    setTimeout(() => {
+      if (this.isLoggedIn()) {
+        this.fetchProfilePicFromServer();
+      }
+    }, 200);
+  }
+
+  private _uploadTimeout: any;
+
+  uploadProfilePicToServer(base64Data: string | null, position: string): void {
+    const userId = this.currentUserId();
+    if (!userId) return;
+
+    // Cache locally first for instant visual update
+    if (base64Data) {
+      localStorage.setItem(`profile_image_${userId}`, base64Data);
+    } else {
+      localStorage.removeItem(`profile_image_${userId}`);
+    }
+    localStorage.setItem(`profile_image_position_${userId}`, position);
+    this._profilePicTrigger.update(n => n + 1);
+    this._profilePicPositionTrigger.update(n => n + 1);
+
+    // Debounce the server call by 400ms to avoid flooding while dragging sliders
+    if (this._uploadTimeout) {
+      clearTimeout(this._uploadTimeout);
+    }
+
+    this._uploadTimeout = setTimeout(() => {
+      this.http.post<ApiResponse<boolean>>(
+        `${environment.apiUrl}/users/profile-picture`,
+        { base64Image: base64Data || '', position: position }
+      ).subscribe({
+        next: (res) => {
+          if (res.success) {
+            console.log('Profile picture synchronized with server.');
+          }
+        },
+        error: (err) => {
+          console.error('Failed to synchronize profile picture with server:', err);
+        }
+      });
+    }, 400);
+  }
+
+  fetchProfilePicFromServer(): void {
+    const userId = this.currentUserId();
+    if (!userId) return;
+
+    this.http.get<ApiResponse<{ base64Image: string | null, position: string }>>(
+      `${environment.apiUrl}/users/profile-picture`
+    ).subscribe({
+      next: (res) => {
+        if (res.success && res.data) {
+          const pic = res.data.base64Image;
+          const pos = res.data.position || '50% 50%';
+          
+          if (pic) {
+            localStorage.setItem(`profile_image_${userId}`, pic);
+          } else {
+            localStorage.removeItem(`profile_image_${userId}`);
+          }
+          localStorage.setItem(`profile_image_position_${userId}`, pos);
+
+          this._profilePicTrigger.update(n => n + 1);
+          this._profilePicPositionTrigger.update(n => n + 1);
+        }
+      },
+      error: (err) => {
+        console.error('Failed to fetch profile picture from server:', err);
+      }
+    });
+  }
+
+  setProfilePic(base64Data: string | null): void {
+    const userId = this.currentUserId();
+    if (userId) {
+      const currentPos = this.profilePicPosition();
+      this.uploadProfilePicToServer(base64Data, currentPos);
+    }
+  }
+
+  private _profilePicPositionTrigger = signal<number>(0);
+
+  // ✅ Profile Picture CSS object-position from localStorage, keyed by userId
+  readonly profilePicPosition = computed((): string => {
+    this._profilePicPositionTrigger(); // reactivity hook
+    const userId = this.currentUserId();
+    if (!userId) return '50% 50%';
+    return localStorage.getItem(`profile_image_position_${userId}`) ?? '50% 50%';
+  });
+
+  setProfilePicPosition(position: string): void {
+    const userId = this.currentUserId();
+    if (userId) {
+      const currentPic = this.profilePic();
+      this.uploadProfilePicToServer(currentPic, position);
+    }
+  }
+
   login(request: LoginRequest): Observable<ApiResponse<any>> {
     return this.http.post<ApiResponse<any>>(
       `${this.apiUrl}/login`, request

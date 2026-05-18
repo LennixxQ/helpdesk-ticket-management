@@ -39,6 +39,8 @@ export class ProfileComponent implements OnInit {
 
   isSaving = signal(false);
   activeTab = signal<'profile' | 'security'>('profile');
+  posX = signal(50);
+  posY = signal(50);
 
   profileForm = new FormGroup({
     fullName: new FormControl('', [Validators.required]),
@@ -56,6 +58,15 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProfile();
+    this.loadPosition();
+  }
+
+  loadPosition(): void {
+    const pos = this.auth.profilePicPosition().split(' ');
+    if (pos.length === 2) {
+      this.posX.set(parseInt(pos[0]) || 50);
+      this.posY.set(parseInt(pos[1]) || 50);
+    }
   }
 
   loadProfile(): void {
@@ -140,6 +151,59 @@ export class ProfileComponent implements OnInit {
 
   goToSecurity(): void {
     this.router.navigate(['/profile/security']);
+  }
+
+  get profilePicUrl(): string | null {
+    return this.auth.profilePic();
+  }
+
+  get profilePicPosition(): string {
+    return this.auth.profilePicPosition();
+  }
+
+  triggerFileInput(inputElement: HTMLInputElement): void {
+    inputElement.click();
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+
+    const file = input.files[0];
+    if (!file.type.startsWith('image/')) {
+      this.showSnack('Please select a valid image file', 'error');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      this.auth.setProfilePic(base64String);
+      this.setPreset(50, 50);
+      this.showSnack('Profile picture updated successfully', 'success');
+    };
+    reader.onerror = () => {
+      this.showSnack('Error reading image file', 'error');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  onPosXChange(event: Event): void {
+    const val = parseInt((event.target as HTMLInputElement).value);
+    this.posX.set(val);
+    this.auth.setProfilePicPosition(`${this.posX()}% ${this.posY()}%`);
+  }
+
+  onPosYChange(event: Event): void {
+    const val = parseInt((event.target as HTMLInputElement).value);
+    this.posY.set(val);
+    this.auth.setProfilePicPosition(`${this.posX()}% ${this.posY()}%`);
+  }
+
+  setPreset(x: number, y: number): void {
+    this.posX.set(x);
+    this.posY.set(y);
+    this.auth.setProfilePicPosition(`${x}% ${y}%`);
   }
 }
 

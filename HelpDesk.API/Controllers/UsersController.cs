@@ -107,5 +107,81 @@ namespace HelpDesk.API.Controllers
             var response = await _userService.ChangePasswordAsync(userId, request.CurrentPassword, request.NewPassword);
             return response.Success ? Ok(response) : BadRequest(response);
         }
+
+        [HttpPost("profile-picture")]
+        public async Task<IActionResult> UploadProfilePicture([FromBody] UploadProfilePictureRequest request)
+        {
+            var userId = _currentUserProvider.GetCurrentUserId().ToString();
+            _logger.LogInformation("User {UserId} uploading profile picture.", userId);
+
+            try
+            {
+                var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", "Avatars");
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                // Save Base64 Image
+                var imagePath = Path.Combine(directoryPath, $"{userId}.avatar");
+                await System.IO.File.WriteAllTextAsync(imagePath, request.Base64Image);
+
+                // Save Position
+                var positionPath = Path.Combine(directoryPath, $"{userId}.position");
+                await System.IO.File.WriteAllTextAsync(positionPath, request.Position);
+
+                return Ok(BaseResponse<bool>.Ok(true, "Profile picture uploaded successfully."));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error uploading profile picture for user {UserId}", userId);
+                return StatusCode(500, BaseResponse<bool>.Fail("An error occurred while uploading profile picture."));
+            }
+        }
+
+        [HttpGet("profile-picture")]
+        public async Task<IActionResult> GetProfilePicture([FromQuery] string? userId = null)
+        {
+            // If userId is not provided, use the logged-in user
+            var targetUserId = userId;
+            if (string.IsNullOrEmpty(targetUserId))
+            {
+                try
+                {
+                    targetUserId = _currentUserProvider.GetCurrentUserId().ToString();
+                }
+                catch
+                {
+                    return BadRequest(BaseResponse<ProfilePictureResponse>.Fail("User ID is required or user must be authenticated."));
+                }
+            }
+
+            try
+            {
+                var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", "Avatars");
+                var imagePath = Path.Combine(directoryPath, $"{targetUserId}.avatar");
+                var positionPath = Path.Combine(directoryPath, $"{targetUserId}.position");
+
+                string? base64Image = null;
+                string position = "50% 50%";
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    base64Image = await System.IO.File.ReadAllTextAsync(imagePath);
+                }
+
+                if (System.IO.File.Exists(positionPath))
+                {
+                    position = await System.IO.File.ReadAllTextAsync(positionPath);
+                }
+
+                return Ok(BaseResponse<ProfilePictureResponse>.Ok(new ProfilePictureResponse(base64Image, position),"Profile picture retrieved successfully."));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving profile picture for user {UserId}", targetUserId);
+                return StatusCode(500, BaseResponse<ProfilePictureResponse>.Fail("An error occurred while retrieving profile picture."));
+            }
+        }
     }
 }

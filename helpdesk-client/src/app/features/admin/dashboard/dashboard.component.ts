@@ -60,8 +60,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         label: 'Total Tickets',
         value: d.totalTickets,
         icon: 'confirmation_number',
-        color: '#3B82F6',
-        bg: '#DBEAFE',
+        color: '#003366',
+        bg: 'rgba(0, 51, 102, 0.08)',
         trend: d.ticketsThisMonth,
         trendLabel: 'this month',
       },
@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         value: d.ticketsByStatus['Open'] ?? 0,
         icon: 'inbox',
         color: '#D97706',
-        bg: '#FEF3C7',
+        bg: 'rgba(217, 119, 6, 0.08)',
         trend: null,
         trendLabel: '',
       },
@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         value: d.ticketsByStatus['InProgress'] ?? 0,
         icon: 'pending_actions',
         color: '#2563EB',
-        bg: '#DBEAFE',
+        bg: 'rgba(37, 99, 235, 0.08)',
         trend: null,
         trendLabel: '',
       },
@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         value: d.ticketsByStatus['Resolved'] ?? 0,
         icon: 'check_circle',
         color: '#059669',
-        bg: '#D1FAE5',
+        bg: 'rgba(5, 150, 105, 0.08)',
         trend: null,
         trendLabel: '',
       },
@@ -100,10 +100,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     if (!d) return [];
     const total = d.totalTickets || 1;
     return [
-      { label: 'Critical', value: d.ticketsByPriority['Critical'] ?? 0, color: '#C62828', bg: '#FCE4EC', percent: Math.round(((d.ticketsByPriority['Critical'] ?? 0) / total) * 100) },
-      { label: 'High', value: d.ticketsByPriority['High'] ?? 0, color: '#E65100', bg: '#FFF3E0', percent: Math.round(((d.ticketsByPriority['High'] ?? 0) / total) * 100) },
-      { label: 'Medium', value: d.ticketsByPriority['Medium'] ?? 0, color: '#F57F17', bg: '#FFF8E1', percent: Math.round(((d.ticketsByPriority['Medium'] ?? 0) / total) * 100) },
-      { label: 'Low', value: d.ticketsByPriority['Low'] ?? 0, color: '#2E7D32', bg: '#E8F5E9', percent: Math.round(((d.ticketsByPriority['Low'] ?? 0) / total) * 100) },
+      { label: 'Critical', value: d.ticketsByPriority['Critical'] ?? 0, color: '#DC2626', bg: 'rgba(220, 38, 38, 0.08)', percent: Math.round(((d.ticketsByPriority['Critical'] ?? 0) / total) * 100) },
+      { label: 'High', value: d.ticketsByPriority['High'] ?? 0, color: '#EA580C', bg: 'rgba(234, 88, 12, 0.08)', percent: Math.round(((d.ticketsByPriority['High'] ?? 0) / total) * 100) },
+      { label: 'Medium', value: d.ticketsByPriority['Medium'] ?? 0, color: '#D97706', bg: 'rgba(217, 119, 6, 0.08)', percent: Math.round(((d.ticketsByPriority['Medium'] ?? 0) / total) * 100) },
+      { label: 'Low', value: d.ticketsByPriority['Low'] ?? 0, color: '#059669', bg: 'rgba(5, 150, 105, 0.08)', percent: Math.round(((d.ticketsByPriority['Low'] ?? 0) / total) * 100) },
     ];
   });
 
@@ -178,7 +178,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
               d.ticketsByPriority['Medium'] ?? 0,
               d.ticketsByPriority['Low'] ?? 0
             ],
-            backgroundColor: ['#C62828', '#E65100', '#F57F17', '#2E7D32'],
+            backgroundColor: ['#DC2626', '#EA580C', '#D97706', '#059669'],
             borderRadius: 6,
             barThickness: 40
           }]
@@ -196,7 +196,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       });
     }
 
-    // Monthly Trend Line Chart
+    // Monthly Trend Line Chart (Aligned with Corporate Prussian Blue)
     if (this.trendChartRef?.nativeElement) {
       if (this.trendChart) this.trendChart.destroy();
       const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
@@ -212,12 +212,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           datasets: [{
             label: 'Tickets',
             data: monthData,
-            borderColor: '#3B82F6',
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            borderColor: '#003366',
+            backgroundColor: 'rgba(0, 51, 102, 0.08)',
             fill: true,
             tension: 0.4,
-            pointBackgroundColor: '#3B82F6',
-            pointBorderColor: '#fff',
+            pointBackgroundColor: '#003366',
+            pointBorderColor: '#ffffff',
             pointBorderWidth: 2,
             pointRadius: 5
           }]

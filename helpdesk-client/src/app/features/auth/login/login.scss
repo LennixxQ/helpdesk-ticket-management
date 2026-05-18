@@ -55,6 +55,15 @@
     align-items: center;
     gap: 14px;
     margin-bottom: 56px;
+
+    &.logo-loading {
+        .logo-icon {
+            animation: logo-spin-pulse 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            background: rgba(255, 255, 255, 0.3) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3) !important;
+        }
+    }
 }
 
 .logo-icon {
@@ -149,21 +158,53 @@
 
 // ── Card Header ───────────────────────────────────────────────
 .card-header {
-    margin-bottom: 36px;
-    text-align: center;
+    margin-bottom: 32px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    // Unique detailed badge above "Sign In"
+    &::before {
+        content: '🔒 SECURE WORKSPACE';
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #1E40AF; // Soft blue matching original theme
+        background: rgba(30, 64, 175, 0.06);
+        padding: 6px 12px;
+        border-radius: var(--radius-full);
+        border: 1px solid rgba(30, 64, 175, 0.12);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        box-shadow: 0 2px 4px rgba(30, 64, 175, 0.02);
+    }
 
     h2 {
-        font-size: 28px;
-        font-weight: 700;
+        font-size: 30px;
+        font-weight: 800;
         color: var(--color-text-primary);
-        margin: 0 0 8px;
-        letter-spacing: -0.5px;
+        margin: 0;
+        letter-spacing: -1px;
+        line-height: 1.15;
+        
+        // Subtle highlight accent
+        background: linear-gradient(to right, var(--color-text-primary), var(--color-primary-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     p {
-        font-size: 15px;
+        font-size: 14.5px;
         color: var(--color-text-secondary);
+        line-height: 1.5;
         margin: 0;
+        font-weight: 450;
     }
 }
 
@@ -231,10 +272,10 @@
         font-size: 22px;
         width: 22px;
         height: 22px;
-    }
 
-    mat-spinner {
-        --mdc-circular-progress-active-indicator-color: #fff;
+        &.btn-loading-logo {
+            animation: btn-logo-spin 1.2s linear infinite;
+        }
     }
 }
 
@@ -249,4 +290,25 @@
 @keyframes pulse {
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes logo-spin-pulse {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.18) rotate(180deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@keyframes btn-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

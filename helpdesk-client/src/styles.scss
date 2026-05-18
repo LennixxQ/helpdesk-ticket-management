@@ -677,3 +677,50 @@ a {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+// ── Global Custom Branded Loading Logo Spinner Override ──────────
+mat-spinner, mat-progress-spinner {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 48px !important;
+    height: 48px !important;
+
+    // Hide original rotating Material SVG circles
+    svg {
+        display: none !important;
+    }
+
+    // High-fidelity custom animated brand logo loading spinner
+    &::before {
+        content: 'support_agent';
+        font-family: 'Material Icons' !important;
+        font-size: 32px;
+        color: var(--color-primary); // Matches primary theme Prussian Blue
+        animation: global-logo-spin 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        display: inline-block;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+@keyframes global-logo-spin {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+        color: var(--color-primary-light); // Smoothly transitions to teal-blue mid-spin!
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 0.8;
+    }
+}
