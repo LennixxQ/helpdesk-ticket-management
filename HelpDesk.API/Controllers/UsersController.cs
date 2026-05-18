@@ -121,12 +121,9 @@ namespace HelpDesk.API.Controllers
                 {
                     Directory.CreateDirectory(directoryPath);
                 }
-
-                // Save Base64 Image
                 var imagePath = Path.Combine(directoryPath, $"{userId}.avatar");
                 await System.IO.File.WriteAllTextAsync(imagePath, request.Base64Image);
 
-                // Save Position
                 var positionPath = Path.Combine(directoryPath, $"{userId}.position");
                 await System.IO.File.WriteAllTextAsync(positionPath, request.Position);
 
@@ -142,7 +139,6 @@ namespace HelpDesk.API.Controllers
         [HttpGet("profile-picture")]
         public async Task<IActionResult> GetProfilePicture([FromQuery] string? userId = null)
         {
-            // If userId is not provided, use the logged-in user
             var targetUserId = userId;
             if (string.IsNullOrEmpty(targetUserId))
             {

@@ -1,26 +1,43 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
-import { CommonModule } from '@angular/common';
+import { MatBadgeModule } from '@angular/material/badge';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserRole } from '../../../core/models/user.model';
+import { NotificationAlertService, NotificationItem } from '../../../core/services/notification-alert.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatIconModule, MatButtonModule, MatMenuModule, MatTooltipModule, MatDividerModule, CommonModule, RouterLink],
+  imports: [MatIconModule, MatButtonModule, MatMenuModule, MatTooltipModule, MatDividerModule, MatBadgeModule, CommonModule, RouterLink, DatePipe],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
   standalone: true
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @Output() toggleSidebar = new EventEmitter<void>();
 
   auth = inject(AuthService);
   router = inject(Router);
+  notifService = inject(NotificationAlertService);
+
+  ngOnInit() {
+    this.notifService.fetchNotifications().subscribe();
+  }
+
+  onNotificationClick(notif: NotificationItem) {
+    this.notifService.markAsRead(notif.id);
+    this.router.navigateByUrl(notif.routeUrl);
+  }
+
+  markAllNotificationsRead(event: Event) {
+    event.stopPropagation();
+    this.notifService.markAllAsRead();
+  }
 
   get userInitial(): string {
     const name = this.auth.currentUserName();

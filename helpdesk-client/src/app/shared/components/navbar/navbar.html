@@ -24,6 +24,49 @@
                 <span>New Ticket</span>
             </button>
             }
+            
+            <!-- Notifications -->
+            <button mat-icon-button class="notification-trigger" [matMenuTriggerFor]="notifMenu" matTooltip="Notifications">
+                <mat-icon [matBadge]="notifService.unreadCount()" matBadgeColor="warn" [matBadgeHidden]="notifService.unreadCount() === 0">notifications</mat-icon>
+            </button>
+            
+            <mat-menu #notifMenu="matMenu" class="notification-dropdown" xPosition="before">
+                <div class="notif-header" (click)="$event.stopPropagation()">
+                    <h3>Notifications</h3>
+                    @if (notifService.unreadCount() > 0) {
+                        <button mat-button color="primary" class="mark-read-btn" (click)="markAllNotificationsRead($event)">Mark all read</button>
+                    }
+                </div>
+                <mat-divider></mat-divider>
+                <div class="notif-list">
+                    @if (notifService.notifications().length === 0) {
+                        <div class="empty-notif" (click)="$event.stopPropagation()">
+                            <mat-icon>notifications_none</mat-icon>
+                            <p>All caught up!</p>
+                        </div>
+                    } @else {
+                        @for (notif of notifService.notifications(); track notif.id) {
+                            <button mat-menu-item class="notif-item" [class.unread]="!notif.isRead" (click)="onNotificationClick(notif)">
+                                <div class="notif-icon" [ngClass]="notif.type.toLowerCase()">
+                                    <mat-icon>{{ notif.type === 'Info' ? 'info' : notif.type === 'Warning' ? 'warning' : notif.type === 'Error' ? 'error' : 'check_circle' }}</mat-icon>
+                                </div>
+                                <div class="notif-content">
+                                    <div class="notif-title">{{ notif.title }}</div>
+                                    <div class="notif-message">{{ notif.message }}</div>
+                                    <div class="notif-time">{{ notif.createdAt | date:'short' }}</div>
+                                </div>
+                                @if (!notif.isRead) {
+                                    <div class="unread-dot"></div>
+                                }
+                            </button>
+                            <mat-divider></mat-divider>
+                        }
+                    }
+                </div>
+                <div class="notif-footer">
+                    <a routerLink="/notifications" class="view-all-link">Notification Settings</a>
+                </div>
+            </mat-menu>
         </div>
 
         <!-- Profile Menu -->
