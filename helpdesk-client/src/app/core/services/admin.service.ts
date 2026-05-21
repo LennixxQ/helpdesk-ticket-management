@@ -78,7 +78,7 @@ export class AdminService {
     // PUT /api/categories/ActivateCategory  (categoryId in body)
     toggleCategory(categoryId: string): Observable<ApiResponse<CategoryModel>> {
         return this.http.put<ApiResponse<CategoryModel>>(
-            `${this.categoriesApi}/ActivateCategory`, { categoryId }
+            `${this.categoriesApi}/ActivateCategory`, { id: categoryId }
         );
     }
 

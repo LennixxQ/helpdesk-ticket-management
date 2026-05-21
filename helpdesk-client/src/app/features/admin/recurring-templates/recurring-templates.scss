@@ -205,6 +205,9 @@
 }
 
 .cancel-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     border-radius: 14px !important;
     font-weight: 600 !important;
     padding: 0 24px !important;
@@ -216,6 +219,7 @@
 .submit-btn {
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
     gap: 10px;
     background: linear-gradient(135deg, #EC4899, #DB2777) !important;
     color: #fff !important;

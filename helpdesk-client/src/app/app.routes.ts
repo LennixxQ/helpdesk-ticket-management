@@ -161,12 +161,6 @@ export const routes: Routes = [
                         .then(m => m.KbListComponent)
             },
             {
-                path: 'kb/:id',
-                loadComponent: () =>
-                    import('./features/knowledge-base/kb-detail/kb-detail.component')
-                        .then(m => m.KbDetailComponent)
-            },
-            {
                 path: 'kb/create',
                 canActivate: [roleGuard],
                 data: { roles: ['Admin', 'Agent'] },
@@ -181,6 +175,12 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./features/knowledge-base/kb-editor/kb-editor.component')
                         .then(m => m.KbEditorComponent)
+            },
+            {
+                path: 'kb/:id',
+                loadComponent: () =>
+                    import('./features/knowledge-base/kb-detail/kb-detail.component')
+                        .then(m => m.KbDetailComponent)
             },
 
             // ── Profile ──────────────────────────────────────────

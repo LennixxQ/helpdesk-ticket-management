@@ -18,9 +18,9 @@
     <div class="user-profile-card">
         <div class="user-avatar">
             @if (profilePicUrl) {
-                <img [src]="profilePicUrl" alt="Avatar" class="avatar-img" [style.object-position]="profilePicPosition" />
+            <img [src]="profilePicUrl" alt="Avatar" class="avatar-img" [style.object-position]="profilePicPosition" />
             } @else {
-                {{ currentUserName.charAt(0).toUpperCase() }}
+            {{ currentUserName.charAt(0).toUpperCase() }}
             }
         </div>
         <div class="user-info">
@@ -80,16 +80,8 @@
         }
 
         <div class="quick-actions">
-            <a class="action-btn" [routerLink]="'/notifications'" routerLinkActive="active" matTooltip="Notifications" matTooltipPosition="right">
-                <span class="action-icon-wrapper">
-                    <mat-icon>notifications</mat-icon>
-                    <span class="notification-badge">3</span>
-                </span>
-                @if (!collapsed) {
-                <span>Notifications</span>
-                }
-            </a>
-            <a class="action-btn" [routerLink]="'/profile'" routerLinkActive="active" matTooltip="Profile" matTooltipPosition="right">
+            <a class="action-btn" [routerLink]="'/profile'" routerLinkActive="active" matTooltip="Profile"
+                matTooltipPosition="right">
                 <span class="action-icon-wrapper">
                     <mat-icon>account_circle</mat-icon>
                 </span>

@@ -32,26 +32,26 @@
                 <p>Set up automated ticket creation</p>
             </div>
         </div>
-        <form class="form-grid" (ngSubmit)="submitCreate()">
+        <form class="form-grid" [formGroup]="createForm" (ngSubmit)="submitCreate()">
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Template Name</mat-label>
                 <mat-icon matPrefix>label</mat-icon>
-                <input matInput [formControl]="createForm.get('templateName')" placeholder="e.g., Weekly Server Backup Check" />
+                <input matInput formControlName="templateName" placeholder="e.g., Weekly Server Backup Check" />
             </mat-form-field>
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Ticket Title</mat-label>
                 <mat-icon matPrefix>title</mat-icon>
-                <input matInput [formControl]="createForm.get('ticketTitle')" placeholder="e.g., Check server backups" />
+                <input matInput formControlName="ticketTitle" placeholder="e.g., Check server backups" />
             </mat-form-field>
             <mat-form-field appearance="outline" class="form-field full-width">
                 <mat-label>Description</mat-label>
                 <mat-icon matPrefix>description</mat-icon>
-                <textarea matInput [formControl]="createForm.get('description')" rows="2" placeholder="Optional description..."></textarea>
+                <textarea matInput formControlName="description" rows="2" placeholder="Optional description..."></textarea>
             </mat-form-field>
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Category</mat-label>
                 <mat-icon matPrefix>category</mat-icon>
-                <mat-select [formControl]="createForm.get('categoryId')">
+                <mat-select formControlName="categoryId">
                     @for (cat of categories(); track cat.id) {
                     <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
                     }
@@ -60,7 +60,7 @@
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Priority</mat-label>
                 <mat-icon matPrefix>flag</mat-icon>
-                <mat-select [formControl]="createForm.get('priority')">
+                <mat-select formControlName="priority">
                     <mat-option [value]="1">Low</mat-option>
                     <mat-option [value]="2">Medium</mat-option>
                     <mat-option [value]="3">High</mat-option>
@@ -70,7 +70,7 @@
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Recurrence</mat-label>
                 <mat-icon matPrefix>repeat</mat-icon>
-                <mat-select [formControl]="createForm.get('recurrencePattern')">
+                <mat-select formControlName="recurrencePattern">
                     <mat-option [value]="1">Daily</mat-option>
                     <mat-option [value]="2">Weekly</mat-option>
                     <mat-option [value]="3">Monthly</mat-option>

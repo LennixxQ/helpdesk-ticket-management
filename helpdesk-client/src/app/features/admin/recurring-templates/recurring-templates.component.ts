@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -220,30 +220,4 @@ export class RecurringTemplatesComponent implements OnInit {
       panelClass: type === 'success' ? ['snack-success'] : ['snack-error']
     });
   }
-}
-
-class FormGroup {
-  controls: Record<string, FormControl>;
-  value: Record<string, any> = {};
-  constructor(initial: Record<string, any>) {
-    this.controls = {};
-    for (const [key, value] of Object.entries(initial)) {
-      this.controls[key] = new FormControl(value);
-    }
-    this.updateValue();
-  }
-  get(key: string): FormControl { return this.controls[key]; }
-  reset(value?: any): void {
-    for (const key of Object.keys(this.controls)) {
-      this.controls[key].setValue(value?.[key] ?? null);
-    }
-    this.updateValue();
-  }
-  private updateValue(): void {
-    this.value = {};
-    for (const [key, control] of Object.entries(this.controls)) {
-      this.value[key] = control.value;
-    }
-  }
-  get invalid(): boolean { return Object.values(this.controls).some(c => c.invalid); }
 }

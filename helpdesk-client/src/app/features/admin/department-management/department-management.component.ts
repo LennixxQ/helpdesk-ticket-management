@@ -142,6 +142,7 @@ export class DepartmentManagementComponent implements OnInit {
       this.form.reset();
     }
     this.showForm.set(true);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
   }
 
   closeForm(): void {
